@@ -2,8 +2,7 @@
 
 Practice scanning Latin hexameter — Ovid and Vergil — **from macronized texts**.
 
-> **Status: in development.** The scanner below works; the student app is being built. It will be
-> served on GitHub Pages.
+> **Use it:** https://samuelshotchkiss-jpg.github.io/latin-scansion/
 
 ## Why macronized texts
 
@@ -31,7 +30,7 @@ Tapping a mark then says why that syllable is long, short, or elided.
 ## Tutorial, practice, and progress
 
 - **Tutorial** walks through meter one idea at a time — syllables, long and short; the pattern;
-  *qu, h, x, z*; mūta cum liquida; elision; consonants at the start of a word; Greek words; the
+  *qu, h, x, z*; elision; mūta cum liquida; consonants at the start of a word; Greek words; the
   poets' licences — each with a short lesson and lines to practice it on. The lessons and their
   lines live in [`data/tutorial.json`](data/tutorial.json): edit the text, reorder the stages, or
   swap in lines from your own texts by citation.
@@ -66,10 +65,11 @@ Each line is placed at the lowest level that allows everything in it:
 | Level | Adds |
 |---|---|
 | 1 | Long and short syllables only |
-| 2 | Elision (including *est* / *es*: *imposita (e)st*) |
-| 3 | Muta cum liquida — inside a word, and at the start of one (*unda gravet*, *curvāmine flectit*) |
-| 4 | Greek-looking words: *āera*, *Aenēās*, *Boōtēn*, *Teucrī* |
-| 5 | Anything advanced: hiatus, synizesis, hypermetry, lengthening at the beat… |
+| 2 | *qu, h, x, z*: any *qu* (its *u* is not a vowel), and an *h*, *x* or *z* that changes a syllable's length |
+| 3 | Elision (including *est* / *es*: *imposita (e)st*) |
+| 4 | Muta cum liquida — inside a word, and at the start of one (*unda gravet*, *curvāmine flectit*) |
+| 5 | Greek-looking words: *āera*, *Aenēās*, *Boōtēn*, *Teucrī* |
+| 6 | Anything advanced: hiatus, synizesis, hypermetry, lengthening at the beat… |
 
 ## The scanner
 
@@ -87,7 +87,7 @@ python scansion/scan.py my_lines.tsv --json key.json   # the answer key
 import scansion
 r = scansion.scan("atque ita compositās parvō curvāmine flectit,")
 r["feet"]    # ['LSS', 'LSS', 'LL', 'LL', 'LSS', 'LL']
-r["level"]   # 3
+r["level"]   # 4
 ```
 
 **Input.** UTF-8, one verse per line, with a macron on every long vowel. A line may begin with a
@@ -116,10 +116,10 @@ and they are the place to start if you teach differently.
   "citation": "Met. 8.194",
   "text": "atque ita compositās parvō curvāmine flectit,",
   "scans": true,
-  "level": 3,
+  "level": 4,
   "advanced": false,
   "feet": ["LSS", "LSS", "LL", "LL", "LSS", "LL"],
-  "flags": ["elision", "f + liquid at word start"],
+  "flags": ["elision", "f + liquid at word start", "qu, h, x, z"],
   "nuclei": [
     {"start": 0, "end": 1, "text": "a", "mark": "L", "why": "two consonants", "followed_by": "tqu"},
     {"start": 4, "end": 5, "text": "e", "mark": "elided"}

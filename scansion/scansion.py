@@ -6,7 +6,7 @@ standard library. Give it a line of Latin in which every long vowel carries a ma
     >>> import scansion
     >>> r = scansion.scan("atque ita compositās parvō curvāmine flectit,")
     >>> r["feet"], r["level"], r["flags"]
-    (['LSS', 'LSS', 'LL', 'LL', 'LSS', 'LL'], 3, ['elision', 'f + liquid at word start'])
+    (['LSS', 'LSS', 'LL', 'LL', 'LSS', 'LL'], 4, ['elision', 'f + liquid at word start', 'qu, h, x, z'])
 
 WHAT A SCAN IS. For every vowel or diphthong in the line -- every syllable NUCLEUS -- the result
 gives its span in the text, its mark (L long, S short, or `elided` when elision removes it), and the
@@ -32,8 +32,13 @@ CONVENTIONS. Change these if you teach differently:
     row, the same vowel twice, many vowels, or a name whose macron was hard to settle. A y alone is
     not enough, and a familiar name (Īcarus) is not hard.
 
+QU, H, X, Z. Any qu flags a line, because students take its u for a vowel. h, x and z flag it only
+where miscounting them would change a mark: a short syllable with an h among its consonants (captat
+harundine), a long syllable whose only consonant is x or z (dīxit).
+
 LEVELS. A line sits at the lowest level that admits everything in it:
-    1 long and short only   2 + elision   3 + muta cum liquida   4 + Greekiness   5 + anything advanced
+    1 long and short only   2 + qu, h, x, z   3 + elision   4 + muta cum liquida   5 + Greekiness
+    6 + anything advanced
 
 HINTS (optional). `scan(text, citation, hints)` accepts
     {"names": {...}, "trouble": {...}}
@@ -71,14 +76,17 @@ MUTA = {"muta cum liquida", "muta cum liquida at word start", "f + liquid at wor
 
 
 def level_of(flags: set, advanced: bool) -> int:
-    """1 long and short only; 2 + elision; 3 + muta cum liquida; 4 + Greekiness; 5 + advanced."""
+    """1 long and short only; 2 + qu, h, x, z; 3 + elision; 4 + muta cum liquida; 5 + Greekiness;
+    6 + advanced."""
     if advanced:
-        return 5
+        return 6
     if "greekiness" in flags:
-        return 4
+        return 5
     if flags & MUTA:
-        return 3
+        return 4
     if flags & ELISION:
+        return 3
+    if "qu, h, x, z" in flags:
         return 2
     return 1
 
@@ -301,6 +309,19 @@ def build_line(s: str, low: str, words, pick, flags: set):
     pattern = "".join(m[0] for m in marks)
     if not HEXAMETER.match(pattern):
         return None
+
+    # qu, h, x, z. ANY qu: students take its u for a vowel and add a syllable (owner, 2026-09-17).
+    # h, x and z only where miscounting them changes a mark: a short syllable with an h among its
+    # consonants (h counted), a long syllable whose only consonant is x or z (x counted as one).
+    if "qu" in low:
+        flags.add("qu, h, x, z")
+    for k, (v, (w, why, letters)) in enumerate(zip(active, marks)):
+        if k == len(active) - 1:
+            continue
+        raw = "".join(c for c in low[v.end:active[k + 1].start] if c.isalpha() and not is_vowel(c))
+        if (w == "S" and "h" in raw and len(raw) >= 2) or (w == "L" and why == "two consonants" and letters in ("x", "z")):
+            flags.add("qu, h, x, z")
+            break
     return units, active, marks, pattern
 
 

@@ -1,5 +1,5 @@
 {
-  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the larger set its 'Practice more' link opens -- `levels` (1 long and short only, 2 elision, 3 muta cum liquida, 4 Greek words, 5 advanced) and, to narrow further, `flags` (a line needs at least one). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0.",
+  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the larger set its 'Practice more' link opens -- `levels` (1 long and short only, 2 qu/h/x/z, 3 elision, 4 muta cum liquida, 5 Greek words, 6 advanced) and, to narrow further, `flags` (a line needs at least one). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0.",
   "stages": [
     {
       "id": "syllables",
@@ -8,7 +8,7 @@
       "lines": [
         "Met. 8.192",
         "Met. 8.198",
-        "Met. 8.189"
+        "Met. 8.186"
       ]
     },
     {
@@ -16,8 +16,8 @@
       "title": "The pattern: dactyls and spondees",
       "lesson": "<p>The hexameter is six <b>feet</b>, and each foot is one of two kinds:</p><ul><li>a <b>dactyl</b> ¯ ˘ ˘ — Greek for “finger”: one long joint, then two short ones;</li><li>a <b>spondee</b> ¯ ¯ — equivalent to a dactyl, because two shorts make one long.</li></ul><p>Every foot begins with a long syllable. The fifth foot is almost always a dactyl, and the sixth is always ¯ ¯.</p><p class=\"howto\">When you press <b>Check</b>, dividers appear between the feet <i>your</i> marks make. If they stop partway through the line, that is where your marks stop fitting the pattern.</p>",
       "lines": [
-        "Met. 8.185",
-        "Met. 8.191",
+        "Met. 8.195",
+        "Met. 8.209",
         "Met. 8.193"
       ],
       "practice": {
@@ -38,7 +38,7 @@
       ],
       "practice": {
         "levels": [
-          1
+          2
         ]
       }
     },
@@ -54,7 +54,7 @@
       ],
       "practice": {
         "levels": [
-          2
+          3
         ]
       }
     },
@@ -69,7 +69,7 @@
       ],
       "practice": {
         "levels": [
-          3
+          4
         ]
       }
     },
@@ -84,7 +84,7 @@
       ],
       "practice": {
         "levels": [
-          3
+          4
         ],
         "flags": [
           "muta cum liquida at word start",
@@ -103,7 +103,7 @@
       ],
       "practice": {
         "levels": [
-          4
+          5
         ]
       }
     },
@@ -118,7 +118,7 @@
       ],
       "practice": {
         "levels": [
-          5
+          6
         ]
       }
     }
