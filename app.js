@@ -16,7 +16,7 @@
   const SYMBOL = { L: '¯', S: '˘' };
   const WORD = { L: 'long', S: 'short', X: 'elided' };
   const TIE = '<span class="tie-sym"></span>';
-  const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z', 'Elision', 'Mūta cum liquida', 'Greek words', 'Advanced'];
+  const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
 
   const $ = (id) => document.getElementById(id);
   const lineEl = $('line');
@@ -61,6 +61,11 @@
       S.levels = [...new Set(S.levels.flatMap((k) => (k === 1 ? [1] : k === 2 ? [2, 3] : [k + 1])))];
       S.kinds = 7;
     }
+    if (S.kinds === 7) {                              // seven became eight: word-initial consonants left muta
+      S.levels = [...new Set(S.levels.flatMap((k) => (k < 5 ? [k] : k === 5 ? [5, 6] : [k + 1])))];
+      S.kinds = 8;
+      delete S.focus;
+    }
     setKinds(S.levels);
     fillStageMenu();
 
@@ -102,19 +107,16 @@
   }
 
   // Practice: a passage, and the KINDS of line ticked. A kind is a level, not "up to" one: ticking
-  // only Elision gives just the elision lines. A focus (from a tutorial link) narrows further to lines
-  // carrying one of its flags.
-  function inSet(l, levels, flags) {
-    return levels.includes(l.level) && (!flags || flags.some((f) => l.flags.includes(f)));
+  // only Elision gives just the elision lines.
+  function inSet(l, levels) {
+    return levels.includes(l.level);
   }
   function rebuildPool(keepCitation) {
     const passage = $('passage').value;
-    pool = lines.filter((l) => (!passage || l.passage === passage) && inSet(l, S.levels, S.focus && S.focus.flags));
+    pool = lines.filter((l) => (!passage || l.passage === passage) && inSet(l, S.levels));
     const at = pool.findIndex((l) => l.citation === keepCitation);
     index = at >= 0 ? at : Math.max(0, pool.findIndex((l) => !P.isSolved(l.citation)));
     S.passage = passage; P.save();
-    $('focus').hidden = !S.focus;
-    $('focus-label').textContent = S.focus ? `Focus: ${S.focus.label}` : '';
     showLine();
   }
   function setKinds(levels) {
@@ -122,7 +124,6 @@
   }
   function usePracticeSet(stage) {
     S.levels = stage.practice.levels.slice();
-    S.focus = stage.practice.flags ? { label: stage.title, flags: stage.practice.flags.slice() } : null;
     S.passage = '';
     S.citation = null;
     S.mode = 'practice';
@@ -135,7 +136,6 @@
     S.levels = [...document.querySelectorAll('#kinds input:checked')].map((x) => Number(x.value));
     rebuildPool(current() && current().citation);
   }));
-  $('clear-focus').addEventListener('click', () => { S.focus = null; rebuildPool(current() && current().citation); });
 
   // Tutorial: one stage's lesson and lines.
   function fillStageMenu() {
@@ -153,7 +153,7 @@
     $('lesson-title').textContent = `Stage ${k + 1} of ${stages.length}: ${stage.title}`;
     let lesson = stage.lesson;
     if (stage.practice) {
-      const n = lines.filter((l) => inSet(l, stage.practice.levels, stage.practice.flags)).length;
+      const n = lines.filter((l) => inSet(l, stage.practice.levels)).length;
       lesson += `<p class="practice-more"><a href="?practice=${encodeURIComponent(stage.id)}" data-stage="${k}">Practice more: ${n} lines like these →</a></p>`;
     }
     $('lesson-body').innerHTML = lesson;
@@ -490,8 +490,7 @@
     const total = l.nuclei.length;
     const correct = right === total;
     const context = S.mode === 'tutorial' ? `Tutorial: ${stages[S.stage].title}`
-      : `${$('passage').value || 'All passages'} · ${S.levels.map((k) => KIND_NAMES[k - 1]).join(' + ')}` +
-        (S.focus ? ` · focus: ${S.focus.label}` : '');
+      : `${$('passage').value || 'All passages'} · ${S.levels.map((k) => KIND_NAMES[k - 1]).join(' + ')}`;
     const result = P.recordCheck(l, correct, helped, context);
 
     let html;

@@ -6,7 +6,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-17d">
+  <link rel="stylesheet" href="styles.css?v=2026-09-17e">
 </head>
 <body>
   <header class="top">
@@ -29,14 +29,11 @@
         <label title="qu — nothing else"><input type="checkbox" value="2"> qu</label>
         <label title="h, x or z — and maybe qu"><input type="checkbox" value="3"> h, x, z</label>
         <label title="Elision — and maybe qu, h, x, z"><input type="checkbox" value="4"> Elision</label>
-        <label title="Mūta cum liquida — and maybe elision or qu, h, x, z"><input type="checkbox" value="5"> Mūta cum liquida</label>
-        <label title="Greek-looking words — and maybe any of the above"><input type="checkbox" value="6"> Greek words</label>
-        <label title="The poets' licences — and anything else"><input type="checkbox" value="7"> Advanced</label>
+        <label title="A mute + liquid inside a word — and maybe any kind above"><input type="checkbox" value="5"> Mūta cum liquida</label>
+        <label title="Consonants beginning the next word, like gr- or fl- — and maybe any kind above"><input type="checkbox" value="6"> Consonants at the start of a word</label>
+        <label title="Greek-looking words — and maybe any of the above"><input type="checkbox" value="7"> Greek words</label>
+        <label title="The poets' licences — and anything else"><input type="checkbox" value="8"> Advanced</label>
       </fieldset>
-      <span id="focus" class="focus" hidden>
-        <span id="focus-label"></span>
-        <button type="button" id="clear-focus" class="link" aria-label="Show all lines of these kinds">✕</button>
-      </span>
     </div>
 
     <div id="tutorial-controls" class="controls" hidden>
@@ -128,7 +125,7 @@
     </div>
   </div>
 
-  <script src="progress.js?v=2026-09-17d"></script>
-  <script src="app.js?v=2026-09-17d"></script>
+  <script src="progress.js?v=2026-09-17e"></script>
+  <script src="app.js?v=2026-09-17e"></script>
 </body>
 </html>

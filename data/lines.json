@@ -6,7 +6,7 @@
   "stage": 1,
   "penalty": 1,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -1001,7 +1001,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -1867,7 +1867,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -2013,7 +2013,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -2739,7 +2739,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -2900,7 +2900,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -3050,7 +3050,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -3635,7 +3635,7 @@
   "stage": 2,
   "penalty": 2,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LSS",
@@ -4099,7 +4099,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -5081,7 +5081,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -7555,7 +7555,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -8881,7 +8881,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -9309,7 +9309,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -10642,7 +10642,7 @@
   "stage": 1,
   "penalty": 1,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -11506,7 +11506,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -13403,7 +13403,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -14119,7 +14119,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -15554,7 +15554,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -16283,7 +16283,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -16434,7 +16434,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -17315,7 +17315,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -17452,7 +17452,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -18851,7 +18851,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -20569,7 +20569,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -20850,7 +20850,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -21882,7 +21882,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -23745,7 +23745,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -24762,7 +24762,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -26040,7 +26040,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -26336,7 +26336,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -26625,7 +26625,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -27950,7 +27950,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -28965,7 +28965,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -29254,7 +29254,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -29674,7 +29674,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -31902,7 +31902,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -33334,7 +33334,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -34310,7 +34310,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -35882,7 +35882,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -36023,7 +36023,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -36175,7 +36175,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -37233,7 +37233,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -38668,7 +38668,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -40489,7 +40489,7 @@
   "stage": 2,
   "penalty": 4,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LSS",
@@ -42349,7 +42349,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -43066,7 +43066,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -43208,7 +43208,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -43629,7 +43629,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -45184,7 +45184,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -45490,7 +45490,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -45771,7 +45771,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -46609,7 +46609,7 @@
   "stage": 2,
   "penalty": 4,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LSS",
@@ -46744,7 +46744,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -46903,7 +46903,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -47190,7 +47190,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -48053,7 +48053,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -48602,7 +48602,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -49009,7 +49009,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -49159,7 +49159,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -50976,7 +50976,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -52096,7 +52096,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -52252,7 +52252,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -52682,7 +52682,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -52819,7 +52819,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -52979,7 +52979,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -53434,7 +53434,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -53587,7 +53587,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -54008,7 +54008,7 @@
   "stage": 2,
   "penalty": 3,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LSS",
@@ -55181,7 +55181,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -55771,7 +55771,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -56330,7 +56330,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -57425,7 +57425,7 @@
   "stage": 2,
   "penalty": 3,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LL",
@@ -58576,7 +58576,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -59001,7 +59001,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -59724,7 +59724,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -62937,7 +62937,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -63880,7 +63880,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -64595,7 +64595,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -64738,7 +64738,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -64895,7 +64895,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -66195,7 +66195,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -67136,7 +67136,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -67695,7 +67695,7 @@
   "stage": 2,
   "penalty": 3,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LL",
@@ -68531,7 +68531,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -69246,7 +69246,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -70091,7 +70091,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -70956,7 +70956,7 @@
   "stage": 2,
   "penalty": 3,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LSS",
@@ -72214,7 +72214,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -72355,7 +72355,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -73358,7 +73358,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -75037,7 +75037,7 @@
   "stage": 2,
   "penalty": 4,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LL",
@@ -75736,7 +75736,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -76595,7 +76595,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -76915,7 +76915,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -78279,7 +78279,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -79824,7 +79824,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -81852,7 +81852,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -82126,7 +82126,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -82677,7 +82677,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -83117,7 +83117,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -84938,7 +84938,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -85516,7 +85516,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -91283,7 +91283,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -92246,7 +92246,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -93564,7 +93564,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -93712,7 +93712,7 @@
   "stage": 2,
   "penalty": 3,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LSS",
@@ -94130,7 +94130,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -95304,7 +95304,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -95456,7 +95456,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -95759,7 +95759,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -98731,7 +98731,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LL",
@@ -99142,7 +99142,7 @@
   "stage": 2,
   "penalty": 3,
   "ambiguous": false,
-  "level": 7,
+  "level": 8,
   "advanced": true,
   "feet": [
    "LL",
@@ -99288,7 +99288,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": [
    "LSS",
@@ -99579,7 +99579,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LL",
@@ -99880,7 +99880,7 @@
   "stage": 1,
   "penalty": 1,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -100745,7 +100745,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -100902,7 +100902,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -101455,7 +101455,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 6,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",

@@ -36,7 +36,7 @@ Tapping a mark then says why that syllable is long, short, or elided.
   swap in lines from your own texts by citation.
 - **Practice** chooses lines by passage and by the kinds of line ticked — only lines with elision,
   say, or only the advanced ones. Every tutorial stage after the first links to a practice set of
-  lines like its own (`?practice=<stage id>`).
+  lines like its own (`?practice=<stage id>`), ticking the matching kinds.
 - **My progress** shows lines figured out (and what share of the whole), points, streaks, days
   practiced, badges, and what has been practiced. A line solved after **Show answer** earns nothing
   until it is solved again on another visit.
@@ -68,9 +68,10 @@ Each line is placed at the lowest level that allows everything in it:
 | 2 | *qu* — its *u* is not a vowel |
 | 3 | *h*, *x*, *z* — where miscounting one would change a syllable's length (*captat harundine*, *dīxit*) |
 | 4 | Elision (including *est* / *es*: *imposita (e)st*) |
-| 5 | Muta cum liquida — inside a word, and at the start of one (*unda gravet*, *curvāmine flectit*) |
-| 6 | Greek-looking words: *āera*, *Aenēās*, *Boōtēn*, *Teucrī* |
-| 7 | Anything advanced: hiatus, synizesis, hypermetry, lengthening at the beat… |
+| 5 | Muta cum liquida inside a word (*patris*, *utrumque*) |
+| 6 | Consonants at the start of a word, which leave a short vowel short (*unda gravet*, *curvāmine flectit*) |
+| 7 | Greek-looking words: *āera*, *Aenēās*, *Boōtēn*, *Teucrī* |
+| 8 | Anything advanced: hiatus, synizesis, hypermetry, lengthening at the beat… |
 
 ## The scanner
 
@@ -88,7 +89,7 @@ python scansion/scan.py my_lines.tsv --json key.json   # the answer key
 import scansion
 r = scansion.scan("atque ita compositās parvō curvāmine flectit,")
 r["feet"]    # ['LSS', 'LSS', 'LL', 'LL', 'LSS', 'LL']
-r["level"]   # 5
+r["level"]   # 6
 ```
 
 **Input.** UTF-8, one verse per line, with a macron on every long vowel. A line may begin with a
@@ -103,9 +104,9 @@ These are the choices built into the scanner. They are stated at the top of `sca
 and they are the place to start if you teach differently.
 
 - The final syllable of a line counts as long.
-- *Muta cum liquida* is a stop (p b t d c g) followed by l or r. Inside a word the meter decides; at
-  the start of a word it leaves a short final vowel short. A word-initial *fl-* or *fr-* does the same
-  in Ovid and Vergil, and is grouped with it.
+- *Muta cum liquida* is a stop (p b t d c g) followed by l or r; inside a word the meter decides.
+- Consonants at the start of a word are their own kind: a mute + liquid there leaves a short final
+  vowel short, and in Ovid and Vergil so does *fl-* or *fr-* — which is not muta cum liquida.
 - Advanced licences are tried only when a line will not scan without them.
 
 ### The answer key
@@ -117,7 +118,7 @@ and they are the place to start if you teach differently.
   "citation": "Met. 8.194",
   "text": "atque ita compositās parvō curvāmine flectit,",
   "scans": true,
-  "level": 5,
+  "level": 6,
   "advanced": false,
   "feet": ["LSS", "LSS", "LL", "LL", "LSS", "LL"],
   "flags": ["elision", "f + liquid at word start", "qu"],

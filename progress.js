@@ -151,7 +151,7 @@ window.Progress = (function () {
       return { name, total: mine.length, solved: mine.filter((l) => isSolved(l.citation)).length };
     });
     const solvedLines = allLines.filter((l) => isSolved(l.citation));
-    const byLevel = [1, 2, 3, 4, 5, 6, 7].map((lv) => ({
+    const byLevel = [1, 2, 3, 4, 5, 6, 7, 8].map((lv) => ({
       level: lv,
       total: allLines.filter((l) => l.level === lv).length,
       solved: solvedLines.filter((l) => l.level === lv).length,
@@ -194,7 +194,7 @@ window.Progress = (function () {
   function reportHTML(name) {
     const st = stats();
     const when = new Date();
-    const levelNames = ['Long and short only', 'qu', 'h, x, z', 'Elision', 'Mūta cum liquida', 'Greek words', 'Advanced'];
+    const levelNames = ['Long and short only', 'qu', 'h, x, z', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
     const recent = st.recent.slice(0, 12).map(({ line, e }) =>
       `<tr><td>${esc(line.citation)}</td><td class="latin">${esc(line.text)}</td><td>${e.firstTry ? '★ first try' : e.checks + ' tries'}</td></tr>`).join('');
     return `<!doctype html>

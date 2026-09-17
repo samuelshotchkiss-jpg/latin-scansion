@@ -6,7 +6,7 @@ standard library. Give it a line of Latin in which every long vowel carries a ma
     >>> import scansion
     >>> r = scansion.scan("atque ita compositās parvō curvāmine flectit,")
     >>> r["feet"], r["level"], r["flags"]
-    (['LSS', 'LSS', 'LL', 'LL', 'LSS', 'LL'], 5, ['elision', 'f + liquid at word start', 'qu'])
+    (['LSS', 'LSS', 'LL', 'LL', 'LSS', 'LL'], 6, ['elision', 'f + liquid at word start', 'qu'])
 
 WHAT A SCAN IS. For every vowel or diphthong in the line -- every syllable NUCLEUS -- the result
 gives its span in the text, its mark (L long, S short, or `elided` when elision removes it), and the
@@ -20,9 +20,9 @@ i -- and the meter decides it. A line that will not scan therefore usually carri
 
 CONVENTIONS. Change these if you teach differently:
   * the final syllable of the line is long by definition;
-  * muta cum liquida is a stop (p b t d c g) + l or r. Inside a word the meter decides; at the start
-    of a word it leaves a short final vowel short. f + l / f + r at the start of a word does the
-    same, and is grouped with muta cum liquida;
+  * muta cum liquida is a stop (p b t d c g) + l or r. Inside a word the meter decides. CONSONANTS AT THE
+    START OF A WORD are their own kind: a mute + liquid there leaves a short final vowel short, and so
+    does f + l / f + r -- which is not muta cum liquida at all;
   * ADVANCED, and tried only when a line will not scan without them: hiatus, synizesis, correption,
     a dissolved diphthong, hypermetry, lengthening at the beat, a word-initial cluster the poet
     ignores. Also advanced, though tried first: a word-initial cluster (sc-, sp-, st-...) that makes
@@ -37,8 +37,8 @@ separate kind, flagging a line only where miscounting them would change a mark: 
 an h among its consonants (captat harundine), a long syllable whose only consonant is x or z (dīxit).
 
 LEVELS. A line sits at the lowest level that admits everything in it:
-    1 long and short only   2 + qu   3 + h, x, z   4 + elision   5 + muta cum liquida   6 + Greekiness
-    7 + anything advanced
+    1 long and short only   2 + qu   3 + h, x, z   4 + elision   5 + muta cum liquida
+    6 + consonants at the start of a word   7 + Greekiness   8 + anything advanced
 
 HINTS (optional). `scan(text, citation, hints)` accepts
     {"names": {...}, "trouble": {...}}
@@ -72,15 +72,18 @@ MAX_DEVIATIONS = 4        # non-default choices per line; bounds the stage-2 sea
 ADVANCED = {"hiatus", "synizesis", "correption", "diphthong split", "hypermetry", "lengthened syllable",
             "ignored cluster", "word-initial cluster makes position"}
 ELISION = {"elision", "prodelision"}
-MUTA = {"muta cum liquida", "muta cum liquida at word start", "f + liquid at word start"}
+MUTA = {"muta cum liquida"}                                                  # inside a word
+WORD_START = {"muta cum liquida at word start", "f + liquid at word start"}  # not a kind of muta: fl- is no mute
 
 
 def level_of(flags: set, advanced: bool) -> int:
-    """1 long and short only; 2 + qu; 3 + h, x, z; 4 + elision; 5 + muta cum liquida; 6 + Greekiness;
-    7 + advanced."""
+    """1 long and short only; 2 + qu; 3 + h, x, z; 4 + elision; 5 + muta cum liquida; 6 + consonants at
+    the start of a word; 7 + Greekiness; 8 + advanced."""
     if advanced:
-        return 7
+        return 8
     if "greekiness" in flags:
+        return 7
+    if flags & WORD_START:
         return 6
     if flags & MUTA:
         return 5
