@@ -20,16 +20,16 @@
       "lines": ["Met. 8.190", "Met. 8.188", "Met. 8.197", "Met. 8.217"]
     },
     {
-      "id": "muta",
-      "title": "Mūta cum liquida",
-      "lesson": "<p><b>Mutes</b> are hard sounds that fully interrupt the flow of air: <i>c, g; t, d; p, b</i>. <b>Liquids</b> are just two: <i>l, r</i>.</p><p>(<i>s</i> and <i>f</i> are fricatives, <i>i/j</i> and <i>v</i> are semivowels, and <i>m</i> and <i>n</i> are nasals: none of them matter here.)</p><p>In actual speech, a mute + liquid usually <i>began</i> a syllable: <i>patris</i> was <i>pa-tris</i>, with the first syllable short. In poetry, either pronunciation was permitted — <i>pat-ris</i>, first syllable long, or <i>pa-tris</i>, first syllable short. Let the rest of the line decide.</p>",
-      "lines": ["Met. 8.199", "Met. 8.211", "Met. 8.206"]
-    },
-    {
       "id": "elision",
       "title": "Elision",
       "lesson": "<p>Whenever a word ends in a <b>vowel or m</b>, and the next word begins with a <b>vowel or h</b>, one of the syllables gets eaten — <b>elided</b>. Delicious!</p><p>Generally it's the first one: <i>atque ita</i> = <i>atqu' ita</i>; <i>Īcare, ait</i> = <i>Īcar' ait</i>.</p><p>Unless the second word is <b>est</b> or <b>es</b>: <i>imposita est</i> = <i>imposita 'st</i>; <i>ubi es</i> = <i>ubi 's</i>.</p><p class=\"howto\">Mark an elision with the swoosh ‿ — drag it under the gap between the two syllables. The elided vowel turns grey and takes no long or short mark.</p>",
       "lines": ["Met. 8.201", "Met. 8.203", "Met. 8.215", "Met. 8.232"]
+    },
+    {
+      "id": "muta",
+      "title": "Mūta cum liquida",
+      "lesson": "<p><b>Mutes</b> are hard sounds that fully interrupt the flow of air: <i>c, g; t, d; p, b</i>. <b>Liquids</b> are just two: <i>l, r</i>.</p><p>(<i>s</i> and <i>f</i> are fricatives, <i>i/j</i> and <i>v</i> are semivowels, and <i>m</i> and <i>n</i> are nasals: none of them matter here.)</p><p>In actual speech, a mute + liquid usually <i>began</i> a syllable: <i>patris</i> was <i>pa-tris</i>, with the first syllable short. In poetry, either pronunciation was permitted — <i>pat-ris</i>, first syllable long, or <i>pa-tris</i>, first syllable short. Let the rest of the line decide.</p>",
+      "lines": ["Met. 8.199", "Met. 8.211", "Met. 8.206"]
     },
     {
       "id": "clusters",
