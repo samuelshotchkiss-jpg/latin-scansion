@@ -19,9 +19,9 @@ The line is shown whole, with no syllable divisions. The student drags long (¯)
 over it, and each mark **snaps to a syllable nucleus** — the vowel or diphthong at the heart of a
 syllable. Dividing the syllables is part of the skill, so the app never does it for them.
 
-**Elision** is marked the traditional way: a swoosh under the gap between two words (*atque ‿ ita*).
-The app works out which vowel it removes — the one ending the first word, or the *e* of *est* in
-prodelision (*imposita ‿ est*). A vowel stays open to long and short marks until the student elides
+**Elision** is marked the traditional way: a swoosh under the gap between two syllables (*atque ‿ ita*).
+It can go in *any* gap — the app does not hint where elision is possible. It removes the first of the
+two vowels, or the *e* of *est* in prodelision (*imposita ‿ est*). A vowel stays open to long and short marks until the student elides
 it, so the app never gives an elision away; once elided, any mark on it goes back to the tray.
 
 **Check** turns each mark green or red, and draws foot dividers above the line — grouped from the

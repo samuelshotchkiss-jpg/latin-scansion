@@ -2,10 +2,9 @@
 //
 // The key (data/lines.json) lists every syllable NUCLEUS of a line -- a vowel or diphthong -- with its
 // mark: L, S, or elided. Nuclei are internal: the student never sees them marked. Long and short marks
-// snap to them. Elision is a swoosh UNDER the line, dropped on a word junction (a vowel or -m ending one
-// word, a vowel or h- beginning the next); the app works out which vowel it removes -- the first word's,
-// or the e of est/es (prodelision). A nucleus stays open to long and short marks until the STUDENT
-// elides it: the app never gives an elision away.
+// snap to them. Elision is a swoosh UNDER the line, dropped in the gap between any two syllables; the
+// app works out which vowel it removes (see computeJunctions). A nucleus stays open to long and short
+// marks until the STUDENT elides it: the app never gives an elision away.
 (function () {
   'use strict';
 
@@ -73,30 +72,26 @@
   // ---- where a swoosh may go ------------------------------------------------------------------------
   const isLetter = (c) => /\p{L}/u.test(c);
 
+  // EVERY gap between two neighbouring syllables takes a swoosh, however nonsensical (owner,
+  // 2026-09-16): restricting it to the gaps where elision is possible would tell the student where
+  // to look. The swoosh removes the first of the two vowels -- unless the second begins est or es,
+  // when it removes that e (prodelision). One more slot after the last syllable: hypermetry.
   function computeJunctions(l) {
     const chars = [...l.text];
     const n = l.nuclei;
     const out = [];
     for (let k = 0; k + 1 < n.length; k++) {
-      const between = chars.slice(n[k].end, n[k + 1].start);
-      const gap = between.findIndex((c) => !isLetter(c));
-      if (gap === -1) {                                    // inside a word: synizesis
-        const mid = between.join('').toLowerCase();
-        if ((mid === '' || mid === 'h') && n[k].end - n[k].start === 1) out.push({ p: k, q: k + 1, elided: k });
-        continue;
+      let elided = k;
+      if (chars.slice(n[k].end, n[k + 1].start).some((c) => !isLetter(c))) {
+        let s = n[k + 1].start, e = n[k + 1].start;
+        while (s > 0 && isLetter(chars[s - 1])) s--;
+        while (e < chars.length && isLetter(chars[e])) e++;
+        const next = chars.slice(s, e).join('').toLowerCase();
+        if (next === 'est' || next === 'es') elided = k + 1;
       }
-      let back = between.length - 1;
-      while (back >= 0 && isLetter(between[back])) back--;
-      const tail = between.slice(0, gap).join('').toLowerCase();
-      const head = between.slice(back + 1).join('').toLowerCase();
-      if (!['', 'm'].includes(tail) || !['', 'h'].includes(head)) continue;
-      let end = n[k + 1].start;
-      while (end < chars.length && isLetter(chars[end])) end++;
-      const next = chars.slice(n[k + 1].start - head.length, end).join('').toLowerCase();
-      out.push({ p: k, q: k + 1, elided: (next === 'est' || next === 'es') ? k + 1 : k });
+      out.push({ p: k, q: k + 1, elided });
     }
-    const last = n.length - 1;                             // hypermetry: a final vowel before the next line
-    if (last >= 0 && chars.slice(n[last].end).every((c) => !isLetter(c))) out.push({ p: last, q: null, elided: last });
+    if (n.length) out.push({ p: n.length - 1, q: null, elided: n.length - 1 });
     return out;
   }
 
