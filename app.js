@@ -5,69 +5,120 @@
 // snap to them. Elision is a swoosh UNDER the line, dropped in the gap between any two syllables; the
 // app works out which vowel it removes (see computeJunctions). A nucleus stays open to long and short
 // marks until the STUDENT elides it: the app never gives an elision away.
+//
+// Two modes: TUTORIAL (data/tutorial.json -- a lesson and its lines, stage by stage) and PRACTICE (a
+// passage and the skills learned so far). Progress, points, badges and the report are progress.js.
 (function () {
   'use strict';
 
+  const P = window.Progress;
+  const S = P.state;
   const SYMBOL = { L: '¯', S: '˘' };
   const WORD = { L: 'long', S: 'short', X: 'elided' };
-  const STORE_KEY = 'latinScansion.v1';
   const TIE = '<span class="tie-sym"></span>';
+  const LEVEL_NAMES = ['Long and short', '+ Elision', '+ Mūta cum liquida', '+ Greek words', '+ Everything'];
 
   const $ = (id) => document.getElementById(id);
   const lineEl = $('line');
 
-  let lines = [], pool = [], index = 0;
-  let marks = {};          // nucleus index -> 'L' | 'S' | 'X'
-  let tieOf = {};          // elided nucleus index -> junction index (where its swoosh was drawn)
-  let junctions = [];      // [{p, q, elided}] -- the places a swoosh may go; q null at line end
-  let checked = false, revealed = false;
-  let tool = null;
-  let overlay = null;
-  const saved = load();
-  saved.solved = saved.solved || {};
+  let lines = [];          // every scannable line, in reading order
+  let byCitation = {};
+  let stages = [];         // tutorial stages whose lines all exist
+  let pool = [], index = 0;
+  let marks = {}, tieOf = {}, junctions = [];
+  let checked = false, revealed = false, helped = false;
+  let tool = null, overlay = null;
 
-  // ---- storage ------------------------------------------------------------------------------------
-  function load() {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; }
+  // ---- startup ------------------------------------------------------------------------------------
+  Promise.all([
+    fetch('data/lines.json').then((r) => r.json()),
+    fetch('data/tutorial.json').then((r) => r.json()).catch(() => ({ stages: [] })),
+  ]).then(([data, tutorial]) => {
+    lines = data.filter((l) => l.scans && l.passage)
+      .map((l, i) => ({ ...l, _at: i }))
+      .sort((a, b) => (a.passage_order - b.passage_order) || (a._at - b._at));
+    lines.forEach((l) => { byCitation[l.citation] = l; });
+    stages = (tutorial.stages || []).map((s) => {
+      const missing = s.lines.filter((c) => !byCitation[c]);
+      if (missing.length) console.warn(`tutorial stage "${s.id}": no such line(s): ${missing.join(', ')}`);
+      return { ...s, lines: s.lines.filter((c) => byCitation[c]) };
+    }).filter((s) => s.lines.length);
+    P.init(lines, stages);
+
+    const names = [...new Set(lines.map((l) => l.passage))];
+    $('passage').innerHTML = '<option value="">All passages</option>' +
+      names.map((n) => `<option>${escapeHTML(n)}</option>`).join('');
+    $('passage').value = names.includes(S.passage) ? S.passage : (names[0] || '');
+    $('level').value = String(S.level || 1);
+    fillStageMenu();
+
+    if (!S.acknowledged) $('privacy').hidden = false;
+    setMode(S.mode || (Object.keys(S.lines).length ? 'practice' : 'tutorial'));
+    updatePoints();
+  }).catch(() => { lineEl.textContent = 'Could not load the lines (data/lines.json).'; });
+
+  $('acknowledge').addEventListener('click', () => { P.acknowledge(); $('privacy').hidden = true; });
+
+  function escapeHTML(s) {
+    return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   }
-  function save() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch (e) { /* private mode */ }
+  function current() { return pool[index]; }
+  function updatePoints() { $('points-pill').textContent = S.points ? `★ ${S.points}` : ''; }
+
+  // ---- modes --------------------------------------------------------------------------------------
+  document.querySelectorAll('.mode[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+
+  function setMode(mode) {
+    S.mode = mode; P.save();
+    document.querySelectorAll('.mode[data-mode]').forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
+    $('practice-controls').hidden = mode !== 'practice';
+    $('tutorial-controls').hidden = mode !== 'tutorial';
+    $('lesson').hidden = mode !== 'tutorial';
+    if (mode === 'tutorial') openStage(Math.min(S.stage || 0, stages.length - 1), true);
+    else rebuildPool(S.citation);
   }
 
-  // ---- data ---------------------------------------------------------------------------------------
-  fetch('data/lines.json')
-    .then((r) => r.json())
-    .then((data) => {
-      lines = data.filter((l) => l.scans && l.passage)
-        .map((l, i) => ({ ...l, _at: i }))
-        .sort((a, b) => (a.passage_order - b.passage_order) || (a._at - b._at));
-      const names = [...new Set(lines.map((l) => l.passage))];
-      $('passage').innerHTML = '<option value="">All passages</option>' +
-        names.map((n) => `<option>${escapeHTML(n)}</option>`).join('');
-      $('passage').value = names.includes(saved.passage) ? saved.passage : (names[0] || '');
-      $('level').value = String(saved.level || 1);
-      rebuildPool(saved.citation);
-    })
-    .catch(() => { lineEl.textContent = 'Could not load the lines (data/lines.json).'; });
-
+  // Practice: a passage, and every level up to what the student knows.
   function rebuildPool(keepCitation) {
     const passage = $('passage').value;
     const level = Number($('level').value);
     pool = lines.filter((l) => (!passage || l.passage === passage) && l.level <= level);
     const at = pool.findIndex((l) => l.citation === keepCitation);
-    index = at >= 0 ? at : Math.max(0, pool.findIndex((l) => !saved.solved[l.citation]));
-    saved.passage = passage; saved.level = level; save();
+    index = at >= 0 ? at : Math.max(0, pool.findIndex((l) => !P.isSolved(l.citation)));
+    S.passage = passage; S.level = level; P.save();
     showLine();
   }
   $('passage').addEventListener('change', () => rebuildPool());
   $('level').addEventListener('change', () => rebuildPool(current() && current().citation));
-  window.addEventListener('resize', () => drawOverlay());
 
-  function current() { return pool[index]; }
-
-  function escapeHTML(s) {
-    return s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // Tutorial: one stage's lesson and lines.
+  function fillStageMenu() {
+    $('stage').innerHTML = stages.map((s, i) =>
+      `<option value="${i}">${S.tutorial[s.id] ? '✓ ' : ''}${i + 1}. ${escapeHTML(s.title)}</option>`).join('');
+    $('stage').value = String(Math.min(S.stage || 0, Math.max(0, stages.length - 1)));
   }
+  $('stage').addEventListener('change', () => openStage(Number($('stage').value)));
+
+  function openStage(k, resume) {
+    const stage = stages[k];
+    if (!stage) return;
+    S.stage = k; P.save();
+    $('stage').value = String(k);
+    $('lesson-title').textContent = `Stage ${k + 1} of ${stages.length}: ${stage.title}`;
+    $('lesson-body').innerHTML = stage.lesson;
+    $('lesson-body').hidden = false;
+    $('lesson-toggle').textContent = 'Hide lesson';
+    pool = stage.lines.map((c) => byCitation[c]);
+    const saved = resume ? S.stagePos[stage.id] : null;
+    const at = saved ? pool.findIndex((l) => l.citation === saved) : -1;
+    index = at >= 0 ? at : Math.max(0, pool.findIndex((l) => !P.isSolved(l.citation)));
+    showLine();
+  }
+  $('lesson-toggle').addEventListener('click', () => {
+    const body = $('lesson-body');
+    body.hidden = !body.hidden;
+    $('lesson-toggle').textContent = body.hidden ? 'Show lesson' : 'Hide lesson';
+  });
 
   // ---- where a swoosh may go ------------------------------------------------------------------------
   const isLetter = (c) => /\p{L}/u.test(c);
@@ -97,7 +148,7 @@
 
   // ---- rendering ----------------------------------------------------------------------------------
   function showLine() {
-    marks = {}; tieOf = {}; checked = false; revealed = false;
+    marks = {}; tieOf = {}; checked = false; revealed = false; helped = false;
     $('feedback').innerHTML = ''; $('reason').innerHTML = '';
     const l = current();
     if (!l) {
@@ -122,13 +173,17 @@
     updatePosition();
     $('prev').disabled = index === 0;
     $('next').disabled = index >= pool.length - 1;
-    saved.citation = l.citation; save();
+    if (S.mode === 'tutorial' && stages[S.stage]) S.stagePos[stages[S.stage].id] = l.citation;
+    else S.citation = l.citation;
+    P.save();
     render();
   }
 
   function updatePosition() {
-    const solved = pool.filter((x) => saved.solved[x.citation]).length;
-    $('position').textContent = `Line ${index + 1} of ${pool.length} · ${solved} solved`;
+    const solved = pool.filter((x) => P.isSolved(x.citation)).length;
+    const what = S.mode === 'tutorial' ? 'Practice line' : 'Line';
+    const mark = current() && P.isSolved(current().citation) ? ' · ✓ figured out' : '';
+    $('position').textContent = `${what} ${index + 1} of ${pool.length} · ${solved} solved${mark}`;
   }
 
   function nucEls() { return [...lineEl.querySelectorAll('.nuc')]; }
@@ -141,12 +196,12 @@
       if (!checked) el.classList.remove('ok', 'bad');
       el.classList.toggle('revealed', revealed);
     });
-    drawOverlay();
+    return drawOverlay();
   }
 
   // Swooshes under the line, and -- after Check -- foot dividers above it.
   function drawOverlay() {
-    if (!overlay) return;
+    if (!overlay) return null;
     overlay.innerHTML = '';
     const lr = lineEl.getBoundingClientRect();
     const els = nucEls();
@@ -159,9 +214,8 @@
       const j = junctions[tieOf[i]] || junctions.find((jj) => jj.elided === i);
       const a = rect(j ? j.p : i);
       const b = j && j.q != null ? rect(j.q) : null;
-      let x1 = a.left + a.width / 2, x2;
-      if (b && Math.abs(b.top - a.top) < a.height / 2) x2 = b.left + b.width / 2;
-      else x2 = a.right + a.height * 0.45;
+      const x1 = a.left + a.width / 2;
+      const x2 = b && Math.abs(b.top - a.top) < a.height / 2 ? b.left + b.width / 2 : a.right + a.height * 0.45;
       const tie = document.createElement('span');
       tie.className = 'tie';
       tie.dataset.i = i;
@@ -174,7 +228,7 @@
       overlay.appendChild(tie);
     });
 
-    if (!(checked || revealed)) return;
+    if (!(checked || revealed)) return null;
     // The student's own marks, grouped into feet in order: ¯ ¯ is a spondee, ¯ ˘ ˘ a dactyl.
     const seq = l.nuclei.map((_, i) => i).filter((i) => marks[i] !== 'X');
     let p = 0, feet = 0;
@@ -200,6 +254,7 @@
     });
     return { feet, complete: feet === 6 && p === seq.length };
   }
+  window.addEventListener('resize', () => drawOverlay());
 
   // ---- placing marks ------------------------------------------------------------------------------
   function place(i, mark, from, j) {
@@ -220,8 +275,7 @@
     render();
   }
 
-  // Where a drop at (x, y) lands: a nucleus for long/short, a junction for the swoosh. Returns
-  // {i, j} or null.
+  // Where a drop at (x, y) lands: a nucleus for long/short, a junction for the swoosh. {i, j} or null.
   function targetAt(x, y, mark) {
     const els = nucEls();
     if (mark === 'X') {
@@ -256,12 +310,12 @@
   let drag = null;
   function startDrag(e, mark, from) {
     e.preventDefault();
-    drag = { mark, from, x0: e.clientX, y0: e.clientY, moved: false, ghost: null, target: null };
+    drag = { mark, from, x0: e.clientX, y0: e.clientY, moved: false, ghost: null, key: '', t: null };
   }
   function highlight(t) {
     nucEls().forEach((el) => el.classList.remove('target'));
     lineEl.querySelectorAll('.slot').forEach((s) => s.remove());
-    if (!t) return;
+    if (!t || !drag) return;
     if (drag.mark !== 'X') { nucEls()[t.i].classList.add('target'); return; }
     const jj = junctions[t.j];
     const lr = lineEl.getBoundingClientRect();
@@ -291,7 +345,7 @@
     drag.ghost.style.top = e.clientY + 'px';
     const t = targetAt(e.clientX, e.clientY, drag.mark);
     const key = t ? `${t.i}/${t.j}` : '';
-    if (key !== drag.target) { drag.target = key; drag.t = t; highlight(t); }
+    if (key !== drag.key) { drag.key = key; drag.t = t; highlight(t); }
   });
   document.addEventListener('pointerup', () => {
     if (!drag) return;
@@ -374,22 +428,46 @@
       if (marks[i] === 'L' || marks[i] === 'S') el.classList.add(marks[i] === want ? 'ok' : 'bad');
     });
     checked = true; revealed = false;
-    const shape = drawOverlay();
-    render();
+    const shape = render();
     const total = l.nuclei.length;
-    if (right === total) {
-      saved.solved[l.citation] = true; save();
-      updatePosition();
-      $('feedback').innerHTML = '<div><b>Correct!</b></div>' + spondaicNote(l);
+    const correct = right === total;
+    const context = S.mode === 'tutorial' ? `Tutorial: ${stages[S.stage].title}`
+      : `${$('passage').value || 'All passages'} · ${LEVEL_NAMES[Number($('level').value) - 1]}`;
+    const result = P.recordCheck(l, correct, helped, context);
+
+    let html;
+    if (correct) {
+      html = '<div><b>Correct!</b>';
+      if (result.points) html += ` <span class="gain">+${result.points} points${result.firstTry ? ' — first try!' : ''}</span>`;
+      else if (result.helped) html += ' <span class="note">You used Show answer on this line — try it again on your own another time to count it.</span>';
+      else if (result.alreadySolved) html += ' <span class="note">(Already figured out.)</span>';
+      html += '</div>' + spondaicNote(l);
     } else {
       const unmarked = l.nuclei.filter((n, i) => !marks[i]).length;
-      let msg = `${right} of ${total} right.`;
-      if (unmarked) msg += ` ${unmarked} syllable${unmarked === 1 ? ' has' : 's have'} no mark.`;
-      if (shape && !shape.complete) msg += ' <span class="note">Your marks don’t divide into six feet yet — see where the dividers stop.</span>';
-      msg += ' <span class="note">Tap a mark to see why.</span>';
-      $('feedback').innerHTML = msg;
+      html = `${right} of ${total} right.`;
+      if (unmarked) html += ` ${unmarked} syllable${unmarked === 1 ? ' has' : 's have'} no mark.`;
+      if (shape && !shape.complete) html += ' <span class="note">Your marks don’t divide into six feet yet — see where the dividers stop.</span>';
+      html += ' <span class="note">Tap a mark to see why.</span>';
     }
+    let badges = result.badges;
+    if (correct && S.mode === 'tutorial') {
+      const stage = stages[S.stage];
+      if (stage.lines.every((c) => P.isSolved(c))) {
+        badges = badges.concat(P.completeStage(stage.id));
+        fillStageMenu();
+        html += `<div class="stage-done"><b>Stage ${S.stage + 1} complete!</b>` +
+          (S.stage + 1 < stages.length
+            ? ` <button type="button" class="primary" id="next-stage">On to stage ${S.stage + 2}: ${escapeHTML(stages[S.stage + 1].title)} →</button>`
+            : ' That was the last stage — head to <b>Practice</b> to keep going.') + '</div>';
+      }
+    }
+    html += badges.map((b) => `<span class="new-badge" title="${escapeHTML(b.desc)}">★ New badge: ${escapeHTML(b.title)}</span>`).join('');
+    $('feedback').innerHTML = html;
+    const nextStage = $('next-stage');
+    if (nextStage) nextStage.addEventListener('click', () => openStage(S.stage + 1));
     $('reason').innerHTML = '';
+    updatePosition();
+    updatePoints();
   });
 
   $('reveal').addEventListener('click', () => {
@@ -399,7 +477,8 @@
       marks[i] = expected(n);
       if (marks[i] === 'X') tieOf[i] = junctions.findIndex((jj) => jj.elided === i);
     });
-    revealed = true; checked = false;
+    revealed = true; checked = false; helped = true;
+    P.recordReveal(l);
     nucEls().forEach((el) => el.classList.remove('ok', 'bad'));
     render();
     $('feedback').innerHTML = spondaicNote(l) + '<div class="note">Tap a mark to see why.</div>';
@@ -414,6 +493,49 @@
     return l.flags.includes('spondaic fifth foot')
       ? '<div class="note">The fifth foot is a spondee (¯ ¯) — rare, and usually for effect.</div>' : '';
   }
+
+  // ---- my progress --------------------------------------------------------------------------------
+  $('open-progress').addEventListener('click', () => {
+    const st = P.stats();
+    const row = (label, n, total) => {
+      const pct = total ? Math.round(100 * n / total) : 0;
+      return `<div class="progress-row"><div>${escapeHTML(label)}</div><div class="meter"><span style="width:${pct}%"></span></div><div class="nums">${n} / ${total}</div></div>`;
+    };
+    $('progress-body').innerHTML =
+      `<p>${st.solved ? `You've figured out <b>${st.solved}</b> line${st.solved === 1 ? '' : 's'} — <b>${st.percent}%</b> of all ${st.total} lines, or ${st.solved * 6} feet of hexameter.` : 'No lines figured out yet — start with the Tutorial!'}</p>` +
+      `<div class="big-stats">
+        <div><b>${st.points}</b><span>points</span></div>
+        <div><b>${st.firstTries}</b><span>first-try lines</span></div>
+        <div><b>${st.bestStreak}</b><span>best streak</span></div>
+        <div><b>${st.days}</b><span>days practiced</span></div>
+        <div><b>${st.checks}</b><span>checks</span></div>
+      </div>` +
+      '<h3>Tutorial</h3>' + row('Stages finished', st.stages.filter((s) => s.done).length, st.stages.length) +
+      '<h3>Passages</h3>' + st.passages.map((p) => row(p.name, p.solved, p.total)).join('') +
+      '<h3>Levels</h3>' + st.byLevel.map((l) => row(`${l.level}. ${LEVEL_NAMES[l.level - 1]}`, l.solved, l.total)).join('') +
+      '<h3>Badges</h3>' + (st.badges.length
+        ? `<div class="badge-list">${st.badges.map((b) => `<span title="${escapeHTML(b.desc)}">★ ${escapeHTML(b.title)}</span>`).join('')}</div>`
+        : '<p class="note">None yet — your first correct line earns one.</p>') +
+      (st.configs.length ? '<h3>What you have practiced</h3><ul>' +
+        st.configs.map(([k, n]) => `<li>${escapeHTML(k)} <span class="note">(${n} check${n === 1 ? '' : 's'})</span></li>`).join('') + '</ul>' : '');
+    $('report-name').value = S.name || '';
+    $('progress').hidden = false;
+  });
+  $('close-progress').addEventListener('click', () => { $('progress').hidden = true; });
+  $('progress').addEventListener('click', (e) => { if (e.target.id === 'progress') $('progress').hidden = true; });
+  $('report-name').addEventListener('change', () => { S.name = $('report-name').value.trim(); P.save(); });
+  $('download-report').addEventListener('click', () => {
+    S.name = $('report-name').value.trim(); P.save();
+    P.downloadReport(S.name);
+  });
+  $('reset-progress').addEventListener('click', () => {
+    if (!window.confirm('Erase all your progress in this browser? This cannot be undone.')) return;
+    P.reset();
+    $('progress').hidden = true;
+    fillStageMenu();
+    updatePoints();
+    setMode('tutorial');
+  });
 
   // ---- reasons, in the student's words --------------------------------------------------------------
   function showReason(i) {

@@ -28,6 +28,23 @@ it, so the app never gives an elision away; once elided, any mark on it goes bac
 student's *own* marks, so a scansion that does not fall into six feet shows exactly where it breaks.
 Tapping a mark then says why that syllable is long, short, or elided.
 
+## Tutorial, practice, and progress
+
+- **Tutorial** walks through meter one idea at a time — syllables, long and short; the pattern;
+  *qu, h, x, z*; mūta cum liquida; elision; consonants at the start of a word; Greek words; the
+  poets' licences — each with a short lesson and lines to practice it on. The lessons and their
+  lines live in [`data/tutorial.json`](data/tutorial.json): edit the text, reorder the stages, or
+  swap in lines from your own texts by citation.
+- **Practice** chooses lines by passage and by the skills learned so far.
+- **My progress** shows lines figured out (and what share of the whole), points, streaks, days
+  practiced, badges, and what has been practiced. A line solved after **Show answer** earns nothing
+  until it is solved again on another visit.
+- **Download report** saves a one-page progress report (a web page) that a student can send to a
+  teacher.
+
+All of this is kept in the browser's local storage and never sent anywhere; a notice says so on the
+first visit.
+
 ## Running it locally
 
 The app is plain HTML, CSS and JavaScript with no build step, but it loads its lines with `fetch`, so

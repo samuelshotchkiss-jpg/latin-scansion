@@ -9,7 +9,15 @@
 <body>
   <header class="top">
     <h1>Latin Scansion</h1>
-    <div class="controls">
+    <nav class="modes" aria-label="Sections">
+      <button type="button" class="mode" data-mode="tutorial">Tutorial</button>
+      <button type="button" class="mode" data-mode="practice">Practice</button>
+      <button type="button" id="open-progress" class="mode">My progress <span id="points-pill" class="pill"></span></button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="practice-controls" class="controls">
       <label>Passage
         <select id="passage"></select>
       </label>
@@ -23,9 +31,21 @@
         </select>
       </label>
     </div>
-  </header>
 
-  <main>
+    <div id="tutorial-controls" class="controls" hidden>
+      <label>Stage
+        <select id="stage"></select>
+      </label>
+    </div>
+
+    <article id="lesson" class="lesson" hidden>
+      <div class="lesson-head">
+        <h2 id="lesson-title"></h2>
+        <button type="button" id="lesson-toggle" class="link">Hide lesson</button>
+      </div>
+      <div id="lesson-body" class="lesson-body"></div>
+    </article>
+
     <div class="where">
       <span id="citation" class="citation"></span>
       <span id="position" class="position"></span>
@@ -59,9 +79,49 @@
   </main>
 
   <footer class="foot">
-    Texts: Ovid and Vergil (public domain) · Macrons and answer keys: CC BY-NC-SA 4.0 · Code: AGPL-3.0
+    Texts: Ovid and Vergil (public domain) · Macrons, answer keys and lessons: CC BY-NC-SA 4.0 · Code: AGPL-3.0
   </footer>
 
+  <!-- The privacy notice. Keep it in step with what progress.js actually stores. -->
+  <div id="privacy" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">Welcome! (Privacy Notice)</h2>
+      <p>This app uses your browser's <b>Local Storage</b> to remember your progress:</p>
+      <ul>
+        <li>which lines you have scanned correctly, and how many tries each one took;</li>
+        <li>your points, your streaks, and the badges you have earned;</li>
+        <li>which passages and levels you have practiced, and how far you are in the tutorial;</li>
+        <li>your name, only if you type it in to make a progress report.</li>
+      </ul>
+      <p><b>Your data is stored only on this computer and within this browser.</b> It is never collected, analyzed, or sent anywhere else. If you clear your browser's data, or use a different computer or browser, your progress starts over.</p>
+      <p>A progress report is made only when you click <b>Download report</b>. It is saved to your own computer, and it is up to you whether to send it to your teacher.</p>
+      <p>By clicking "Acknowledge," you agree to the use of Local Storage for this purpose.</p>
+      <div class="modal-actions">
+        <button type="button" id="acknowledge" class="primary">Acknowledge</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="progress" class="modal" hidden>
+    <div class="modal-card wide" role="dialog" aria-modal="true" aria-labelledby="progress-title">
+      <div class="modal-head">
+        <h2 id="progress-title">My progress</h2>
+        <button type="button" id="close-progress" class="link">Close</button>
+      </div>
+      <div id="progress-body"></div>
+      <div class="report">
+        <h3>A report for your teacher</h3>
+        <label>Your name <input type="text" id="report-name" autocomplete="name" maxlength="60"></label>
+        <button type="button" id="download-report" class="primary">Download report</button>
+        <p class="note">The report is a web page saved to your computer. Upload or send it however your teacher asks.</p>
+      </div>
+      <div class="danger">
+        <button type="button" id="reset-progress" class="link">Start over (erase my progress)</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="progress.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
