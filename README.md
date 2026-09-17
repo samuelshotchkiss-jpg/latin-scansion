@@ -15,14 +15,18 @@ removed by elision — nothing is a guess, and the rules stop looking arbitrary.
 
 ## How a student scans
 
-The line is shown whole, with no syllable divisions. The student drags long and short marks over it,
-and each mark **snaps to a syllable nucleus** — the vowel or diphthong at the heart of a syllable.
-Marking an elision takes that nucleus out of play. Dividing the syllables is part of the skill, so
-the app never does it for them.
+The line is shown whole, with no syllable divisions. The student drags long (¯) and short (˘) marks
+over it, and each mark **snaps to a syllable nucleus** — the vowel or diphthong at the heart of a
+syllable. Dividing the syllables is part of the skill, so the app never does it for them.
 
-A vowel stays open to long and short marks until the student marks it elided — the app never gives
-an elision away. Once elided, it takes no long or short mark, and any mark already on it goes back to
-the tray. After **Check**, tapping a vowel says why it is long, short, or elided.
+**Elision** is marked the traditional way: a swoosh under the gap between two words (*atque ‿ ita*).
+The app works out which vowel it removes — the one ending the first word, or the *e* of *est* in
+prodelision (*imposita ‿ est*). A vowel stays open to long and short marks until the student elides
+it, so the app never gives an elision away; once elided, any mark on it goes back to the tray.
+
+**Check** turns each mark green or red, and draws foot dividers above the line — grouped from the
+student's *own* marks, so a scansion that does not fall into six feet shows exactly where it breaks.
+Tapping a mark then says why that syllable is long, short, or elided.
 
 ## Running it locally
 

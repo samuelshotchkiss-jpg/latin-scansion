@@ -64,7 +64,7 @@ main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
   outline-offset: 2px;
 }
 .nuc.target { background: var(--target); box-shadow: 0 0 0 3px var(--target); }
-.nuc.elided { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
+.nuc.elided { color: var(--muted); }
 .nuc .mark {
   position: absolute;
   left: 50%;
@@ -77,12 +77,32 @@ main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
   touch-action: none;
   padding: 0 .12em;
 }
-.nuc.ok { box-shadow: inset 0 -3px 0 var(--ok); }
-.nuc.bad { box-shadow: inset 0 -3px 0 var(--bad); }
-.nuc.missing { box-shadow: inset 0 -3px 0 var(--missing); }
 .nuc.ok .mark { color: var(--ok); }
 .nuc.bad .mark { color: var(--bad); }
 .nuc.revealed .mark { color: var(--muted); }
+
+/* Swooshes (elision) under the line and foot dividers above it live in one overlay. */
+.line { position: relative; }
+.overlay { position: absolute; inset: 0; pointer-events: none; }
+.tie {
+  position: absolute;
+  border: 2px solid var(--mark);
+  border-top: none;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+.tie::after { content: ""; position: absolute; inset: -8px -4px -10px; }   /* a bigger target to grab */
+.tie.ok { border-color: var(--ok); }
+.tie.bad { border-color: var(--bad); }
+.tie.revealed { border-color: var(--muted); }
+.tie.slot { border-style: dashed; border-color: var(--accent); pointer-events: none; }
+.bar { position: absolute; width: 2px; background: var(--muted); border-radius: 1px; }
+.tie-sym {
+  display: inline-block; width: 1.1em; height: .42em; vertical-align: middle;
+  border: 2px solid currentColor; border-top: none; border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
 
 .tray { display: flex; gap: .6rem; justify-content: center; margin-top: .5rem; }
 .chip {
