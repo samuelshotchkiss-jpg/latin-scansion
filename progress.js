@@ -194,7 +194,7 @@ window.Progress = (function () {
   function reportHTML(name) {
     const st = stats();
     const when = new Date();
-    const levelNames = ['Long and short', '+ Elision', '+ Mūta cum liquida', '+ Greek words', '+ Everything'];
+    const levelNames = ['Long and short only', 'Elision', 'Mūta cum liquida', 'Greek words', 'Advanced'];
     const recent = st.recent.slice(0, 12).map(({ line, e }) =>
       `<tr><td>${esc(line.citation)}</td><td class="latin">${esc(line.text)}</td><td>${e.firstTry ? '★ first try' : e.checks + ' tries'}</td></tr>`).join('');
     return `<!doctype html>
@@ -235,8 +235,8 @@ window.Progress = (function () {
   </div>
   <h2>Passages</h2>
   ${st.passages.map((p) => `<div class="row"><div>${esc(p.name)}</div>${bar(p.solved, p.total)}</div>`).join('')}
-  <h2>By level</h2>
-  ${st.byLevel.map((l) => `<div class="row"><div>Level ${l.level}: ${esc(levelNames[l.level - 1])}</div>${bar(l.solved, l.total)}</div>`).join('')}
+  <h2>By kind of line</h2>
+  ${st.byLevel.map((l) => `<div class="row"><div>${esc(levelNames[l.level - 1])}</div>${bar(l.solved, l.total)}</div>`).join('')}
   <h2>Tutorial</h2>
   <ul class="stages">${st.stages.map((s) => `<li>${s.done ? '✓' : '○'} ${esc(s.title)}</li>`).join('')}</ul>
   <h2>Badges</h2>

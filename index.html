@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Latin Scansion</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
+       cache files for ten minutes, and a new page running an old script breaks. -->
+  <link rel="stylesheet" href="styles.css?v=2026-09-17b">
 </head>
 <body>
   <header class="top">
@@ -21,15 +23,18 @@
       <label>Passage
         <select id="passage"></select>
       </label>
-      <label>What you know
-        <select id="level">
-          <option value="1">Long and short</option>
-          <option value="2">+ Elision</option>
-          <option value="3">+ Mūta cum liquida</option>
-          <option value="4">+ Greek words</option>
-          <option value="5">+ Everything</option>
-        </select>
-      </label>
+      <fieldset id="kinds" class="kinds">
+        <legend>Lines with</legend>
+        <label title="Nothing but long and short syllables"><input type="checkbox" value="1"> Long and short only</label>
+        <label title="Elision, but no mūta cum liquida"><input type="checkbox" value="2"> Elision</label>
+        <label title="Mūta cum liquida — and maybe elision"><input type="checkbox" value="3"> Mūta cum liquida</label>
+        <label title="Greek-looking words — and maybe elision or mūta cum liquida"><input type="checkbox" value="4"> Greek words</label>
+        <label title="The poets' licences — and anything else"><input type="checkbox" value="5"> Advanced</label>
+      </fieldset>
+      <span id="focus" class="focus" hidden>
+        <span id="focus-label"></span>
+        <button type="button" id="clear-focus" class="link" aria-label="Show all lines of these kinds">✕</button>
+      </span>
     </div>
 
     <div id="tutorial-controls" class="controls" hidden>
@@ -121,7 +126,7 @@
     </div>
   </div>
 
-  <script src="progress.js"></script>
-  <script src="app.js"></script>
+  <script src="progress.js?v=2026-09-17b"></script>
+  <script src="app.js?v=2026-09-17b"></script>
 </body>
 </html>

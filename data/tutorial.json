@@ -1,53 +1,126 @@
 {
-  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML) and the lines to practice it on, by citation. Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0.",
+  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the larger set its 'Practice more' link opens -- `levels` (1 long and short only, 2 elision, 3 muta cum liquida, 4 Greek words, 5 advanced) and, to narrow further, `flags` (a line needs at least one). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0.",
   "stages": [
     {
       "id": "syllables",
       "title": "Syllables, long and short",
       "lesson": "<p>Scansion starts with syllables. Treat the whole line as one big word:</p><p class=\"latin\">fistula disparibus paulātim surgit avēnīs<br>fistuladisparibuspaulātimsurgitavēnīs</p><p><b>Each vowel or diphthong gets a syllable.</b> A diphthong is two vowels pronounced as one: <i>ae, oe, au</i> — sometimes <i>ui, ei, eu</i>. Split <b>before one consonant</b>, <b>between two</b>:</p><p class=\"latin\">fis-tu-la-dis-pa-ri-bus-pau-lā-tim-sur-gi-ta-vē-nīs</p><p>Notice that <i>avēnīs</i> stole the final consonant of <i>surgit</i>!</p><p><b>A syllable is long if:</b></p><ul><li>it has a long vowel (one marked with a macron: ā);</li><li>it has a diphthong;</li><li>it ends in a consonant — true whenever its vowel is followed by two or more consonants;</li><li>it is the last syllable of the line.</li></ul><p>All other syllables are short.</p><p class=\"howto\"><b>In this app</b> you don't write the dashes. Drag a long mark ¯ or a short mark ˘ onto each vowel — the marks snap into place — and press <b>Check</b>.</p>",
-      "lines": ["Met. 8.192", "Met. 8.198", "Met. 8.189"]
+      "lines": [
+        "Met. 8.192",
+        "Met. 8.198",
+        "Met. 8.189"
+      ]
     },
     {
       "id": "pattern",
       "title": "The pattern: dactyls and spondees",
       "lesson": "<p>The hexameter is six <b>feet</b>, and each foot is one of two kinds:</p><ul><li>a <b>dactyl</b> ¯ ˘ ˘ — Greek for “finger”: one long joint, then two short ones;</li><li>a <b>spondee</b> ¯ ¯ — equivalent to a dactyl, because two shorts make one long.</li></ul><p>Every foot begins with a long syllable. The fifth foot is almost always a dactyl, and the sixth is always ¯ ¯.</p><p class=\"howto\">When you press <b>Check</b>, dividers appear between the feet <i>your</i> marks make. If they stop partway through the line, that is where your marks stop fitting the pattern.</p>",
-      "lines": ["Met. 8.185", "Met. 8.191", "Met. 8.193"]
+      "lines": [
+        "Met. 8.185",
+        "Met. 8.191",
+        "Met. 8.193"
+      ],
+      "practice": {
+        "levels": [
+          1
+        ]
+      }
     },
     {
       "id": "refinements",
       "title": "Some refinements: qu, h, x and z",
       "lesson": "<ul><li><b>qu</b>: the <i>u</i> doesn't exist. It is neither a consonant nor a vowel, and has no effect on length.</li><li><b>h</b>: also doesn't exist. It was very lightly pronounced.</li><li><b>x</b> is actually two consonants, c + s — so <i>dīxit et</i> is <i>dīc-si-tet</i>.</li><li><b>z</b> is also two consonants (it only shows up in Greek words).</li></ul>",
-      "lines": ["Met. 8.190", "Met. 8.188", "Met. 8.197", "Met. 8.217"]
+      "lines": [
+        "Met. 8.190",
+        "Met. 8.188",
+        "Met. 8.197",
+        "Met. 8.217"
+      ],
+      "practice": {
+        "levels": [
+          1
+        ]
+      }
     },
     {
       "id": "elision",
       "title": "Elision",
       "lesson": "<p>Whenever a word ends in a <b>vowel or m</b>, and the next word begins with a <b>vowel or h</b>, one of the syllables gets eaten — <b>elided</b>. Delicious!</p><p>Generally it's the first one: <i>atque ita</i> = <i>atqu' ita</i>; <i>Īcare, ait</i> = <i>Īcar' ait</i>.</p><p>Unless the second word is <b>est</b> or <b>es</b>: <i>imposita est</i> = <i>imposita 'st</i>; <i>ubi es</i> = <i>ubi 's</i>.</p><p class=\"howto\">Mark an elision with the swoosh ‿ — drag it under the gap between the two syllables. The elided vowel turns grey and takes no long or short mark.</p>",
-      "lines": ["Met. 8.201", "Met. 8.203", "Met. 8.215", "Met. 8.232"]
+      "lines": [
+        "Met. 8.201",
+        "Met. 8.203",
+        "Met. 8.215",
+        "Met. 8.232"
+      ],
+      "practice": {
+        "levels": [
+          2
+        ]
+      }
     },
     {
       "id": "muta",
       "title": "Mūta cum liquida",
       "lesson": "<p><b>Mutes</b> are hard sounds that fully interrupt the flow of air: <i>c, g; t, d; p, b</i>. <b>Liquids</b> are just two: <i>l, r</i>.</p><p>(<i>s</i> and <i>f</i> are fricatives, <i>i/j</i> and <i>v</i> are semivowels, and <i>m</i> and <i>n</i> are nasals: none of them matter here.)</p><p>In actual speech, a mute + liquid usually <i>began</i> a syllable: <i>patris</i> was <i>pa-tris</i>, with the first syllable short. In poetry, either pronunciation was permitted — <i>pat-ris</i>, first syllable long, or <i>pa-tris</i>, first syllable short. Let the rest of the line decide.</p>",
-      "lines": ["Met. 8.199", "Met. 8.211", "Met. 8.206"]
+      "lines": [
+        "Met. 8.199",
+        "Met. 8.211",
+        "Met. 8.206"
+      ],
+      "practice": {
+        "levels": [
+          3
+        ]
+      }
     },
     {
       "id": "clusters",
       "title": "Consonants at the start of a word",
       "lesson": "<p>In Greek, two consonants at the start of a word tend to lengthen the last vowel of the word before. Not so much in Latin:</p><p class=\"latin\">atque ita compositās parvō curvāmine flectit</p><p>The <i>-e</i> of <i>curvāmine</i> stays short before <i>fl-</i>. A short vowel before a mute + liquid that begins the next word usually stays short too: <i>unda gravet</i>.</p>",
-      "lines": ["Met. 8.205", "Met. 8.224", "Met. 8.194"]
+      "lines": [
+        "Met. 8.205",
+        "Met. 8.224",
+        "Met. 8.194"
+      ],
+      "practice": {
+        "levels": [
+          3
+        ],
+        "flags": [
+          "muta cum liquida at word start",
+          "f + liquid at word start"
+        ]
+      }
     },
     {
       "id": "greek",
       "title": "Greek words",
       "lesson": "<p>Most of the names in these stories are Greek, and Greek words put vowels together in ways Latin usually doesn't. Trust the macrons, and watch for:</p><ul><li>pairs that <b>look</b> like diphthongs but aren't: <i>āera</i> is <i>ā-e-ra</i>, three syllables; <i>Pāsiphaē</i> ends <i>-pha-ē</i>;</li><li>vowels side by side: <i>Mīnōia</i>, <i>Boōtēn</i>, <i>Aenēās</i>;</li><li>the diphthong <b>eu</b> in names like <i>Teucrī</i>.</li></ul>",
-      "lines": ["Met. 8.187", "Aen. 6.14", "Aen. 6.25"]
+      "lines": [
+        "Met. 8.187",
+        "Aen. 6.14",
+        "Aen. 6.25"
+      ],
+      "practice": {
+        "levels": [
+          4
+        ]
+      }
     },
     {
       "id": "licences",
       "title": "The poets' licences",
       "lesson": "<p>Now and then a poet bends the rules. You won't meet these often, but you'll learn to recognize them:</p><ul><li><b>Hiatus</b>: no elision where you'd expect one — <i>dea. ille</i>.</li><li><b>Synizesis</b>: two vowels in one word run together into a single syllable — <i>Lāvīnia</i> becomes <i>Lā-vīn-ya</i>. Mark it with the swoosh between the two vowels.</li><li><b>Hypermetry</b>: the line has one syllable too many, and its last vowel elides into the next line — <i>locōrumque</i>. Put the swoosh after the last syllable.</li></ul>",
-      "lines": ["Aen. 1.405", "Aen. 1.2", "Aen. 1.332"]
+      "lines": [
+        "Aen. 1.405",
+        "Aen. 1.2",
+        "Aen. 1.332"
+      ],
+      "practice": {
+        "levels": [
+          5
+        ]
+      }
     }
   ]
 }

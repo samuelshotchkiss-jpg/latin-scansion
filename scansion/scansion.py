@@ -25,7 +25,8 @@ CONVENTIONS. Change these if you teach differently:
     same, and is grouped with muta cum liquida;
   * ADVANCED, and tried only when a line will not scan without them: hiatus, synizesis, correption,
     a dissolved diphthong, hypermetry, lengthening at the beat, a word-initial cluster the poet
-    ignores. Also advanced, though tried first: a word-initial cluster that makes position by itself.
+    ignores. Also advanced, though tried first: a word-initial cluster (sc-, sp-, st-...) that makes
+    position by itself. The s + t left by prodelision (vīsa 'st) is not one: that is ordinary position.
   * GREEKINESS: a word that looks unlike ordinary Latin -- a pair that looks like a diphthong and is
     not (āera), vowels side by side in a name (Aenēās), an eu diphthong (Teucrī), three vowels in a
     row, the same vowel twice, many vowels, or a name whose macron was hard to settle. A y alone is
@@ -271,6 +272,11 @@ def build_line(s: str, low: str, words, pick, flags: set):
                 else:
                     marks.append(("S", "muta cum liquida at word start", letters))
                     flags.add("muta cum liquida at word start")
+            elif cons[0].word != v.word and any(u.word == cons[0].word and u.kind == "V" and u.gone == "prodelided"
+                                                 for u in units):
+                # vīsa 'st: the e of est has gone, so its s + t follow the vowel directly. Ordinary
+                # position, not a word-initial cluster (every "cluster" the corpus had was this).
+                marks.append(("L", "two consonants", letters))
             elif cons[0].word != v.word and all(u.word == cons[0].word for u in cons):
                 if len(cons) == 2 and letters[0] == "f" and cons[1].liquid:
                     # in Ovid and Vergil a short final vowel stays short before fl-/fr- (curvāmine flectit)

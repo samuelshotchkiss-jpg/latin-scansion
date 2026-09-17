@@ -16449,8 +16449,8 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
-  "advanced": true,
+  "level": 2,
+  "advanced": false,
   "feet": [
    "LSS",
    "LSS",
@@ -16460,8 +16460,7 @@
    "LL"
   ],
   "flags": [
-   "prodelision",
-   "word-initial cluster makes position"
+   "prodelision"
   ],
   "nuclei": [
    {
@@ -16531,7 +16530,7 @@
     "end": 23,
     "text": "a",
     "mark": "L",
-    "why": "word-initial cluster makes position",
+    "why": "two consonants",
     "followed_by": "st"
    },
    {
@@ -24406,8 +24405,8 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
-  "advanced": true,
+  "level": 2,
+  "advanced": false,
   "feet": [
    "LSS",
    "LSS",
@@ -24417,8 +24416,7 @@
    "LL"
   ],
   "flags": [
-   "prodelision",
-   "word-initial cluster makes position"
+   "prodelision"
   ],
   "nuclei": [
    {
@@ -24473,7 +24471,7 @@
     "end": 19,
     "text": "a",
     "mark": "L",
-    "why": "word-initial cluster makes position",
+    "why": "two consonants",
     "followed_by": "st"
    },
    {
@@ -53339,8 +53337,8 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
-  "advanced": true,
+  "level": 2,
+  "advanced": false,
   "feet": [
    "LL",
    "LL",
@@ -53350,8 +53348,7 @@
    "LL"
   ],
   "flags": [
-   "prodelision",
-   "word-initial cluster makes position"
+   "prodelision"
   ],
   "nuclei": [
    {
@@ -53413,7 +53410,7 @@
     "end": 23,
     "text": "a",
     "mark": "L",
-    "why": "word-initial cluster makes position",
+    "why": "two consonants",
     "followed_by": "st"
    },
    {
@@ -58299,8 +58296,8 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
-  "advanced": true,
+  "level": 2,
+  "advanced": false,
   "feet": [
    "LL",
    "LSS",
@@ -58310,8 +58307,7 @@
    "LL"
   ],
   "flags": [
-   "prodelision",
-   "word-initial cluster makes position"
+   "prodelision"
   ],
   "nuclei": [
    {
@@ -58372,7 +58368,7 @@
     "end": 23,
     "text": "a",
     "mark": "L",
-    "why": "word-initial cluster makes position",
+    "why": "two consonants",
     "followed_by": "st"
    },
    {
@@ -85056,8 +85052,8 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
-  "advanced": true,
+  "level": 2,
+  "advanced": false,
   "feet": [
    "LSS",
    "LL",
@@ -85067,8 +85063,7 @@
    "LL"
   ],
   "flags": [
-   "prodelision",
-   "word-initial cluster makes position"
+   "prodelision"
   ],
   "nuclei": [
    {
@@ -85099,7 +85094,7 @@
     "end": 7,
     "text": "a",
     "mark": "L",
-    "why": "word-initial cluster makes position",
+    "why": "two consonants",
     "followed_by": "st"
    },
    {
@@ -94481,8 +94476,8 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 5,
-  "advanced": true,
+  "level": 2,
+  "advanced": false,
   "feet": [
    "LSS",
    "LSS",
@@ -94493,8 +94488,7 @@
   ],
   "flags": [
    "elision",
-   "prodelision",
-   "word-initial cluster makes position"
+   "prodelision"
   ],
   "nuclei": [
    {
@@ -94526,7 +94520,7 @@
     "end": 9,
     "text": "e",
     "mark": "L",
-    "why": "word-initial cluster makes position",
+    "why": "two consonants",
     "followed_by": "st"
    },
    {

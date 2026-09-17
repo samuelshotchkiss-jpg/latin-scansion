@@ -35,7 +35,9 @@ Tapping a mark then says why that syllable is long, short, or elided.
   poets' licences — each with a short lesson and lines to practice it on. The lessons and their
   lines live in [`data/tutorial.json`](data/tutorial.json): edit the text, reorder the stages, or
   swap in lines from your own texts by citation.
-- **Practice** chooses lines by passage and by the skills learned so far.
+- **Practice** chooses lines by passage and by the kinds of line ticked — only lines with elision,
+  say, or only the advanced ones. Every tutorial stage after the first links to a practice set of
+  lines like its own (`?practice=<stage id>`).
 - **My progress** shows lines figured out (and what share of the whole), points, streaks, days
   practiced, badges, and what has been practiced. A line solved after **Show answer** earns nothing
   until it is solved again on another visit.

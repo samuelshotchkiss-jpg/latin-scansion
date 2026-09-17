@@ -16,7 +16,7 @@
   const SYMBOL = { L: '¯', S: '˘' };
   const WORD = { L: 'long', S: 'short', X: 'elided' };
   const TIE = '<span class="tie-sym"></span>';
-  const LEVEL_NAMES = ['Long and short', '+ Elision', '+ Mūta cum liquida', '+ Greek words', '+ Everything'];
+  const KIND_NAMES = ['Long and short only', 'Elision', 'Mūta cum liquida', 'Greek words', 'Advanced'];
 
   const $ = (id) => document.getElementById(id);
   const lineEl = $('line');
@@ -48,14 +48,29 @@
     const names = [...new Set(lines.map((l) => l.passage))];
     $('passage').innerHTML = '<option value="">All passages</option>' +
       names.map((n) => `<option>${escapeHTML(n)}</option>`).join('');
-    $('passage').value = names.includes(S.passage) ? S.passage : (names[0] || '');
-    $('level').value = String(S.level || 1);
+    $('passage').value = names.includes(S.passage) || S.passage === '' ? S.passage : (names[0] || '');
+    if (!Array.isArray(S.levels)) {                   // the first release kept "everything up to level N"
+      S.levels = Array.from({ length: S.level || 1 }, (_, i) => i + 1);
+      delete S.level;
+    }
+    setKinds(S.levels);
     fillStageMenu();
+
+    // A "Practice more" link: ?practice=<stage id> opens Practice with that stage's lines.
+    const wanted = new URLSearchParams(location.search).get('practice');
+    if (wanted) {
+      const stage = stages.find((s) => s.id === wanted && s.practice);
+      if (stage) usePracticeSet(stage);
+      history.replaceState(null, '', location.pathname);
+    }
 
     if (!S.acknowledged) $('privacy').hidden = false;
     setMode(S.mode || (Object.keys(S.lines).length ? 'practice' : 'tutorial'));
     updatePoints();
-  }).catch(() => { lineEl.textContent = 'Could not load the lines (data/lines.json).'; });
+  }).catch((err) => {
+    console.error(err);
+    lineEl.textContent = 'Could not load the lines (data/lines.json).';
+  });
 
   $('acknowledge').addEventListener('click', () => { P.acknowledge(); $('privacy').hidden = true; });
 
@@ -78,18 +93,41 @@
     else rebuildPool(S.citation);
   }
 
-  // Practice: a passage, and every level up to what the student knows.
+  // Practice: a passage, and the KINDS of line ticked. A kind is a level, not "up to" one: ticking
+  // only Elision gives just the elision lines. A focus (from a tutorial link) narrows further to lines
+  // carrying one of its flags.
+  function inSet(l, levels, flags) {
+    return levels.includes(l.level) && (!flags || flags.some((f) => l.flags.includes(f)));
+  }
   function rebuildPool(keepCitation) {
     const passage = $('passage').value;
-    const level = Number($('level').value);
-    pool = lines.filter((l) => (!passage || l.passage === passage) && l.level <= level);
+    pool = lines.filter((l) => (!passage || l.passage === passage) && inSet(l, S.levels, S.focus && S.focus.flags));
     const at = pool.findIndex((l) => l.citation === keepCitation);
     index = at >= 0 ? at : Math.max(0, pool.findIndex((l) => !P.isSolved(l.citation)));
-    S.passage = passage; S.level = level; P.save();
+    S.passage = passage; P.save();
+    $('focus').hidden = !S.focus;
+    $('focus-label').textContent = S.focus ? `Focus: ${S.focus.label}` : '';
     showLine();
   }
+  function setKinds(levels) {
+    document.querySelectorAll('#kinds input').forEach((cb) => { cb.checked = levels.includes(Number(cb.value)); });
+  }
+  function usePracticeSet(stage) {
+    S.levels = stage.practice.levels.slice();
+    S.focus = stage.practice.flags ? { label: stage.title, flags: stage.practice.flags.slice() } : null;
+    S.passage = '';
+    S.citation = null;
+    S.mode = 'practice';
+    $('passage').value = '';
+    setKinds(S.levels);
+    P.save();
+  }
   $('passage').addEventListener('change', () => rebuildPool());
-  $('level').addEventListener('change', () => rebuildPool(current() && current().citation));
+  document.querySelectorAll('#kinds input').forEach((cb) => cb.addEventListener('change', () => {
+    S.levels = [...document.querySelectorAll('#kinds input:checked')].map((x) => Number(x.value));
+    rebuildPool(current() && current().citation);
+  }));
+  $('clear-focus').addEventListener('click', () => { S.focus = null; rebuildPool(current() && current().citation); });
 
   // Tutorial: one stage's lesson and lines.
   function fillStageMenu() {
@@ -105,7 +143,12 @@
     S.stage = k; P.save();
     $('stage').value = String(k);
     $('lesson-title').textContent = `Stage ${k + 1} of ${stages.length}: ${stage.title}`;
-    $('lesson-body').innerHTML = stage.lesson;
+    let lesson = stage.lesson;
+    if (stage.practice) {
+      const n = lines.filter((l) => inSet(l, stage.practice.levels, stage.practice.flags)).length;
+      lesson += `<p class="practice-more"><a href="?practice=${encodeURIComponent(stage.id)}" data-stage="${k}">Practice more: ${n} lines like these →</a></p>`;
+    }
+    $('lesson-body').innerHTML = lesson;
     $('lesson-body').hidden = false;
     $('lesson-toggle').textContent = 'Hide lesson';
     pool = stage.lines.map((c) => byCitation[c]);
@@ -114,6 +157,13 @@
     index = at >= 0 ? at : Math.max(0, pool.findIndex((l) => !P.isSolved(l.citation)));
     showLine();
   }
+  $('lesson-body').addEventListener('click', (e) => {
+    const a = e.target.closest('.practice-more a');
+    if (!a) return;
+    e.preventDefault();                                   // same page: no reload needed
+    usePracticeSet(stages[Number(a.dataset.stage)]);
+    setMode('practice');
+  });
   $('lesson-toggle').addEventListener('click', () => {
     const body = $('lesson-body');
     body.hidden = !body.hidden;
@@ -152,7 +202,7 @@
     $('feedback').innerHTML = ''; $('reason').innerHTML = '';
     const l = current();
     if (!l) {
-      lineEl.textContent = 'No lines at this level in this passage yet — try adding a skill.';
+      lineEl.textContent = 'No lines match — tick another kind of line, or choose All passages.';
       $('citation').textContent = ''; $('position').textContent = '';
       overlay = null; junctions = [];
       return;
@@ -432,7 +482,8 @@
     const total = l.nuclei.length;
     const correct = right === total;
     const context = S.mode === 'tutorial' ? `Tutorial: ${stages[S.stage].title}`
-      : `${$('passage').value || 'All passages'} · ${LEVEL_NAMES[Number($('level').value) - 1]}`;
+      : `${$('passage').value || 'All passages'} · ${S.levels.map((k) => KIND_NAMES[k - 1]).join(' + ')}` +
+        (S.focus ? ` · focus: ${S.focus.label}` : '');
     const result = P.recordCheck(l, correct, helped, context);
 
     let html;
@@ -512,7 +563,7 @@
       </div>` +
       '<h3>Tutorial</h3>' + row('Stages finished', st.stages.filter((s) => s.done).length, st.stages.length) +
       '<h3>Passages</h3>' + st.passages.map((p) => row(p.name, p.solved, p.total)).join('') +
-      '<h3>Levels</h3>' + st.byLevel.map((l) => row(`${l.level}. ${LEVEL_NAMES[l.level - 1]}`, l.solved, l.total)).join('') +
+      '<h3>Kinds of line</h3>' + st.byLevel.map((l) => row(KIND_NAMES[l.level - 1], l.solved, l.total)).join('') +
       '<h3>Badges</h3>' + (st.badges.length
         ? `<div class="badge-list">${st.badges.map((b) => `<span title="${escapeHTML(b.desc)}">★ ${escapeHTML(b.title)}</span>`).join('')}</div>`
         : '<p class="note">None yet — your first correct line earns one.</p>') +
