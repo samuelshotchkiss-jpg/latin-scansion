@@ -1,5 +1,5 @@
 {
-  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the larger set its 'Practice more' link opens -- `levels` (1 long and short only, 2 qu/h/x/z, 3 elision, 4 muta cum liquida, 5 Greek words, 6 advanced) and, to narrow further, `flags` (a line needs at least one). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0.",
+  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the larger set its 'Practice more' link opens -- `levels` (1 long and short only, 2 qu, 3 h/x/z, 4 elision, 5 muta cum liquida, 6 Greek words, 7 advanced) and, to narrow further, `flags` (a line needs at least one). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0.",
   "stages": [
     {
       "id": "syllables",
@@ -38,7 +38,8 @@
       ],
       "practice": {
         "levels": [
-          2
+          2,
+          3
         ]
       }
     },
@@ -54,7 +55,7 @@
       ],
       "practice": {
         "levels": [
-          3
+          4
         ]
       }
     },
@@ -69,7 +70,7 @@
       ],
       "practice": {
         "levels": [
-          4
+          5
         ]
       }
     },
@@ -84,7 +85,7 @@
       ],
       "practice": {
         "levels": [
-          4
+          5
         ],
         "flags": [
           "muta cum liquida at word start",
@@ -103,7 +104,7 @@
       ],
       "practice": {
         "levels": [
-          5
+          6
         ]
       }
     },
@@ -118,7 +119,7 @@
       ],
       "practice": {
         "levels": [
-          6
+          7
         ]
       }
     }

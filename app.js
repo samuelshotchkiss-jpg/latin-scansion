@@ -16,7 +16,7 @@
   const SYMBOL = { L: '¯', S: '˘' };
   const WORD = { L: 'long', S: 'short', X: 'elided' };
   const TIE = '<span class="tie-sym"></span>';
-  const KIND_NAMES = ['Long and short only', 'qu, h, x, z', 'Elision', 'Mūta cum liquida', 'Greek words', 'Advanced'];
+  const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z', 'Elision', 'Mūta cum liquida', 'Greek words', 'Advanced'];
 
   const $ = (id) => document.getElementById(id);
   const lineEl = $('line');
@@ -53,9 +53,13 @@
       S.levels = Array.from({ length: S.level || 1 }, (_, i) => i + 1);
       delete S.level;
     }
-    if (S.kinds !== 6) {                              // five kinds became six: qu, h, x, z split off level 1
+    if (!S.kinds) {                                   // five kinds became six: qu, h, x, z split off level 1
       S.levels = [...new Set(S.levels.flatMap((k) => (k === 1 ? [1, 2] : [k + 1])))];
       S.kinds = 6;
+    }
+    if (S.kinds === 6) {                              // six became seven: qu and h, x, z split apart
+      S.levels = [...new Set(S.levels.flatMap((k) => (k === 1 ? [1] : k === 2 ? [2, 3] : [k + 1])))];
+      S.kinds = 7;
     }
     setKinds(S.levels);
     fillStageMenu();
