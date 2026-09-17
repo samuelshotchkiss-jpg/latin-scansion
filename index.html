@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Latin Scansion</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Latin Scansion</h1>
+    <div class="controls">
+      <label>Passage
+        <select id="passage"></select>
+      </label>
+      <label>What you know
+        <select id="level">
+          <option value="1">Long and short</option>
+          <option value="2">+ Elision</option>
+          <option value="3">+ Mūta cum liquida</option>
+          <option value="4">+ Greek words</option>
+          <option value="5">+ Everything</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <div class="where">
+      <span id="citation" class="citation"></span>
+      <span id="position" class="position"></span>
+    </div>
+
+    <div id="line" class="line" lang="la"></div>
+
+    <div id="tray" class="tray" aria-label="Marks">
+      <button type="button" class="chip" data-mark="L" aria-label="long mark">
+        <span class="sym">¯</span><span class="word">long</span>
+      </button>
+      <button type="button" class="chip" data-mark="S" aria-label="short mark">
+        <span class="sym">˘</span><span class="word">short</span>
+      </button>
+      <button type="button" class="chip" data-mark="X" aria-label="elision mark">
+        <span class="sym">×</span><span class="word">elided</span>
+      </button>
+    </div>
+    <p class="hint">Drag a mark onto a vowel — or tap a mark, then tap vowels. Drag a mark off the line to take it back.</p>
+
+    <div class="actions">
+      <button type="button" id="prev">← Previous</button>
+      <button type="button" id="clear">Clear</button>
+      <button type="button" id="check" class="primary">Check</button>
+      <button type="button" id="reveal">Show answer</button>
+      <button type="button" id="next">Next →</button>
+    </div>
+
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+    <div id="reason" class="reason" aria-live="polite"></div>
+  </main>
+
+  <footer class="foot">
+    Texts: Ovid and Vergil (public domain) · Macrons and answer keys: CC BY-NC-SA 4.0 · Code: AGPL-3.0
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

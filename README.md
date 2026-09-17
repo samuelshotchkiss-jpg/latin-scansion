@@ -20,6 +20,22 @@ and each mark **snaps to a syllable nucleus** — the vowel or diphthong at the 
 Marking an elision takes that nucleus out of play. Dividing the syllables is part of the skill, so
 the app never does it for them.
 
+A vowel stays open to long and short marks until the student marks it elided — the app never gives
+an elision away. Once elided, it takes no long or short mark, and any mark already on it goes back to
+the tray. After **Check**, tapping a vowel says why it is long, short, or elided.
+
+## Running it locally
+
+The app is plain HTML, CSS and JavaScript with no build step, but it loads its lines with `fetch`, so
+serve the folder rather than opening the file:
+
+```bash
+python -m http.server 8770
+```
+
+then open `http://localhost:8770`. Progress is kept in the browser's local storage; nothing is sent
+anywhere.
+
 ## Levels
 
 Each line is placed at the lowest level that allows everything in it:
