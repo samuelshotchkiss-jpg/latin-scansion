@@ -160,7 +160,9 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
                         units.append(Unit("C", ws, ws + 1, wi))
                         i += 1
                         continue
-                elif units and units[-1].kind == "V":                   # eius, Troia -- or Mīnōia
+                elif units and units[-1].kind == "V" and t[:i] != "co":   # eius, Troia -- or Mīnōia
+                    # (not coiēre, coit: co- + the i of eō is a vowel, co-i-ē-re. Met. 4.83 scans
+                    # either way, and the consonantal reading won the tie until 2026-09-24)
                     if pick(("i between vowels", wi, i),
                             [("consonantal", 0, 1), ("vocalic", 1, 1)]) == "consonantal":
                         units.append(Unit("C", ws + i, ws + i + 1, wi, count=2))

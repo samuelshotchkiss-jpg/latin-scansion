@@ -20708,17 +20708,19 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 1,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
-   "LL",
+   "LSS",
    "LSS",
    "LL",
    "LSS",
    "LL"
   ],
-  "flags": [],
+  "flags": [
+   "greekiness"
+  ],
   "nuclei": [
    {
     "start": 0,
@@ -20756,9 +20758,15 @@
     "start": 12,
     "end": 13,
     "text": "o",
-    "mark": "L",
-    "why": "two consonants",
-    "followed_by": "i"
+    "mark": "S",
+    "why": "short vowel"
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel"
    },
    {
     "start": 14,
@@ -20839,7 +20847,16 @@
     "why": "final syllable"
    }
   ],
-  "difficult_words": [],
+  "difficult_words": [
+   {
+    "word": "coiēre",
+    "start": 11,
+    "end": 17,
+    "why": [
+     "three vowels in a row"
+    ]
+   }
+  ],
   "passage": "Pyramus and Thisbe",
   "passage_order": 3
  },
