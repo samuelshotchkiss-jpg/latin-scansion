@@ -4,6 +4,10 @@
 // one -- so a dactyl is DUM-di-di and a spondee DUM-dum, each foot the same length. The first long of
 // every foot (where the beat falls) is struck harder. Elided syllables are silent.
 //
+// A soft cymbal marks each WORD ACCENT (the scanner's `accent`, from word end and syllable weight). Where
+// the beat and the accent fall together -- as they usually do in the last two feet -- drum and cymbal
+// sound at once; where they pull apart, you hear the cymbal off the beat.
+//
 // Everything is synthesized in the browser (Web Audio): no sound files to download. The drums are
 // pitched well above a kick drum's, because a phone's speaker cannot play the low end.
 //
@@ -56,6 +60,32 @@ window.Rhythm = (function () {
     n.start(t);
     sources.push(n);
   }
+  // A cymbal: a long hiss of noise, filtered high so it shimmers, kept quiet under the drums.
+  let noise = null;
+  function cymbal(t) {
+    if (!noise) {
+      noise = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 1.2), ctx.sampleRate);
+      const d = noise.getChannelData(0);
+      for (let k = 0; k < d.length; k++) d[k] = Math.random() * 2 - 1;
+    }
+    const n = ctx.createBufferSource();
+    n.buffer = noise;
+    const hp = ctx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.value = 6000;
+    const peak = ctx.createBiquadFilter();
+    peak.type = 'peaking';
+    peak.frequency.value = 9000;
+    peak.gain.value = 6;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.12, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.0);
+    n.connect(hp).connect(peak).connect(g).connect(ctx.destination);
+    n.start(t);
+    n.stop(t + 1.05);
+    sources.push(n);
+  }
   const dum = (t, strong) => drum(t, strong ? 230 : 200, 95, 0.32, strong ? 0.9 : 0.6);
   const di = (t) => drum(t, 520, 380, 0.1, 0.45);
 
@@ -80,8 +110,9 @@ window.Rhythm = (function () {
   }
 
   // Play marks ('L', 'S' or 'X', one per syllable). onBeat(i, seconds) fires as syllable i sounds;
-  // onEnd() when the line is over. Returns false if this browser has no Web Audio.
-  function play(marks, onBeat, onEnd) {
+  // onEnd() when the line is over. accents[i] true: syllable i carries its word's accent (cymbal).
+  // Returns false if this browser has no Web Audio.
+  function play(marks, onBeat, onEnd, accents) {
     stop();
     if (!audio()) return false;
     const ictus = beats(marks);
@@ -91,6 +122,7 @@ window.Rhythm = (function () {
       if (m === 'X') return;
       const len = m === 'L' ? 2 * BEAT : BEAT;
       if (m === 'L') dum(t, ictus.has(i)); else di(t);
+      if (accents && accents[i]) cymbal(t);
       const at = (t - start + 0.12) * 1000;
       timers.push(setTimeout(() => onBeat && onBeat(i, len), at));
       t += len;

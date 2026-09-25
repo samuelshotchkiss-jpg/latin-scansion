@@ -402,6 +402,49 @@ def difficult_words(s: str, low: str, words, units, cit, hints) -> list[dict]:
     return out
 
 
+# ---- word accent ---------------------------------------------------------------------------------------
+# One-syllable words that lean on their neighbour and carry no accent of their own.
+PROCLITIC = {"a", "ab", "abs", "ad", "ante", "cum", "de", "e", "ex", "in", "ob", "per", "pro", "prae", "sub",
+             "trans", "et", "ac", "at", "aut", "sed", "nec", "neu", "seu", "uel", "ut", "si", "ne", "est", "es"}
+# Words whose -que is part of the word, not the enclitic: they take the ordinary rule (ítaque, úndique).
+LEXICAL_QUE = {"itaque", "undique", "denique", "utique"}
+
+
+def word_accents(units: list[Unit], words, marks_by_start: dict) -> set[int]:
+    """The start offset of the nucleus that carries each word's accent.
+
+    The Latin rule, from word end and syllable weight. Two syllables: the first. Three or more: the
+    next-to-last if it is heavy -- a long vowel, a diphthong, or closed by a consonant inside the word --
+    else the one before it. An enclitic (-que, -ve; -ne after a consonant) pulls the accent onto the
+    syllable just before it: virúmque, indignáve. A mute + liquid follows the poet's own scansion: where
+    he makes the syllable heavy, it takes the accent (tenébrae), which keeps the clausulae consistent
+    (owner, 2026-09-25). Elided syllables still count -- the word keeps its accent; merged ones
+    (synizesis) do not. One-syllable words are accented unless they lean on a neighbour (PROCLITIC).
+    """
+    out = set()
+    for wi, (_, t, _) in enumerate(words):
+        syl = [u for u in units if u.kind == "V" and u.word == wi and u.gone != "merged"]
+        n, b = len(syl), bare(t)
+        if n == 0 or (n == 1 and b in PROCLITIC):
+            continue
+        if n == 1:
+            out.add(syl[0].start)
+            continue
+        # -ne only after a consonant: carmine, sanguine end in -ne and are not enclitic. -ve after a vowel
+        # is the enclitic all the same (indignave, fāmāve): the plain words in -ve are short (grave, breve).
+        enclitic = ((b.endswith("que") and b not in LEXICAL_QUE)
+                    or (b.endswith("ue") and len(b) > 2)
+                    or (b.endswith("ne") and len(b) > 2 and not is_vowel(b[-3])))
+        if enclitic or n == 2:
+            out.add(syl[-2].start)
+            continue
+        pen = syl[-2]
+        why = marks_by_start.get(pen.start, ("", "", ""))[1]
+        heavy = pen.long or why in ("two consonants", "muta cum liquida, long")
+        out.add(pen.start if heavy else syl[-3].start)
+    return out
+
+
 def feet(pattern: str, meter: str = "hexameter") -> list[str]:
     if meter == "pentameter":                      # each half: two feet, then its lone long syllable
         half = len(PENTAMETER.match(pattern).group(1))
@@ -466,11 +509,14 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None,
     (units, active, marks, pattern), flags = tops[0]
 
     marks_by_start = {v.start: m for v, m in zip(active, marks)}
+    accents = word_accents(units, words, marks_by_start)
     nuclei = []
     for u in units:
         if u.kind != "V":
             continue
         entry = {"start": u.start, "end": u.end, "text": s[u.start:u.end]}
+        if u.start in accents:
+            entry["accent"] = True
         if u.gone:
             entry.update(mark=u.gone)
         else:

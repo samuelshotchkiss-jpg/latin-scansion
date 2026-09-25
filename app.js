@@ -37,8 +37,10 @@
 
   // ---- startup ------------------------------------------------------------------------------------
   Promise.all([
-    fetch('data/lines.json').then((r) => r.json()),
-    fetch('data/tutorial.json').then((r) => r.json()).catch(() => ({ stages: [] })),
+    // no-cache: ask the server every time whether the key or the tutorial changed (a few bytes when
+    // not), so a push reaches students on their next load instead of after the cache expires
+    fetch('data/lines.json', { cache: 'no-cache' }).then((r) => r.json()),
+    fetch('data/tutorial.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => ({ stages: [] })),
   ]).then(([data, tutorial]) => {
     lines = data.filter((l) => l.scans && l.passage)
       .map((l, i) => ({ ...l, _at: i }))
@@ -684,7 +686,7 @@
       const el = els[i];
       el.classList.add('beat');
       setTimeout(() => el.classList.remove('beat'), len * 900);
-    }, stopRhythm);
+    }, stopRhythm, l.nuclei.map((n) => !!n.accent));
   }
   function stopRhythm() {
     if (window.Rhythm) window.Rhythm.stop();
