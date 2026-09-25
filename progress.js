@@ -29,7 +29,63 @@ window.Progress = (function () {
   S.stagePos = S.stagePos || {};
   S.points = S.points || 0;
 
+  // ---- two tabs, one storage ------------------------------------------------------------------------
+  // Every tab holds its own copy of S, and save() writes the whole copy. So a tab left open -- a phone or
+  // an iPad keeps them for weeks and brings them back without reloading -- used to overwrite whatever a
+  // newer tab had done since (seen 2026-09-24: a stale tab's one save erased two finished stages). Now
+  // save() first folds in what is stored, and another tab's save is folded in the moment it happens.
+  // Progress only ever grows under a merge; the one thing that shrinks it, Reset, is stamped (resetAt)
+  // so that a newer reset wins and an older copy cannot bring back what was erased.
+  function merge(o) {
+    if (!o || typeof o !== 'object') return;
+    const mine = S.resetAt || '', theirs = o.resetAt || '';
+    if (theirs > mine) {                             // they reset after we loaded: take theirs whole
+      Object.keys(S).forEach((k) => delete S[k]);
+      Object.assign(S, o);
+      return;
+    }
+    if (theirs < mine) return;                       // theirs predates our reset
+    Object.entries(o.lines || {}).forEach(([c, b]) => {
+      const a = S.lines[c];
+      if (!a) { S.lines[c] = b; return; }
+      // the record of the FIRST solve carries firstTry, points and solvedAt together
+      const first = b.solved && (!a.solved || (b.solvedAt || '') < (a.solvedAt || '')) ? b : a;
+      S.lines[c] = Object.assign({}, first, {
+        checks: Math.max(a.checks || 0, b.checks || 0),
+        reveals: Math.max(a.reveals || 0, b.reveals || 0),
+        solved: !!(a.solved || b.solved),
+      });
+    });
+    const earliest = (x, y) => (x && y ? (x < y ? x : y) : x || y);
+    const latest = (x, y) => (x && y ? (x > y ? x : y) : x || y);
+    Object.entries(o.badges || {}).forEach(([k, d]) => { S.badges[k] = earliest(S.badges[k], d); });
+    // the LATER finish date: a stage finished again after its lesson was revised stays cleared
+    Object.entries(o.tutorial || {}).forEach(([k, d]) => { S.tutorial[k] = latest(S.tutorial[k], d); });
+    Object.entries(o.days || {}).forEach(([k, n]) => { S.days[k] = Math.max(S.days[k] || 0, n); });
+    Object.entries(o.configs || {}).forEach(([k, n]) => { S.configs[k] = Math.max(S.configs[k] || 0, n); });
+    Object.entries(o.stagePos || {}).forEach(([k, c]) => { if (!(k in S.stagePos)) S.stagePos[k] = c; });
+    S.streak.best = Math.max(S.streak.best || 0, (o.streak && o.streak.best) || 0);
+    if (!S.acknowledged && o.acknowledged) S.acknowledged = o.acknowledged;
+    if (!S.name && o.name) S.name = o.name;
+    // points come only from solved lines, so the total is recomputed rather than added twice
+    S.points = Object.values(S.lines).reduce((n, e) => n + (e.points || 0), 0);
+    // what this tab is showing -- mode, stage, levels, passage -- stays this tab's
+  }
+
+  let onChange = null;                               // the app's hook: redraw after another tab saved
+  window.addEventListener('storage', (e) => {
+    if (e.key !== KEY || e.newValue === null) return;
+    try { merge(JSON.parse(e.newValue)); } catch (err) { return; }
+    if (onChange) onChange();
+  });
+
+  // Can this browser keep anything at all? Blocked website data or storage turned off says no, and
+  // then every save fails silently -- the app says so instead (app.js).
+  let storageOK = true;
+  try { localStorage.setItem(KEY + '.probe', '1'); localStorage.removeItem(KEY + '.probe'); } catch (e) { storageOK = false; }
+
   function save() {
+    try { merge(JSON.parse(localStorage.getItem(KEY))); } catch (e) { /* nothing stored, or unreadable */ }
     try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* private mode: nothing is kept */ }
   }
   const today = () => new Date().toISOString().slice(0, 10);
@@ -151,8 +207,9 @@ window.Progress = (function () {
 
   function reset() {
     Object.keys(S).forEach((k) => { if (k !== 'acknowledged') delete S[k]; });
-    Object.assign(S, { version: 2, lines: {}, configs: {}, days: {}, streak: { current: 0, best: 0 }, badges: {}, tutorial: {}, stagePos: {}, points: 0 });
-    save();
+    Object.assign(S, { version: 2, lines: {}, configs: {}, days: {}, streak: { current: 0, best: 0 }, badges: {}, tutorial: {}, stagePos: {}, points: 0,
+      resetAt: new Date().toISOString() });
+    try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* not save(): nothing to merge in */ }
   }
 
   // ---- the numbers ----------------------------------------------------------------------------------
@@ -268,5 +325,5 @@ window.Progress = (function () {
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
 
-  return { state: S, save, init, recordCheck, recordReveal, completeStage, isStale, isSolved, acknowledge, reset, stats, downloadReport };
+  return { state: S, save, init, storageOK: () => storageOK, onChange: (fn) => { onChange = fn; }, recordCheck, recordReveal, completeStage, isStale, isSolved, acknowledge, reset, stats, downloadReport };
 })();

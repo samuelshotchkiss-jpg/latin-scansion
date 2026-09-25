@@ -77,7 +77,9 @@
       history.replaceState(null, '', location.pathname);
     }
 
-    if (!S.acknowledged) $('privacy').hidden = false;
+    if (!P.storageOK()) $('no-storage').hidden = false;
+    else if (!S.acknowledged) $('privacy').hidden = false;
+    P.onChange(() => { updatePoints(); fillStageMenu(); });   // another tab saved
     setMode(S.mode || (Object.keys(S.lines).length ? 'practice' : 'tutorial'));
     updatePoints();
   }).catch((err) => {

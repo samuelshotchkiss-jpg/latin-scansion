@@ -163,6 +163,7 @@ main > .controls { justify-content: center; align-items: center; margin-bottom: 
 .lesson-body .latin { font-family: Tahoma, "Noto Sans", sans-serif; font-size: 1.1rem; }
 .lesson-body .howto { color: var(--muted); }
 .lesson-body .whats-new { border-left: 3px solid var(--accent); padding-left: .6rem; }
+.no-storage { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid #c0392b; border-radius: 8px; padding: .7rem 1rem; margin: 0 0 1rem; }
 .stage-done { margin-top: .5rem; }
 .stage-done button { margin-top: .5rem; }
 .gain { color: var(--ok); font-weight: 600; }
