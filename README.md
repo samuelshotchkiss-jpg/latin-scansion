@@ -76,13 +76,15 @@ Each line is placed at the lowest level that allows everything in it:
 ## The scanner
 
 `scansion/` is a small Python library (standard library only, Python 3.10+) that scans a macronized
-hexameter and says why every syllable is long or short. It produces the app's answer key, and it
+hexameter (or, with `meter="pentameter"`, a pentameter) and says why every syllable is long or short.
+The app itself practises hexameters only. It produces the app's answer key, and it
 works on any macronized text — use it for your own corpus.
 
 ```bash
 python scansion/scan.py my_lines.tsv --report          # lines that need a human look
 python scansion/scan.py my_lines.tsv --level 1         # the easiest lines
 python scansion/scan.py my_lines.tsv --json key.json   # the answer key
+python scansion/scan.py couplets.tsv --elegiac         # elegiac couplets: odd lines hexameter, even pentameter
 ```
 
 ```python

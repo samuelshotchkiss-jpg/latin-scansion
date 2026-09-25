@@ -1,4 +1,4 @@
-"""scansion.py -- scan macronized Latin hexameters, syllable nucleus by syllable nucleus.
+"""scansion.py -- scan macronized Latin hexameters (and pentameters), nucleus by nucleus.
 
 This is the engine behind the latin-scansion app, and it has no dependencies beyond the Python 3.10+
 standard library. Give it a line of Latin in which every long vowel carries a macron:
@@ -47,7 +47,13 @@ nouns the text does not capitalize; `trouble` marks words whose vowel lengths we
 (corrected by hand, or disputed by a macronizer). Only names count as trouble: a corrected case
 ending is not Greek. `bare()` makes the forms.
 
-Hexameter only. Elegiac pentameter is not yet supported.
+METER. `scan()` reads a hexameter unless told otherwise. `scan(text, cit, hints, meter="pentameter")`
+reads the second line of an elegiac couplet: two dactyls or spondees and a long syllable, a word end
+(the diaeresis at mid-line), then two dactyls and a final syllable -- `feet` comes back as
+['LSS', 'LL', 'L', 'LSS', 'LSS', 'L']. The same conventions apply, and the syllable before the
+diaeresis must be long, like the last. A pentameter's result carries "meter": "pentameter"; a
+hexameter's carries no meter key, so a hexameter answer key is unchanged. Which line of a couplet is
+which is the caller's to say (by its position): some pentameters also scan as hexameters.
 """
 from __future__ import annotations
 
@@ -62,6 +68,8 @@ PLAIN = set("aeiouy")
 STOPS, LIQUIDS = set("pbtdcgk"), set("lr")
 WORD = re.compile(r"[a-zāēīōūȳäëïöüÿ]+")
 HEXAMETER = re.compile(r"^(?:LSS|LL){5}LL$")     # the final syllable is long by definition
+PENTAMETER = re.compile(r"^((?:LSS|LL){2})L(?:LSS){2}L$")   # group 1: the half before the diaeresis
+METERS = {"hexameter": HEXAMETER, "pentameter": PENTAMETER}
 
 JOINED_EU = {"neu", "ceu", "seu", "heu", "eheu", "heus"}   # plus any name: Teucrī, Orpheus
 JOINED_EI = {"dein", "deinde", "deinceps", "hei", "ei"}   # `ei` unmarked is the interjection; the pronoun is eī
@@ -132,6 +140,11 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
         c = t[i]
         nxt = t[i + 1] if i + 1 < n else ""
         if is_vowel(c):
+            if (c == "i" and nxt == "c" and i + 2 < n and is_vowel(t[i + 2]) and units
+                    and units[-1].kind == "C" and PREFIX_BEFORE_I.match(t[:i])):
+                # iniciō, coniciō, abiciō: iaciō's j is not written (in-jiciō), yet it still closes the
+                # prefix's syllable -- so the prefix's last consonant counts double, as x does
+                units[-1].count = 2
             if c == "u" and i > 0 and nxt and is_vowel(nxt) and units:
                 if t[i - 1] == "g" and i > 1 and t[i - 2] == "n":       # sanguis: gu is one consonant
                     units[-1].end = ws + i + 1
@@ -209,7 +222,7 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
     return units
 
 
-def build_line(s: str, low: str, words, pick, flags: set):
+def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexameter"):
     units: list[Unit] = []
     for wi, (ws, t, proper) in enumerate(words):
         units.extend(parse_word(t, ws, wi, proper, pick))
@@ -254,8 +267,9 @@ def build_line(s: str, low: str, words, pick, flags: set):
             flags.add("correption")
 
     # hypermetry: a final vowel that elides into the next line (locōrumque)
+    # (a hexameter's licence: a pentameter closes its couplet, with nothing after it to elide into)
     tail = [u for u in units if u.word == len(words) - 1]
-    if tail and tail[-1].kind == "V" and not tail[-1].gone:
+    if meter == "hexameter" and tail and tail[-1].kind == "V" and not tail[-1].gone:
         if pick(("hypermetry",), [("no", 0, 1), ("elide", 3, 2)]) == "elide":
             tail[-1].gone = "elided"
             flags.add("hypermetry")
@@ -312,8 +326,14 @@ def build_line(s: str, low: str, words, pick, flags: set):
             marks.append(("S", "short vowel", letters))
 
     pattern = "".join(m[0] for m in marks)
-    if not HEXAMETER.match(pattern):
+    fit = METERS[meter].match(pattern)
+    if not fit:
         return None
+    if meter == "pentameter":
+        # the diaeresis: a word must end with the long syllable at mid-line
+        mid = len(fit.group(1))
+        if active[mid].word == active[mid + 1].word:
+            return None
 
     # qu, and h/x/z, kept apart (owner, 2026-09-17): qu is everywhere and the app half-handles it (its u
     # takes no mark), so it comes first. ANY qu flags a line -- students take its u for a vowel. h, x and
@@ -375,7 +395,10 @@ def difficult_words(s: str, low: str, words, units, cit, hints) -> list[dict]:
     return out
 
 
-def feet(pattern: str) -> list[str]:
+def feet(pattern: str, meter: str = "hexameter") -> list[str]:
+    if meter == "pentameter":                      # each half: two feet, then its lone long syllable
+        half = len(PENTAMETER.match(pattern).group(1))
+        return feet(pattern[:half]) + ["L"] + feet(pattern[half + 1:-1]) + ["L"]
     out, p = [], 0
     while p < len(pattern):
         step = 3 if pattern[p + 1:p + 2] == "S" else 2
@@ -384,8 +407,13 @@ def feet(pattern: str) -> list[str]:
     return out
 
 
-def scan(text: str, cit: str | None = None, hints: dict | None = None) -> dict:
-    """Scan one macronized hexameter. See the module docstring for the result."""
+def scan(text: str, cit: str | None = None, hints: dict | None = None,
+         meter: str = "hexameter") -> dict:
+    """Scan one macronized hexameter, or with meter="pentameter" a pentameter. See the module
+    docstring for the result."""
+    if meter not in METERS:
+        raise ValueError(f"meter must be one of {sorted(METERS)}, not {meter!r}")
+    tag = {"meter": meter} if meter != "hexameter" else {}
     s = unicodedata.normalize("NFC", text)
     low = s.lower()
     words = [(m.start(), m.group(0), s[m.start()].isupper()) for m in WORD.finditer(low)]
@@ -407,7 +435,7 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None) -> dict:
                 return opts[idx][0]
 
             flags: set = set()
-            res = build_line(s, low, words, pick, flags)
+            res = build_line(s, low, words, pick, flags, meter)
             if res:
                 solutions.append((penalty[0], res, flags))
             fixed = dict(asg)
@@ -423,7 +451,7 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None) -> dict:
 
     if not solutions:
         written = sum(1 for c in low if is_vowel(c))
-        return {"citation": cit, "text": s, "scans": False, "short_line": written < 12}
+        return {"citation": cit, "text": s, "scans": False, "short_line": written < 12, **tag}
 
     best = min(p for p, _, _ in solutions)
     tops = [(res, fl) for p, res, fl in solutions if p == best]
@@ -445,8 +473,8 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None) -> dict:
                 entry["followed_by"] = letters
         nuclei.append(entry)
 
-    ft = feet(pattern)
-    if ft[4] == "LL":
+    ft = feet(pattern, meter)
+    if meter == "hexameter" and ft[4] == "LL":
         flags.add("spondaic fifth foot")
     hard = difficult_words(s, low, words, units, cit, hints)
     if hard:
@@ -454,7 +482,7 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None) -> dict:
     advanced = bool(flags & ADVANCED)
     return {"citation": cit, "text": s, "scans": True, "stage": stage, "penalty": best,
             "ambiguous": len(distinct) > 1, "level": level_of(flags, advanced), "advanced": advanced,
-            "feet": ft, "flags": sorted(flags), "nuclei": nuclei, "difficult_words": hard}
+            "feet": ft, "flags": sorted(flags), "nuclei": nuclei, "difficult_words": hard, **tag}
 
 
 def mark_line(result: dict) -> str:
