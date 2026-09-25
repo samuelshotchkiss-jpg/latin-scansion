@@ -20988,7 +20988,7 @@
  },
  {
   "citation": "Met. 4.85",
-  "text": "fallere cūstōdēs foribusque excēdere temptent,",
+  "text": "fallere custōdēs foribusque excēdere temptent,",
   "scans": true,
   "stage": 1,
   "penalty": 0,
@@ -21035,9 +21035,10 @@
    {
     "start": 9,
     "end": 10,
-    "text": "ū",
+    "text": "u",
     "mark": "L",
-    "why": "long vowel"
+    "why": "two consonants",
+    "followed_by": "st"
    },
    {
     "start": 12,
@@ -30369,7 +30370,7 @@
  },
  {
   "citation": "Met. 4.150",
-  "text": "hoc manus, est et amor: dabit hīc in vulnera vīrēs.",
+  "text": "hoc manus, est et amor: dabit hic in vulnera vīrēs.",
   "scans": true,
   "stage": 1,
   "penalty": 0,
@@ -30463,9 +30464,10 @@
    {
     "start": 31,
     "end": 32,
-    "text": "ī",
+    "text": "i",
     "mark": "L",
-    "why": "long vowel"
+    "why": "two consonants",
+    "followed_by": "c"
    },
    {
     "start": 34,
@@ -38235,12 +38237,12 @@
  },
  {
   "citation": "Met. 8.221",
-  "text": "parte Samos (fuerant Dēlōsque Parōsque relictae)",
+  "text": "parte Samos (fuerant Dēlosque Parosque relictae)",
   "scans": true,
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 2,
+  "level": 7,
   "advanced": false,
   "feet": [
    "LSS",
@@ -38251,6 +38253,7 @@
    "LL"
   ],
   "flags": [
+   "greekiness",
    "qu"
   ],
   "nuclei": [
@@ -38319,9 +38322,10 @@
    {
     "start": 24,
     "end": 25,
-    "text": "ō",
+    "text": "o",
     "mark": "L",
-    "why": "long vowel"
+    "why": "two consonants",
+    "followed_by": "squ"
    },
    {
     "start": 28,
@@ -38342,9 +38346,10 @@
    {
     "start": 33,
     "end": 34,
-    "text": "ō",
+    "text": "o",
     "mark": "L",
-    "why": "long vowel"
+    "why": "two consonants",
+    "followed_by": "squ"
    },
    {
     "start": 37,
@@ -38378,7 +38383,24 @@
     "why": "final syllable"
    }
   ],
-  "difficult_words": [],
+  "difficult_words": [
+   {
+    "word": "Dēlosque",
+    "start": 21,
+    "end": 29,
+    "why": [
+     "its macron was hard to settle"
+    ]
+   },
+   {
+    "word": "Parosque",
+    "start": 30,
+    "end": 38,
+    "why": [
+     "its macron was hard to settle"
+    ]
+   }
+  ],
   "passage": "Daedalus and Icarus",
   "passage_order": 1
  },
