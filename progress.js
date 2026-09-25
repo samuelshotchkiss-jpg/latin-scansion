@@ -45,7 +45,7 @@ window.Progress = (function () {
     { id: 'streak5', title: 'Five in a row', desc: 'Five lines in a row right on the first try.', test: () => S.streak.best >= 5 },
     { id: 'streak10', title: 'Ten in a row', desc: 'Ten lines in a row right on the first try.', test: () => S.streak.best >= 10 },
     { id: 'qu', title: 'The u in qu', desc: 'Your first line with qu, whose u is not a vowel.', test: (t) => t.flag.qu },
-    { id: 'hxz', title: 'h, x, z', desc: 'Your first line where an h, x or z decided a syllable.', test: (t) => t.flag.hxz },
+    { id: 'hxz', title: 'h, x, z', desc: 'Your first line where an h, an x or z, or a letter that counts twice decided a syllable.', test: (t) => t.flag.hxz },
     { id: 'elision', title: 'Delicious', desc: 'Your first line with an elision.', test: (t) => t.flag.elision },
     { id: 'muta', title: 'Mūta cum liquida', desc: 'Your first line with a mute and a liquid inside a word.', test: (t) => t.flag.muta },
     { id: 'wordstart', title: 'Next word along', desc: "Your first line decided by the consonants beginning the next word.", test: (t) => t.flag.wordStart },
@@ -200,7 +200,7 @@ window.Progress = (function () {
   function reportHTML(name) {
     const st = stats();
     const when = new Date();
-    const levelNames = ['Long and short only', 'qu', 'h, x, z', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
+    const levelNames = ['Long and short only', 'qu', 'h, x, z, letters that count twice', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
     const recent = st.recent.slice(0, 12).map(({ line, e }) =>
       `<tr><td>${esc(line.citation)}</td><td class="latin">${esc(line.text)}</td><td>${e.firstTry ? '★ first try' : e.checks + ' tries'}</td></tr>`).join('');
     return `<!doctype html>

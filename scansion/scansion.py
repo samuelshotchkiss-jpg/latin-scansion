@@ -35,6 +35,9 @@ CONVENTIONS. Change these if you teach differently:
 QU; H, X, Z. Any qu flags a line, because students take its u for a vowel. h, x and z are a later,
 separate kind, flagging a line only where miscounting them would change a mark: a short syllable with
 an h among its consonants (captat harundine), a long syllable whose only consonant is x or z (dīxit).
+The same kind holds every other single letter that counts as two: an i between vowels (Troia =
+Troy-ya), the c of hic and hoc before a vowel (hic amor = hic-camor), and the unwritten j of iniciō.
+The flag keeps its name, "h, x, z", because the app keys a badge to it.
 
 LEVELS. A line sits at the lowest level that admits everything in it:
     1 long and short only   2 + qu   3 + h, x, z   4 + elision   5 + muta cum liquida
@@ -347,7 +350,9 @@ def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexamete
         if k == len(active) - 1:
             continue
         raw = "".join(c for c in low[v.end:active[k + 1].start] if c.isalpha() and not is_vowel(c))
-        if (w == "S" and "h" in raw and len(raw) >= 2) or (w == "L" and why == "two consonants" and letters in ("x", "z")):
+        # one letter making a syllable long is a letter that counts twice: x, z, an i between vowels
+        # (Troia = Troy-ya), the c of hic/hoc before a vowel (hic amor = hic-camor), iniciō's hidden j
+        if (w == "S" and "h" in raw and len(raw) >= 2) or (w == "L" and why == "two consonants" and len(letters) == 1):
             flags.add("h, x, z")
             break
     return units, active, marks, pattern

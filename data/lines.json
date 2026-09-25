@@ -40388,7 +40388,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 2,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LSS",
@@ -40399,6 +40399,7 @@
    "LL"
   ],
   "flags": [
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -44116,6 +44117,7 @@
   ],
   "flags": [
    "elision",
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -45678,7 +45680,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 2,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LL",
@@ -45689,6 +45691,7 @@
    "LL"
   ],
   "flags": [
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -50886,7 +50889,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 1,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LL",
@@ -50896,7 +50899,9 @@
    "LSS",
    "LL"
   ],
-  "flags": [],
+  "flags": [
+   "h, x, z"
+  ],
   "nuclei": [
    {
     "start": 1,
@@ -52433,7 +52438,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 1,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LSS",
@@ -52443,7 +52448,9 @@
    "LSS",
    "LL"
   ],
-  "flags": [],
+  "flags": [
+   "h, x, z"
+  ],
   "nuclei": [
    {
     "start": 1,
@@ -63530,6 +63537,7 @@
   ],
   "flags": [
    "elision",
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -63648,7 +63656,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 2,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LL",
@@ -63659,6 +63667,7 @@
    "LL"
   ],
   "flags": [
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -78331,6 +78340,7 @@
   "flags": [
    "elision",
    "greekiness",
+   "h, x, z",
    "muta cum liquida at word start"
   ],
   "nuclei": [
@@ -80306,6 +80316,7 @@
   ],
   "flags": [
    "elision",
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -80433,7 +80444,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 2,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LSS",
@@ -80444,6 +80455,7 @@
    "LL"
   ],
   "flags": [
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -84552,7 +84564,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 2,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LL",
@@ -84563,6 +84575,7 @@
    "LL"
   ],
   "flags": [
+   "h, x, z",
    "qu"
   ],
   "nuclei": [
@@ -88293,7 +88306,7 @@
   "stage": 1,
   "penalty": 0,
   "ambiguous": false,
-  "level": 1,
+  "level": 3,
   "advanced": false,
   "feet": [
    "LSS",
@@ -88303,7 +88316,9 @@
    "LSS",
    "LL"
   ],
-  "flags": [],
+  "flags": [
+   "h, x, z"
+  ],
   "nuclei": [
    {
     "start": 1,
@@ -89296,6 +89311,7 @@
    "LL"
   ],
   "flags": [
+   "h, x, z",
    "muta cum liquida",
    "qu"
   ],

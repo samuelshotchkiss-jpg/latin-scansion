@@ -16,7 +16,7 @@
   const SYMBOL = { L: '¯', S: '˘' };
   const WORD = { L: 'long', S: 'short', X: 'elided' };
   const TIE = '<span class="tie-sym"></span>';
-  const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
+  const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z, letters that count twice', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
 
   const $ = (id) => document.getElementById(id);
   const lineEl = $('line');
