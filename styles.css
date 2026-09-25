@@ -194,3 +194,93 @@ main > .controls { justify-content: center; align-items: center; margin-bottom: 
 .report input { font: inherit; padding: .3rem .45rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); }
 .danger { text-align: right; margin-top: .8rem; font-size: .85rem; }
 @media (max-width: 34rem) { .progress-row { grid-template-columns: 1fr 5.5rem; } .progress-row .meter { grid-column: 1 / -1; grid-row: 2; } }
+
+/* ---- touch: no double-tap zoom, no grey flash, no long-press menu on the line --------------------- */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+button, select, label, .chip, .nuc { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.chip { touch-action: none; }                              /* chips are dragged, not scrolled */
+.line { -webkit-touch-callout: none; }
+.nuc::before { content: ""; position: absolute; inset: -.35em -.2em; }   /* a fingertip-sized target */
+.narrow { display: none; }
+
+/* The "Lines with" box: on a wide screen the legend is only a label. */
+.kinds-toggle { all: unset; color: var(--muted); font-size: .8rem; }
+.kinds-summary { display: none; }
+
+/* ---- fast scanning -------------------------------------------------------------------------------- */
+.nuc.cursor { background: var(--target); box-shadow: 0 0 0 3px var(--target), inset 0 -3px 0 var(--accent); animation: blink 1.1s ease-in-out infinite; }
+@keyframes blink { 50% { box-shadow: 0 0 0 3px var(--target), inset 0 -3px 0 transparent; } }
+.chip .key { display: none; margin-left: .15rem; }
+body.fast .chip .key { display: inline-block; }
+@media (pointer: coarse) { body.fast .chip .key { display: none; } }   /* a phone has no i, u, o keys to show */
+kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding: 0 .35rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: var(--bg); color: var(--ink); }
+.fast-toggle { display: flex; justify-content: center; align-items: center; gap: .4rem; margin: .6rem auto 0; font-size: .9rem; color: var(--ink); }
+.hint kbd { font-size: .75rem; }
+
+/* ---- the rhythm, singalong style ------------------------------------------------------------------ */
+.rhythm-row { margin-top: .6rem; display: flex; flex-wrap: wrap; gap: .4rem .9rem; justify-content: center; align-items: center; }
+.rhythm-row .note { flex-basis: 100%; }
+.rhythm-btn { padding: .4rem .9rem; border-radius: 999px; border: 1px solid var(--accent); background: var(--panel); color: var(--accent); font-weight: 600; cursor: pointer; }
+.autoplay { display: inline-flex; gap: .3rem; align-items: center; font-size: .85rem; color: var(--muted); }
+.nuc .mark { transition: transform .12s ease-out, color .12s; }
+.line.singing .nuc { transition: color .15s; }
+.line.singing .nuc.sung { color: var(--accent); }
+.nuc.beat { background: var(--target); color: var(--accent); }
+.nuc.beat .mark { transform: translateX(-50%) scale(1.7); color: var(--accent); }
+
+/* ---- fast scanning unlocked: the celebration ------------------------------------------------------ */
+.celebrate { text-align: left; }
+.celebrate h2 { text-align: center; }
+.burst { text-align: center; font-size: 3rem; line-height: 1; animation: pop .6s cubic-bezier(.2, 1.6, .4, 1) both; }
+@keyframes pop { from { transform: scale(.2) rotate(-20deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.keys { border-collapse: collapse; margin: .3rem 0 .6rem; }
+.keys td { padding: .25rem .6rem .25rem 0; vertical-align: middle; }
+.keys td.sym { font-family: Tahoma, "Noto Sans", sans-serif; font-size: 1.3rem; color: var(--mark); text-align: center; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 1rem; align-items: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nuc.cursor, .burst { animation: none; }
+  .nuc .mark { transition: none; }
+}
+
+/* ---- phones --------------------------------------------------------------------------------------- */
+@media (max-width: 40rem) {
+  .wide { display: none; }
+  .narrow { display: inline; }
+  .top { padding: .55rem .75rem; gap: .4rem; flex-wrap: nowrap; }
+  .modes { flex-wrap: nowrap; gap: .3rem; }
+  .top h1 { font-size: 1rem; white-space: nowrap; }
+  .mode { padding: .3rem .6rem; font-size: .85rem; }
+  main { padding: .75rem .75rem 1rem; display: flex; flex-direction: column; }
+  .controls { gap: .5rem; }
+  .controls > label { width: 100%; }
+  .controls select { flex: 1; min-width: 0; }
+  /* the kinds fold away behind one line */
+  .kinds { width: 100%; min-width: 0; max-width: 100%; display: block; padding: .35rem .7rem; }
+  .kinds legend { display: contents; }
+  .kinds-toggle { display: flex; width: 100%; min-width: 0; font-size: .88rem; color: var(--ink); cursor: pointer; white-space: nowrap; }
+  .kinds-toggle::after { content: "▾"; color: var(--muted); margin-left: .3rem; }
+  .kinds.open .kinds-toggle::after { content: "▴"; }
+  .kinds-summary { display: block; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; color: var(--muted); }
+  .kinds label { display: none; }
+  .kinds.open label { display: flex; clear: left; padding: .25rem 0; }
+  .lesson { padding: .75rem .9rem; margin-bottom: .6rem; }
+  .line { margin: .6rem 0 .5rem; padding: 1.9rem .7rem 1rem; }
+  /* the dock: marks and buttons stay under the thumb */
+  .dock {
+    order: 10; position: sticky; bottom: 0; z-index: 5;
+    margin: .5rem -.75rem -1rem; padding: .5rem .75rem calc(.6rem + env(safe-area-inset-bottom));
+    background: var(--bg); border-top: 1px solid var(--line); box-shadow: 0 -4px 12px rgba(0, 0, 0, .06);
+  }
+  .tray { margin-top: 0; gap: .45rem; }
+  .chip { padding: .5rem .85rem; }
+  .chip .word { font-size: .9rem; }
+  .hint { margin: .4rem 0 .5rem; font-size: .8rem; }
+  .fast-toggle { margin-top: .4rem; }
+  .actions { flex-wrap: nowrap; gap: .35rem; }
+  .actions button { padding: .5rem .6rem; font-size: .92rem; white-space: nowrap; }
+  .actions #check { flex: 1; }
+  .feedback { margin-top: .4rem; }
+  .modal { padding: .75rem; }
+  .modal-card { padding: 1rem 1.1rem; }
+}

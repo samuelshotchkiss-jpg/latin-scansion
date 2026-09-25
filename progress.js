@@ -90,6 +90,20 @@ window.Progress = (function () {
   }
   const today = () => new Date().toISOString().slice(0, 10);
 
+  // ---- fast scanning: the mastery that unlocks it -------------------------------------------------
+  // Lines figured out, against every Check ever pressed (wrong ones, and ones after Show answer, too).
+  const FAST = { lines: 20, ratio: 0.5 };            // 20 lines, at least one solve per two checks
+  function fastStats() {
+    const all = Object.values(S.lines);
+    const solved = all.filter((e) => e.solved).length;
+    const checks = all.reduce((n, e) => n + (e.checks || 0), 0);
+    return { solved, checks, ratio: checks ? solved / checks : 0, need: FAST };
+  }
+  function fastReady() {
+    const f = fastStats();
+    return f.solved >= FAST.lines && f.ratio >= FAST.ratio;
+  }
+
   // ---- badges ---------------------------------------------------------------------------------------
   // Each test sees the tallies after a line is solved. Order is display order.
   const BADGES = [
@@ -111,6 +125,10 @@ window.Progress = (function () {
     { id: 'days3', title: 'Three days', desc: 'Practiced on three different days.', test: () => Object.keys(S.days).length >= 3 },
     { id: 'days7', title: 'A week of practice', desc: 'Practiced on seven different days.', test: () => Object.keys(S.days).length >= 7 },
     { id: 'tutorial', title: 'Tutorial complete', desc: 'Worked through every stage of the tutorial.', test: (t) => t.tutorialDone },
+    // FAST SCANNING. Its cursor walks from syllable to syllable, which gives away where the syllables are
+    // -- so it is earned, not offered: enough lines, and few enough checks per line (owner, 2026-09-24).
+    // Unlocking IS this badge, so it keeps its date, survives the two-tab merge and is never taken back.
+    { id: 'fast', title: 'Fast scanning', desc: `Unlocked fast scanning: ${FAST.lines} lines figured out, at least one for every ${1 / FAST.ratio} checks.`, test: () => fastReady() },
   ];
 
   let allLines = [];       // set by the app once the data has loaded
@@ -325,5 +343,6 @@ window.Progress = (function () {
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
 
-  return { state: S, save, init, storageOK: () => storageOK, onChange: (fn) => { onChange = fn; }, recordCheck, recordReveal, completeStage, isStale, isSolved, acknowledge, reset, stats, downloadReport };
+  return { state: S, save, init, storageOK: () => storageOK, onChange: (fn) => { onChange = fn; }, recordCheck, recordReveal, completeStage, isStale, isSolved, acknowledge, reset, stats, downloadReport,
+    fastStats, fastUnlocked: () => !!S.badges.fast };
 })();

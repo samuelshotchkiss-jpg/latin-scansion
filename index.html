@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f5d8a">
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-25">
+  <link rel="stylesheet" href="styles.css?v=2026-09-26">
 </head>
 <body>
   <header class="top">
-    <h1>Latin Scansion</h1>
+    <h1><span class="wide">Latin </span>Scansion</h1>
     <nav class="modes" aria-label="Sections">
       <button type="button" class="mode" data-mode="tutorial">Tutorial</button>
       <button type="button" class="mode" data-mode="practice">Practice</button>
-      <button type="button" id="open-progress" class="mode">My progress <span id="points-pill" class="pill"></span></button>
+      <button type="button" id="open-progress" class="mode"><span class="wide">My p</span><span class="narrow">P</span>rogress <span id="points-pill" class="pill"></span></button>
     </nav>
   </header>
 
@@ -27,7 +28,7 @@
         <select id="passage"></select>
       </label>
       <fieldset id="kinds" class="kinds">
-        <legend>Lines with</legend>
+        <legend><button type="button" id="kinds-toggle" class="kinds-toggle" aria-expanded="false">Lines with<span id="kinds-summary" class="kinds-summary"></span></button></legend>
         <label title="Nothing but long and short syllables"><input type="checkbox" value="1"> Long and short only</label>
         <label title="qu — nothing else"><input type="checkbox" value="2"> qu</label>
         <label title="h, x or z, or a letter that counts twice (Troia, hic amor) — and maybe qu"><input type="checkbox" value="3"> h, x, z, letters that count twice</label>
@@ -60,25 +61,29 @@
 
     <div id="line" class="line" lang="la"></div>
 
+    <div class="dock">
     <div id="tray" class="tray" aria-label="Marks">
       <button type="button" class="chip" data-mark="L" aria-label="long mark">
-        <span class="sym">¯</span><span class="word">long</span>
+        <span class="sym">¯</span><span class="word">long</span><kbd class="key">i</kbd>
       </button>
       <button type="button" class="chip" data-mark="S" aria-label="short mark">
-        <span class="sym">˘</span><span class="word">short</span>
+        <span class="sym">˘</span><span class="word">short</span><kbd class="key">u</kbd>
       </button>
       <button type="button" class="chip" data-mark="X" aria-label="elision mark">
-        <span class="sym"><span class="tie-sym"></span></span><span class="word">elision</span>
+        <span class="sym"><span class="tie-sym"></span></span><span class="word">elision</span><kbd class="key">o</kbd>
       </button>
     </div>
-    <p class="hint">Drag long and short marks onto vowels, and the elision mark under the gap between two syllables — or tap a mark, then tap the line. Drag a mark off the line to take it back.</p>
+    <label id="fast-toggle" class="fast-toggle" hidden><input type="checkbox" id="fast"> ⚡ Fast scanning</label>
+    <p id="hint" class="hint"><span class="wide">Drag long and short marks onto vowels, and the elision mark under the gap between two syllables — or tap a mark, then tap the line. Drag a mark off the line to take it back.</span><span class="narrow">Tap a mark, then tap a vowel. Drag a mark off the line to take it back.</span></p>
+    <p id="fast-hint" class="hint" hidden><span class="wide">Type <kbd>i</kbd> long, <kbd>u</kbd> short, <kbd>o</kbd> elided — each marks the highlighted syllable and moves on. <kbd>←</kbd> <kbd>→</kbd> move, <kbd>Backspace</kbd> goes back, <kbd>Enter</kbd> checks.</span><span class="narrow">Tap ¯ ˘ ‿ to mark the highlighted syllable and move on. Tap a vowel to jump to it.</span></p>
 
     <div class="actions">
-      <button type="button" id="prev">← Previous</button>
+      <button type="button" id="prev" aria-label="Previous line">←<span class="wide"> Previous</span></button>
       <button type="button" id="clear">Clear</button>
       <button type="button" id="check" class="primary">Check</button>
       <button type="button" id="reveal">Show answer</button>
-      <button type="button" id="next">Next →</button>
+      <button type="button" id="next" aria-label="Next line"><span class="wide">Next </span>→</button>
+    </div>
     </div>
 
     <div id="feedback" class="feedback" aria-live="polite"></div>
@@ -98,6 +103,7 @@
         <li>which lines you have scanned correctly, and how many tries each one took;</li>
         <li>your points, your streaks, and the badges you have earned;</li>
         <li>which passages and levels you have practiced, and how far you are in the tutorial;</li>
+        <li>your settings: fast scanning, once you unlock it, and whether the rhythm plays by itself;</li>
         <li>your name, only if you type it in to make a progress report.</li>
       </ul>
       <p><b>Your data is stored only on this computer and within this browser.</b> It is never collected, analyzed, or sent anywhere else. If you clear your browser's data, or use a different computer or browser, your progress starts over.</p>
@@ -128,7 +134,35 @@
     </div>
   </div>
 
-  <script src="progress.js?v=2026-09-25"></script>
-  <script src="app.js?v=2026-09-25"></script>
+  <!-- Fast scanning, unlocked: the celebration, and the guide to the keys. -->
+  <div id="fast-unlocked" class="modal" hidden>
+    <div class="modal-card celebrate" role="dialog" aria-modal="true" aria-labelledby="fast-title">
+      <div class="burst" aria-hidden="true">⚡</div>
+      <h2 id="fast-title">Fast scanning unlocked!</h2>
+      <p id="fast-why"></p>
+      <p>You know where the syllables are now, so you don't need to drag marks one by one. A highlighted
+        syllable walks along the line: mark it, and it moves to the next one.</p>
+      <h3>On a keyboard</h3>
+      <table class="keys">
+        <tr><td><kbd>i</kbd></td><td class="sym">¯</td><td><b>long</b> — a straight stroke, like the long mark</td></tr>
+        <tr><td><kbd>u</kbd></td><td class="sym">˘</td><td><b>short</b> — a cup, like the short mark</td></tr>
+        <tr><td><kbd>o</kbd></td><td class="sym"><span class="tie-sym"></span></td><td><b>elided</b> — an empty circle: the syllable counts for nothing</td></tr>
+        <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td></td><td>move without marking</td></tr>
+        <tr><td><kbd>Backspace</kbd></td><td></td><td>step back and erase</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td></td><td>Check</td></tr>
+      </table>
+      <h3>On a phone</h3>
+      <p>Tap <b>¯</b>, <b>˘</b> or <b>‿</b> to mark the highlighted syllable. Tap any vowel to jump to it.</p>
+      <p class="note">Turn it on or off any time with the ⚡ Fast scanning switch under the marks.</p>
+      <div class="modal-actions">
+        <button type="button" id="fast-later" class="link">Not now</button>
+        <button type="button" id="fast-on" class="primary">Turn it on</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="progress.js?v=2026-09-26"></script>
+  <script src="rhythm.js?v=2026-09-26"></script>
+  <script src="app.js?v=2026-09-26"></script>
 </body>
 </html>

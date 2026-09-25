@@ -28,6 +28,12 @@
   let marks = {}, tieOf = {}, junctions = [];
   let checked = false, revealed = false, helped = false;
   let tool = null, overlay = null;
+  let cursor = null;       // FAST SCANNING: the syllable the next key or tap marks (null when off)
+
+  // Fast scanning's keys: a straight stroke is long, a cup is short, an empty circle is nothing.
+  // l, s and e -- the keys a focused vowel always took -- work too.
+  const FAST_KEYS = { i: 'L', u: 'S', o: 'X', l: 'L', s: 'S', e: 'X' };
+  const fastOn = () => !!S.fast && P.fastUnlocked();
 
   // ---- startup ------------------------------------------------------------------------------------
   Promise.all([
@@ -79,7 +85,8 @@
 
     if (!P.storageOK()) $('no-storage').hidden = false;
     else if (!S.acknowledged) $('privacy').hidden = false;
-    P.onChange(() => { updatePoints(); fillStageMenu(); });   // another tab saved
+    P.onChange(() => { updatePoints(); fillStageMenu(); showFastToggle(); });   // another tab saved
+    showFastToggle();
     setMode(S.mode || (Object.keys(S.lines).length ? 'practice' : 'tutorial'));
     updatePoints();
   }).catch((err) => {
@@ -123,7 +130,17 @@
   }
   function setKinds(levels) {
     document.querySelectorAll('#kinds input').forEach((cb) => { cb.checked = levels.includes(Number(cb.value)); });
+    summarizeKinds();
   }
+  // On a phone the eight checkboxes fold away behind one line that says what is ticked.
+  function summarizeKinds() {
+    const on = [...document.querySelectorAll('#kinds input:checked')].map((x) => KIND_NAMES[Number(x.value) - 1]);
+    $('kinds-summary').textContent = on.length ? `: ${on.join(', ')}` : ': nothing ticked';
+  }
+  $('kinds-toggle').addEventListener('click', () => {
+    const open = $('kinds').classList.toggle('open');
+    $('kinds-toggle').setAttribute('aria-expanded', String(open));
+  });
   function usePracticeSet(stage) {
     S.levels = stage.practice.levels.slice();
     S.passage = '';
@@ -136,6 +153,7 @@
   $('passage').addEventListener('change', () => rebuildPool());
   document.querySelectorAll('#kinds input').forEach((cb) => cb.addEventListener('change', () => {
     S.levels = [...document.querySelectorAll('#kinds input:checked')].map((x) => Number(x.value));
+    summarizeKinds();
     rebuildPool(current() && current().citation);
   }));
 
@@ -212,6 +230,8 @@
   // ---- rendering ----------------------------------------------------------------------------------
   function showLine() {
     marks = {}; tieOf = {}; checked = false; revealed = false; helped = false;
+    stopRhythm();
+    cursor = fastOn() ? 0 : null;
     $('feedback').innerHTML = ''; $('reason').innerHTML = '';
     const l = current();
     if (!l) {
@@ -258,7 +278,11 @@
       el.querySelector('.mark').textContent = m === 'L' || m === 'S' ? SYMBOL[m] : '';
       if (!checked) el.classList.remove('ok', 'bad');
       el.classList.toggle('revealed', revealed);
+      el.classList.toggle('cursor', cursor === Number(el.dataset.i) && !checked && !revealed);
     });
+    document.body.classList.toggle('fast', fastOn());
+    $('hint').hidden = fastOn();
+    $('fast-hint').hidden = !fastOn();
     return drawOverlay();
   }
 
@@ -331,6 +355,7 @@
   }
   function removeMark(i) { delete marks[i]; delete tieOf[i]; edited(); }
   function edited() {
+    stopRhythm();
     if (checked || revealed) {
       checked = false; revealed = false;
       $('feedback').innerHTML = ''; $('reason').innerHTML = '';
@@ -417,7 +442,7 @@
     drag = null;
     if (d.ghost) d.ghost.remove();
     if (!d.moved) {
-      if (d.from == null) selectTool(d.mark);
+      if (d.from == null) { if (fastOn()) fastMark(d.mark); else selectTool(d.mark); }
       else showReason(d.from);
       return;
     }
@@ -428,7 +453,11 @@
   document.querySelectorAll('.chip').forEach((chip) => {
     chip.addEventListener('pointerdown', (e) => startDrag(e, chip.dataset.mark, null));
     chip.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTool(chip.dataset.mark); }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();                               // not the fast-scanning Enter (= Check)
+        if (fastOn()) fastMark(chip.dataset.mark); else selectTool(chip.dataset.mark);
+      }
     });
   });
 
@@ -439,13 +468,26 @@
     if (markEl && markEl.textContent) startDrag(e, marks[markEl.parentElement.dataset.i], Number(markEl.parentElement.dataset.i));
   });
   lineEl.addEventListener('click', (e) => {
+    if (e.target.closest('.mark') || e.target.closest('.tie')) return;
     const el = e.target.closest('.nuc');
-    if (!el || e.target.closest('.mark')) return;
-    tapNucleus(Number(el.dataset.i));
+    if (el) { tapNucleus(Number(el.dataset.i)); return; }
+    // A fingertip is wider than a vowel: a tap that lands between letters takes the nearest one.
+    if (checked || revealed) return;
+    if (fastOn()) {
+      const t = targetAt(e.clientX, e.clientY, 'L');
+      if (t) { cursor = t.i; render(); }
+      return;
+    }
+    if (!tool) return;
+    const t = targetAt(e.clientX, e.clientY, tool);
+    if (!t) return;
+    if (tool !== 'X') applyTool(t.i, tool);
+    else if (marks[t.i] === 'X') removeMark(t.i);
+    else place(t.i, 'X', null, t.j);
   });
   lineEl.addEventListener('keydown', (e) => {
     const el = e.target.closest('.nuc');
-    if (!el) return;
+    if (!el || fastOn()) return;                         // fast scanning has its own keys (below)
     const i = Number(el.dataset.i);
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tapNucleus(i); }
     else if (e.key === 'Backspace' || e.key === 'Delete') { e.preventDefault(); if (marks[i]) removeMark(i); }
@@ -460,8 +502,78 @@
     document.querySelectorAll('.chip').forEach((c) => c.classList.toggle('selected', c.dataset.mark === tool));
   }
   function tapNucleus(i) {
+    if (fastOn()) {                                      // fast scanning: a tap moves the highlight
+      if (checked || revealed) showReason(i); else { cursor = i; render(); }
+      return;
+    }
     if (tool) applyTool(i, tool);
     else if (checked || revealed) showReason(i);
+  }
+
+  // ---- fast scanning ---------------------------------------------------------------------------------
+  // Mark the highlighted syllable and move on. The swoosh goes in the gap that elides THIS vowel; the one
+  // vowel no gap elides -- before est or es, whose gap removes the e instead -- takes no swoosh.
+  function fastMark(mark) {
+    const l = current();
+    if (!l || cursor == null || cursor >= l.nuclei.length) return;
+    const i = cursor;
+    if (mark === 'X') {
+      const k = junctions.findIndex((jj) => jj.elided === i);
+      if (k < 0) return;
+      cursor = i + 1;
+      if (marks[i] === 'X') render(); else place(i, 'X', null, k);
+    } else {
+      cursor = i + 1;
+      if (marks[i] === 'X') { delete marks[i]; delete tieOf[i]; }
+      place(i, mark, null);
+    }
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!fastOn() || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target.closest && e.target.closest('input, select, textarea')) return;
+    if (document.querySelector('.modal:not([hidden])')) return;
+    const l = current();
+    if (!l) return;
+    const n = l.nuclei.length;
+    if (cursor == null) cursor = 0;
+    const mark = FAST_KEYS[e.key.toLowerCase()];
+    if (mark) { e.preventDefault(); fastMark(mark); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); cursor = Math.min(n, cursor + 1); render(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); cursor = Math.max(0, cursor - 1); render(); }
+    else if (e.key === 'Backspace') {
+      e.preventDefault();
+      if (cursor > 0 && (cursor >= n || !marks[cursor])) cursor--;
+      if (marks[cursor]) removeMark(cursor); else render();
+    } else if (e.key === 'Enter' && !(e.target.closest && e.target.closest('button'))) {
+      e.preventDefault();
+      $('check').click();
+    }
+  });
+  function showFastToggle() {
+    $('fast-toggle').hidden = !P.fastUnlocked();
+    $('fast').checked = fastOn();
+  }
+  $('fast').addEventListener('change', () => {
+    S.fast = $('fast').checked;
+    P.save();
+    const l = current();
+    cursor = fastOn() && l ? Math.max(0, l.nuclei.findIndex((_, i) => !marks[i])) : null;
+    if (fastOn() && l && l.nuclei.every((_, i) => marks[i])) cursor = l.nuclei.length;
+    if (fastOn()) selectTool(null);
+    render();
+  });
+  $('fast-on').addEventListener('click', () => {
+    $('fast-unlocked').hidden = true;
+    $('fast').checked = true;
+    $('fast').dispatchEvent(new Event('change'));
+  });
+  $('fast-later').addEventListener('click', () => { $('fast-unlocked').hidden = true; });
+  function celebrateFast() {
+    const f = P.fastStats();
+    $('fast-why').innerHTML = `You've figured out <b>${f.solved}</b> lines, needing only ` +
+      `<b>${(f.checks / f.solved).toFixed(1)}</b> checks per line.`;
+    showFastToggle();
+    $('fast-unlocked').hidden = false;
   }
   // Tap-to-place. For the swoosh, a tapped vowel names its junction: the one that elides it, else
   // the one it borders.
@@ -525,13 +637,59 @@
       }
     }
     html += badges.map((b) => `<span class="new-badge" title="${escapeHTML(b.desc)}">★ New badge: ${escapeHTML(b.title)}</span>`).join('');
+    if (correct) html += rhythmControls();
     $('feedback').innerHTML = html;
     const nextStage = $('next-stage');
     if (nextStage) nextStage.addEventListener('click', () => openStage(S.stage + 1));
     $('reason').innerHTML = '';
     updatePosition();
     updatePoints();
+    if (correct) {
+      wireRhythm();
+      if (S.autoplay !== false) playRhythm();
+    }
+    if (badges.some((b) => b.id === 'fast')) celebrateFast();
   });
+
+  // ---- the rhythm: DUM-di-di, DUM-dum, singalong style ------------------------------------------------
+  // Played from the ANSWER KEY's marks, so it is the line's true rhythm; each syllable and its mark light
+  // up as its drum sounds. Offered on a correct Check (and played by itself, unless the student turned
+  // that off) and after Show answer.
+  const TOUCH = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  function rhythmControls() {
+    if (!window.Rhythm) return '';
+    return '<div class="rhythm-row"><button type="button" id="play-rhythm" class="rhythm-btn">▶ Hear the rhythm</button>' +
+      `<label class="autoplay"><input type="checkbox" id="autoplay"${S.autoplay !== false ? ' checked' : ''}> play by itself</label>` +
+      (TOUCH ? '<div class="note">No sound? Check the volume, and your phone’s silent switch.</div>' : '') + '</div>';
+  }
+  function wireRhythm() {
+    const b = $('play-rhythm');
+    if (b) b.addEventListener('click', playRhythm);
+    const a = $('autoplay');
+    if (a) a.addEventListener('change', () => { S.autoplay = a.checked; P.save(); });
+  }
+  function playRhythm() {
+    const l = current();
+    if (!l || !window.Rhythm) return;
+    const els = nucEls();
+    stopRhythm();
+    lineEl.classList.add('singing');
+    const b = $('play-rhythm');
+    if (b) b.textContent = '♪ Playing…';
+    window.Rhythm.play(l.nuclei.map(expected), (i, len) => {
+      els.forEach((el, k) => { if (k < i) el.classList.add('sung'); });
+      const el = els[i];
+      el.classList.add('beat');
+      setTimeout(() => el.classList.remove('beat'), len * 900);
+    }, stopRhythm);
+  }
+  function stopRhythm() {
+    if (window.Rhythm) window.Rhythm.stop();
+    lineEl.classList.remove('singing');
+    nucEls().forEach((el) => el.classList.remove('beat', 'sung'));
+    const b = $('play-rhythm');
+    if (b) b.textContent = '▶ Hear the rhythm';
+  }
 
   $('reveal').addEventListener('click', () => {
     const l = current(); if (!l) return;
@@ -544,7 +702,8 @@
     P.recordReveal(l);
     nucEls().forEach((el) => el.classList.remove('ok', 'bad'));
     render();
-    $('feedback').innerHTML = spondaicNote(l) + '<div class="note">Tap a mark to see why.</div>';
+    $('feedback').innerHTML = spondaicNote(l) + '<div class="note">Tap a mark to see why.</div>' + rhythmControls();
+    wireRhythm();
     $('reason').innerHTML = '';
   });
 
@@ -579,11 +738,24 @@
       '<h3>Badges</h3>' + (st.badges.length
         ? `<div class="badge-list">${st.badges.map((b) => `<span title="${escapeHTML(b.desc)}">★ ${escapeHTML(b.title)}</span>`).join('')}</div>`
         : '<p class="note">None yet — your first correct line earns one.</p>') +
+      fastSection() +
       (st.configs.length ? '<h3>What you have practiced</h3><ul>' +
         st.configs.map(([k, n]) => `<li>${escapeHTML(k)} <span class="note">(${n} check${n === 1 ? '' : 's'})</span></li>`).join('') + '</ul>' : '');
     $('report-name').value = S.name || '';
     $('progress').hidden = false;
   });
+  function fastSection() {
+    const f = P.fastStats();
+    const per = f.solved ? (f.checks / f.solved).toFixed(1) : '—';
+    const most = 1 / f.need.ratio;
+    if (P.fastUnlocked()) {
+      return '<h3>⚡ Fast scanning</h3><p>Unlocked! Turn it on or off with the switch under the marks.</p>';
+    }
+    return '<h3>⚡ Fast scanning (locked)</h3>' +
+      `<p class="note">Unlocks when you have figured out ${f.need.lines} lines, needing ${most} or fewer checks per line on average.</p>` +
+      `<div class="progress-row"><div>Lines figured out</div><div class="meter"><span style="width:${Math.round(100 * Math.min(f.solved, f.need.lines) / f.need.lines)}%"></span></div><div class="nums">${Math.min(f.solved, f.need.lines)} / ${f.need.lines}</div></div>` +
+      `<p class="note">Checks per line so far: <b>${per}</b> (${most} or fewer to unlock).</p>`;
+  }
   $('close-progress').addEventListener('click', () => { $('progress').hidden = true; });
   $('progress').addEventListener('click', (e) => { if (e.target.id === 'progress') $('progress').hidden = true; });
   $('report-name').addEventListener('change', () => { S.name = $('report-name').value.trim(); P.save(); });
