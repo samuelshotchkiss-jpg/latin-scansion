@@ -132,8 +132,13 @@ window.Progress = (function () {
     save();
   }
 
-  function completeStage(id) {
-    if (S.tutorial[id]) return [];
+  // A stage finished BEFORE its lesson was revised (`revised` in tutorial.json) is stale: finishing it
+  // again moves the date forward, which clears the app's "new since you finished" marker. The dates are
+  // ISO strings, so < compares them; a stage with no `revised` is never stale.
+  const isStale = (stage) => !!(stage.revised && S.tutorial[stage.id] && S.tutorial[stage.id] < stage.revised);
+
+  function completeStage(id, stage) {
+    if (S.tutorial[id] && !(stage && isStale(stage))) return [];
     S.tutorial[id] = today();
     const fresh = awardBadges(null);
     save();
@@ -263,5 +268,5 @@ window.Progress = (function () {
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
 
-  return { state: S, save, init, recordCheck, recordReveal, completeStage, isSolved, acknowledge, reset, stats, downloadReport };
+  return { state: S, save, init, recordCheck, recordReveal, completeStage, isStale, isSolved, acknowledge, reset, stats, downloadReport };
 })();

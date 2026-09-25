@@ -140,7 +140,7 @@
   // Tutorial: one stage's lesson and lines.
   function fillStageMenu() {
     $('stage').innerHTML = stages.map((s, i) =>
-      `<option value="${i}">${S.tutorial[s.id] ? '✓ ' : ''}${i + 1}. ${escapeHTML(s.title)}</option>`).join('');
+      `<option value="${i}">${P.isStale(s) ? '✱ ' : S.tutorial[s.id] ? '✓ ' : ''}${i + 1}. ${escapeHTML(s.title)}</option>`).join('');
     $('stage').value = String(Math.min(S.stage || 0, Math.max(0, stages.length - 1)));
   }
   $('stage').addEventListener('change', () => openStage(Number($('stage').value)));
@@ -152,6 +152,9 @@
     $('stage').value = String(k);
     $('lesson-title').textContent = `Stage ${k + 1} of ${stages.length}: ${stage.title}`;
     let lesson = stage.lesson;
+    if (P.isStale(stage) && stage.new) {                  // finished before the lesson grew: say what is new
+      lesson = `<p class="whats-new">✱ <b>New since you finished this stage:</b> ${stage.new}</p>` + lesson;
+    }
     if (stage.practice) {
       const n = lines.filter((l) => inSet(l, stage.practice.levels)).length;
       lesson += `<p class="practice-more"><a href="?practice=${encodeURIComponent(stage.id)}" data-stage="${k}">Practice more: ${n} lines like these →</a></p>`;
@@ -511,7 +514,7 @@
     if (correct && S.mode === 'tutorial') {
       const stage = stages[S.stage];
       if (stage.lines.every((c) => P.isSolved(c))) {
-        badges = badges.concat(P.completeStage(stage.id));
+        badges = badges.concat(P.completeStage(stage.id, stage));
         fillStageMenu();
         html += `<div class="stage-done"><b>Stage ${S.stage + 1} complete!</b>` +
           (S.stage + 1 < stages.length

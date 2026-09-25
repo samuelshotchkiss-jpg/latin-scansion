@@ -1,5 +1,5 @@
 {
-  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the kinds of line its 'Practice more' link ticks -- `levels` (1 long and short only, 2 qu, 3 h/x/z, 4 elision, 5 muta cum liquida, 6 consonants at the start of a word, 7 Greek words, 8 advanced). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0.",
+  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the kinds of line its 'Practice more' link ticks -- `levels` (1 long and short only, 2 qu, 3 h/x/z, 4 elision, 5 muta cum liquida, 6 consonants at the start of a word, 7 Greek words, 8 advanced). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0. A stage may also carry `revised` (the date its lesson last grew, YYYY-MM-DD) and `new` (one line of HTML: what grew). A student who finished the stage BEFORE that date sees ✱ beside it and the `new` line atop its lesson, until they finish the stage again; set `revised` to the day AFTER the change is pushed -- the app records those dates in UTC, so an evening finish is already tomorrow, and a revision date on the push day itself would miss students who finished that morning. The cost of the day after is only that a student who finished on push day is shown the note once.",
   "stages": [
     {
       "id": "syllables",
@@ -29,6 +29,8 @@
     {
       "id": "refinements",
       "title": "Some refinements: qu, h, x, z, and letters that count twice",
+      "revised": "2026-09-26",
+      "new": "letters that count twice — an <i>i</i> between vowels (<i>Troia</i>), and <i>hic</i> and <i>hoc</i> before a vowel. Two new practice lines at the end.",
       "lesson": "<ul><li><b>qu</b>: the <i>u</i> doesn't exist. It is neither a consonant nor a vowel, and has no effect on length.</li><li><b>h</b>: also doesn't exist. It was very lightly pronounced.</li><li><b>x</b> is actually two consonants, c + s — so <i>dīxit et</i> is <i>dīc-si-tet</i>.</li><li><b>z</b> is also two consonants (it only shows up in Greek words).</li><li><b>i between two vowels</b> is a consonant — say it like English <i>y</i> — and, like <i>x</i>, it counts as two: <i>Troiae quī</i> is <i>Troy-yae-quī</i>. The <i>o</i> has no macron, but its syllable ends in a consonant, so it is long.</li><li><b>hic</b> and <b>hoc</b> before a vowel are really <i>hicc</i> and <i>hocc</i>: <i>dabit hic in</i> is <i>da-bi-thic-cin</i>. Short vowel, long syllable.</li></ul>",
       "lines": [
         "Met. 8.190",
