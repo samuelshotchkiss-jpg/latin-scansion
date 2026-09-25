@@ -571,8 +571,8 @@
   $('fast-later').addEventListener('click', () => { $('fast-unlocked').hidden = true; });
   function celebrateFast() {
     const f = P.fastStats();
-    $('fast-why').innerHTML = `You've figured out <b>${f.solved}</b> lines, needing only ` +
-      `<b>${(f.checks / f.solved).toFixed(1)}</b> checks per line.`;
+    $('fast-why').innerHTML = `Your last <b>${f.recent}</b> lines took only ` +
+      `<b>${f.perLine.toFixed(1)}</b> checks each, on average.`;
     showFastToggle();
     $('fast-unlocked').hidden = false;
   }
@@ -749,15 +749,15 @@
   });
   function fastSection() {
     const f = P.fastStats();
-    const per = f.solved ? (f.checks / f.solved).toFixed(1) : '—';
-    const most = 1 / f.need.ratio;
+    const per = f.recent ? f.perLine.toFixed(1) : '—';
+    const most = f.need.perLine;
     if (P.fastUnlocked()) {
       return '<h3>⚡ Fast scanning</h3><p>Unlocked! Turn it on or off with the switch under the marks.</p>';
     }
     return '<h3>⚡ Fast scanning (locked)</h3>' +
-      `<p class="note">Unlocks when you have figured out ${f.need.lines} lines, needing ${most} or fewer checks per line on average.</p>` +
-      `<div class="progress-row"><div>Lines figured out</div><div class="meter"><span style="width:${Math.round(100 * Math.min(f.solved, f.need.lines) / f.need.lines)}%"></span></div><div class="nums">${Math.min(f.solved, f.need.lines)} / ${f.need.lines}</div></div>` +
-      `<p class="note">Checks per line so far: <b>${per}</b> (${most} or fewer to unlock).</p>`;
+      `<p class="note">Unlocks when your last ${f.need.lines} lines took ${most} checks or fewer each, on average. Only your most recent lines count, so a slow start never holds you back.</p>` +
+      `<div class="progress-row"><div>Lines figured out</div><div class="meter"><span style="width:${Math.round(100 * f.recent / f.need.lines)}%"></span></div><div class="nums">${f.recent} / ${f.need.lines}</div></div>` +
+      `<p class="note">Your last ${f.recent} line${f.recent === 1 ? '' : 's'}: <b>${per}</b> checks each (${most} or fewer to unlock).</p>`;
   }
   $('close-progress').addEventListener('click', () => { $('progress').hidden = true; });
   $('progress').addEventListener('click', (e) => { if (e.target.id === 'progress') $('progress').hidden = true; });

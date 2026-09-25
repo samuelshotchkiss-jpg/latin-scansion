@@ -91,17 +91,26 @@ window.Progress = (function () {
   const today = () => new Date().toISOString().slice(0, 10);
 
   // ---- fast scanning: the mastery that unlocks it -------------------------------------------------
-  // Lines figured out, against every Check ever pressed (wrong ones, and ones after Show answer, too).
-  const FAST = { lines: 20, ratio: 0.5 };            // 20 lines, at least one solve per two checks
+  // The student's MOST RECENT lines only: the last FAST.lines lines figured out, costing FAST.perLine
+  // checks or fewer each on average. Early struggles fall out of the window as new lines come in, so a
+  // hard first week never weighs a student down (owner, 2026-09-25: not a lifetime average).
+  // A line's cost is the checks it took TO SOLVE (solveChecks, recorded since 2026-09-25), so checking
+  // an already-solved line again, to practise it, costs nothing. Older records lack it: a first-try line
+  // cost 1, and any other falls back to its check count -- which may include later re-checks, and so
+  // can only overstate, never flatter.
+  const FAST = { lines: 20, perLine: 2 };
+  const solveCost = (e) => e.solveChecks || (e.firstTry ? 1 : Math.max(1, e.checks || 1));
   function fastStats() {
-    const all = Object.values(S.lines);
-    const solved = all.filter((e) => e.solved).length;
-    const checks = all.reduce((n, e) => n + (e.checks || 0), 0);
-    return { solved, checks, ratio: checks ? solved / checks : 0, need: FAST };
+    const solved = Object.values(S.lines).filter((e) => e.solved);
+    const recent = solved.slice()
+      .sort((a, b) => ((b.solvedAt || '') < (a.solvedAt || '') ? -1 : (b.solvedAt || '') > (a.solvedAt || '') ? 1 : 0))
+      .slice(0, FAST.lines);
+    const cost = recent.reduce((n, e) => n + solveCost(e), 0);
+    return { solved: solved.length, recent: recent.length, perLine: recent.length ? cost / recent.length : 0, need: FAST };
   }
   function fastReady() {
     const f = fastStats();
-    return f.solved >= FAST.lines && f.ratio >= FAST.ratio;
+    return f.recent >= FAST.lines && f.perLine <= FAST.perLine;
   }
 
   // ---- badges ---------------------------------------------------------------------------------------
@@ -128,7 +137,7 @@ window.Progress = (function () {
     // FAST SCANNING. Its cursor walks from syllable to syllable, which gives away where the syllables are
     // -- so it is earned, not offered: enough lines, and few enough checks per line (owner, 2026-09-24).
     // Unlocking IS this badge, so it keeps its date, survives the two-tab merge and is never taken back.
-    { id: 'fast', title: 'Fast scanning', desc: `Unlocked fast scanning: ${FAST.lines} lines figured out, at least one for every ${1 / FAST.ratio} checks.`, test: () => fastReady() },
+    { id: 'fast', title: 'Fast scanning', desc: `Unlocked fast scanning: your last ${FAST.lines} lines took ${FAST.perLine} checks or fewer each, on average.`, test: () => fastReady() },
   ];
 
   let allLines = [];       // set by the app once the data has loaded
@@ -186,6 +195,7 @@ window.Progress = (function () {
       e.solved = true;
       e.firstTry = e.checks === 1 && !e.reveals;
       e.solvedAt = new Date().toISOString();
+      e.solveChecks = e.checks;                    // what this line cost to figure out (fast scanning)
       e.points = 10 * (line.level || 1) + (e.firstTry ? 10 : 0);
       S.points += e.points;
       S.days[today()] = (S.days[today()] || 0) + 1;
