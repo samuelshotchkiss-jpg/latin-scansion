@@ -87,6 +87,7 @@
     else if (!S.acknowledged) $('privacy').hidden = false;
     P.onChange(() => { updatePoints(); fillStageMenu(); showFastToggle(); });   // another tab saved
     showFastToggle();
+    $('autoplay').checked = S.autoplay !== false;          // on unless the student turned it off
     setMode(S.mode || (Object.keys(S.lines).length ? 'practice' : 'tutorial'));
     updatePoints();
   }).catch((err) => {
@@ -659,15 +660,17 @@
   function rhythmControls() {
     if (!window.Rhythm) return '';
     return '<div class="rhythm-row"><button type="button" id="play-rhythm" class="rhythm-btn">▶ Hear the rhythm</button>' +
-      `<label class="autoplay"><input type="checkbox" id="autoplay"${S.autoplay !== false ? ' checked' : ''}> play by itself</label>` +
       (TOUCH ? '<div class="note">No sound? Check the volume, and your phone’s silent switch.</div>' : '') + '</div>';
   }
   function wireRhythm() {
     const b = $('play-rhythm');
     if (b) b.addEventListener('click', playRhythm);
-    const a = $('autoplay');
-    if (a) a.addEventListener('change', () => { S.autoplay = a.checked; P.save(); });
   }
+  $('autoplay').addEventListener('change', () => {
+    S.autoplay = $('autoplay').checked;
+    P.save();
+    if (!S.autoplay) stopRhythm();                       // turning it off mid-line silences it now
+  });
   function playRhythm() {
     const l = current();
     if (!l || !window.Rhythm) return;

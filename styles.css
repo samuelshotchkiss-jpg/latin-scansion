@@ -214,14 +214,14 @@ button, select, label, .chip, .nuc { touch-action: manipulation; -webkit-tap-hig
 body.fast .chip .key { display: inline-block; }
 @media (pointer: coarse) { body.fast .chip .key { display: none; } }   /* a phone has no i, u, o keys to show */
 kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding: 0 .35rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: var(--bg); color: var(--ink); }
-.fast-toggle { display: flex; justify-content: center; align-items: center; gap: .4rem; margin: .6rem auto 0; font-size: .9rem; color: var(--ink); }
+.toggles { display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem 1.2rem; margin: .6rem auto 0; }
+.toggle { display: flex; align-items: center; gap: .4rem; font-size: .9rem; color: var(--ink); }
 .hint kbd { font-size: .75rem; }
 
 /* ---- the rhythm, singalong style ------------------------------------------------------------------ */
 .rhythm-row { margin-top: .6rem; display: flex; flex-wrap: wrap; gap: .4rem .9rem; justify-content: center; align-items: center; }
 .rhythm-row .note { flex-basis: 100%; }
 .rhythm-btn { padding: .4rem .9rem; border-radius: 999px; border: 1px solid var(--accent); background: var(--panel); color: var(--accent); font-weight: 600; cursor: pointer; }
-.autoplay { display: inline-flex; gap: .3rem; align-items: center; font-size: .85rem; color: var(--muted); }
 .nuc .mark { transition: transform .12s ease-out, color .12s; }
 .line.singing .nuc { transition: color .15s; }
 .line.singing .nuc.sung { color: var(--accent); }
@@ -272,13 +272,15 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
     margin: .5rem -.75rem -1rem; padding: .5rem .75rem calc(.6rem + env(safe-area-inset-bottom));
     background: var(--bg); border-top: 1px solid var(--line); box-shadow: 0 -4px 12px rgba(0, 0, 0, .06);
   }
-  .tray { margin-top: 0; gap: .45rem; }
-  .chip { padding: .5rem .85rem; }
-  .chip .word { font-size: .9rem; }
+  .tray { margin-top: 0; gap: .4rem; }
+  .chip { flex: 1 1 0; min-width: 0; justify-content: center; gap: .3rem; padding: .5rem .35rem; }
+  .chip .word { font-size: clamp(.78rem, 3.9vw, .9rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chip .sym { font-size: 1.25rem; }
+  body.fast .chip .key { display: none; }                  /* no room, and usually no keyboard */
   .hint { margin: .4rem 0 .5rem; font-size: .8rem; }
-  .fast-toggle { margin-top: .4rem; }
-  .actions { flex-wrap: nowrap; gap: .35rem; }
-  .actions button { padding: .5rem .6rem; font-size: .92rem; white-space: nowrap; }
+  .toggles { margin-top: .4rem; }
+  .actions { flex-wrap: nowrap; gap: .3rem; }
+  .actions button { padding: .5rem clamp(.35rem, 2vw, .6rem); font-size: clamp(.8rem, 3.9vw, .92rem); white-space: nowrap; }
   .actions #check { flex: 1; }
   .feedback { margin-top: .4rem; }
   .modal { padding: .75rem; }

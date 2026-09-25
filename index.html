@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-26">
+  <link rel="stylesheet" href="styles.css?v=2026-09-27">
 </head>
 <body>
   <header class="top">
@@ -73,7 +73,10 @@
         <span class="sym"><span class="tie-sym"></span></span><span class="word">elision</span><kbd class="key">o</kbd>
       </button>
     </div>
-    <label id="fast-toggle" class="fast-toggle" hidden><input type="checkbox" id="fast"> ⚡ Fast scanning</label>
+    <div class="toggles">
+      <label id="fast-toggle" class="toggle" hidden><input type="checkbox" id="fast"> ⚡ Fast scanning</label>
+      <label class="toggle" title="Play the line's rhythm on drums when you get it right"><input type="checkbox" id="autoplay"> 🥁 Play the rhythm</label>
+    </div>
     <p id="hint" class="hint"><span class="wide">Drag long and short marks onto vowels, and the elision mark under the gap between two syllables — or tap a mark, then tap the line. Drag a mark off the line to take it back.</span><span class="narrow">Tap a mark, then tap a vowel. Drag a mark off the line to take it back.</span></p>
     <p id="fast-hint" class="hint" hidden><span class="wide">Type <kbd>i</kbd> long, <kbd>u</kbd> short, <kbd>o</kbd> elided — each marks the highlighted syllable and moves on. <kbd>←</kbd> <kbd>→</kbd> move, <kbd>Backspace</kbd> goes back, <kbd>Enter</kbd> checks.</span><span class="narrow">Tap ¯ ˘ ‿ to mark the highlighted syllable and move on. Tap a vowel to jump to it.</span></p>
 
@@ -163,6 +166,6 @@
 
   <script src="progress.js?v=2026-09-26"></script>
   <script src="rhythm.js?v=2026-09-26"></script>
-  <script src="app.js?v=2026-09-26"></script>
+  <script src="app.js?v=2026-09-27"></script>
 </body>
 </html>
