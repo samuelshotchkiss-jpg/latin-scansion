@@ -13,6 +13,8 @@ Licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (see
 
 - The macron markings added to the texts.
 - The answer keys: every line's scansion, the reason given for each syllable, and its level.
+- The literary devices in `data/devices.json`: the definitions, the translations, and the choice
+  of examples.
 - HTML pages and the project's Markdown documentation (e.g. `README.md` and this file).
 
 In plain terms: others may share and adapt this material, but must credit it, may not use it

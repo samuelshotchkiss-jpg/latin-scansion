@@ -46,6 +46,19 @@ Tapping a mark then says why that syllable is long, short, or elided.
 All of this is kept in the browser's local storage and never sent anywhere; a notice says so on the
 first visit.
 
+## Literary devices
+
+A second page, **Devices** (`devices.html`), drills the literary devices of the course's
+Meter & Literary Devices Quiz by matching cards into rows: each row is one device, with its
+**name**, its **definition**, and a Latin **example** from the reading. Tap a card, then the
+space where it belongs; **Check** marks each card right or wrong. Tick *Names are cards too*
+for a harder round. The quiz shows the Latin alone, so the English starts hidden;
+tick *Show the English* to see the translations.
+
+It is a page of its own: it shares nothing with the scansion practice, and it stores nothing
+in the browser. Its data, [`data/devices.json`](data/devices.json), is generated from the same
+pool the quiz is drawn from, so the practice and the quiz cannot disagree.
+
 ## Running it locally
 
 The app is plain HTML, CSS and JavaScript with no build step, but it loads its lines with `fetch`, so

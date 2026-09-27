@@ -147,6 +147,8 @@ main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
   background: var(--panel); color: var(--ink); cursor: pointer;
 }
 .mode.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+a.mode { text-decoration: none; display: inline-block; }   /* the Devices link, dressed as a mode */
+.foot-link { color: var(--accent); font-weight: 600; font-size: .85rem; }
 .pill { font-size: .8rem; margin-left: .25rem; opacity: .85; }
 main > .controls { justify-content: center; align-items: center; margin-bottom: 1rem; }
 .kinds { display: flex; flex-wrap: wrap; gap: .25rem .9rem; border: 1px solid var(--line); border-radius: 8px; padding: .3rem .8rem .45rem; margin: 0; font-size: .9rem; }
@@ -251,6 +253,8 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   .modes { flex-wrap: nowrap; gap: .3rem; }
   .top h1 { font-size: 1rem; white-space: nowrap; }
   .mode { padding: .3rem .6rem; font-size: .85rem; }
+  /* no room in a phone's header for a fourth pill: the footer link stands in for it */
+  .top .mode-extra { display: none; }
   main { padding: .75rem .75rem 1rem; display: flex; flex-direction: column; }
   .controls { gap: .5rem; }
   .controls > label { width: 100%; }

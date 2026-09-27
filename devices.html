@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f5d8a">
+  <title>Literary Devices · Latin Scansion</title>
+  <!-- ?v= must change whenever styles.css, devices.css or devices.js change (see index.html). -->
+  <link rel="stylesheet" href="styles.css?v=2026-09-28">
+  <link rel="stylesheet" href="devices.css?v=2026-09-29">
+</head>
+<body>
+  <header class="top">
+    <h1><span class="wide">Latin </span>Scansion</h1>
+    <nav class="modes" aria-label="Sections">
+      <a class="mode" href="index.html"><span class="wide">Scan lines</span><span class="narrow">Scan</span></a>
+      <a class="mode active" href="devices.html" aria-current="page">Devices</a>
+    </nav>
+  </header>
+
+  <main class="dv">
+    <div class="dv-layout">
+    <div class="dv-play">
+    <h2 class="dv-title">Literary devices: match the rows</h2>
+    <p class="dv-intro">Each row is one device: its <b>name</b>, its <b>definition</b>, and a Latin
+      <b>example</b>. Tap a card, then tap the space where it belongs. Tap a placed card to take it back.</p>
+
+    <div class="controls dv-controls">
+      <label>Rows
+        <select id="dv-rows">
+          <option value="4">4</option>
+          <option value="5" selected>5</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+        </select>
+      </label>
+      <label class="toggle"><input type="checkbox" id="dv-names"> Names are cards too</label>
+      <label class="toggle"><input type="checkbox" id="dv-english"> Show the English</label>
+    </div>
+
+    <div id="dv-board" class="dv-board" role="table" aria-label="Rows to fill"></div>
+
+    <div class="actions dv-actions">
+      <button type="button" id="dv-check" class="primary">Check</button>
+      <button type="button" id="dv-reveal">Show answer</button>
+      <button type="button" id="dv-new">New round</button>
+    </div>
+    <div id="dv-feedback" class="feedback" aria-live="polite"></div>
+    </div>
+
+    <!-- THE CARDS STAY IN REACH: a sidebar that stays put on a wide screen, a drawer pinned
+         to the bottom on a phone. Either folds away with its own button. -->
+    <aside id="dv-side" class="dv-side" aria-label="Cards to place">
+      <button type="button" id="dv-side-toggle" class="dv-side-head" aria-expanded="true"
+              aria-controls="dv-tray">
+        <span>Cards <span id="dv-count" class="dv-count"></span></span>
+        <span class="dv-chev" aria-hidden="true">▾</span>
+      </button>
+      <div id="dv-tray" class="dv-tray"></div>
+    </aside>
+    </div>
+  </main>
+
+  <footer class="foot">
+    Texts: Ovid and Vergil (public domain) · Definitions, translations and examples: CC BY-NC-SA 4.0 · Code: AGPL-3.0
+    <br>Nothing on this page is saved: it keeps no progress and stores nothing in your browser.
+  </footer>
+
+  <script src="devices.js?v=2026-09-29"></script>
+</body>
+</html>

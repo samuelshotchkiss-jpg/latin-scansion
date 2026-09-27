@@ -1,0 +1,101 @@
+/* devices.css -- the Literary devices page (devices.html). Uses the scansion page's tokens
+   from styles.css, so light and dark follow it. */
+.dv-title { margin: 0 0 .25rem; font-size: 1.25rem; }
+.dv-intro { margin: 0 0 1rem; color: var(--muted); }
+.dv-controls { justify-content: flex-start; align-items: center; margin-bottom: 1rem; }
+.dv-controls .toggle { color: var(--ink); }
+
+/* ---- the rows -------------------------------------------------------------------------------- */
+.dv-board { display: flex; flex-direction: column; gap: .5rem; }
+.dv-row {
+  display: grid; grid-template-columns: minmax(8rem, .7fr) minmax(0, 1.3fr) minmax(0, 1.6fr);
+  gap: .5rem; align-items: stretch;
+}
+.dv-head .dv-cell {
+  font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--muted); padding: 0 .25rem;
+}
+.dv-row:not(.dv-head) {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: .5rem;
+}
+.dv-cell { display: flex; flex-direction: column; min-width: 0; }
+.dv-slot-label { display: none; }
+.dv-fixed {
+  flex: 1; display: flex; align-items: center; padding: .5rem .6rem;
+  font-weight: 700; color: var(--accent); font-size: 1.05rem;
+}
+.dv-slot {
+  flex: 1; min-height: 3.2rem; border: 2px dashed var(--line); border-radius: 8px;
+  background: transparent; color: var(--muted); cursor: pointer; font-size: .85rem;
+}
+.dv-slot.ready { border-color: var(--accent); background: var(--target); color: var(--accent); }
+
+/* ---- the page: rows on the left, the cards beside them ---------------------------------------- */
+main.dv { max-width: 84rem; }
+.dv-layout { display: grid; grid-template-columns: minmax(0, 1fr) 21rem; gap: 1.25rem; align-items: start; }
+.dv-side {
+  /* 6rem: at the top of the page it starts under the header and still fits the screen */
+  position: sticky; top: .75rem; max-height: calc(100vh - 6rem);
+  display: flex; flex-direction: column;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+}
+.dv-side-head {
+  display: flex; justify-content: space-between; align-items: center; gap: .5rem;
+  padding: .55rem .8rem; border: none; border-bottom: 1px solid var(--line); background: none;
+  color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; text-align: left;
+}
+.dv-count { font-weight: 400; color: var(--muted); font-size: .9rem; }
+.dv-chev { transition: transform .15s; }
+.dv-side.dv-folded .dv-chev { transform: rotate(-90deg); }
+.dv-side.dv-folded .dv-tray { display: none; }
+.dv-side.dv-folded .dv-side-head { border-bottom: none; }
+.dv-done { margin: .25rem; color: var(--muted); font-size: .9rem; }
+
+/* ---- the cards ------------------------------------------------------------------------------- */
+.dv-tray { display: flex; flex-direction: column; gap: .5rem; padding: .6rem; overflow-y: auto; }
+.dv-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; width: 100%;
+  text-align: left; padding: .5rem .65rem; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); color: var(--ink); cursor: pointer; font: inherit;
+  border-left-width: 5px;
+}
+.dv-card.dv-name { border-left-color: var(--accent); }
+.dv-card.dv-definition { border-left-color: var(--missing); }
+.dv-card.dv-example { border-left-color: var(--ok); }
+.dv-card.selected { box-shadow: 0 0 0 3px var(--accent); }
+.dv-card.ok { background: color-mix(in srgb, var(--ok) 14%, var(--panel)); border-color: var(--ok); }
+.dv-card.bad { background: color-mix(in srgb, var(--bad) 14%, var(--panel)); border-color: var(--bad); }
+.dv-tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.dv-face { display: flex; flex-direction: column; gap: .1rem; }
+.dv-name .dv-face { font-weight: 700; color: var(--accent); }
+.dv-cite { font-size: .75rem; color: var(--muted); }
+/* Tahoma for the Latin, as on the scansion page: the capital I has serifs, every macron is there */
+.dv-latin { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.02rem; }
+.dv-latin b { color: var(--accent); }
+.dv-english { font-size: .85rem; font-style: italic; color: var(--muted); }
+.dv-no-english .dv-english { display: none; }
+.dv-actions { margin-top: 1rem; }
+
+/* ---- narrow screens: the cards become a drawer pinned to the bottom -------------------------- */
+@media (max-width: 60rem) {
+  .dv-layout { display: block; }
+  .dv-side.dv-drawer {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 5;
+    max-height: 42vh; border-radius: 12px 12px 0 0; border-bottom: none;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, .12);
+  }
+  .dv-drawer .dv-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+  body:has(.dv-drawer:not(.dv-folded)) { padding-bottom: 44vh; }   /* last row can clear the drawer */
+  body:has(.dv-drawer.dv-folded) { padding-bottom: 3.5rem; }
+}
+
+/* ---- phones: each row stacks its three spaces, each labelled -------------------------------- */
+@media (max-width: 40rem) {
+  .dv-head { display: none; }
+  .dv-row { grid-template-columns: 1fr; }
+  .dv-slot-label {
+    display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin-bottom: .15rem;
+  }
+  .dv-drawer .dv-tray { grid-template-columns: 1fr; }
+}
