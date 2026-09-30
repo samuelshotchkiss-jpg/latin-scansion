@@ -58,6 +58,12 @@ diaeresis must be long, like the last. A pentameter's result carries "meter": "p
 hexameter's carries no meter key, so a hexameter answer key is unchanged. Which line of a couplet is
 which is the caller's to say (by its position): some pentameters also scan as hexameters.
 
+HALF-LINES. Vergil left some lines unfinished (Aen. 4.361 `Ītaliam nōn sponte sequor.`). With
+meter="half-line" the scanner reads the beginning of a hexameter: whole feet, and perhaps a lone long
+syllable where the line breaks off -- `feet` comes back as ['LSS', 'LL', 'LSS', 'L']. The last
+syllable counts as long, like a line's last. The result carries "meter": "half-line". Which lines
+are half-lines is the caller's to say: a line that merely will not scan is usually a wrong macron.
+
 THE NEXT LINE (optional). Hypermetry elides a line's last vowel into the NEXT line, so it is possible
 only when that line begins with a vowel or h. `scan(text, cit, hints, next_line="perlegerent ...")`
 says how the next line begins, and hypermetry is then tried only if it can happen. Without it the
@@ -78,7 +84,10 @@ STOPS, LIQUIDS = set("pbtdcgk"), set("lr")
 WORD = re.compile(r"[a-zāēīōūȳäëïöüÿ]+")
 HEXAMETER = re.compile(r"^(?:LSS|LL){5}LL$")     # the final syllable is long by definition
 PENTAMETER = re.compile(r"^((?:LSS|LL){2})L(?:LSS){2}L$")   # group 1: the half before the diaeresis
-METERS = {"hexameter": HEXAMETER, "pentameter": PENTAMETER}
+# a line the poet left unfinished (Aen. 4.361 Ītaliam nōn sponte sequor): whole feet, then perhaps a
+# lone long syllable where it breaks off -- a hexameter's beginning
+HALF_LINE = re.compile(r"^(?:LSS|LL){1,5}L?$")
+METERS = {"hexameter": HEXAMETER, "pentameter": PENTAMETER, "half-line": HALF_LINE}
 
 JOINED_EU = {"neu", "ceu", "seu", "heu", "eheu", "heus"}   # plus any name: Teucrī, Orpheus
 JOINED_EI = {"dein", "deinde", "deinceps", "hei", "ei"}   # `ei` unmarked is the interjection; the pronoun is eī

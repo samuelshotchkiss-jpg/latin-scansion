@@ -55,7 +55,38 @@ main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
 
 /* the rest of a line the reading stops in the middle of: grey, but scanned */
 .beyond { color: var(--muted); }                    /* colour only: opacity would fade the marks too */
-.beyond-note { margin: -.4rem 0 .6rem; color: var(--muted); font-size: .85rem; text-align: center; }
+.line-note { margin: .2rem 0 .6rem; color: var(--muted); font-size: .85rem; text-align: center; }
+
+/* The lines before and after: smaller, faint and outside the box -- not the grey of a tail, which sits
+   inside the line at full size. The one above shows its END, the one below its BEGINNING: that is
+   where hypermetry happens. */
+.ctx { margin: .35rem 0; }
+.ctx-line {
+  all: unset; box-sizing: border-box; position: relative; display: flex; align-items: baseline; gap: .6rem;
+  width: 100%; padding: .1rem 2.9rem .35rem 1rem; color: var(--muted); opacity: .6; cursor: pointer;
+}
+div.ctx-line { cursor: default; }
+button.ctx-line:hover, button.ctx-line:focus-visible { opacity: .9; }
+button.ctx-line:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.ctx-cit { flex: none; font-size: .75rem; min-width: 5.2rem; }
+.ctx-text {
+  flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(.95rem, 2.4vw, 1.25rem);
+}
+.ctx-prev .ctx-text { direction: rtl; text-align: left; }           /* a long line keeps its END */
+.ctx-prev .ctx-text > bdi { direction: ltr; unicode-bidi: isolate; }
+.ctx-check { position: absolute; right: .75rem; color: var(--ok); font-weight: 700; }
+.stage-lines.slide-up { animation: slide-up .3s ease-out; }
+.stage-lines.slide-down { animation: slide-down .3s ease-out; }
+@keyframes slide-up { from { transform: translateY(3.2rem); opacity: .35; } to { transform: none; opacity: 1; } }
+@keyframes slide-down { from { transform: translateY(-3.2rem); opacity: .35; } to { transform: none; opacity: 1; } }
+
+/* hypermetry: an elision split between two lines -- trailing and open on the first, unbegun on the next */
+.tie.trail { border-right: none; border-radius: 0 0 0 100% / 0 0 0 100%; }
+.tie.lead { border-left: none; border-radius: 0 0 100% 0 / 0 0 100% 0; }
+.half-tie { pointer-events: none; cursor: default; }
+.half-tie::after { display: none; }
+.half-tie.faint { border-color: var(--muted); opacity: .7; }
 
 /* Go to a line */
 .goto { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .5rem; margin-top: .6rem; font-size: .9rem; }
@@ -293,6 +324,7 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   .nuc.cursor, .burst { animation: none; }
   .nuc .mark { transition: none; }
   .line-check.fresh { animation: none; }
+  .stage-lines.slide-up, .stage-lines.slide-down { animation: none; }
 }
 
 /* ---- phones --------------------------------------------------------------------------------------- */

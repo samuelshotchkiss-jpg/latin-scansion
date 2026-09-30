@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-29d">
+  <link rel="stylesheet" href="styles.css?v=2026-09-30">
 </head>
 <body>
   <header class="top">
@@ -70,8 +70,13 @@
       <span id="position" class="position"></span>
     </div>
 
-    <div id="line" class="line" lang="la"></div>
-    <p id="beyond-note" class="beyond-note" hidden>Your reading stops in the middle of this line. The <span class="beyond">grey words</span> finish it: they are not part of your reading, but they count for the meter, so scan them too.</p>
+    <!-- the line, with the lines before and after it faint above and below (the text's own order) -->
+    <div id="stage-lines" class="stage-lines">
+      <div id="ctx-prev" class="ctx ctx-prev" hidden></div>
+      <div id="line" class="line" lang="la"></div>
+      <div id="ctx-next" class="ctx ctx-next" hidden></div>
+    </div>
+    <p id="line-note" class="line-note" hidden></p>
 
     <div class="dock">
     <div id="tray" class="tray" aria-label="Marks">
@@ -162,7 +167,7 @@
       </div>
       <p id="map-summary"></p>
       <p class="map-legend"><span class="cell solved"></span> figured out <span class="cell todo"></span> not yet
-        <span class="cell todo current"></span> the line you're on <span class="cell half"></span> a half-line Vergil never finished
+        <span class="cell todo current"></span> the line you're on
         <span class="cell omitted"></span> a line left out as spurious</p>
       <p class="note">Each square is one line. Tap any square to go to that line.</p>
       <div id="map-body" class="map-body"></div>
@@ -198,6 +203,6 @@
 
   <script src="progress.js?v=2026-09-28"></script>
   <script src="rhythm.js?v=2026-09-29"></script>
-  <script src="app.js?v=2026-09-29d"></script>
+  <script src="app.js?v=2026-09-30"></script>
 </body>
 </html>

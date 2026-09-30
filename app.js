@@ -22,7 +22,9 @@
   const lineEl = $('line');
 
   let lines = [];          // every scannable line, in reading order
-  let rows = [];           // every line of every passage, scannable or not (Vergil's half-lines), in order
+  let rows = [];           // every line of every passage, scannable or not, in order
+  let rowsByCit = {};
+  let lastShown = null;    // the citation shown before this one: a step to a neighbour scrolls
   let byCitation = {};
   let stages = [];         // tutorial stages whose lines all exist
   let pool = [], index = 0;
@@ -47,6 +49,7 @@
       .map((l, i) => ({ ...l, _at: i }))
       .sort((a, b) => (a.passage_order - b.passage_order) || (a._at - b._at));
     lines = rows.filter((l) => l.scans);
+    rows.forEach((l) => { rowsByCit[l.citation] = l; });
     lines.forEach((l) => { byCitation[l.citation] = l; });
     stages = (tutorial.stages || []).map((s) => {
       const missing = s.lines.filter((c) => !byCitation[c]);
@@ -251,7 +254,8 @@
     const l = current();
     if (!l) {
       lineEl.textContent = 'No lines match — tick another kind of line, or choose All passages.';
-      $('beyond-note').hidden = true;
+      $('line-note').hidden = true;
+      $('ctx-prev').hidden = $('ctx-next').hidden = true;
       $('citation').textContent = ''; $('position').textContent = '';
       overlay = null; junctions = [];
       return;
@@ -273,11 +277,15 @@
       at = nu.end;
     });
     html += piece(at, chars.length);
-    $('beyond-note').hidden = end >= chars.length;
+    const note = end < chars.length ? TAIL_NOTE : l.meter === 'half-line' ? halfLineNote(l) : '';
+    $('line-note').innerHTML = note;
+    $('line-note').hidden = !note;
     lineEl.innerHTML = html + '<span class="line-check" title="You have figured out this line" hidden>✓</span><div class="overlay"></div>';
     overlay = lineEl.querySelector('.overlay');
     junctions = computeJunctions(l);
     $('citation').textContent = l.citation;
+    showContext(l);
+    slide(l.citation);
     $('goto-msg').innerHTML = '';
     $('goto-work').value = workOf(l.citation);
     setGotoHint();
@@ -317,6 +325,103 @@
 
   function nucEls() { return [...lineEl.querySelectorAll('.nuc')]; }
 
+  // ---- the lines around it ----------------------------------------------------------------------------
+  const TAIL_NOTE = 'Your reading stops in the middle of this line. The <span class="beyond">grey words</span> finish it: ' +
+    'they are not part of your reading, but they count for the meter, so scan them too.';
+  const NUMBER = ['no', 'one', 'two', 'three', 'four', 'five'];
+  function halfLineNote(l) {
+    const whole = l.feet.filter((f) => f.length > 1).length;
+    const half = l.feet[l.feet.length - 1].length === 1;
+    return `Vergil left this line unfinished: it breaks off after ${NUMBER[whole]}${half ? ' and a half' : ''} ` +
+      `feet. Scan what is there.`;
+  }
+  const citeStep = (cit, d) => { const [b, n] = bookLine(cit); return `${workOf(cit)} ${b}.${n + d}`; };
+  const neighbour = (l, d) => rowsByCit[citeStep(l.citation, d)] || null;
+  const hypermetric = (l) => !!(l && l.flags && l.flags.includes('hypermetry'));
+
+  // A neighbour, faint: its nuclei are spans so a half swoosh can find them. In Practice it is a button
+  // that goes there; in the Tutorial it is only to read (a click would leave the lesson).
+  function ctxHTML(l, which) {
+    const chars = [...l.text];
+    let html = '', at = 0;
+    (l.nuclei || []).forEach((nu, i) => {
+      html += escapeHTML(chars.slice(at, nu.start).join(''));
+      html += `<span class="ctx-nuc" data-i="${i}">${escapeHTML(chars.slice(nu.start, nu.end).join(''))}</span>`;
+      at = nu.end;
+    });
+    html += escapeHTML(chars.slice(at).join(''));
+    if (which === 'prev') html = `<bdi>${html}</bdi>`;
+    const solved = P.isSolved(l.citation);
+    const go = S.mode !== 'tutorial';
+    const title = `${l.citation}${solved ? ' · figured out' : ''}${go ? ' — go to this line' : ''}`;
+    const inner = `<span class="ctx-cit">${escapeHTML(l.citation)}</span><span class="ctx-text" lang="la">${html}</span>` +
+      (solved ? '<span class="ctx-check" aria-label="figured out">✓</span>' : '');
+    return go
+      ? `<button type="button" class="ctx-line" data-go="${escapeHTML(l.citation)}" title="${escapeHTML(title)}">${inner}</button>`
+      : `<div class="ctx-line" title="${escapeHTML(title)}">${inner}</div>`;
+  }
+  function showContext(l) {
+    [['ctx-prev', -1, 'prev'], ['ctx-next', 1, 'next']].forEach(([id, d, which]) => {
+      const n = neighbour(l, d);
+      $(id).hidden = !n;
+      $(id).innerHTML = n ? ctxHTML(n, which) : '';
+    });
+  }
+  ['ctx-prev', 'ctx-next'].forEach((id) => $(id).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (!b) return;
+    const note = goTo(b.dataset.go);
+    $('goto-msg').innerHTML = note;
+  }));
+
+  // A step to the line just after (or before) in the text scrolls, as if the page moved: the faint line
+  // below slides up into the box. Any other jump just appears.
+  function slide(cit) {
+    const was = lastShown;
+    lastShown = cit;
+    const box = $('stage-lines');
+    box.classList.remove('slide-up', 'slide-down');
+    if (!was || was === cit) return;
+    const dir = citeStep(was, 1) === cit ? 'slide-up' : citeStep(was, -1) === cit ? 'slide-down' : '';
+    if (!dir) return;
+    void box.offsetWidth;                                  // restart the animation
+    box.classList.add(dir);
+  }
+
+  // HYPERMETRY, SPLIT: a swoosh on a line's last vowel trails off open (drawOverlay), and the next line's
+  // first vowel gets the other half, unbegun. Drawn on the faint next line as soon as the student marks
+  // it; and once a hypermetric line is figured out, its halves show from its neighbours too.
+  function halfTie(host, el, side, faint) {
+    const hr = host.getBoundingClientRect(), r = el.getBoundingClientRect();
+    const mid = r.left + r.width / 2 - hr.left;
+    // a leading half stops short of its line's left edge rather than poke out of the box
+    const w = side === 'trail' ? r.height * 0.9 : Math.max(6, Math.min(r.height * 0.9, mid - 3));
+    const t = document.createElement('span');
+    t.className = `tie half-tie ${side}${faint ? ' faint' : ''}`;
+    t.style.left = (side === 'trail' ? mid : mid - w) + 'px';
+    t.style.width = w + 'px';
+    t.style.top = (r.bottom - hr.top - r.height * 0.12) + 'px';
+    t.style.height = (r.height * 0.28) + 'px';
+    host.appendChild(t);
+  }
+  function drawSplitTies() {
+    document.querySelectorAll('.half-tie').forEach((t) => t.remove());
+    const l = current();
+    if (!l) return;
+    const last = l.nuclei.length - 1;
+    const below = $('ctx-next').querySelector('.ctx-line');
+    const first = below && below.querySelector('.ctx-nuc');
+    if (first && marks[last] === 'X') halfTie(below, first, 'lead', false);
+    const prev = neighbour(l, -1);
+    if (hypermetric(prev) && P.isSolved(prev.citation)) {
+      const above = $('ctx-prev').querySelector('.ctx-line');
+      const tail = above && [...above.querySelectorAll('.ctx-nuc')].pop();
+      if (tail) halfTie(above, tail, 'trail', true);
+      const mine = nucEls()[0];
+      if (mine && overlay) halfTie(lineEl, mine, 'lead', true);
+    }
+  }
+
   function render() {
     nucEls().forEach((el) => {
       const m = marks[el.dataset.i];
@@ -329,7 +434,9 @@
     document.body.classList.toggle('fast', fastOn());
     $('hint').hidden = fastOn();
     $('fast-hint').hidden = !fastOn();
-    return drawOverlay();
+    const shape = drawOverlay();
+    drawSplitTies();
+    return shape;
   }
 
   // Swooshes under the line, and -- after Check -- foot dividers above it.
@@ -350,7 +457,7 @@
       const x1 = a.left + a.width / 2;
       const x2 = b && Math.abs(b.top - a.top) < a.height / 2 ? b.left + b.width / 2 : a.right + a.height * 0.45;
       const tie = document.createElement('span');
-      tie.className = 'tie';
+      tie.className = j && j.q == null ? 'tie trail' : 'tie';
       tie.dataset.i = i;
       tie.style.left = (x1 - lr.left) + 'px';
       tie.style.width = Math.max(14, x2 - x1) + 'px';
@@ -363,17 +470,21 @@
 
     if (!(checked || revealed)) return null;
     // The student's own marks, grouped into feet in order: ¯ ¯ is a spondee, ¯ ˘ ˘ a dactyl.
+    // A half-line (Aen. 4.361) has as many feet as its key, the last perhaps a lone long syllable.
     const seq = l.nuclei.map((_, i) => i).filter((i) => marks[i] !== 'X');
+    const half = l.meter === 'half-line';
+    const want = half ? l.feet.length : 6;
     let p = 0, feet = 0;
     const breaks = [];
-    while (p < seq.length && feet < 6) {
+    while (p < seq.length && feet < want) {
       const m0 = marks[seq[p]], m1 = marks[seq[p + 1]], m2 = marks[seq[p + 2]];
       let size = 0;
       if (m0 === 'L' && m1 === 'L') size = 2;
       else if (m0 === 'L' && m1 === 'S' && m2 === 'S') size = 3;
+      else if (half && m0 === 'L' && p === seq.length - 1) size = 1;
       if (!size) break;
       p += size; feet++;
-      if (feet < 6 && p < seq.length) breaks.push([seq[p - 1], seq[p]]);
+      if (feet < want && p < seq.length) breaks.push([seq[p - 1], seq[p]]);
     }
     breaks.forEach(([a, b]) => {
       const ra = rect(a), rb = rect(b);
@@ -385,9 +496,9 @@
       bar.style.height = (ra.height * 0.7) + 'px';
       overlay.appendChild(bar);
     });
-    return { feet, complete: feet === 6 && p === seq.length };
+    return { feet, complete: feet === want && p === seq.length };
   }
-  window.addEventListener('resize', () => drawOverlay());
+  window.addEventListener('resize', () => { drawOverlay(); drawSplitTies(); });
 
   // ---- placing marks ------------------------------------------------------------------------------
   function place(i, mark, from, j) {
@@ -590,10 +701,21 @@
       e.preventDefault();
       if (cursor > 0 && (cursor >= n || !marks[cursor])) cursor--;
       if (marks[cursor]) removeMark(cursor); else render();
-    } else if (e.key === 'Enter' && !(e.target.closest && e.target.closest('button'))) {
+    } else if (e.key === 'Enter' && (hasUncheckedMarks() || !(e.target.closest && e.target.closest('button')))) {
       e.preventDefault();
       $('check').click();
     }
+  });
+  // ENTER CHECKS a line that has marks not yet checked, whatever has the focus. A button keeps the
+  // focus after a click, so a student who clicked Next, typed marks and pressed Enter pressed NEXT --
+  // and lost the marks (a student, 2026-09-30). Only with nothing to check does Enter press a button.
+  const hasUncheckedMarks = () => Object.keys(marks).length > 0 && !checked && !revealed;
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' || fastOn() || e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target.closest && e.target.closest('input, select, textarea, .chip')) return;
+    if (document.querySelector('.modal:not([hidden])') || !hasUncheckedMarks()) return;
+    e.preventDefault();
+    $('check').click();
   });
   function showFastToggle() {
     $('fast-toggle').hidden = !P.fastUnlocked();
@@ -672,7 +794,7 @@
       const unmarked = l.nuclei.filter((n, i) => !marks[i]).length;
       html = `${right} of ${total} right.`;
       if (unmarked) html += ` ${unmarked} syllable${unmarked === 1 ? ' has' : 's have'} no mark.`;
-      if (shape && !shape.complete) html += ' <span class="note">Your marks don’t divide into six feet yet — see where the dividers stop.</span>';
+      if (shape && !shape.complete) html += ` <span class="note">Your marks don’t divide into ${l.meter === 'half-line' ? 'feet' : 'six feet'} yet — see where the dividers stop.</span>`;
       html += ' <span class="note">Tap a mark to see why.</span>';
     }
     let badges = result.badges;
