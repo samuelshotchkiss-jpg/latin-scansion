@@ -412,6 +412,7 @@
     t.style.top = (r.bottom - hr.top - r.height * 0.12) + 'px';
     t.style.height = (r.height * 0.28) + 'px';
     host.appendChild(t);
+    return t;
   }
   function drawSplitTies() {
     document.querySelectorAll('.half-tie').forEach((t) => t.remove());
@@ -568,7 +569,7 @@
   }
   function highlight(t) {
     nucEls().forEach((el) => el.classList.remove('target'));
-    lineEl.querySelectorAll('.slot').forEach((s) => s.remove());
+    document.querySelectorAll('#line .slot, #ctx-next .slot').forEach((s) => s.remove());
     if (!t || !drag) return;
     if (drag.mark !== 'X') { nucEls()[t.i].classList.add('target'); return; }
     const jj = junctions[t.j];
@@ -584,6 +585,10 @@
     slot.style.top = (a.bottom - lr.top - a.height * 0.12) + 'px';
     slot.style.height = (a.height * 0.28) + 'px';
     overlay.appendChild(slot);
+    // over a last vowel, the next line previews its unbegun half too
+    const below = jj.q == null && $('ctx-next').querySelector('.ctx-line');
+    const first = below && below.querySelector('.ctx-nuc');
+    if (first) halfTie(below, first, 'lead', false).classList.add('slot');
   }
   document.addEventListener('pointermove', (e) => {
     if (!drag) return;
