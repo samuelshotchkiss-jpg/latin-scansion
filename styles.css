@@ -206,6 +206,17 @@ button.cell:hover { border-color: var(--accent); }
 /* Previous and Next new are a matched pair at the two ends of the row; the rest sit between them */
 .actions { justify-content: space-between; align-items: center; }
 .actions-mid { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; flex: 1; }
+/* the tutorial has its own ends of the row: Back and Next / Next stage (body.tutorial) */
+body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tutorial) .tutorial-only { display: none; }
+.stage-dots { display: inline-flex; gap: .4rem; align-items: center; }
+.stage-dots button {
+  all: unset; box-sizing: border-box; width: .95rem; height: .95rem; border-radius: 50%; cursor: pointer;
+  border: 2px solid var(--muted); background: transparent;
+}
+.stage-dots button.done { background: var(--ok); border-color: var(--ok); }
+.stage-dots button.here { box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--accent); }
+.stage-dots button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.stage-dots .of { color: var(--muted); font-size: .85rem; margin-right: .2rem; }
 .actions button.nav { min-width: 7.5rem; border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
 .feedback { margin-top: 1.25rem; text-align: center; min-height: 1.5em; }

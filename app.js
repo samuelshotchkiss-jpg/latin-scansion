@@ -117,6 +117,8 @@
   function setMode(mode) {
     S.mode = mode; P.save();
     document.querySelectorAll('.mode[data-mode]').forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
+    document.body.classList.toggle('tutorial', mode === 'tutorial');
+    $('goto').hidden = mode === 'tutorial';                // Go to and the map belong to Practice
     $('practice-controls').hidden = mode !== 'practice';
     $('tutorial-controls').hidden = mode !== 'tutorial';
     $('lesson').hidden = mode !== 'tutorial';
@@ -183,7 +185,7 @@
   }
   $('stage').addEventListener('change', () => openStage(Number($('stage').value)));
 
-  function openStage(k, resume) {
+  function openStage(k, resume, atEnd) {
     const stage = stages[k];
     if (!stage) return;
     S.stage = k; P.save();
@@ -203,7 +205,7 @@
     pool = stage.lines.map((c) => byCitation[c]);
     const saved = resume ? S.stagePos[stage.id] : null;
     const at = saved ? pool.findIndex((l) => l.citation === saved) : -1;
-    index = at >= 0 ? at : Math.max(0, pool.findIndex((l) => !P.isSolved(l.citation)));
+    index = atEnd ? pool.length - 1 : at >= 0 ? at : Math.max(0, pool.findIndex((l) => !P.isSolved(l.citation)));
     showLine();
   }
   $('lesson-body').addEventListener('click', (e) => {
@@ -297,6 +299,7 @@
     $('prev').disabled = index === 0;
     $('next').disabled = index >= pool.length - 1;
     $('next-new').disabled = nextNewIndex() < 0;
+    tutorialNav();
     if (S.mode === 'tutorial' && stages[S.stage]) S.stagePos[stages[S.stage].id] = l.citation;
     else S.citation = l.citation;
     P.save();
@@ -307,6 +310,16 @@
     const solved = pool.filter((x) => P.isSolved(x.citation)).length;
     const what = S.mode === 'tutorial' ? 'Practice line' : 'Line';
     $('position').textContent = `${what} ${index + 1} of ${pool.length} · ${solved} solved`;
+    const tut = S.mode === 'tutorial';
+    $('position').hidden = tut;
+    $('stage-dots').hidden = !tut;
+    if (tut) {
+      $('stage-dots').innerHTML = `<span class="of">Line ${index + 1} of ${pool.length}</span>` + pool.map((x, k) => {
+        const done = P.isSolved(x.citation);
+        const label = `Line ${k + 1}${done ? ', figured out' : ''}`;
+        return `<button type="button" data-k="${k}" class="${done ? 'done' : ''}${k === index ? ' here' : ''}" title="${label}" aria-label="${label}"></button>`;
+      }).join('');
+    }
     // figured out: said beside the citation AND shown at the right of the line itself, where the eye is
     const done = !!(current() && P.isSolved(current().citation));
     $('solved-flag').hidden = !done;
@@ -318,6 +331,34 @@
   // Next new: the next line in the pool not yet figured out, wrapping round to the start; -1 when
   // every other line is done. Next walks every line, solved or not, so a student who did the tutorial
   // first met its lines again, one after another, in Daedalus (a student, 2026-09-28).
+  // ---- the tutorial's own row: Back and Next, which cross from stage to stage ---------------------------
+  // A stage is a short sequence, and moving on is FREE (owner, 2026-09-30): the student sees what was
+  // wrong after every Check, and has Show answer when stuck -- whether to go on is theirs to decide.
+  function tutorialNav() {
+    if (S.mode !== 'tutorial') return;
+    const lastLine = index >= pool.length - 1, lastStage = S.stage >= stages.length - 1;
+    $('t-back').disabled = index === 0 && S.stage === 0;
+    $('t-back').title = index === 0 && S.stage > 0 ? `Back to stage ${S.stage}` : 'The line before';
+    $('t-next').innerHTML = !lastLine ? '<span class="wide">Next </span>→'
+      : !lastStage ? '<span class="wide">Next stage </span><span class="narrow">Stage </span>→'
+      : '<span class="wide">On to Practice </span><span class="narrow">Practice </span>→';
+    $('t-next').title = !lastLine ? 'The next line'
+      : !lastStage ? `Stage ${S.stage + 2}: ${stages[S.stage + 1].title}` : 'The tutorial is done: practice on the passages';
+    $('t-next').setAttribute('aria-label', $('t-next').title);
+  }
+  $('t-back').addEventListener('click', () => {
+    if (index > 0) { index--; showLine(); } else if (S.stage > 0) openStage(S.stage - 1, false, true);
+  });
+  $('t-next').addEventListener('click', () => {
+    if (index < pool.length - 1) { index++; showLine(); }
+    else if (S.stage < stages.length - 1) openStage(S.stage + 1);
+    else setMode('practice');
+  });
+  $('stage-dots').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-k]');
+    if (b) { index = Number(b.dataset.k); showLine(); }
+  });
+
   function nextNewIndex() {
     for (let k = 1; k < pool.length; k++) {
       const j = (index + k) % pool.length;
