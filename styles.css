@@ -178,6 +178,7 @@ button.cell:hover { border-color: var(--accent); }
 .tie.bad { border-color: var(--bad); }
 .tie.revealed { border-color: var(--muted); }
 .tie.slot { border-style: dashed; border-color: var(--accent); pointer-events: none; }
+.tie.slot.trail { border-right: none; }                /* the preview keeps the open end of a trailing swoosh */
 .bar { position: absolute; width: 2px; background: var(--muted); border-radius: 1px; }
 .tie-sym {
   display: inline-block; width: 1.1em; height: .42em; vertical-align: middle;

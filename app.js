@@ -578,7 +578,7 @@
     const x1 = a.left + a.width / 2;
     const x2 = b && Math.abs(b.top - a.top) < a.height / 2 ? b.left + b.width / 2 : a.right + a.height * 0.45;
     const slot = document.createElement('span');
-    slot.className = 'tie slot';
+    slot.className = jj.q == null ? 'tie slot trail' : 'tie slot';   // over a last vowel: the open, trailing half
     slot.style.left = (x1 - lr.left) + 'px';
     slot.style.width = Math.max(14, x2 - x1) + 'px';
     slot.style.top = (a.bottom - lr.top - a.height * 0.12) + 'px';
