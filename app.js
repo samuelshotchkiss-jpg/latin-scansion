@@ -22,6 +22,7 @@
   const lineEl = $('line');
 
   let lines = [];          // every scannable line, in reading order
+  let rows = [];           // every line of every passage, scannable or not (Vergil's half-lines), in order
   let byCitation = {};
   let stages = [];         // tutorial stages whose lines all exist
   let pool = [], index = 0;
@@ -42,9 +43,10 @@
     fetch('data/lines.json', { cache: 'no-cache' }).then((r) => r.json()),
     fetch('data/tutorial.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => ({ stages: [] })),
   ]).then(([data, tutorial]) => {
-    lines = data.filter((l) => l.scans && l.passage)
+    rows = data.filter((l) => l.passage)
       .map((l, i) => ({ ...l, _at: i }))
       .sort((a, b) => (a.passage_order - b.passage_order) || (a._at - b._at));
+    lines = rows.filter((l) => l.scans);
     lines.forEach((l) => { byCitation[l.citation] = l; });
     stages = (tutorial.stages || []).map((s) => {
       const missing = s.lines.filter((c) => !byCitation[c]);
@@ -76,6 +78,7 @@
     }
     setKinds(S.levels);
     fillStageMenu();
+    fillWorkMenu();
 
     // A "Practice more" link: ?practice=<stage id> opens Practice with that stage's lines.
     const wanted = new URLSearchParams(location.search).get('practice');
@@ -132,13 +135,17 @@
     showLine();
   }
   function setKinds(levels) {
-    document.querySelectorAll('#kinds input').forEach((cb) => { cb.checked = levels.includes(Number(cb.value)); });
+    kindBoxes().forEach((cb) => { cb.checked = levels.includes(Number(cb.value)); });
     summarizeKinds();
   }
   // On a phone the eight checkboxes fold away behind one line that says what is ticked.
+  const kindBoxes = () => [...document.querySelectorAll('#kinds input[value]')];
   function summarizeKinds() {
-    const on = [...document.querySelectorAll('#kinds input:checked')].map((x) => KIND_NAMES[Number(x.value) - 1]);
-    $('kinds-summary').textContent = on.length ? `: ${on.join(', ')}` : ': nothing ticked';
+    const on = kindBoxes().filter((x) => x.checked).map((x) => KIND_NAMES[Number(x.value) - 1]);
+    const all = on.length === KIND_NAMES.length;
+    $('kinds-summary').textContent = all ? ': all kinds' : on.length ? `: ${on.join(', ')}` : ': nothing ticked';
+    $('kinds-all').checked = all;
+    $('kinds-all').indeterminate = on.length > 0 && !all;
   }
   $('kinds-toggle').addEventListener('click', () => {
     const open = $('kinds').classList.toggle('open');
@@ -154,11 +161,16 @@
     P.save();
   }
   $('passage').addEventListener('change', () => rebuildPool());
-  document.querySelectorAll('#kinds input').forEach((cb) => cb.addEventListener('change', () => {
-    S.levels = [...document.querySelectorAll('#kinds input:checked')].map((x) => Number(x.value));
+  kindBoxes().forEach((cb) => cb.addEventListener('change', () => {
+    S.levels = kindBoxes().filter((x) => x.checked).map((x) => Number(x.value));
     summarizeKinds();
     rebuildPool(current() && current().citation);
   }));
+  $('kinds-all').addEventListener('change', () => {
+    S.levels = $('kinds-all').checked ? KIND_NAMES.map((_, i) => i + 1) : [];
+    setKinds(S.levels);
+    rebuildPool(current() && current().citation);
+  });
 
   // Tutorial: one stage's lesson and lines.
   function fillStageMenu() {
@@ -252,10 +264,13 @@
       at = nu.end;
     });
     html += escapeHTML(chars.slice(at).join(''));
-    lineEl.innerHTML = html + '<div class="overlay"></div>';
+    lineEl.innerHTML = html + '<span class="line-check" title="You have figured out this line" hidden>✓</span><div class="overlay"></div>';
     overlay = lineEl.querySelector('.overlay');
     junctions = computeJunctions(l);
     $('citation').textContent = l.citation;
+    $('goto-msg').innerHTML = '';
+    $('goto-work').value = workOf(l.citation);
+    setGotoHint();
     updatePosition();
     $('prev').disabled = index === 0;
     $('next').disabled = index >= pool.length - 1;
@@ -269,8 +284,12 @@
   function updatePosition() {
     const solved = pool.filter((x) => P.isSolved(x.citation)).length;
     const what = S.mode === 'tutorial' ? 'Practice line' : 'Line';
-    const mark = current() && P.isSolved(current().citation) ? ' · ✓ figured out' : '';
-    $('position').textContent = `${what} ${index + 1} of ${pool.length} · ${solved} solved${mark}`;
+    $('position').textContent = `${what} ${index + 1} of ${pool.length} · ${solved} solved`;
+    // figured out: said beside the citation AND shown at the right of the line itself, where the eye is
+    const done = !!(current() && P.isSolved(current().citation));
+    $('solved-flag').hidden = !done;
+    const tick = lineEl.querySelector('.line-check');
+    if (tick) tick.hidden = !done;
     $('next-new').disabled = nextNewIndex() < 0;
   }
 
@@ -666,6 +685,10 @@
     $('reason').innerHTML = '';
     updatePosition();
     updatePoints();
+    if (result.points) {
+      const tick = lineEl.querySelector('.line-check');
+      if (tick) tick.classList.add('fresh');
+    }
     if (correct) {
       wireRhythm();
       if (S.autoplay !== false) playRhythm();
@@ -735,6 +758,180 @@
   $('prev').addEventListener('click', () => { if (index > 0) { index--; showLine(); } });
   $('next').addEventListener('click', () => { if (index < pool.length - 1) { index++; showLine(); } });
   $('next-new').addEventListener('click', () => { const j = nextNewIndex(); if (j >= 0) { index = j; showLine(); } });
+
+  // ---- Go to a line --------------------------------------------------------------------------------
+  // The work comes from a menu, so nobody has to type "Met." or "Aen."; the student types only the book
+  // and the line, in whatever way comes naturally: 4.620, 4 620, 4,620, 4:620.
+  const WORK_NAMES = { 'Met.': 'Metamorphoses', 'Aen.': 'Aeneid', 'Her.': 'Heroides' };
+  const workOf = (cit) => cit.split(' ')[0];
+  const bookLine = (cit) => cit.split(' ')[1].split('.').map(Number);          // 'Aen. 4.620' -> [4, 620]
+  const workName = (w) => WORK_NAMES[w] || w;
+  // Lines our text leaves out ON PURPOSE, inside a passage: not a gap in the selection, so the map keeps
+  // the passage whole and marks the line (owner, 2026-09-29: Met. 1.545 is judged spurious).
+  const OMITTED = { 'Met. 1.545': 'left out of our text as spurious' };
+  function fillWorkMenu() {
+    const works = [...new Set(rows.map((l) => workOf(l.citation)))];
+    $('goto-work').innerHTML = works.map((w) => `<option value="${escapeHTML(w)}">${escapeHTML(workName(w))}</option>`).join('');
+    setGotoHint();
+  }
+  function setGotoHint() {
+    const w = $('goto-work').value;
+    const ex = lines.find((l) => workOf(l.citation) === w);
+    $('goto-line').placeholder = ex ? `e.g. ${ex.citation.split(' ')[1]}` : 'book.line';
+  }
+  $('goto-work').addEventListener('change', setGotoHint);
+
+  // Show a line in Practice, whatever the student was doing. Its passage is chosen (unless All passages
+  // is), and its kind ticked if it was not: the student asked for THIS line. Returns what changed.
+  function goTo(cit) {
+    const l = byCitation[cit];
+    if (!l) return '';
+    let note = '';
+    if (!S.levels.includes(l.level)) {
+      S.levels = [...S.levels, l.level].sort((a, b) => a - b);
+      setKinds(S.levels);
+      note = `“${KIND_NAMES[l.level - 1]}” is ticked now, so this line can show.`;
+    }
+    if ($('passage').value && $('passage').value !== l.passage) $('passage').value = l.passage;
+    S.citation = cit;
+    if (S.mode !== 'practice') setMode('practice'); else rebuildPool(cit);
+    return note;
+  }
+
+  // "54–89, 165–197": the stretches of one book that are in the app
+  function ranges(nums) {
+    const out = [];
+    nums.forEach((n) => {
+      const r = out[out.length - 1];
+      if (r && n === r[1] + 1) r[1] = n; else out.push([n, n]);
+    });
+    return out.map(([a, b]) => (a === b ? `${a}` : `${a}–${b}`)).join(', ');
+  }
+  function goButton(cit) {
+    return `<button type="button" class="link" data-go="${escapeHTML(cit)}">${escapeHTML(cit)}</button>`;
+  }
+  function doGoto() {
+    let text = $('goto-line').value.trim();
+    let w = $('goto-work').value;
+    // someone who types the abbreviation anyway ("aen 4.620") is taken at their word
+    const typed = text.match(/^([a-z]+)\.?\s*/i);
+    if (typed) {
+      const t = typed[1].toLowerCase();
+      const hit = [...$('goto-work').options].find((o) => o.value.toLowerCase().startsWith(t) || o.text.toLowerCase().startsWith(t));
+      if (hit) { w = hit.value; $('goto-work').value = w; }
+      text = text.slice(typed[0].length);
+    }
+    const m = text.match(/^(\d+)\s*[.,:;/ ]\s*(\d+)$/);
+    const msg = $('goto-msg');
+    if (!m) { msg.innerHTML = 'Type the book and the line, like <b>4.620</b>.'; return; }
+    const book = Number(m[1]), n = Number(m[2]);
+    const cit = `${w} ${book}.${n}`;
+    const row = rows.find((l) => l.citation === cit);
+    if (row && byCitation[cit]) {
+      const note = goTo(cit);
+      $('goto-line').value = '';
+      $('goto-msg').innerHTML = note;
+      return;
+    }
+    if (row) { msg.innerHTML = `${escapeHTML(cit)} is a half-line Vergil never finished, so there is nothing to scan.`; return; }
+    if (OMITTED[cit]) { msg.innerHTML = `${escapeHTML(cit)} is ${OMITTED[cit]}.`; return; }
+    const inBook = rows.filter((l) => workOf(l.citation) === w && bookLine(l.citation)[0] === book);
+    if (!inBook.length) {
+      const books = [...new Set(rows.filter((l) => workOf(l.citation) === w).map((l) => bookLine(l.citation)[0]))].sort((a, b) => a - b);
+      msg.innerHTML = `No lines from ${escapeHTML(workName(w))} ${book} are in the app. Books here: ${books.join(', ')}.`;
+      return;
+    }
+    const nums = inBook.map((l) => bookLine(l.citation)[1])
+      .concat(Object.keys(OMITTED).filter((c) => workOf(c) === w && bookLine(c)[0] === book).map((c) => bookLine(c)[1]))
+      .sort((a, b) => a - b);
+    const nearest = inBook.filter((l) => byCitation[l.citation])
+      .reduce((a, b) => (Math.abs(bookLine(b.citation)[1] - n) < Math.abs(bookLine(a.citation)[1] - n) ? b : a));
+    msg.innerHTML = `${escapeHTML(cit)} isn’t in the app. ${escapeHTML(workName(w))} ${book} here: ${ranges(nums)}. Nearest: ${goButton(nearest.citation)}`;
+  }
+  $('goto-go').addEventListener('click', doGoto);
+  $('goto-line').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); doGoto(); } });
+  $('goto-msg').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (b) { const note = goTo(b.dataset.go); $('goto-msg').innerHTML = note; }
+  });
+
+  // ---- the map of lines ---------------------------------------------------------------------------
+  // One square per line, ten to a row, lined up by line number (a row is 180–189), so a student can
+  // find "late in Aeneid 4" by eye. Where our selection skips lines, the stretch breaks, and a gap across
+  // the map says what is missing.
+  function mapHTML() {
+    const cur = current() && current().citation;
+    const passages = [...new Set(rows.map((l) => l.passage))];
+    return passages.map((name) => {
+      const mine = rows.filter((l) => l.passage === name);
+      const scannable = mine.filter((l) => byCitation[l.citation]);
+      Object.keys(OMITTED).forEach((c) => {
+        const [b, n] = bookLine(c);
+        const k = mine.findIndex((l, i) => i > 0 && workOf(l.citation) === workOf(c)
+          && bookLine(l.citation)[0] === b && bookLine(mine[i - 1].citation)[0] === b
+          && bookLine(mine[i - 1].citation)[1] === n - 1 && bookLine(l.citation)[1] === n + 1);
+        if (k > 0) mine.splice(k, 0, { citation: c, omitted: true });
+      });
+      const done = scannable.filter((l) => P.isSolved(l.citation)).length;
+      // stretches of consecutive lines in one book
+      const runs = [];
+      mine.forEach((l) => {
+        const [b, n] = bookLine(l.citation);
+        const r = runs[runs.length - 1];
+        if (r && r.work === workOf(l.citation) && r.book === b && n === r.last + 1) { r.items.push(l); r.last = n; }
+        else runs.push({ work: workOf(l.citation), book: b, first: n, last: n, items: [l] });
+      });
+      let html = `<section class="map-passage"><h3>${escapeHTML(name)} <span class="map-count">${done} of ${scannable.length}</span></h3>`;
+      runs.forEach((r, k) => {
+        const prev = runs[k - 1];
+        if (prev && prev.work === r.work && prev.book === r.book) {
+          const a = prev.last + 1, b = r.first - 1;
+          html += `<div class="map-gap">${a === b ? `line ${a} is` : `lines ${a}–${b} are`} not in our selection</div>`;
+        }
+        if (!prev || prev.book !== r.book || prev.work !== r.work) html += `<div class="map-book">${escapeHTML(workName(r.work))} ${r.book}</div>`;
+        const byN = {};
+        r.items.forEach((l) => { byN[bookLine(l.citation)[1]] = l; });
+        html += '<div class="map-grid">';
+        for (let d = Math.floor(r.first / 10) * 10; d <= r.last; d += 10) {
+          html += `<span class="map-row">${d}</span>`;
+          for (let n = d; n < d + 10; n++) {
+            const l = byN[n];
+            if (!l) { html += '<span class="cell none"></span>'; continue; }
+            if (l.omitted) {
+              html += `<span class="cell omitted" title="${escapeHTML(l.citation)} · ${OMITTED[l.citation]}"></span>`;
+              continue;
+            }
+            if (!byCitation[l.citation]) {
+              html += `<span class="cell half" title="${escapeHTML(l.citation)} · a half-line Vergil never finished"></span>`;
+              continue;
+            }
+            const solved = P.isSolved(l.citation);
+            const label = `${l.citation} · ${solved ? 'figured out' : 'not yet'}`;
+            html += `<button type="button" class="cell ${solved ? 'solved' : 'todo'}${l.citation === cur ? ' current' : ''}" data-go="${escapeHTML(l.citation)}" title="${escapeHTML(label)}" aria-label="${escapeHTML(label)}"></button>`;
+          }
+        }
+        html += '</div>';
+      });
+      return html + '</section>';
+    }).join('');
+  }
+  $('open-map').addEventListener('click', () => {
+    const done = lines.filter((l) => P.isSolved(l.citation)).length;
+    $('map-summary').innerHTML = `You've figured out <b>${done}</b> of ${lines.length} lines.`;
+    $('map-body').innerHTML = mapHTML();
+    $('map').hidden = false;
+    const here = $('map-body').querySelector('.cell.current');
+    if (here) here.scrollIntoView({ block: 'center' });
+  });
+  $('map-body').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (!b) return;
+    $('map').hidden = true;
+    const note = goTo(b.dataset.go);
+    $('goto-msg').innerHTML = note;
+  });
+  $('close-map').addEventListener('click', () => { $('map').hidden = true; });
+  $('map').addEventListener('click', (e) => { if (e.target.id === 'map') $('map').hidden = true; });
 
   function spondaicNote(l) {
     return l.flags.includes('spondaic fifth foot')

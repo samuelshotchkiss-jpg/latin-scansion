@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-29">
+  <link rel="stylesheet" href="styles.css?v=2026-09-29c">
 </head>
 <body>
   <header class="top">
@@ -30,6 +30,7 @@
       </label>
       <fieldset id="kinds" class="kinds">
         <legend><button type="button" id="kinds-toggle" class="kinds-toggle" aria-expanded="false">Lines with<span id="kinds-summary" class="kinds-summary"></span></button></legend>
+        <label class="kinds-all" title="Tick or untick every kind at once"><input type="checkbox" id="kinds-all"> All kinds</label>
         <label title="Nothing but long and short syllables"><input type="checkbox" value="1"> Long and short only</label>
         <label title="qu — nothing else"><input type="checkbox" value="2"> qu</label>
         <label title="h, x or z, or a letter that counts twice (Troia, hic amor) — and maybe qu"><input type="checkbox" value="3"> h, x, z, letters that count twice</label>
@@ -47,6 +48,15 @@
       </label>
     </div>
 
+    <!-- Go to a line: the work from a menu, then book and line typed (nobody has to spell "Met.") -->
+    <div class="goto">
+      <label><span class="goto-word">Go to</span> <select id="goto-work" aria-label="Which text"></select></label>
+      <input type="text" id="goto-line" inputmode="decimal" autocomplete="off" size="9" aria-label="Book and line, like 4.620">
+      <button type="button" id="goto-go">Go</button>
+      <button type="button" id="open-map" title="Every line in the app, and which ones you have figured out" aria-label="Map of lines">▦<span class="wide"> Map of lines</span></button>
+      <span id="goto-msg" class="goto-msg" aria-live="polite"></span>
+    </div>
+
     <article id="lesson" class="lesson" hidden>
       <div class="lesson-head">
         <h2 id="lesson-title"></h2>
@@ -56,7 +66,7 @@
     </article>
 
     <div class="where">
-      <span id="citation" class="citation"></span>
+      <span><span id="citation" class="citation"></span> <span id="solved-flag" class="solved-flag" hidden>✓ Figured out</span></span>
       <span id="position" class="position"></span>
     </div>
 
@@ -124,7 +134,7 @@
   </div>
 
   <div id="progress" class="modal" hidden>
-    <div class="modal-card wide" role="dialog" aria-modal="true" aria-labelledby="progress-title">
+    <div class="modal-card roomy" role="dialog" aria-modal="true" aria-labelledby="progress-title">
       <div class="modal-head">
         <h2 id="progress-title">My progress</h2>
         <button type="button" id="close-progress" class="link">Close</button>
@@ -139,6 +149,22 @@
       <div class="danger">
         <button type="button" id="reset-progress" class="link">Start over (erase my progress)</button>
       </div>
+    </div>
+  </div>
+
+  <!-- The map: every line in the app as a square, solved or not; a click goes there. -->
+  <div id="map" class="modal" hidden>
+    <div class="modal-card roomy" role="dialog" aria-modal="true" aria-labelledby="map-title">
+      <div class="modal-head">
+        <h2 id="map-title">Map of lines</h2>
+        <button type="button" id="close-map" class="link">Close</button>
+      </div>
+      <p id="map-summary"></p>
+      <p class="map-legend"><span class="cell solved"></span> figured out <span class="cell todo"></span> not yet
+        <span class="cell todo current"></span> the line you're on <span class="cell half"></span> a half-line Vergil never finished
+        <span class="cell omitted"></span> a line left out as spurious</p>
+      <p class="note">Each square is one line. Tap any square to go to that line.</p>
+      <div id="map-body" class="map-body"></div>
     </div>
   </div>
 
@@ -171,6 +197,6 @@
 
   <script src="progress.js?v=2026-09-28"></script>
   <script src="rhythm.js?v=2026-09-29"></script>
-  <script src="app.js?v=2026-09-29b"></script>
+  <script src="app.js?v=2026-09-29c"></script>
 </body>
 </html>
