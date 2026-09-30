@@ -57,6 +57,12 @@ reads the second line of an elegiac couplet: two dactyls or spondees and a long 
 diaeresis must be long, like the last. A pentameter's result carries "meter": "pentameter"; a
 hexameter's carries no meter key, so a hexameter answer key is unchanged. Which line of a couplet is
 which is the caller's to say (by its position): some pentameters also scan as hexameters.
+
+THE NEXT LINE (optional). Hypermetry elides a line's last vowel into the NEXT line, so it is possible
+only when that line begins with a vowel or h. `scan(text, cit, hints, next_line="perlegerent ...")`
+says how the next line begins, and hypermetry is then tried only if it can happen. Without it the
+scanner cannot know, and tries hypermetry as before -- which misread Aen. 6.33 `... prōtinus omnia`
+(6.34 `perlegerent`) as hypermetric instead of the synizesis `omnja`.
 """
 from __future__ import annotations
 
@@ -227,7 +233,20 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
     return units
 
 
-def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexameter"):
+def opens_with_vowel(line: str) -> bool:
+    """Can a vowel elide into this line? Its first letter is a vowel or h -- but not an i or u that is a
+    consonant because a vowel follows it (iam, uolat)."""
+    t = "".join(c for c in unicodedata.normalize("NFC", line).lower() if c.isalpha())
+    if not t:
+        return False
+    if t[0] == "h":
+        return True
+    if not is_vowel(t[0]):
+        return False
+    return not (base(t[0]) in "iu" and len(t) > 1 and is_vowel(t[1]))
+
+
+def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexameter", can_elide_on: bool = True):
     units: list[Unit] = []
     for wi, (ws, t, proper) in enumerate(words):
         units.extend(parse_word(t, ws, wi, proper, pick))
@@ -274,7 +293,7 @@ def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexamete
     # hypermetry: a final vowel that elides into the next line (locōrumque)
     # (a hexameter's licence: a pentameter closes its couplet, with nothing after it to elide into)
     tail = [u for u in units if u.word == len(words) - 1]
-    if meter == "hexameter" and tail and tail[-1].kind == "V" and not tail[-1].gone:
+    if meter == "hexameter" and can_elide_on and tail and tail[-1].kind == "V" and not tail[-1].gone:
         if pick(("hypermetry",), [("no", 0, 1), ("elide", 3, 2)]) == "elide":
             tail[-1].gone = "elided"
             flags.add("hypermetry")
@@ -458,9 +477,10 @@ def feet(pattern: str, meter: str = "hexameter") -> list[str]:
 
 
 def scan(text: str, cit: str | None = None, hints: dict | None = None,
-         meter: str = "hexameter") -> dict:
-    """Scan one macronized hexameter, or with meter="pentameter" a pentameter. See the module
-    docstring for the result."""
+         meter: str = "hexameter", next_line: str | None = None) -> dict:
+    """Scan one macronized hexameter, or with meter="pentameter" a pentameter. `next_line`, if given,
+    is the line that follows (THE NEXT LINE in the module docstring). See the module docstring for
+    the result."""
     if meter not in METERS:
         raise ValueError(f"meter must be one of {sorted(METERS)}, not {meter!r}")
     tag = {"meter": meter} if meter != "hexameter" else {}
@@ -485,7 +505,8 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None,
                 return opts[idx][0]
 
             flags: set = set()
-            res = build_line(s, low, words, pick, flags, meter)
+            res = build_line(s, low, words, pick, flags, meter,
+                             next_line is None or opens_with_vowel(next_line))
             if res:
                 solutions.append((penalty[0], res, flags))
             fixed = dict(asg)

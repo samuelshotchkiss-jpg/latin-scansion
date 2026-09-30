@@ -251,19 +251,29 @@
     const l = current();
     if (!l) {
       lineEl.textContent = 'No lines match — tick another kind of line, or choose All passages.';
+      $('beyond-note').hidden = true;
       $('citation').textContent = ''; $('position').textContent = '';
       overlay = null; junctions = [];
       return;
     }
     const chars = [...l.text];
+    // A line the reading stops in the middle of comes whole (reading_ends: where the reading stops);
+    // the rest is grey -- it counts for the meter, but it is not part of the reading.
+    const end = l.reading_ends == null ? chars.length : l.reading_ends;
+    const piece = (a, b) => {
+      const inside = escapeHTML(chars.slice(a, Math.min(b, end)).join(''));
+      const beyond = escapeHTML(chars.slice(Math.max(a, end), b).join(''));
+      return inside + (beyond ? `<span class="beyond">${beyond}</span>` : '');
+    };
     let html = '', at = 0;
     l.nuclei.forEach((nu, i) => {
-      html += escapeHTML(chars.slice(at, nu.start).join(''));
-      html += `<span class="nuc" data-i="${i}" tabindex="0">` +
+      html += piece(at, nu.start);
+      html += `<span class="nuc${nu.start >= end ? ' beyond' : ''}" data-i="${i}" tabindex="0">` +
               `${escapeHTML(chars.slice(nu.start, nu.end).join(''))}<span class="mark"></span></span>`;
       at = nu.end;
     });
-    html += escapeHTML(chars.slice(at).join(''));
+    html += piece(at, chars.length);
+    $('beyond-note').hidden = end >= chars.length;
     lineEl.innerHTML = html + '<span class="line-check" title="You have figured out this line" hidden>✓</span><div class="overlay"></div>';
     overlay = lineEl.querySelector('.overlay');
     junctions = computeJunctions(l);

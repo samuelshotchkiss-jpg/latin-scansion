@@ -24,6 +24,7 @@ An excerpt must therefore start on the first line of a couplet.
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -39,6 +40,17 @@ def read_lines(path: str) -> list[tuple[str, str]]:
         cit, _, text = raw.partition("\t") if "\t" in raw else (str(n), "", raw)
         rows.append((cit.strip(), text))
     return rows
+
+
+def following(rows: list[tuple[str, str]], n: int) -> str | None:
+    """The line after row n, if the file has it: the next row, when its citation is the next number
+    (Met. 8.183 -> Met. 8.184, 12 -> 13). Hypermetry needs it (scansion.py, THE NEXT LINE)."""
+    if n + 1 >= len(rows):
+        return None
+    here, there = re.match(r"^(.*?)(\d+)$", rows[n][0]), re.match(r"^(.*?)(\d+)$", rows[n + 1][0])
+    if here and there and here.group(1) == there.group(1) and int(there.group(2)) == int(here.group(2)) + 1:
+        return rows[n + 1][1]
+    return None
 
 
 def read_hint(path: str | None) -> set:
@@ -75,8 +87,10 @@ def main() -> int:
     a = ap.parse_args()
 
     hints = {"names": read_hint(a.names), "trouble": read_hint(a.trouble)}
-    results = [scansion.scan(text, cit, hints, "pentameter" if a.elegiac and n % 2 else "hexameter")
-               for n, (cit, text) in enumerate(read_lines(a.text))]
+    rows = read_lines(a.text)
+    results = [scansion.scan(text, cit, hints, "pentameter" if a.elegiac and n % 2 else "hexameter",
+                             next_line=following(rows, n))
+               for n, (cit, text) in enumerate(rows)]
     scansion.print_scans(results, report=a.report, level=a.level, greek=a.greek)
     if a.json:
         scansion.write_key(results, a.json)
