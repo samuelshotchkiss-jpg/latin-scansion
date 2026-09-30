@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-28">
+  <link rel="stylesheet" href="styles.css?v=2026-09-29">
 </head>
 <body>
   <header class="top">
@@ -82,11 +82,14 @@
     <p id="fast-hint" class="hint" hidden><span class="wide">Type <kbd>i</kbd> long, <kbd>u</kbd> short, <kbd>o</kbd> elided — each marks the highlighted syllable and moves on. <kbd>←</kbd> <kbd>→</kbd> move, <kbd>Backspace</kbd> goes back, <kbd>Enter</kbd> checks.</span><span class="narrow">Tap ¯ ˘ ‿ to mark the highlighted syllable and move on. Tap a vowel to jump to it.</span></p>
 
     <div class="actions">
-      <button type="button" id="prev" aria-label="Previous line">←<span class="wide"> Previous</span></button>
-      <button type="button" id="clear">Clear</button>
-      <button type="button" id="check" class="primary">Check</button>
-      <button type="button" id="reveal">Show answer</button>
-      <button type="button" id="next" aria-label="Next line"><span class="wide">Next </span>→</button>
+      <button type="button" id="prev" class="nav" aria-label="Previous line">←<span class="wide"> Previous</span></button>
+      <div class="actions-mid">
+        <button type="button" id="clear">Clear</button>
+        <button type="button" id="check" class="primary">Check</button>
+        <button type="button" id="reveal" aria-label="Show answer"><span class="wide">Show answer</span><span class="narrow">Answer</span></button>
+        <button type="button" id="next" aria-label="Next line"><span class="wide">Next </span>→</button>
+      </div>
+      <button type="button" id="next-new" class="nav" aria-label="Next new line" title="Skip to the next line you haven't figured out yet"><span class="wide">Next new </span><span class="narrow">New </span>⇥</button>
     </div>
     </div>
 
@@ -168,6 +171,6 @@
 
   <script src="progress.js?v=2026-09-28"></script>
   <script src="rhythm.js?v=2026-09-29"></script>
-  <script src="app.js?v=2026-09-29"></script>
+  <script src="app.js?v=2026-09-29b"></script>
 </body>
 </html>

@@ -259,6 +259,7 @@
     updatePosition();
     $('prev').disabled = index === 0;
     $('next').disabled = index >= pool.length - 1;
+    $('next-new').disabled = nextNewIndex() < 0;
     if (S.mode === 'tutorial' && stages[S.stage]) S.stagePos[stages[S.stage].id] = l.citation;
     else S.citation = l.citation;
     P.save();
@@ -270,7 +271,20 @@
     const what = S.mode === 'tutorial' ? 'Practice line' : 'Line';
     const mark = current() && P.isSolved(current().citation) ? ' · ✓ figured out' : '';
     $('position').textContent = `${what} ${index + 1} of ${pool.length} · ${solved} solved${mark}`;
+    $('next-new').disabled = nextNewIndex() < 0;
   }
+
+  // Next new: the next line in the pool not yet figured out, wrapping round to the start; -1 when
+  // every other line is done. Next walks every line, solved or not, so a student who did the tutorial
+  // first met its lines again, one after another, in Daedalus (a student, 2026-09-28).
+  function nextNewIndex() {
+    for (let k = 1; k < pool.length; k++) {
+      const j = (index + k) % pool.length;
+      if (!P.isSolved(pool[j].citation)) return j;
+    }
+    return -1;
+  }
+  const inTutorial = (cit) => stages.some((s) => s.lines.includes(cit));
 
   function nucEls() { return [...lineEl.querySelectorAll('.nuc')]; }
 
@@ -618,7 +632,12 @@
       html = '<div><b>Correct!</b>';
       if (result.points) html += ` <span class="gain">+${result.points} points${result.firstTry ? ' — first try!' : ''}</span>`;
       else if (result.helped) html += ' <span class="note">You used Show answer on this line — try it again on your own another time to count it.</span>';
-      else if (result.alreadySolved) html += ' <span class="note">(Already figured out.)</span>';
+      else if (result.alreadySolved) {
+        // in Practice, say so when the line is one the tutorial already had them scan
+        const where = S.mode === 'practice' && inTutorial(l.citation) ? ' — it’s one of the tutorial’s lines' : '';
+        html += ` <span class="note">You’ve already figured this one out${where}, so it earns no new points.` +
+          (nextNewIndex() >= 0 ? ' <b>Next new</b> skips to a line you haven’t done.' : '') + '</span>';
+      }
       html += '</div>' + spondaicNote(l);
     } else {
       const unmarked = l.nuclei.filter((n, i) => !marks[i]).length;
@@ -715,6 +734,7 @@
   $('clear').addEventListener('click', () => { marks = {}; tieOf = {}; edited(); });
   $('prev').addEventListener('click', () => { if (index > 0) { index--; showLine(); } });
   $('next').addEventListener('click', () => { if (index < pool.length - 1) { index++; showLine(); } });
+  $('next-new').addEventListener('click', () => { const j = nextNewIndex(); if (j >= 0) { index = j; showLine(); } });
 
   function spondaicNote(l) {
     return l.flags.includes('spondaic fifth foot')

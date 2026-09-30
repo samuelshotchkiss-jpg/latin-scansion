@@ -122,6 +122,10 @@ main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
 }
 .actions button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .actions button:disabled { opacity: .45; cursor: default; }
+/* Previous and Next new are a matched pair at the two ends of the row; the rest sit between them */
+.actions { justify-content: space-between; align-items: center; }
+.actions-mid { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; flex: 1; }
+.actions button.nav { min-width: 7.5rem; border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
 .feedback { margin-top: 1.25rem; text-align: center; min-height: 1.5em; }
 .feedback .feet { font-family: Tahoma, "Noto Sans", sans-serif; font-size: 1.3rem; letter-spacing: .08em; margin-top: .35rem; }
@@ -286,6 +290,8 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   .actions { flex-wrap: nowrap; gap: .3rem; }
   .actions button { padding: .5rem clamp(.35rem, 2vw, .6rem); font-size: clamp(.8rem, 3.9vw, .92rem); white-space: nowrap; }
   .actions #check { flex: 1; }
+  .actions-mid { flex-wrap: nowrap; gap: .3rem; min-width: 0; }
+  .actions button.nav { min-width: 0; flex: 0 0 auto; }
   .feedback { margin-top: .4rem; }
   .modal { padding: .75rem; }
   .modal-card { padding: 1rem 1.1rem; }
