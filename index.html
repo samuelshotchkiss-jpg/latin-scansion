@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-30">
+  <link rel="stylesheet" href="styles.css?v=2026-09-30b">
 </head>
 <body>
   <header class="top">
@@ -70,11 +70,14 @@
       <span id="position" class="position"></span>
     </div>
 
-    <!-- the line, with the lines before and after it faint above and below (the text's own order) -->
-    <div id="stage-lines" class="stage-lines">
-      <div id="ctx-prev" class="ctx ctx-prev" hidden></div>
-      <div id="line" class="line" lang="la"></div>
-      <div id="ctx-next" class="ctx ctx-next" hidden></div>
+    <!-- the box: the line, with the lines before and after it faded above and below, full size -- a
+         stretch of the text, which scrolls when the student steps to the next line -->
+    <div id="line-box" class="line-box">
+      <div id="stage-lines" class="stage-lines">
+        <div id="ctx-prev" class="ctx ctx-prev" hidden></div>
+        <div id="line" class="line" lang="la"></div>
+        <div id="ctx-next" class="ctx ctx-next" hidden></div>
+      </div>
     </div>
     <p id="line-note" class="line-note" hidden></p>
 
@@ -203,6 +206,6 @@
 
   <script src="progress.js?v=2026-09-28"></script>
   <script src="rhythm.js?v=2026-09-29"></script>
-  <script src="app.js?v=2026-09-30"></script>
+  <script src="app.js?v=2026-09-30b"></script>
 </body>
 </html>

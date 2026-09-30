@@ -264,10 +264,14 @@
     // A line the reading stops in the middle of comes whole (reading_ends: where the reading stops);
     // the rest is grey -- it counts for the meter, but it is not part of the reading.
     const end = l.reading_ends == null ? chars.length : l.reading_ends;
+    // (the space after the reading's last word goes on the far side of the dashed rule)
+    const stop = end < chars.length ? end + (chars[end] === ' ' ? 1 : 0) : end;
+    const RULE = '<span class="reading-end" title="Your reading ends here"></span>';
     const piece = (a, b) => {
       const inside = escapeHTML(chars.slice(a, Math.min(b, end)).join(''));
-      const beyond = escapeHTML(chars.slice(Math.max(a, end), b).join(''));
-      return inside + (beyond ? `<span class="beyond">${beyond}</span>` : '');
+      const gap = escapeHTML(chars.slice(Math.max(a, end), Math.min(b, stop)).join(''));
+      const beyond = escapeHTML(chars.slice(Math.max(a, stop), b).join(''));
+      return inside + (a <= end && end < b ? gap + RULE : gap) + (beyond ? `<span class="beyond">${beyond}</span>` : '');
     };
     let html = '', at = 0;
     l.nuclei.forEach((nu, i) => {
@@ -326,8 +330,8 @@
   function nucEls() { return [...lineEl.querySelectorAll('.nuc')]; }
 
   // ---- the lines around it ----------------------------------------------------------------------------
-  const TAIL_NOTE = 'Your reading stops in the middle of this line. The <span class="beyond">grey words</span> finish it: ' +
-    'they are not part of your reading, but they count for the meter, so scan them too.';
+  const TAIL_NOTE = 'Your reading stops in the middle of this line, at the dashed rule. The <span class="beyond">words in grey italics</span> ' +
+    'finish it: they are not part of your reading, but they count for the meter, so scan them too.';
   const NUMBER = ['no', 'one', 'two', 'three', 'four', 'five'];
   function halfLineNote(l) {
     const whole = l.feet.filter((f) => f.length > 1).length;
@@ -354,10 +358,10 @@
     const solved = P.isSolved(l.citation);
     const go = S.mode !== 'tutorial';
     const title = `${l.citation}${solved ? ' · figured out' : ''}${go ? ' — go to this line' : ''}`;
-    const inner = `<span class="ctx-cit">${escapeHTML(l.citation)}</span><span class="ctx-text" lang="la">${html}</span>` +
+    const inner = `<span class="ctx-text" lang="la">${html}</span>` +
       (solved ? '<span class="ctx-check" aria-label="figured out">✓</span>' : '');
     return go
-      ? `<button type="button" class="ctx-line" data-go="${escapeHTML(l.citation)}" title="${escapeHTML(title)}">${inner}</button>`
+      ? `<button type="button" class="ctx-line" data-go="${escapeHTML(l.citation)}" title="${escapeHTML(title)}" aria-label="${escapeHTML(title)}">${inner}</button>`
       : `<div class="ctx-line" title="${escapeHTML(title)}">${inner}</div>`;
   }
   function showContext(l) {
@@ -384,6 +388,11 @@
     if (!was || was === cit) return;
     const dir = citeStep(was, 1) === cit ? 'slide-up' : citeStep(was, -1) === cit ? 'slide-down' : '';
     if (!dir) return;
+    // one step = the distance from the line above to the line (or from the line to the line below)
+    const other = dir === 'slide-up' ? $('ctx-prev') : lineEl;
+    const step = dir === 'slide-up' ? lineEl.offsetTop - (other.hidden ? 0 : other.offsetTop)
+      : $('ctx-next').hidden ? lineEl.offsetHeight : $('ctx-next').offsetTop - lineEl.offsetTop;
+    box.style.setProperty('--step', `${Math.max(step, 40)}px`);
     void box.offsetWidth;                                  // restart the animation
     box.classList.add(dir);
   }

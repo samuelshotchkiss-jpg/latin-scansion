@@ -53,33 +53,36 @@ main { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
 .line-check.fresh { animation: check-pop .45s ease-out; }
 @keyframes check-pop { 0% { transform: translateY(-50%) scale(0); } 70% { transform: translateY(-50%) scale(1.25); } 100% { transform: translateY(-50%) scale(1); } }
 
-/* the rest of a line the reading stops in the middle of: grey, but scanned */
-.beyond { color: var(--muted); }                    /* colour only: opacity would fade the marks too */
+/* the rest of a line the reading stops in the middle of: grey ITALICS after a dashed rule -- not the
+   faded upright type of the lines before and after, which ARE the reading. Scanned all the same. */
+.beyond { color: var(--muted); font-style: italic; }   /* colour, not opacity: opacity would fade the marks */
+.reading-end {
+  display: inline-block; width: 0; height: 1.05em; margin: 0 .28em 0 .12em; vertical-align: -.15em;
+  border-left: 2px dashed var(--muted);
+}
 .line-note { margin: .2rem 0 .6rem; color: var(--muted); font-size: .85rem; text-align: center; }
 
-/* The lines before and after: smaller, faint and outside the box -- not the grey of a tail, which sits
-   inside the line at full size. The one above shows its END, the one below its BEGINNING: that is
-   where hypermetry happens. */
-.ctx { margin: .35rem 0; }
+/* The lines before and after, inside the box at full size: the same type, upright, faded -- the text
+   going on, where the grey italics of a tail are words outside the reading. On one row each: the line
+   above keeps its END, the line below its BEGINNING, which is where hypermetry happens. */
 .ctx-line {
-  all: unset; box-sizing: border-box; position: relative; display: flex; align-items: baseline; gap: .6rem;
-  width: 100%; padding: .1rem 2.9rem .35rem 1rem; color: var(--muted); opacity: .6; cursor: pointer;
+  all: unset; box-sizing: border-box; position: relative; display: block; width: 100%;
+  padding: 0 2.9rem 0 1rem; color: var(--ink); opacity: .3; cursor: pointer;
+  font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.35rem, 3.6vw, 2.1rem);
+  line-height: 2.1; user-select: none; -webkit-user-select: none;
 }
 div.ctx-line { cursor: default; }
-button.ctx-line:hover, button.ctx-line:focus-visible { opacity: .9; }
-button.ctx-line:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
-.ctx-cit { flex: none; font-size: .75rem; min-width: 5.2rem; }
-.ctx-text {
-  flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
-  font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(.95rem, 2.4vw, 1.25rem);
-}
+button.ctx-line:hover { opacity: .5; }
+button.ctx-line:focus-visible { opacity: .5; outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 6px; }
+.ctx-text { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .ctx-prev .ctx-text { direction: rtl; text-align: left; }           /* a long line keeps its END */
 .ctx-prev .ctx-text > bdi { direction: ltr; unicode-bidi: isolate; }
-.ctx-check { position: absolute; right: .75rem; color: var(--ok); font-weight: 700; }
-.stage-lines.slide-up { animation: slide-up .3s ease-out; }
-.stage-lines.slide-down { animation: slide-down .3s ease-out; }
-@keyframes slide-up { from { transform: translateY(3.2rem); opacity: .35; } to { transform: none; opacity: 1; } }
-@keyframes slide-down { from { transform: translateY(-3.2rem); opacity: .35; } to { transform: none; opacity: 1; } }
+.ctx-check { position: absolute; right: .6rem; top: 50%; transform: translateY(-50%); color: var(--ok); font: 700 1.1rem/1 system-ui, sans-serif; }
+/* the scroll: the whole stretch slides by one line, clipped by the box */
+.stage-lines.slide-up { animation: slide-up .32s ease-out; }
+.stage-lines.slide-down { animation: slide-down .32s ease-out; }
+@keyframes slide-up { from { transform: translateY(var(--step, 3.5rem)); } to { transform: none; } }
+@keyframes slide-down { from { transform: translateY(calc(-1 * var(--step, 3.5rem))); } to { transform: none; } }
 
 /* hypermetry: an elision split between two lines -- trailing and open on the first, unbegun on the next */
 .tie.trail { border-right: none; border-radius: 0 0 0 100% / 0 0 0 100%; }
@@ -120,12 +123,13 @@ button.cell:hover { border-color: var(--accent); }
 .map-legend .cell:first-child { margin-left: 0; }
 
 /* The line. Tahoma first: sans, a capital I with serifs, and full macron coverage incl. ȳ. */
+.line-box {
+  margin: 1.25rem 0 1rem; padding: .5rem 0;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  overflow: hidden;                                  /* the text scrolls inside the box */
+}
 .line {
-  margin: 1.25rem 0 1rem;
-  padding: 2.4rem 2.9rem 1.4rem 1rem;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  padding: 1rem 2.9rem .2rem 1rem;
   font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif;
   font-size: clamp(1.35rem, 3.6vw, 2.1rem);
   line-height: 2.9;
@@ -351,7 +355,9 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   .kinds label { display: none; }
   .kinds.open label { display: flex; clear: left; padding: .25rem 0; }
   .lesson { padding: .75rem .9rem; margin-bottom: .6rem; }
-  .line { margin: .6rem 0 .5rem; padding: 1.9rem 2.2rem 1rem .7rem; }
+  .line-box { margin: .6rem 0 .5rem; padding: .35rem 0; }
+  .line { padding: .8rem 2.2rem .15rem .7rem; }
+  .ctx-line { padding: 0 2.2rem 0 .7rem; }
   .line-check { right: .35rem; width: 1.5rem; height: 1.5rem; font-size: .95rem; line-height: 1.5rem; }
   /* one row: menu, book.line, Go, and the map as an icon */
   .goto { margin-top: .5rem; gap: .35rem; flex-wrap: wrap; }
