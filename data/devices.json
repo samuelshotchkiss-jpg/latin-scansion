@@ -467,6 +467,84 @@
       ]
      ],
      "english": "you too, Icarus, would have had a large part in so great a work, had grief allowed"
+    },
+    {
+     "cite": "Aen. 6.18-19",
+     "latin": [
+      [
+       [
+        "redditus hīs prīmum terrīs ",
+        false
+       ],
+       [
+        "tibi",
+        true
+       ],
+       [
+        ", ",
+        false
+       ],
+       [
+        "Phoebe",
+        true
+       ],
+       [
+        ", sacrāvit",
+        false
+       ]
+      ],
+      [
+       [
+        "rēmigium ālārum",
+        false
+       ]
+      ]
+     ],
+     "english": "returned to these lands first, he dedicated to you, Phoebus, the oarage of his wings"
+    },
+    {
+     "cite": "Met. 4.67-69",
+     "latin": [
+      [
+       [
+        "id vitium nūllī per saecula longa notātum—",
+        false
+       ]
+      ],
+      [
+       [
+        "quid nōn sentit amor?—prīmī ",
+        false
+       ],
+       [
+        "vīdistis",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "amantēs",
+        true
+       ]
+      ],
+      [
+       [
+        "et vōcis ",
+        false
+       ],
+       [
+        "fēcistis",
+        true
+       ],
+       [
+        " iter",
+        false
+       ]
+      ]
+     ],
+     "english": "that flaw, noticed by no one through long ages -- what does love not sense? -- you lovers saw first, and you made it a road for your voices"
     }
    ]
   },
