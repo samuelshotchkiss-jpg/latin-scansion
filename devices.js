@@ -228,14 +228,28 @@
   function newRound() {
     const n = Number($("dv-rows").value);
     const namesToo = $("dv-names").checked;
-    const picked = shuffle(POOL.slice()).slice(0, n);
-    rows = picked.map((d) => ({
+    // The quiz's two collision rules (quiz.py draw): no line of Latin dealt twice, and no
+    // example beside a device it ALSO is -- 4.67-69 is the apostrophe, but its "quid non sentit
+    // amor?" would make a rhetorical question right too, and a right answer must not be marked
+    // wrong. A device whose every example collides is passed over for the next one.
+    const picked = [], used = new Set(), keys = new Set(), barred = new Set();
+    for (const d of shuffle(POOL.slice())) {
+      if (picked.length === n) break;
+      if (barred.has(d.key)) continue;
+      const ex = shuffle(d.examples.slice()).find((e) =>
+        !(e.lines || []).some((l) => used.has(l)) && !(e.also || []).some((k) => keys.has(k)));
+      if (!ex) continue;
+      (ex.lines || []).forEach((l) => used.add(l));
+      (ex.also || []).forEach((k) => barred.add(k));
+      keys.add(d.key);
+      picked.push({ d, ex });
+    }
+    rows = picked.map(({ d }) => ({
       key: d.key, name: d.name, fixed: !namesToo,
       slots: { name: null, definition: null, example: null },
     }));
     cards = [];
-    for (const d of picked) {
-      const ex = d.examples[Math.floor(Math.random() * d.examples.length)];
+    for (const { d, ex } of picked) {
       cards.push({ key: d.key, kind: "definition", text: d.definition });
       cards.push({ key: d.key, kind: "example", example: ex });
       if (namesToo) cards.push({ key: d.key, kind: "name", text: d.name });
