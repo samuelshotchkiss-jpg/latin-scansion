@@ -661,6 +661,156 @@
       ]
      ],
      "english": "let Minos own everything; he does not own the air"
+    },
+    {
+     "cite": "Met. 4.55-56",
+     "latin": [
+      [
+       [
+        "Pȳramus et Thisbē, ",
+        false
+       ],
+       [
+        "iuvenum",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "pulcherrimus",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "alter",
+        true
+       ],
+       [
+        ",",
+        false
+       ]
+      ],
+      [
+       [
+        "altera",
+        true
+       ],
+       [
+        ", quās Oriēns habuit, ",
+        false
+       ],
+       [
+        "praelāta",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "puellīs",
+        true
+       ],
+       [
+        ",",
+        false
+       ]
+      ]
+     ],
+     "english": "Pyramus and Thisbe, he the most handsome of young men, she preferred over all the girls the East held"
+    },
+    {
+     "cite": "Met. 4.64",
+     "latin": [
+      [
+       [
+        "quōque ",
+        false
+       ],
+       [
+        "magis",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "tegitur",
+        true
+       ],
+       [
+        ", ",
+        false
+       ],
+       [
+        "tēctus",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "magis",
+        true
+       ],
+       [
+        " aestuat ignis.",
+        false
+       ]
+      ]
+     ],
+     "english": "and the more it is covered, the more the covered fire burns"
+    },
+    {
+     "cite": "Met. 4.71",
+     "latin": [
+      [
+       [
+        "saepe, ubi cōnstiterant ",
+        false
+       ],
+       [
+        "hinc",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "Thisbē",
+        true
+       ],
+       [
+        ", ",
+        false
+       ],
+       [
+        "Pȳramus",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "illinc",
+        true
+       ],
+       [
+        ",",
+        false
+       ]
+      ]
+     ],
+     "english": "often, when they had taken their places, Thisbe on this side, Pyramus on that"
     }
    ]
   },
@@ -758,6 +908,132 @@
       ]
      ],
      "english": "(the sun's sad face) kept offering ghastly light to the troubled lands"
+    },
+    {
+     "cite": "Met. 4.66",
+     "latin": [
+      [
+       [
+        "pariēs",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "domuī",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "commūnis",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "utrīque",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ]
+     ],
+     "english": "the wall shared by both houses"
+    },
+    {
+     "cite": "Met. 4.69-70",
+     "latin": [
+      [
+       [
+        "tūtaeque",
+        true
+       ],
+       [
+        " per illud",
+        false
+       ]
+      ],
+      [
+       [
+        "murmure",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "blanditiae",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "minimō",
+        true
+       ],
+       [
+        " trānsīre solēbant.",
+        false
+       ]
+      ]
+     ],
+     "english": "and through it their sweet talk used to cross safely, in the smallest whisper"
+    },
+    {
+     "cite": "Met. 4.77",
+     "latin": [
+      [
+       [
+        "quod ",
+        false
+       ],
+       [
+        "datus",
+        true
+       ],
+       [
+        " est verbīs ad ",
+        false
+       ],
+       [
+        "amīcās",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "trānsitus",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "aurīs",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ]
+     ],
+     "english": "that a way across has been given to our words, to friendly ears"
     }
    ]
   },
@@ -898,6 +1174,103 @@
       ]
      ],
      "english": "Ovid: and the father's hands trembled / Vergil: twice the father's hands fell"
+    }
+   ]
+  },
+  {
+   "key": "onomatopoeia",
+   "name": "onomatopoeia",
+   "definition": "A word whose sound imitates its meaning.",
+   "examples": [
+    {
+     "cite": "Met. 4.70",
+     "latin": [
+      [
+       [
+        "murmure",
+        true
+       ],
+       [
+        " blanditiae ",
+        false
+       ],
+       [
+        "minimō",
+        true
+       ],
+       [
+        " trānsīre solēbant.",
+        false
+       ]
+      ]
+     ],
+     "english": "their sweet talk used to cross in the smallest whisper"
+    }
+   ]
+  },
+  {
+   "key": "personification",
+   "name": "personification",
+   "definition": "Giving a thing human feelings or actions.",
+   "examples": [
+    {
+     "cite": "Met. 4.73",
+     "latin": [
+      [
+       [
+        "\"",
+        false
+       ],
+       [
+        "invide",
+        true
+       ],
+       [
+        "\" dīcēbant \"pariēs, quid amantibus ",
+        false
+       ],
+       [
+        "obstās",
+        true
+       ],
+       [
+        "?",
+        false
+       ]
+      ]
+     ],
+     "english": "'jealous wall,' they said, 'why do you stand in the lovers' way?'"
+    }
+   ]
+  },
+  {
+   "key": "litotes",
+   "name": "litotes",
+   "definition": "Understatement by denying the opposite.",
+   "examples": [
+    {
+     "cite": "Met. 4.76",
+     "latin": [
+      [
+       [
+        "nec",
+        true
+       ],
+       [
+        " sumus ",
+        false
+       ],
+       [
+        "ingrātī",
+        true
+       ],
+       [
+        ": tibi nōs dēbēre fatēmur,",
+        false
+       ]
+      ]
+     ],
+     "english": "and we are not ungrateful: we admit that we owe it to you"
     }
    ]
   }
