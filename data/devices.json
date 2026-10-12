@@ -26,7 +26,14 @@
        ]
       ]
      ],
-     "english": "like a bird who has led her tender young out of a high nest into the air"
+     "english": "like a bird who has led her tender young out of a high nest into the air",
+     "lines": [
+      "Met. 8.213",
+      "Met. 8.214"
+     ],
+     "also": [
+      "chiasmus"
+     ]
     },
     {
      "cite": "Met. 8.191-192",
@@ -48,7 +55,12 @@
        ]
       ]
      ],
-     "english": "just so a shepherd's panpipe rises little by little from reeds of unequal length"
+     "english": "just so a shepherd's panpipe rises little by little from reeds of unequal length",
+     "lines": [
+      "Met. 8.191",
+      "Met. 8.192"
+     ],
+     "also": []
     }
    ]
   },
@@ -75,7 +87,13 @@
        ]
       ]
      ],
-     "english": "by an unaccustomed road he swam out to the icy Bears"
+     "english": "by an unaccustomed road he swam out to the icy Bears",
+     "lines": [
+      "Aen. 6.16"
+     ],
+     "also": [
+      "metonymy"
+     ]
     },
     {
      "cite": "Met. 8.228",
@@ -91,7 +109,11 @@
        ]
       ]
      ],
-     "english": "and lacking his oarage"
+     "english": "and lacking his oarage",
+     "lines": [
+      "Met. 8.228"
+     ],
+     "also": []
     },
     {
      "cite": "Aen. 6.19",
@@ -107,7 +129,11 @@
        ]
       ]
      ],
-     "english": "the oarage of his wings"
+     "english": "the oarage of his wings",
+     "lines": [
+      "Aen. 6.19"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 8.208",
@@ -127,7 +153,11 @@
        ]
       ]
      ],
-     "english": "with me as guide, pluck your road!"
+     "english": "with me as guide, pluck your road!",
+     "lines": [
+      "Met. 8.208"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 8.219-220",
@@ -153,7 +183,12 @@
        ]
       ]
      ],
-     "english": "and he believed they were gods, who could pluck the upper air"
+     "english": "and he believed they were gods, who could pluck the upper air",
+     "lines": [
+      "Met. 8.219",
+      "Met. 8.220"
+     ],
+     "also": []
     }
    ]
   },
@@ -212,7 +247,14 @@
        ]
       ]
      ],
-     "english": "but the sky is surely open … let Minos own everything, he does not own the air"
+     "english": "but the sky is surely open … let Minos own everything, he does not own the air",
+     "lines": [
+      "Met. 8.186",
+      "Met. 8.187"
+     ],
+     "also": [
+      "chiasmus"
+     ]
     }
    ]
   },
@@ -239,7 +281,11 @@
        ]
       ]
      ],
-     "english": "not knowing that he was handling his own danger"
+     "english": "not knowing that he was handling his own danger",
+     "lines": [
+      "Met. 8.196"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 8.211-212",
@@ -269,7 +315,12 @@
        ]
       ]
      ],
-     "english": "he gave his son kisses that would never be given again"
+     "english": "he gave his son kisses that would never be given again",
+     "lines": [
+      "Met. 8.211",
+      "Met. 8.212"
+     ],
+     "also": []
     }
    ]
   },
@@ -304,7 +355,13 @@
        ]
       ]
      ],
-     "english": "'where are you? In what place shall I look for you?'"
+     "english": "'where are you? In what place shall I look for you?'",
+     "lines": [
+      "Met. 8.232"
+     ],
+     "also": [
+      "apostrophe"
+     ]
     }
    ]
   },
@@ -335,7 +392,11 @@
        ]
       ]
      ],
-     "english": "but the unhappy father, now no longer a father"
+     "english": "but the unhappy father, now no longer a father",
+     "lines": [
+      "Met. 8.231"
+     ],
+     "also": []
     }
    ]
   },
@@ -364,7 +425,12 @@
        ]
       ]
      ],
-     "english": "'he may block the lands and the waves,' he says"
+     "english": "'he may block the lands and the waves,' he says",
+     "lines": [
+      "Met. 8.185",
+      "Met. 8.186"
+     ],
+     "also": []
     },
     {
      "cite": "Aen. 6.15",
@@ -380,7 +446,13 @@
        ]
       ]
      ],
-     "english": "on swift feathers"
+     "english": "on swift feathers",
+     "lines": [
+      "Aen. 6.15"
+     ],
+     "also": [
+      "alliteration"
+     ]
     }
    ]
   },
@@ -413,7 +485,12 @@
        ]
       ]
      ],
-     "english": "after the last hand was laid on the work"
+     "english": "after the last hand was laid on the work",
+     "lines": [
+      "Met. 8.200",
+      "Met. 8.201"
+     ],
+     "also": []
     },
     {
      "cite": "Aen. 6.26",
@@ -429,7 +506,35 @@
        ]
       ]
      ],
-     "english": "the reminders of unspeakable Venus"
+     "english": "the reminders of unspeakable Venus",
+     "lines": [
+      "Aen. 6.26"
+     ],
+     "also": [
+      "ecphrasis"
+     ]
+    },
+    {
+     "cite": "Aen. 6.16",
+     "latin": [
+      [
+       [
+        "īnsuētum per iter gelidās ēnāvit ad ",
+        false
+       ],
+       [
+        "Arctōs",
+        true
+       ]
+      ]
+     ],
+     "english": "by an unaccustomed road he swam out to the icy Bears",
+     "lines": [
+      "Aen. 6.16"
+     ],
+     "also": [
+      "metaphor"
+     ]
     }
    ]
   },
@@ -466,7 +571,40 @@
        ]
       ]
      ],
-     "english": "you too, Icarus, would have had a large part in so great a work, had grief allowed"
+     "english": "you too, Icarus, would have had a large part in so great a work, had grief allowed",
+     "lines": [
+      "Aen. 6.30",
+      "Aen. 6.31"
+     ],
+     "also": [
+      "ecphrasis"
+     ]
+    },
+    {
+     "cite": "Met. 8.232",
+     "latin": [
+      [
+       [
+        "'",
+        false
+       ],
+       [
+        "Īcare",
+        true
+       ],
+       [
+        ",' dīxit 'ubi es? quā tē regiōne requīram?'",
+        false
+       ]
+      ]
+     ],
+     "english": "'Icarus,' he said, 'where are you? In what place shall I look for you?'",
+     "lines": [
+      "Met. 8.232"
+     ],
+     "also": [
+      "rhetorical_question"
+     ]
     },
     {
      "cite": "Aen. 6.18-19",
@@ -500,7 +638,14 @@
        ]
       ]
      ],
-     "english": "returned to these lands first, he dedicated to you, Phoebus, the oarage of his wings"
+     "english": "returned to these lands first, he dedicated to you, Phoebus, the oarage of his wings",
+     "lines": [
+      "Aen. 6.18",
+      "Aen. 6.19"
+     ],
+     "also": [
+      "metaphor"
+     ]
     },
     {
      "cite": "Met. 4.67-69",
@@ -544,7 +689,15 @@
        ]
       ]
      ],
-     "english": "that flaw, noticed by no one through long ages -- what does love not sense? -- you lovers saw first, and you made it a road for your voices"
+     "english": "that flaw, noticed by no one through long ages -- what does love not sense? -- you lovers saw first, and you made it a road for your voices",
+     "lines": [
+      "Met. 4.67",
+      "Met. 4.68",
+      "Met. 4.69"
+     ],
+     "also": [
+      "rhetorical_question"
+     ]
     }
    ]
   },
@@ -583,7 +736,12 @@
        ]
       ]
      ],
-     "english": "on the doors, the death of Androgeos … twice he had tried to shape the fall in gold"
+     "english": "on the doors, the death of Androgeos … twice he had tried to shape the fall in gold",
+     "lines": [
+      "Aen. 6.20",
+      "Aen. 6.32"
+     ],
+     "also": []
     }
    ]
   },
@@ -612,7 +770,12 @@
        ]
       ]
      ],
-     "english": "hating Crete and his long exile"
+     "english": "hating Crete and his long exile",
+     "lines": [
+      "Met. 8.183",
+      "Met. 8.184"
+     ],
+     "also": []
     },
     {
      "cite": "Georg. 2.192",
@@ -632,7 +795,11 @@
        ]
       ]
      ],
-     "english": "we pour offerings from bowls and gold"
+     "english": "we pour offerings from bowls and gold",
+     "lines": [
+      "Georg. 2.192"
+     ],
+     "also": []
     }
    ]
   },
@@ -663,7 +830,11 @@
        ]
       ]
      ],
-     "english": "he spoke, and sends his mind off into unknown arts"
+     "english": "he spoke, and sends his mind off into unknown arts",
+     "lines": [
+      "Met. 8.188"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 8.209",
@@ -691,7 +862,11 @@
        ]
       ]
      ],
-     "english": "he passes on (the rules of flying) and fits the unknown wings to his shoulders"
+     "english": "he passes on (the rules of flying) and fits the unknown wings to his shoulders",
+     "lines": [
+      "Met. 8.209"
+     ],
+     "also": []
     }
    ]
   },
@@ -738,7 +913,13 @@
        ]
       ]
      ],
-     "english": "let Minos own everything; he does not own the air"
+     "english": "let Minos own everything; he does not own the air",
+     "lines": [
+      "Met. 8.187"
+     ],
+     "also": [
+      "alliteration"
+     ]
     },
     {
      "cite": "Met. 4.55-56",
@@ -800,7 +981,12 @@
        ]
       ]
      ],
-     "english": "Pyramus and Thisbe, he the most handsome of young men, she preferred over all the girls the East held"
+     "english": "Pyramus and Thisbe, he the most handsome of young men, she preferred over all the girls the East held",
+     "lines": [
+      "Met. 4.55",
+      "Met. 4.56"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 4.64",
@@ -844,7 +1030,13 @@
        ]
       ]
      ],
-     "english": "and the more it is covered, the more the covered fire burns"
+     "english": "and the more it is covered, the more the covered fire burns",
+     "lines": [
+      "Met. 4.64"
+     ],
+     "also": [
+      "metaphor"
+     ]
     },
     {
      "cite": "Met. 4.71",
@@ -888,7 +1080,62 @@
        ]
       ]
      ],
-     "english": "often, when they had taken their places, Thisbe on this side, Pyramus on that"
+     "english": "often, when they had taken their places, Thisbe on this side, Pyramus on that",
+     "lines": [
+      "Met. 4.71"
+     ],
+     "also": [
+      "antithesis"
+     ]
+    },
+    {
+     "cite": "Met. 4.57-58",
+     "latin": [
+      [
+       [
+        "ubi dīcitur ",
+        false
+       ],
+       [
+        "altam",
+        true
+       ]
+      ],
+      [
+       [
+        "coctilibus",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "mūrīs",
+        true
+       ],
+       [
+        " cīnxisse Semīramis ",
+        false
+       ],
+       [
+        "urbem",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ]
+     ],
+     "english": "where Semiramis is said to have ringed her high city with walls of baked brick",
+     "lines": [
+      "Met. 4.57",
+      "Met. 4.58"
+     ],
+     "also": [
+      "hyperbaton"
+     ]
     }
    ]
   },
@@ -949,7 +1196,15 @@
        ]
       ]
      ],
-     "english": "and his mouth, shouting his father's name, is taken in by the blue water"
+     "english": "and his mouth, shouting his father's name, is taken in by the blue water",
+     "lines": [
+      "Met. 8.229",
+      "Met. 8.230"
+     ],
+     "also": [
+      "onomatopoeia",
+      "synecdoche"
+     ]
     },
     {
      "cite": "Met. 15.786",
@@ -985,7 +1240,13 @@
        ]
       ]
      ],
-     "english": "(the sun's sad face) kept offering ghastly light to the troubled lands"
+     "english": "(the sun's sad face) kept offering ghastly light to the troubled lands",
+     "lines": [
+      "Met. 15.786"
+     ],
+     "also": [
+      "alliteration"
+     ]
     },
     {
      "cite": "Met. 4.66",
@@ -1025,7 +1286,11 @@
        ]
       ]
      ],
-     "english": "the wall shared by both houses"
+     "english": "the wall shared by both houses",
+     "lines": [
+      "Met. 4.66"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 4.69-70",
@@ -1067,7 +1332,15 @@
        ]
       ]
      ],
-     "english": "and through it their sweet talk used to cross safely, in the smallest whisper"
+     "english": "and through it their sweet talk used to cross safely, in the smallest whisper",
+     "lines": [
+      "Met. 4.69",
+      "Met. 4.70"
+     ],
+     "also": [
+      "onomatopoeia",
+      "alliteration"
+     ]
     },
     {
      "cite": "Met. 4.77",
@@ -1111,7 +1384,11 @@
        ]
       ]
      ],
-     "english": "that a way across has been given to our words, to friendly ears"
+     "english": "that a way across has been given to our words, to friendly ears",
+     "lines": [
+      "Met. 4.77"
+     ],
+     "also": []
     }
    ]
   },
@@ -1146,7 +1423,11 @@
        ]
       ]
      ],
-     "english": "is taken in by the water, which took its name from him"
+     "english": "is taken in by the water, which took its name from him",
+     "lines": [
+      "Met. 8.230"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 8.235",
@@ -1174,7 +1455,11 @@
        ]
       ]
      ],
-     "english": "he buried him, and the land is called by the name of the boy buried there"
+     "english": "he buried him, and the land is called by the name of the boy buried there",
+     "lines": [
+      "Met. 8.235"
+     ],
+     "also": []
     }
    ]
   },
@@ -1251,7 +1536,15 @@
        ]
       ]
      ],
-     "english": "Ovid: and the father's hands trembled / Vergil: twice the father's hands fell"
+     "english": "Ovid: and the father's hands trembled / Vergil: twice the father's hands fell",
+     "lines": [
+      "Aen. 6.33",
+      "Met. 8.211"
+     ],
+     "also": [
+      "onomatopoeia",
+      "ecphrasis"
+     ]
     }
    ]
   },
@@ -1282,7 +1575,13 @@
        ]
       ]
      ],
-     "english": "their sweet talk used to cross in the smallest whisper"
+     "english": "their sweet talk used to cross in the smallest whisper",
+     "lines": [
+      "Met. 4.70"
+     ],
+     "also": [
+      "alliteration"
+     ]
     }
    ]
   },
@@ -1317,7 +1616,14 @@
        ]
       ]
      ],
-     "english": "'jealous wall,' they said, 'why do you stand in the lovers' way?'"
+     "english": "'jealous wall,' they said, 'why do you stand in the lovers' way?'",
+     "lines": [
+      "Met. 4.73"
+     ],
+     "also": [
+      "apostrophe",
+      "rhetorical_question"
+     ]
     }
    ]
   },
@@ -1348,7 +1654,271 @@
        ]
       ]
      ],
-     "english": "and we are not ungrateful: we admit that we owe it to you"
+     "english": "and we are not ungrateful: we admit that we owe it to you",
+     "lines": [
+      "Met. 4.76"
+     ],
+     "also": [
+      "personification",
+      "apostrophe"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "antithesis",
+   "name": "antithesis",
+   "definition": "Opposite ideas set against each other in matching form.",
+   "examples": [
+    {
+     "cite": "Met. 4.91-92",
+     "latin": [
+      [
+       [
+        "et ",
+        false
+       ],
+       [
+        "lūx",
+        true
+       ],
+       [
+        ", tardē discēdere vīsa,",
+        false
+       ]
+      ],
+      [
+       [
+        "praecipitātur",
+        true
+       ],
+       [
+        " aquīs, et aquīs ",
+        false
+       ],
+       [
+        "nox",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "exit",
+        true
+       ],
+       [
+        " ab īsdem.",
+        false
+       ]
+      ]
+     ],
+     "english": "and the daylight, which seemed slow to leave, plunges into the waters, and from those same waters night comes out",
+     "lines": [
+      "Met. 4.91",
+      "Met. 4.92"
+     ],
+     "also": [
+      "chiasmus"
+     ]
+    },
+    {
+     "cite": "Met. 8.185-186",
+     "latin": [
+      [
+       [
+        "'",
+        false
+       ],
+       [
+        "terrās",
+        true
+       ],
+       [
+        " licet' inquit 'et ",
+        false
+       ],
+       [
+        "undās",
+        true
+       ]
+      ],
+      [
+       [
+        "obstruat: at ",
+        false
+       ],
+       [
+        "caelum",
+        true
+       ],
+       [
+        " certē patet'",
+        false
+       ]
+      ]
+     ],
+     "english": "'he may block the lands and the waves,' he says, 'but the sky, surely, is open'",
+     "lines": [
+      "Met. 8.185",
+      "Met. 8.186"
+     ],
+     "also": [
+      "synecdoche",
+      "alliteration"
+     ]
+    },
+    {
+     "cite": "Met. 8.204-205",
+     "latin": [
+      [
+       [
+        "nē, sī ",
+        false
+       ],
+       [
+        "dēmissior",
+        true
+       ],
+       [
+        " ībis,",
+        false
+       ]
+      ],
+      [
+       [
+        "unda",
+        true
+       ],
+       [
+        " gravet pennās, sī ",
+        false
+       ],
+       [
+        "celsior",
+        true
+       ],
+       [
+        ", ",
+        false
+       ],
+       [
+        "ignis",
+        true
+       ],
+       [
+        " adūrat:",
+        false
+       ]
+      ]
+     ],
+     "english": "so that, if you fly lower, the water does not weigh down your feathers; if higher, the fire does not scorch them",
+     "lines": [
+      "Met. 8.204",
+      "Met. 8.205"
+     ],
+     "also": []
+    }
+   ]
+  },
+  {
+   "key": "transferred_epithet",
+   "name": "transferred epithet",
+   "definition": "A describing word that agrees with one noun but describes another.",
+   "examples": [
+    {
+     "cite": "Met. 4.100",
+     "latin": [
+      [
+       [
+        "vīdit et obscūrum ",
+        false
+       ],
+       [
+        "timidō",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "pede",
+        true
+       ],
+       [
+        " fūgit in antrum,",
+        false
+       ]
+      ]
+     ],
+     "english": "she saw (the lioness) and fled on frightened foot into a dark cave",
+     "lines": [
+      "Met. 4.100"
+     ],
+     "also": []
+    },
+    {
+     "cite": "Aen. 6.30",
+     "latin": [
+      [
+       [
+        "caeca",
+        true
+       ],
+       [
+        " regēns fīlō ",
+        false
+       ],
+       [
+        "vestīgia",
+        true
+       ],
+       [
+        ".",
+        false
+       ]
+      ]
+     ],
+     "english": "guiding blind footsteps with a thread",
+     "lines": [
+      "Aen. 6.30"
+     ],
+     "also": [
+      "hyperbaton",
+      "ecphrasis"
+     ]
+    },
+    {
+     "cite": "Met. 8.223",
+     "latin": [
+      [
+       [
+        "cum puer ",
+        false
+       ],
+       [
+        "audācī",
+        true
+       ],
+       [
+        " coepit gaudēre ",
+        false
+       ],
+       [
+        "volātū",
+        true
+       ]
+      ]
+     ],
+     "english": "when the boy began to delight in daring flight",
+     "lines": [
+      "Met. 8.223"
+     ],
+     "also": [
+      "hyperbaton"
+     ]
     }
    ]
   }
