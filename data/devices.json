@@ -741,7 +741,9 @@
       "Aen. 6.20",
       "Aen. 6.32"
      ],
-     "also": []
+     "also": [
+      "anaphora"
+     ]
     }
    ]
   },
@@ -1582,6 +1584,36 @@
      "also": [
       "alliteration"
      ]
+    },
+    {
+     "cite": "Met. 4.123",
+     "latin": [
+      [
+       [
+        "scinditur",
+        true
+       ],
+       [
+        " et tenuī ",
+        false
+       ],
+       [
+        "strīdente",
+        true
+       ],
+       [
+        " forāmine longās",
+        false
+       ]
+      ]
+     ],
+     "english": "(the pipe) splits, and through a narrow hissing hole (shoots out) long (jets)",
+     "lines": [
+      "Met. 4.123"
+     ],
+     "also": [
+      "simile"
+     ]
     }
    ]
   },
@@ -1661,6 +1693,36 @@
      "also": [
       "personification",
       "apostrophe"
+     ]
+    },
+    {
+     "cite": "Met. 4.122",
+     "latin": [
+      [
+       [
+        "nōn",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "aliter",
+        true
+       ],
+       [
+        " quam cum vitiātō fistula plumbō",
+        false
+       ]
+      ]
+     ],
+     "english": "not otherwise than when a pipe, where the lead is flawed …",
+     "lines": [
+      "Met. 4.122"
+     ],
+     "also": [
+      "simile"
      ]
     }
    ]
@@ -1919,6 +1981,181 @@
      "also": [
       "hyperbaton"
      ]
+    }
+   ]
+  },
+  {
+   "key": "anaphora",
+   "name": "anaphora",
+   "definition": "The same word repeated at the start of phrases or lines, one after another.",
+   "examples": [
+    {
+     "cite": "Met. 4.117",
+     "latin": [
+      [
+       [
+        "utque ",
+        false
+       ],
+       [
+        "dedit",
+        true
+       ],
+       [
+        " nōtae lacrimās, ",
+        false
+       ],
+       [
+        "dedit",
+        true
+       ],
+       [
+        " ōscula vestī,",
+        false
+       ]
+      ]
+     ],
+     "english": "and when he had given tears to the cloak he knew, he gave it kisses",
+     "lines": [
+      "Met. 4.117"
+     ],
+     "also": [
+      "chiasmus"
+     ]
+    },
+    {
+     "cite": "Met. 8.231-233",
+     "latin": [
+      [
+       [
+        "'",
+        false
+       ],
+       [
+        "Īcare",
+        true
+       ],
+       [
+        ",' dīxit, 'Īcare,' dīxit … 'Īcare' dīcēbat",
+        false
+       ]
+      ]
+     ],
+     "english": "'Icarus,' he said, 'Icarus,' he said ... 'Icarus,' he kept saying",
+     "lines": [
+      "Met. 8.231",
+      "Met. 8.232",
+      "Met. 8.233"
+     ],
+     "also": [
+      "apostrophe"
+     ]
+    },
+    {
+     "cite": "Aen. 6.24-27",
+     "latin": [
+      [
+       [
+        "hīc",
+        true
+       ],
+       [
+        " crūdēlis amor taurī …",
+        false
+       ]
+      ],
+      [
+       [
+        "hīc",
+        true
+       ],
+       [
+        " labor ille domūs et inextrīcābilis error;",
+        false
+       ]
+      ]
+     ],
+     "english": "here the cruel love for the bull ... here that labour of the house, the maze that cannot be untangled",
+     "lines": [
+      "Aen. 6.24",
+      "Aen. 6.25",
+      "Aen. 6.26",
+      "Aen. 6.27"
+     ],
+     "also": [
+      "ecphrasis"
+     ]
+    },
+    {
+     "cite": "Aen. 6.32-33",
+     "latin": [
+      [
+       [
+        "bis",
+        true
+       ],
+       [
+        " cōnātus erat cāsūs effingere in aurō,",
+        false
+       ]
+      ],
+      [
+       [
+        "bis",
+        true
+       ],
+       [
+        " patriae cecidēre manūs.",
+        false
+       ]
+      ]
+     ],
+     "english": "twice he had tried to shape the fall in gold, twice the father's hands fell",
+     "lines": [
+      "Aen. 6.32",
+      "Aen. 6.33"
+     ],
+     "also": [
+      "ecphrasis"
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hyperbole",
+   "name": "hyperbole",
+   "definition": "Deliberate exaggeration for effect.",
+   "examples": [
+    {
+     "cite": "Met. 4.140-141",
+     "latin": [
+      [
+       [
+        "vulnera ",
+        false
+       ],
+       [
+        "supplēvit",
+        true
+       ],
+       [
+        " lacrimīs flētumque cruōrī",
+        false
+       ]
+      ],
+      [
+       [
+        "miscuit",
+        false
+       ]
+      ]
+     ],
+     "english": "she filled up his wounds with tears, and mixed her weeping with his blood",
+     "lines": [
+      "Met. 4.140",
+      "Met. 4.141"
+     ],
+     "also": []
     }
    ]
   }
