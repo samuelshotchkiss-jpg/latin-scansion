@@ -5,6 +5,7 @@
     python scansion/scan.py lines.tsv --report             # only the lines that need a human
     python scansion/scan.py lines.tsv --level 1            # only the lines at one level
     python scansion/scan.py lines.tsv --greek              # the words flagged as Greek-looking
+    python scansion/scan.py lines.tsv --syllables          # each line divided: fis-tu-la-dis-pa-ri-bus...
     python scansion/scan.py lines.tsv --json key.json      # write the answer key the app reads
     python scansion/scan.py lines.tsv --names names.txt --trouble trouble.txt
     python scansion/scan.py couplets.tsv --elegiac        # hexameter, pentameter, hexameter...
@@ -79,6 +80,7 @@ def main() -> int:
     ap.add_argument("--report", action="store_true", help="print only lines a human should look at")
     ap.add_argument("--level", type=int, choices=range(1, 6), help="print only the lines at this level")
     ap.add_argument("--greek", action="store_true", help="list the words flagged for Greekiness")
+    ap.add_argument("--syllables", action="store_true", help="print each line divided into syllables")
     ap.add_argument("--json", help="write the answer key here")
     ap.add_argument("--names", help="proper nouns the text does not capitalize")
     ap.add_argument("--trouble", help="names whose vowel lengths were hard to settle")
@@ -91,7 +93,7 @@ def main() -> int:
     results = [scansion.scan(text, cit, hints, "pentameter" if a.elegiac and n % 2 else "hexameter",
                              next_line=following(rows, n))
                for n, (cit, text) in enumerate(rows)]
-    scansion.print_scans(results, report=a.report, level=a.level, greek=a.greek)
+    scansion.print_scans(results, report=a.report, level=a.level, greek=a.greek, syllables=a.syllables)
     if a.json:
         scansion.write_key(results, a.json)
         print(f"wrote {a.json}")

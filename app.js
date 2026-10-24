@@ -20,6 +20,7 @@
 
   const $ = (id) => document.getElementById(id);
   const lineEl = $('line');
+  const zoomEl = $('zoom');   // the zoom-in: a tapped syllable, divided (see the end of the file)
 
   let lines = [];          // every scannable line, in reading order
   let rows = [];           // every line of every passage, scannable or not, in order
@@ -252,7 +253,7 @@
     marks = {}; tieOf = {}; checked = false; revealed = false; helped = false;
     stopRhythm();
     cursor = fastOn() ? 0 : null;
-    $('feedback').innerHTML = ''; $('reason').innerHTML = '';
+    $('feedback').innerHTML = ''; closeZoom();
     const l = current();
     if (!l) {
       lineEl.textContent = 'No lines match — tick another kind of line, or choose All passages.';
@@ -566,7 +567,7 @@
     stopRhythm();
     if (checked || revealed) {
       checked = false; revealed = false;
-      $('feedback').innerHTML = ''; $('reason').innerHTML = '';
+      $('feedback').innerHTML = ''; closeZoom();
     }
     render();
   }
@@ -850,7 +851,7 @@
       html = `${right} of ${total} right.`;
       if (unmarked) html += ` ${unmarked} syllable${unmarked === 1 ? ' has' : 's have'} no mark.`;
       if (shape && !shape.complete) html += ` <span class="note">Your marks don’t divide into ${l.meter === 'half-line' ? 'feet' : 'six feet'} yet — see where the dividers stop.</span>`;
-      html += ' <span class="note">Tap a mark to see why.</span>';
+      html += ' <span class="note">Tap any syllable to see why.</span>';
     }
     let badges = result.badges;
     if (correct && S.mode === 'tutorial') {
@@ -869,7 +870,7 @@
     $('feedback').innerHTML = html;
     const nextStage = $('next-stage');
     if (nextStage) nextStage.addEventListener('click', () => openStage(S.stage + 1));
-    $('reason').innerHTML = '';
+    closeZoom();
     updatePosition();
     updatePoints();
     if (result.points) {
@@ -936,9 +937,9 @@
     P.recordReveal(l);
     nucEls().forEach((el) => el.classList.remove('ok', 'bad'));
     render();
-    $('feedback').innerHTML = spondaicNote(l) + '<div class="note">Tap a mark to see why.</div>' + rhythmControls();
+    $('feedback').innerHTML = spondaicNote(l) + '<div class="note">Tap any syllable to see why.</div>' + rhythmControls();
     wireRhythm();
-    $('reason').innerHTML = '';
+    closeZoom();
   });
 
   $('clear').addEventListener('click', () => { marks = {}; tieOf = {}; edited(); });
@@ -1181,43 +1182,295 @@
     setMode('tutorial');
   });
 
-  // ---- reasons, in the student's words --------------------------------------------------------------
+  // ---- the zoom-in: why a syllable is long, short or elided -----------------------------------------
+  // After Check or Show answer, a tap on a syllable opens a card under it: that syllable and its
+  // neighbours, enlarged, divided before the student's eyes. The words close up into one big word (the
+  // tutorial's own method); the consonants between this vowel and the next lift out, and drop into the
+  // syllable they belong to -- a mute + liquid tied by a swoosh and pushed together into the next one;
+  // then what decides the mark lights up: the long vowel, the consonant that ends the syllable, the end
+  // of the line, the vowel an elision runs into. The division is the scanner's (`syllable`, `doubled`,
+  // `silent` in the key), never worked out here.
+  const STEPS = [['is-word', 450], ['is-split', 1300], ['is-why', 2150], ['is-mark', 2700]];
+  const PAIRED = ['muta cum liquida, short', 'muta cum liquida at word start', 'f + liquid at word start',
+    'word-initial cluster ignored'];
+  const CLOSED = ['two consonants', 'muta cum liquida, long', 'word-initial cluster makes position',
+    'lengthened syllable'];
+  let zoomAt = null, zoomTimers = [];
+
   function showReason(i) {
     const l = current(); if (!l || !(checked || revealed)) return;
+    zoomTimers.forEach(clearTimeout); zoomTimers = [];
+    zoomAt = i;
     const n = l.nuclei[i];
-    const want = expected(n);
-    const got = marks[i];
-    let html = `<b>${escapeHTML(n.text)}</b> is <b>${WORD[want]}</b>. ${escapeHTML(reason(n))}`;
-    if (checked && got !== want) html += ` <span class="note">(You marked it ${got ? WORD[got] : 'nothing'}.)</span>`;
-    $('reason').innerHTML = html;
+    const want = expected(n), got = marks[i];
+    const z = zoomStrip(l, i);
+    const [tag, why] = zoomWhy(l, n, z);
+    // the syllable, as it sounds (dīxit: dīc), or the vowel an elision takes (with its -m)
+    const said = z && n.syllable ? z.said : n.text + (z && z.m ? 'm' : '');
+    let head = n.mark === 'merged' ? `<b class="la">${escapeHTML(said)}</b> <b>runs into the next vowel</b>`
+      : `<b class="la">${escapeHTML(said)}</b> is <b>${WORD[want]}</b>`;
+    if (checked && got !== want) head += ` <span class="note">— you marked it ${got ? WORD[got] : 'nothing'}</span>`;
+    zoomEl.innerHTML =
+      `<div class="zoom-head"><span>${head}</span><span class="zoom-buttons">` +
+      `<button type="button" class="zoom-again" title="Divide it again" aria-label="Divide it again">↻</button>` +
+      `<button type="button" class="zoom-close" title="Close" aria-label="Close">×</button></span></div>` +
+      (z ? z.html : '') +
+      `<p class="zoom-why" aria-live="polite"><span class="zoom-tag">${tag}</span> ${why}</p>`;
+    zoomEl.hidden = false;
+    fitZoom();
+    placeZoom();
+    playZoom();
   }
 
-  function reason(n) {
-    const f = n.followed_by || '';
+  function closeZoom() {
+    zoomTimers.forEach(clearTimeout); zoomTimers = [];
+    zoomAt = null;
+    zoomEl.hidden = true;
+    zoomEl.innerHTML = '';
+  }
+
+  function playZoom() {
+    zoomTimers.forEach(clearTimeout); zoomTimers = [];
+    const all = STEPS.map(([c]) => c);
+    zoomEl.classList.remove(...all);
+    const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (still) { zoomEl.classList.add(...all); return; }
+    void zoomEl.offsetWidth;                         // start from the line as it is written
+    STEPS.forEach(([c, t]) => zoomTimers.push(setTimeout(() => zoomEl.classList.add(c), t)));
+  }
+
+  // The letters shrink until the widest moment (the words apart, or the syllables apart) fits the card.
+  function fitZoom() {
+    const zs = zoomEl.querySelector('.zs'), row = zoomEl.querySelector('.zs-row');
+    if (!zs) return;
+    zs.style.fontSize = '';
+    const all = STEPS.map(([c]) => c);
+    zoomEl.classList.add('measure');
+    zoomEl.classList.remove(...all);
+    let need = row.getBoundingClientRect().width;
+    zoomEl.classList.add(...all);
+    need = Math.max(need, row.getBoundingClientRect().width);
+    zoomEl.classList.remove('measure', ...all);
+    const room = zs.clientWidth;
+    if (need > room) zs.style.fontSize = (parseFloat(getComputedStyle(zs).fontSize) * room / need * 0.95) + 'px';
+  }
+
+  // Under the syllable, its caret pointing at it; kept inside the screen, and scrolled into view.
+  function placeZoom() {
+    if (zoomAt == null || zoomEl.hidden) return;
+    const el = nucEls()[zoomAt];
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const w = zoomEl.offsetWidth;
+    const cx = r.left + r.width / 2;
+    const left = Math.max(16, Math.min(window.innerWidth - 16 - w, cx - w / 2));
+    zoomEl.style.left = (left + window.scrollX) + 'px';
+    zoomEl.style.top = (r.bottom + window.scrollY + r.height * 0.6) + 'px';
+    zoomEl.style.setProperty('--caret', Math.max(18, Math.min(w - 18, cx - left)) + 'px');
+    const below = zoomEl.getBoundingClientRect().bottom - window.innerHeight + 12;
+    if (below > 0) window.scrollBy({ top: below, behavior: 'smooth' });
+  }
+
+  zoomEl.addEventListener('click', (e) => {
+    if (e.target.closest('.zoom-close')) closeZoom();
+    else if (e.target.closest('.zoom-again')) playZoom();
+  });
+  // a tap anywhere else closes it -- except on another syllable, which opens that one instead
+  document.addEventListener('pointerdown', (e) => {
+    if (zoomEl.hidden || zoomEl.contains(e.target) || e.target.closest('#line .nuc, #line .tie')) return;
+    closeZoom();
+  }, true);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !zoomEl.hidden) closeZoom(); });
+  window.addEventListener('resize', () => { if (!zoomEl.hidden) { fitZoom(); placeZoom(); } });
+
+  // The strip of letters: the syllable that holds nucleus i, with one neighbour on each side (two on one
+  // side at the ends of the line). Returns its HTML and the letters the explanation names.
+  function zoomStrip(l, i) {
+    const N = l.nuclei;
+    const act = N.map((_, k) => k).filter((k) => N[k].syllable);
+    const n = N[i];
+    // its own syllable -- or, for an elided or merged vowel, the syllable it lies inside
+    let s = act.indexOf(i);
+    if (s < 0) s = act.findIndex((k) => N[k].syllable[0] <= n.start && n.start < N[k].syllable[1]);
+    if (s < 0) return null;
+    const me = act[s], nx = act[s + 1];
+    const lo = Math.max(0, Math.min(s - 1, act.length - 3)), hi = Math.min(act.length - 1, lo + 2);
+    const chars = [...l.text];
+    const halves = new Map((l.doubled || []).map((d) => [d.at, d.as]));
+    const silent = new Set(l.silent || []);
+    const nucOf = new Map();
+    N.forEach((x, k) => { for (let p = x.start; p < x.end; p++) nucOf.set(p, k); });
+    const gone = new Set();                          // an elided vowel and its -m; a prodelided e
+    N.forEach((x) => {
+      if (x.mark !== 'elided' && x.mark !== 'prodelided') return;
+      let e = x.end;
+      if (x.mark === 'elided') while (e < chars.length && isLetter(chars[e])) e++;
+      for (let p = x.start; p < e; p++) gone.add(p);
+    });
+    const role = (p) => !isLetter(chars[p]) ? 'sp' : gone.has(p) ? 'gone'
+      : nucOf.has(p) ? (N[nucOf.get(p)].mark === 'merged' ? 'glide' : 'v') : silent.has(p) ? 'h' : 'c';
+    const span = (a, b) => Array.from({ length: Math.max(0, b - a) }, (_, k) => a + k);
+    const isCons = (p) => role(p) === 'c' || role(p) === 'glide';
+    const letters = (ps, side) => ps.map((p) => (halves.has(p) ? halves.get(p)[side] : chars[p].toLowerCase())).join('');
+
+    // the consonants between this syllable's vowel and the next: those that stay, those that go on
+    const coda = span(N[me].end, N[me].syllable[1]).filter(isCons);
+    const onset = nx != null ? span(N[nx].syllable[0], N[nx].start).filter(isCons) : [];
+    const z = { coda: letters(coda, 0), onset: letters(onset, 1), codaAt: coda[coda.length - 1] };
+    const [sa, sb] = N[me].syllable;
+    z.said = span(sa, sb).filter((p) => isLetter(chars[p]) && !gone.has(p))
+      .map((p) => (halves.has(p) ? halves.get(p)[p === sa ? 1 : 0] : chars[p])).join('');
+    z.crossed = onset.length > 0 && chars.slice(onset[onset.length - 1] + 1, N[nx].start).some((c) => !isLetter(c));
+    z.h = nx != null && span(N[me].end, N[nx].start).some((p) => silent.has(p));
+    z.qu = /qu/.test(n.followed_by || '');
+
+    // what decides the mark: these letters light up (or the end of the line)
+    const key = new Set();
+    let keyEnd = false;
+    const nucleus = (k) => span(N[k].start, N[k].end);
+    const why = n.why || n.mark;
+    if (['long vowel', 'diphthong', 'correption', 'short vowel'].includes(why)) nucleus(i).forEach((p) => key.add(p));
+    if (CLOSED.includes(why)) coda.forEach((p) => key.add(p));
+    if (PAIRED.includes(why)) onset.forEach((p) => key.add(p));
+    if (why === 'final syllable') keyEnd = true;
+    if (n.hiatus && nx != null) nucleus(nx).forEach((p) => key.add(p));
+    if (why === 'merged') [...nucleus(i), ...nucleus(me)].forEach((p) => key.add(p));
+    const ties = [];                                 // [from, to, class]: a swoosh under these letters
+    if (why === 'elided') {
+      z.next = N[me].start > n.start;              // the vowel it runs into -- or the next line's
+      if (z.next) {
+        nucleus(me).forEach((p) => key.add(p));
+        span(n.end, N[me].start).filter((p) => silent.has(p)).forEach((p) => key.add(p));
+      } else keyEnd = true;
+      z.m = n.end < chars.length && isLetter(chars[n.end]);     // an elided syllable ends in a vowel or -m
+    }
+    if (why === 'prodelided') {
+      let p = n.start - 1;
+      while (p > 0 && !isLetter(chars[p])) p--;
+      key.add(p);
+      let w = p;
+      while (w > 0 && isLetter(chars[w - 1])) w--;
+      z.word = chars.slice(w, p + 1).join('');
+    }
+    // every elision in view gets its swoosh: from the lost vowel to the vowel it runs into
+    N.forEach((x, k) => {
+      if (x.mark === 'elided') {
+        const host = act.find((a) => N[a].syllable[0] <= x.start && x.start < N[a].syllable[1]);
+        if (host == null) return;
+        ties.push(N[host].start > x.start ? [x.start, N[host].end, 'zs-elide' + (k === i ? ' mine' : '')]
+          : [x.start, N[host].syllable[1], 'zs-elide trail' + (k === i ? ' mine' : '')]);
+      } else if (x.mark === 'prodelided') {
+        let p = x.start - 1;
+        while (p > 0 && !isLetter(chars[p])) p--;
+        ties.push([p, x.end, 'zs-elide' + (k === i ? ' mine' : '')]);
+      }
+    });
+    // the consonants in play lift out and drop into their syllables; a mute + liquid goes as one.
+    // Each belongs to one syllable (a letter that counts twice is in both), and not where a swoosh
+    // already spans them: the wrappers must nest.
+    const clear = (f, e) => !ties.some(([g, h]) => f < h && g < e);
+    if (me === i && why !== 'final syllable') {
+      const cuts = [];
+      if (coda.length && clear(coda[0], coda[coda.length - 1] + 1)) {
+        cuts.push([coda[0], coda[coda.length - 1] + 1, 'zs-cut-l', s]);
+      }
+      if (onset.length && clear(onset[0], onset[onset.length - 1] + 1)) {
+        cuts.push([onset[0], onset[onset.length - 1] + 1, 'zs-cut-r' + (PAIRED.includes(why) ? ' tied' : ''), s + 1]);
+      }
+      ties.push(...cuts);
+    }
+
+    let html = '<div class="zs"><span class="zs-row" lang="la">';
+    for (let t = lo; t <= hi; t++) {
+      const k = act[t];
+      const [a, b] = N[k].syllable;
+      const mine = ties.filter(([f, e, , g]) => f >= a && e <= b && (g == null || g === t));
+      html += `<span class="zs-syl ${t === s ? 'here' : 'far'}">`;
+      for (let p = a; p < b; p++) {
+        mine.filter(([f]) => f === p).forEach(([, , c]) => { html += `<span class="${c}">`; });
+        if (p === N[k].start) html += '<span class="zs-nuc">';
+        const c = escapeHTML(chars[p]);
+        if (halves.has(p) && p === b - 1 && p !== a) {       // a letter that counts twice: its first sound
+          html += `<span class="zs-l zs-dbl${key.has(p) ? ' key' : ''}"><span class="zs-morph">` +
+                  `<span class="from">${c}</span><span class="to">${escapeHTML(halves.get(p)[0])}</span></span></span>`;
+        } else if (halves.has(p) && p === a) {                 // ... and its second, in the next syllable
+          html += `<span class="zs-l zs-dbl zs-half"><span>${escapeHTML(halves.get(p)[1])}</span></span>`;
+        } else if (role(p) === 'sp') {
+          html += `<span class="zs-sp">${chars[p] === ' ' ? '&nbsp;' : c}</span>`;
+        } else {
+          // a consonant u is the u of qu (or sanguis, suāvis): no sound of its own, like h
+          const mute = role(p) === 'c' && /u/i.test(chars[p]) ? ' zs-u' : '';
+          html += `<span class="zs-l zs-${role(p)}${mute}${key.has(p) ? ' key' : ''}">${c}</span>`;
+        }
+        if (p === N[k].end - 1) {
+          if (k === i) html += `<span class="zs-mark">${SYMBOL[N[k].mark] || ''}</span>`;
+          html += '</span>';
+        }
+        mine.filter(([, e]) => e - 1 === p).forEach(() => { html += '</span>'; });
+      }
+      html += '</span>';
+    }
+    if (hi === act.length - 1) html += `<span class="zs-end${keyEnd ? ' key' : ''}"><span>line ends</span></span>`;
+    z.html = html + '</span></div>';
+    return z;
+  }
+
+  // What lit up, named (the tag), and said in a sentence.
+  function zoomWhy(l, n, z) {
+    const b = (s) => `<b class="la">${escapeHTML(s)}</b>`;
+    const v = b(n.text);
+    const quNote = z && z.qu ? ' (<i>qu</i> is one consonant: its <i>u</i> is not a vowel.)' : '';
+    const hNote = z && z.h ? ' The <i>h</i> does not count.' : '';
+    const hiatus = n.hiatus ? ' The next word begins with a vowel, but here the poet does not elide: that is hiatus.' : '';
+    if (!z) return ['', ''];
+    const open = 'So the syllable ends in its short vowel.';
     switch (n.why || n.mark) {
-      case 'long vowel': return 'It is a long vowel.';
-      case 'diphthong': return 'It is a diphthong, and diphthongs are long.';
-      case 'two consonants': return `It is followed by two consonants (${consonants(f)}), which make the syllable long.`;
-      case 'muta cum liquida, short': return `It is followed by ${f}, a mūta cum liquida (a stop + l or r). That pair does not have to make the syllable long — and here it doesn't.`;
-      case 'muta cum liquida, long': return `It is followed by ${f}, a mūta cum liquida (a stop + l or r). That pair can make the syllable long — and here it does.`;
-      case 'muta cum liquida at word start': return `The next word begins with ${f}, a mūta cum liquida, which does not make this syllable long.`;
-      case 'f + liquid at word start': return `The next word begins with ${f}. Poets treat that pair like a mūta cum liquida: it does not make this syllable long.`;
-      case 'word-initial cluster makes position': return `The next word begins with two consonants (${f}), and here they make this syllable long.`;
-      case 'word-initial cluster ignored': return `The next word begins with two consonants (${f}), but the poet does not let them make this syllable long.`;
-      case 'short vowel': return f ? `It is a short vowel followed by only one consonant (${consonants(f)}).` : 'It is a short vowel followed directly by another vowel.';
-      case 'final syllable': return 'It is the last syllable of the line, which always counts as long.';
-      case 'lengthened syllable': return 'The poet lengthens this syllable where the beat falls on it.';
-      case 'elided': return 'A vowel (or vowel + m) at the end of a word is elided before a word that begins with a vowel or h.';
-      case 'prodelided': return 'After a vowel or -m, the e of est (or es) drops out.';
-      case 'merged': return 'This vowel runs together with the next one into a single syllable (synizesis).';
-      default: return '';
+      case 'long vowel': return ['long vowel', `Its vowel, ${v}, is long — it has a macron.${hiatus}`];
+      case 'diphthong': return ['diphthong', `${v} is a diphthong, two vowels said as one, and diphthongs are long.${hiatus}`];
+      case 'two consonants':
+        return ['ends in a consonant', `It ends in a consonant, ${b(z.coda)}: two consonants come after its vowel, and they divide between this syllable and the next.${quNote}${doubledNote(l, z)}${hNote}`];
+      case 'muta cum liquida, long':
+        return ['mūta cum liquida, divided', `${b(n.followed_by)} is a mūta cum liquida (a stop + <i>l</i> or <i>r</i>), which can go either way. Here the poet divides it: ${b(z.coda)} ends this syllable, so it is long.`];
+      case 'muta cum liquida, short':
+        return ['mūta cum liquida', `${b(z.onset)} is a mūta cum liquida (a stop + <i>l</i> or <i>r</i>), which can go either way. Here it goes together into the next syllable. ${open}`];
+      case 'muta cum liquida at word start':
+        return ['mūta cum liquida', `The next word begins with ${b(z.onset)}, a mūta cum liquida. It goes together into the next syllable. ${open}`];
+      case 'f + liquid at word start':
+        return ['f + liquid', `The next word begins with ${b(z.onset)}. Like a mūta cum liquida, it goes together into the next syllable. ${open}`];
+      case 'word-initial cluster makes position':
+        return ['ends in a consonant', `The next word begins with ${b(n.followed_by)}, and here they divide: ${b(z.coda)} ends this syllable, so it is long.`];
+      case 'word-initial cluster ignored':
+        return ['short vowel', `The next word begins with ${b(n.followed_by)}, but the poet lets them go together into the next syllable. ${open}`];
+      case 'short vowel':
+        if (n.hiatus) return ['no elision', `${hiatus.trim()} ${open}`];
+        if (!z.onset) return ['short vowel', `Its vowel is short, and the next syllable begins with a vowel. ${open}`];
+        return ['short vowel', `Its vowel is short, and only one consonant follows: ${b(z.onset)} begins the next syllable${z.crossed ? ', even across the space between words' : ''}. ${open}${quNote}${hNote}`];
+      case 'correption':
+        return ['shortened', `${v} has a macron, but a long vowel at the end of a word can be shortened before another vowel (correption).`];
+      case 'final syllable':
+        return ['end of the line', 'It is the last syllable of the line, and the last syllable always counts as long.'];
+      case 'lengthened syllable':
+        return ['lengthened at the beat', `Only one consonant follows, ${b(z.coda)}, so it ought to be short. But the beat falls here: the poet keeps ${b(z.coda)} in this syllable and lengthens it.`];
+      case 'elided':
+        if (!z.next) return ['into the next line', 'The line has one syllable too many: its last vowel elides into the next line, which begins with a vowel (hypermetry).'];
+        return ['the next word begins with a vowel', `Its word ends in a vowel${z.m ? ' + <i>m</i>' : ''}, and the next word begins with a vowel${z.h ? ' (the <i>h</i> does not count)' : ''}. So ${v}${z.m ? b('m') : ''} is elided, and the swoosh joins what is left to the next vowel.`];
+      case 'prodelided':
+        return ['est after a vowel', `After a vowel or <i>-m</i>, the <i>e</i> of <i>est</i> drops out: ${b(z.word + ' est')} is said ${b(z.word + '’st')}.`];
+      case 'merged':
+        return ['run together', `${v} runs together with the next vowel into one syllable (synizesis)${/i/i.test(n.text) ? ': say it like English <i>y</i>' : ''}.`];
+      default: return ['', ''];
     }
   }
-  function consonants(f) {
-    const notes = [];
-    if (/[xz]/.test(f)) notes.push('x and z each count as two');
-    if (/qu/.test(f)) notes.push('qu counts as one');
-    if (f === 'i') notes.push('i between vowels counts as two');
-    return notes.length ? `${f}; ${notes.join(', ')}` : f;
+
+  // A letter that counts twice, when it is the one that ends the syllable.
+  function doubledNote(l, z) {
+    const d = (l.doubled || []).find((x) => x.at === z.codaAt);
+    if (!d) return '';
+    const c = [...l.text][d.at].toLowerCase();
+    if (c === 'x') return ' <i>x</i> is two consonants, <i>c</i> + <i>s</i>, and they divide between the syllables.';
+    if (c === 'z') return ' <i>z</i> is two consonants, <i>d</i> + <i>z</i>, and they divide between the syllables.';
+    if (c === 'i') return ' An <i>i</i> between two vowels is a consonant (say it like English <i>y</i>), and it counts twice: once to end this syllable, once to begin the next.';
+    if (d.as[0] === 'c' && d.as[1] === 'c') return ' <i>hic</i> and <i>hoc</i> before a vowel are really <i>hicc</i> and <i>hocc</i>.';
+    return ` This word hides an unwritten <i>j</i> after its <i>${escapeHTML(d.as[0])}</i>: <i>in-jiciō</i>.`;
   }
 })();

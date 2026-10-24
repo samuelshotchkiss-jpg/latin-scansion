@@ -11,12 +11,16 @@
   --bad: #b3261e;
   --missing: #c07a00;
   --mark: #2f5d8a;
+  --key-bg: #ffe39a;     /* the zoom-in: what decides a syllable */
+  --key-ink: #6a4300;
+  --here: #d3e2f2;       /* the zoom-in: the syllable being explained */
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #17181b; --panel: #202227; --ink: #ececef; --muted: #a0a0a8; --line: #3a3c42;
     --accent: #7fb0e0; --accent-ink: #10151b; --target: #26384b;
     --ok: #6cc28f; --bad: #f2877e; --missing: #e7b35c; --mark: #9cc3ea;
+    --key-bg: #5b4512; --key-ink: #ffe08a; --here: #2f4a66;
   }
 }
 
@@ -222,11 +226,97 @@ body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tuto
 .feedback { margin-top: 1.25rem; text-align: center; min-height: 1.5em; }
 .feedback .feet { font-family: Tahoma, "Noto Sans", sans-serif; font-size: 1.3rem; letter-spacing: .08em; margin-top: .35rem; }
 .feedback .note { color: var(--muted); font-size: .9rem; }
-.reason {
-  margin: .75rem auto 0; max-width: 40rem; padding: 0; color: var(--ink);
+/* ---- the zoom-in: a tapped syllable, divided ------------------------------------------------------
+   Four steps, each a class on .zoom (app.js STEPS): is-word -- the words close up into one big word,
+   and the consonants between this vowel and the next lift out; is-split -- the syllables part, and
+   those consonants drop into the one they belong to; is-why -- what decides the mark lights up;
+   is-mark -- the mark lands. */
+.zoom {
+  position: absolute; z-index: 30; width: min(30rem, calc(100vw - 32px));
+  padding: .6rem .9rem .8rem; background: var(--panel); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
 }
-.reason:not(:empty) { padding: .75rem 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
-.reason b { font-family: Tahoma, "Noto Sans", sans-serif; }
+.zoom::before {                                    /* the caret, pointing up at the syllable */
+  content: ""; position: absolute; top: -8px; left: var(--caret, 50%); width: 14px; height: 14px;
+  background: var(--panel); border-left: 1px solid var(--line); border-top: 1px solid var(--line);
+  transform: translateX(-50%) rotate(45deg);
+}
+.zoom .la { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; }
+.zoom .note { color: var(--muted); }
+.zoom-head { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+.zoom-buttons { display: flex; gap: .15rem; flex-shrink: 0; }
+.zoom-buttons button {
+  all: unset; cursor: pointer; color: var(--muted); font-size: 1.25rem; line-height: 1;
+  width: 1.9rem; height: 1.9rem; text-align: center; border-radius: 50%;
+}
+.zoom-buttons button:hover, .zoom-buttons button:focus-visible { background: var(--target); color: var(--ink); }
+.zs {
+  font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(2rem, 9vw, 2.7rem);
+  line-height: 1.15; text-align: center; white-space: nowrap; overflow: hidden; padding: .85em 0 .7em;
+}
+.zs-row { display: inline-flex; align-items: flex-end; }
+.zs-syl {
+  display: inline-flex; align-items: flex-end; border-radius: .18em; color: var(--muted);
+  transition: margin-left .55s ease, background-color .45s ease, box-shadow .45s ease;
+}
+.zs-syl.here { color: var(--ink); }
+.zs-nuc { display: inline-flex; position: relative; }
+.zs-l { display: inline-block; transition: color .3s, background-color .3s, opacity .35s, box-shadow .3s; }
+.zs-sp { display: inline-block; max-width: .35em; overflow: hidden; transition: max-width .45s ease, opacity .3s; }
+.zs-mark {
+  position: absolute; left: 50%; bottom: .7em; transform: translate(-50%, -.45em); opacity: 0;
+  font-size: .85em; line-height: 1; color: var(--mark); transition: opacity .3s, transform .4s cubic-bezier(.2, 1.5, .4, 1);
+}
+.zs-end {                                          /* the end of the line: a wall */
+  position: relative; align-self: stretch; width: .08em; margin-left: .4em; border-radius: .04em;
+  background: var(--muted); transition: background-color .3s, box-shadow .3s;
+}
+.zs-end span {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: .3rem;
+  font: 600 .7rem/1 system-ui, sans-serif; letter-spacing: .03em; color: var(--muted); white-space: nowrap;
+}
+.zs-half { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; }
+.zs-morph { display: inline-grid; }
+.zs-morph > span { grid-area: 1 / 1; text-align: center; transition: opacity .35s; }
+.zs-morph .to { opacity: 0; }
+/* the swooshes: an elision, and a mute + liquid tied together */
+.zs-elide, .zs-cut-l, .zs-cut-r { display: inline-flex; align-items: flex-end; position: relative; }
+.zs-elide::after, .zs-cut-r.tied::after {
+  content: ""; position: absolute; left: .08em; right: .08em; bottom: -.24em; height: .3em; opacity: 0;
+  border: .075em solid var(--muted); border-top: none; border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  transition: opacity .3s;
+}
+.zs-elide.trail::after { right: -.3em; border-right: none; border-radius: 0 0 0 100% / 0 0 0 100%; }
+.zs-cut-r.tied::after { left: -.06em; right: -.06em; bottom: -.16em; height: .17em; }   /* flat: not a breve */
+.zs-elide.mine::after, .zs-cut-r.tied::after { border-color: var(--accent); }
+.zs-cut-l, .zs-cut-r { transition: margin .55s ease, transform .55s ease; }
+
+/* 1 · one big word: spaces close, h fades, elided letters grey out, x becomes c + s */
+.zoom.is-word .zs-sp { max-width: 0; opacity: 0; }
+.zoom.is-word .zs-h, .zoom.is-word .zs-u { opacity: .35; }
+.zoom.is-word .zs-gone { opacity: .45; text-decoration: line-through; text-decoration-thickness: .06em; }
+.zoom.is-word .zs-elide::after, .zoom.is-word .zs-cut-r.tied::after { opacity: 1; }
+.zoom.is-word .zs-morph .from { opacity: 0; }
+.zoom.is-word .zs-morph .to, .zoom.is-word .zs-half { opacity: 1; color: var(--accent); }
+.zoom.is-word .zs-half { max-width: 1em; transition: max-width .45s ease, opacity .35s; }
+.zoom.is-word .zs-glide { color: var(--accent); }
+.zoom.is-word:not(.is-split) .zs-cut-l,
+.zoom.is-word:not(.is-split) .zs-cut-r { margin: 0 .2em; transform: translateY(-.3em); }
+/* 2 · the syllables part */
+.zoom.is-split .zs-syl + .zs-syl { margin-left: .42em; }
+.zoom.is-split .zs-syl { background: var(--target); box-shadow: 0 0 0 .1em var(--target); }
+.zoom.is-split .zs-syl.here { background: var(--here); box-shadow: 0 0 0 .1em var(--here); }
+/* 3 · what decides it */
+.zoom.is-why .key { color: var(--key-ink); background: var(--key-bg); box-shadow: 0 0 0 .05em var(--key-bg); border-radius: .1em; }
+.zoom.is-why .zs-end.key { background: var(--key-ink); box-shadow: 0 0 0 .07em var(--key-bg); }
+.zoom.is-why .zs-end.key span { color: var(--key-ink); }
+/* 4 · the mark */
+.zoom.is-mark .zs-mark { opacity: 1; transform: translate(-50%, 0); }
+.zoom-why { margin: .2rem 0 0; opacity: 0; transition: opacity .4s; }
+.zoom.is-why .zoom-why { opacity: 1; }
+.zoom-tag { padding: .05em .4em; border-radius: .3em; background: var(--key-bg); color: var(--key-ink); font-weight: 600; white-space: nowrap; }
+.zoom-tag:empty { display: none; }
+.zoom.measure, .zoom.measure * { transition: none !important; }
 
 .ghost {
   position: fixed; z-index: 10; pointer-events: none;
@@ -342,6 +432,7 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   .nuc .mark { transition: none; }
   .line-check.fresh { animation: none; }
   .stage-lines.slide-up, .stage-lines.slide-down { animation: none; }
+  .zoom *, .zoom *::after { transition: none !important; }   /* the zoom-in opens at its last step */
 }
 
 /* ---- phones --------------------------------------------------------------------------------------- */

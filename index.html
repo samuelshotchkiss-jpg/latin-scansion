@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-09-30e">
+  <link rel="stylesheet" href="styles.css?v=2026-10-24">
 </head>
 <body>
   <header class="top">
@@ -116,8 +116,10 @@
     </div>
 
     <div id="feedback" class="feedback" aria-live="polite"></div>
-    <div id="reason" class="reason" aria-live="polite"></div>
   </main>
+
+  <!-- the zoom-in: after Check, a tapped syllable divided from its neighbours (app.js, at the end) -->
+  <div id="zoom" class="zoom" role="dialog" aria-label="Why this syllable is long, short or elided" hidden></div>
 
   <footer class="foot">
     <a class="foot-link" href="devices.html">Literary devices: match the rows →</a><br>
@@ -209,6 +211,6 @@
 
   <script src="progress.js?v=2026-09-28"></script>
   <script src="rhythm.js?v=2026-09-29"></script>
-  <script src="app.js?v=2026-09-30e"></script>
+  <script src="app.js?v=2026-10-24"></script>
 </body>
 </html>

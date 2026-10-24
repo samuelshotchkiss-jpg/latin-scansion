@@ -16,7 +16,8 @@ removed by elision — nothing is a guess, and the rules stop looking arbitrary.
 
 The line is shown whole, with no syllable divisions. The student drags long (¯) and short (˘) marks
 over it, and each mark **snaps to a syllable nucleus** — the vowel or diphthong at the heart of a
-syllable. Dividing the syllables is part of the skill, so the app never does it for them.
+syllable. Dividing the syllables is part of the skill, so the app never does it for them while they
+scan.
 
 **Elision** is marked the traditional way: a swoosh under the gap between two syllables (*atque ‿ ita*).
 It can go in *any* gap — the app does not hint where elision is possible. It removes the first of the
@@ -25,7 +26,13 @@ it, so the app never gives an elision away; once elided, any mark on it goes bac
 
 **Check** turns each mark green or red, and draws foot dividers above the line — grouped from the
 student's *own* marks, so a scansion that does not fall into six feet shows exactly where it breaks.
-Tapping a mark then says why that syllable is long, short, or elided.
+
+**Tapping a syllable** after Check (or Show answer) opens a **zoom-in**: that syllable and its
+neighbours, enlarged, divided before the student's eyes. The words close up into one big word; the
+consonants between this vowel and the next lift out and drop into the syllable they belong to — a
+mūta cum liquida tied by a swoosh and pushed together into the next one, an *x* splitting into *c* +
+*s*; then what decides the mark lights up — the long vowel, the consonant that ends the syllable, the
+end of the line, the vowel an elision runs into — and a sentence says why. ↻ plays it again.
 
 ## Tutorial, practice, and progress
 
@@ -96,6 +103,7 @@ works on any macronized text — use it for your own corpus.
 ```bash
 python scansion/scan.py my_lines.tsv --report          # lines that need a human look
 python scansion/scan.py my_lines.tsv --level 1         # the easiest lines
+python scansion/scan.py my_lines.tsv --syllables       # each line divided: fis-tu-la-dis-pa-ri-bus…
 python scansion/scan.py my_lines.tsv --json key.json   # the answer key
 python scansion/scan.py couplets.tsv --elegiac         # elegiac couplets: odd lines hexameter, even pentameter
 ```
@@ -138,7 +146,8 @@ and they are the place to start if you teach differently.
   "feet": ["LSS", "LSS", "LL", "LL", "LSS", "LL"],
   "flags": ["elision", "f + liquid at word start", "qu"],
   "nuclei": [
-    {"start": 0, "end": 1, "text": "a", "mark": "L", "why": "two consonants", "followed_by": "tqu"},
+    {"start": 0, "end": 1, "text": "a", "mark": "L", "why": "two consonants", "followed_by": "tqu",
+     "syllable": [0, 2]},
     {"start": 4, "end": 5, "text": "e", "mark": "elided"}
   ],
   "difficult_words": []
@@ -147,6 +156,13 @@ and they are the place to start if you teach differently.
 
 `start` and `end` are character offsets into `text` (Unicode NFC). `mark` is `L`, `S`, `elided`,
 `prodelided`, or `merged` (synizesis).
+
+`syllable` is where that nucleus's syllable begins and ends, for *explaining* a mark (the app shows it
+only after Check). The line is treated as one big word, as in *fis-tu-la-dis-pa-ri-bus-pau-lā-tim-sur-gi-ta-vē-nīs*,
+and the rules are stated at the top of `scansion/scansion.py` (SYLLABLES). Neighbouring syllables meet;
+they overlap only on a letter that counts twice, which `doubled` lists with the two sounds it stands
+for (`{"at": 3, "as": ["c", "s"]}`: *dīxit* = *dīc-sit*). `silent` lists the letters that count for
+nothing (an *h*), and a vowel left unelided before a vowel carries `"hiatus": true`.
 
 ## Licence
 

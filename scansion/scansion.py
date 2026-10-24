@@ -10,8 +10,9 @@ standard library. Give it a line of Latin in which every long vowel carries a ma
 
 WHAT A SCAN IS. For every vowel or diphthong in the line -- every syllable NUCLEUS -- the result
 gives its span in the text, its mark (L long, S short, or `elided` when elision removes it), and the
-reason for the mark. It never gives syllable boundaries: students mark nuclei, and where the
-consonants fall is only a means to deciding long or short.
+reason for the mark. Students mark nuclei, and the app never divides a line for them: dividing it is
+part of the skill. But the division is also the REASON a mark is right, so the result says where each
+syllable begins and ends, for the app to show once the student has checked the line (SYLLABLES below).
 
 WHY THE TEXT MUST BE MACRONIZED. A scanner working from an unmacronized text has to guess vowel
 length. Here a macron is a long vowel and an unmarked vowel is short, so every mark has a stated
@@ -38,6 +39,26 @@ an h among its consonants (captat harundine), a long syllable whose only consona
 The same kind holds every other single letter that counts as two: an i between vowels (Troia =
 Troy-ya), the c of hic and hoc before a vowel (hic amor = hic-camor), and the unwritten j of iniciō.
 The flag keeps its name, "h, x, z", because the app keys a badge to it.
+
+SYLLABLES. Each nucleus that keeps its syllable carries `syllable`: [start, end], the span of its
+syllable in the text. Treat the line as one big word -- a consonant crosses the space between words
+like any other (surgit avēnīs = sur-gi-ta-vē-nīs) -- and divide it so:
+  * a short syllable ends in its vowel: what follows begins the next syllable (pa-tris, un-da-gra-vet);
+  * one consonant begins the next syllable, unless the poet lengthens the syllable at the beat;
+  * consonants on both sides of the space between two words divide at the space (inhiāns spīrantia =
+    āns-spī, not ānss-pī); consonants that all begin the next word stay with it after a syllable long
+    by its vowel (nec tē spectāre = tē-spec-tā-re);
+  * otherwise, of two or more, the next syllable takes the last one (dis-pa) -- or the last two, when
+    they are a mute + liquid in one word, or an f + l / f + r that begins a word or follows another
+    consonant (mons-trum, ā-trī, af-flat), unless the poet splits that very pair to make the syllable
+    long (pat-ris);
+  * a letter that counts twice is split between the two syllables: dīxit = dīc-sit.
+So neighbouring spans meet, and they overlap only on a letter that counts twice. Such letters are
+listed in `doubled` -- {"at": offset, "as": ["c", "s"]}, the two sounds it stands for: x = c + s,
+z = d + z, an i between vowels = j + j (Troia = Troj-ja), hic before a vowel = hic-c, iniciō = in-j.
+Letters that count for nothing (h, but not the h of ch, ph, th) are listed in `silent`. Elided
+letters lie inside the span of a neighbouring syllable; the nucleus says it is elided. A vowel left
+unelided before a vowel (hiatus) carries "hiatus": true.
 
 LEVELS. A line sits at the lowest level that admits everything in it:
     1 long and short only   2 + qu   3 + h, x, z   4 + elision   5 + muta cum liquida
@@ -145,10 +166,12 @@ class Unit:
     long: bool = False       # V: long by nature
     why: str = ""            # V: "long vowel" / "diphthong" / "split"
     count: int = 1           # C: consonants it is worth (x, z, consonantal i between vowels = 2)
+    halves: str = ""         # C, when count is 2: the two sounds it stands for (x = "cs")
     stop: bool = False
     liquid: bool = False
     gone: str = ""           # V: "elided" / "prodelided" / "merged"
     dropped: bool = False    # C: the -m of an elided syllable
+    hiatus: bool = False     # V: a word's last vowel, left unelided before a vowel
 
 
 def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
@@ -162,7 +185,7 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
                     and units[-1].kind == "C" and PREFIX_BEFORE_I.match(t[:i])):
                 # iniciō, coniciō, abiciō: iaciō's j is not written (in-jiciō), yet it still closes the
                 # prefix's syllable -- so the prefix's last consonant counts double, as x does
-                units[-1].count = 2
+                units[-1].count, units[-1].halves = 2, t[i - 1] + "j"
             if c == "u" and i > 0 and nxt and is_vowel(nxt) and units:
                 if t[i - 1] == "g" and i > 1 and t[i - 2] == "n":       # sanguis: gu is one consonant
                     units[-1].end = ws + i + 1
@@ -183,7 +206,7 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
                     # either way, and the consonantal reading won the tie until 2026-09-24)
                     if pick(("i between vowels", wi, i),
                             [("consonantal", 0, 1), ("vocalic", 1, 1)]) == "consonantal":
-                        units.append(Unit("C", ws + i, ws + i + 1, wi, count=2))
+                        units.append(Unit("C", ws + i, ws + i + 1, wi, count=2, halves="jj"))
                         i += 1
                         continue
                 elif PREFIX_BEFORE_I.match(t[:i]):                      # coniugis, iniūria, obiectus
@@ -234,7 +257,7 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
             i += 2
             continue
         if c in "xz":
-            units.append(Unit("C", ws + i, ws + i + 1, wi, count=2))
+            units.append(Unit("C", ws + i, ws + i + 1, wi, count=2, halves="cs" if c == "x" else "dz"))
             i += 1
             continue
         units.append(Unit("C", ws + i, ws + i + 1, wi, stop=c in STOPS, liquid=c in LIQUIDS))
@@ -255,6 +278,13 @@ def opens_with_vowel(line: str) -> bool:
     return not (base(t[0]) in "iu" and len(t) > 1 and is_vowel(t[1]))
 
 
+def between(units: list[Unit], v: Unit, nxt: Unit) -> list[Unit]:
+    """The consonants between two nuclei that count: not the -m of an elided syllable, but a vowel
+    merged into its neighbour (synizesis), which has become a consonant."""
+    return [u for u in units if v.end <= u.start < nxt.start
+            and ((u.kind == "C" and not u.dropped) or (u.kind == "V" and u.gone == "merged"))]
+
+
 def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexameter", can_elide_on: bool = True):
     units: list[Unit] = []
     for wi, (ws, t, proper) in enumerate(words):
@@ -273,7 +303,7 @@ def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexamete
             continue
         if words[wi][1] in ("hic", "hoc") and a[-1].kind == "C":        # hicc, hocc before a vowel
             if pick(("hic/hoc", wi), [("double", 0, 1), ("single", 1, 1)]) == "double":
-                a[-1].count = 2
+                a[-1].count, a[-1].halves = 2, "cc"
             continue
         last, m = a[-1], None
         if last.kind == "C" and low[last.start:last.end] == "m" and len(a) > 1 and a[-2].kind == "V":
@@ -294,9 +324,10 @@ def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexamete
                     m.dropped = True
                 flags.add("elision")
         elif choice == "hiatus":
+            last.hiatus = True
             flags.add("hiatus")
         else:
-            last.long, last.why = False, ""
+            last.long, last.why = False, "correption"
             flags.add("correption")
 
     # hypermetry: a final vowel that elides into the next line (locōrumque)
@@ -314,8 +345,7 @@ def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexamete
             marks.append(("L", "final syllable", ""))
             continue
         nxt = active[k + 1]
-        cons = [u for u in units if v.end <= u.start < nxt.start
-                and ((u.kind == "C" and not u.dropped) or (u.kind == "V" and u.gone == "merged"))]
+        cons = between(units, v, nxt)
         letters = "".join(low[u.start:u.end] for u in cons)
         total = sum(u.count for u in cons)
         if v.long:
@@ -356,7 +386,7 @@ def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexamete
             if w == "L":
                 flags.add("lengthened syllable")
         else:
-            marks.append(("S", "short vowel", letters))
+            marks.append(("S", "correption" if v.why == "correption" else "short vowel", letters))
 
     pattern = "".join(m[0] for m in marks)
     fit = METERS[meter].match(pattern)
@@ -473,6 +503,91 @@ def word_accents(units: list[Unit], words, marks_by_start: dict) -> set[int]:
     return out
 
 
+# ---- syllables -------------------------------------------------------------------------------------------
+def onset_pair(a: Unit, b: Unit, low: str, word_starts: set, after_consonant: bool = False) -> bool:
+    """Two consonants that can begin a syllable together: a mute + liquid in one word (pa-tris), an
+    f + l / f + r that begins a word (curvāmi-ne-flec-tit) or follows another consonant (af-flat), or
+    a word's first consonant and the vowel merged into the next (dehinc, one syllable by synizesis)."""
+    if a.word != b.word or a.count != 1:
+        return False
+    if b.kind == "V":
+        return a.start in word_starts
+    return b.liquid and (a.stop or (low[a.start:a.end] == "f" and (after_consonant or a.start in word_starts)))
+
+
+def cut(v: Unit, nxt: Unit, cons: list[Unit], mark: str, why: str, low: str, word_starts: set):
+    """Where the syllable of nucleus `v` ends, given the consonants `cons` before the next nucleus:
+    (offset, None), or (None, unit) when that unit counts twice and is split between the two
+    syllables. The rules are the docstring's SYLLABLES."""
+    if not cons:
+        return v.end, None
+    if mark == "S":                                  # a short syllable ends in its vowel
+        return cons[0].start, None
+    if why == "lengthened syllable":                 # the poet keeps the consonant: pectoribūs | inhiāns
+        return cons[-1].end, None
+    ends = [u for u in cons if u.word == v.word != nxt.word]
+    begins = [u for u in cons if u.word == nxt.word != v.word]
+    if ends and begins and len(ends) + len(begins) == len(cons):
+        return begins[0].start, None                 # consonants on both sides of a space: āns-spī
+    if begins and len(begins) == len(cons) and why in ("long vowel", "diphthong"):
+        return cons[0].start, None                   # tē-spec-tā-re: long anyway, so the word keeps them
+    if cons[-1].count == 2:                          # dīc-sit: the last consonant counts twice
+        return None, cons[-1]
+    if len(cons) == 1:
+        return cons[0].start, None
+    a, b = cons[-2], cons[-1]
+    if onset_pair(a, b, low, word_starts, len(cons) > 2) and (len(cons) > 2 or why != "muta cum liquida, long"):
+        return a.start, None                         # mons-trum, ā-trī, af-flat -- but pat-ris
+    return b.start, None
+
+
+def syllables(low: str, words, units: list[Unit], active: list[Unit], marks: list):
+    """Each active nucleus's syllable as [start, end], and the letters split between two syllables."""
+    word_starts = {ws for ws, _, _ in words}
+    spans, doubled, start = [], [], 0
+    for k, v in enumerate(active):
+        if k == len(active) - 1:
+            spans.append([start, len(low)])
+            break
+        w, why, _ = marks[k]
+        at, split = cut(v, active[k + 1], between(units, v, active[k + 1]), w, why, low, word_starts)
+        if split:
+            spans.append([start, split.end])
+            doubled.append({"at": split.start, "as": list(split.halves)})
+            start = split.start
+        else:
+            spans.append([start, at])
+            start = at
+    return spans, doubled
+
+
+def divided(result: dict) -> str:
+    """The line as one big word, divided: fis-tu-la-dis-pa-ri-bus-pau-lā-tim-sur-gi-ta-vē-nīs. A letter
+    that counts twice is spelt as its two sounds (dīc-si-tet); an elided letter is in brackets."""
+    text = result["text"]
+    gone = set()
+    for nu in result["nuclei"]:
+        if nu["mark"] in ("elided", "prodelided"):
+            end = nu["end"]
+            while nu["mark"] == "elided" and end < len(text) and text[end].isalpha():
+                end += 1                             # the -m goes with its vowel
+            gone.update(range(nu["start"], end))
+    halves = {d["at"]: d["as"] for d in result.get("doubled", [])}
+    out = []
+    for nu in (n for n in result["nuclei"] if "syllable" in n):
+        a, b = nu["syllable"]
+        syl = ""
+        for p in range(a, b):
+            c = text[p]
+            if not c.isalpha():
+                continue
+            if p in halves:
+                c = halves[p][0] if p == b - 1 else halves[p][1]
+            syl += f"({c})" if p in gone else c
+        out.append(syl.replace(")(", ""))
+    return "-".join(out)
+
+
 def feet(pattern: str, meter: str = "hexameter") -> list[str]:
     if meter == "pentameter":                      # each half: two feet, then its lone long syllable
         half = len(PENTAMETER.match(pattern).group(1))
@@ -540,6 +655,8 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None,
 
     marks_by_start = {v.start: m for v, m in zip(active, marks)}
     accents = word_accents(units, words, marks_by_start)
+    spans, doubled = syllables(low, words, units, active, marks)
+    span_of = {v.start: sp for v, sp in zip(active, spans)}
     nuclei = []
     for u in units:
         if u.kind != "V":
@@ -554,7 +671,12 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None,
             entry.update(mark=w, why=why)
             if letters:
                 entry["followed_by"] = letters
+            entry["syllable"] = span_of[u.start]
+        if u.hiatus:
+            entry["hiatus"] = True
         nuclei.append(entry)
+    covered = {p for u in units for p in range(u.start, u.end)}
+    silent = [p for p, c in enumerate(low) if c.isalpha() and p not in covered]   # h
 
     ft = feet(pattern, meter)
     if meter == "hexameter" and ft[4] == "LL":
@@ -565,7 +687,9 @@ def scan(text: str, cit: str | None = None, hints: dict | None = None,
     advanced = bool(flags & ADVANCED)
     return {"citation": cit, "text": s, "scans": True, "stage": stage, "penalty": best,
             "ambiguous": len(distinct) > 1, "level": level_of(flags, advanced), "advanced": advanced,
-            "feet": ft, "flags": sorted(flags), "nuclei": nuclei, "difficult_words": hard, **tag}
+            "feet": ft, "flags": sorted(flags), "nuclei": nuclei,
+            **({"doubled": doubled} if doubled else {}), **({"silent": silent} if silent else {}),
+            "difficult_words": hard, **tag}
 
 
 def mark_line(result: dict) -> str:
@@ -578,9 +702,10 @@ def mark_line(result: dict) -> str:
 
 
 def print_scans(results: list[dict], report: bool = False, level: int | None = None,
-                greek: bool = False) -> dict:
+                greek: bool = False, syllables: bool = False) -> dict:
     """Print scans for a human; return a tally. `report` keeps only the lines that need a human
-    (will not scan, needed an advanced licence to scan, or scan two ways equally well)."""
+    (will not scan, needed an advanced licence to scan, or scan two ways equally well); `syllables`
+    adds each line divided into its syllables."""
     tally = {"lines": len(results), "no scan": 0, "stage 2": 0, "ambiguous": 0}
     words: dict = {}
     for r in results:
@@ -610,6 +735,8 @@ def print_scans(results: list[dict], report: bool = False, level: int | None = N
         if r["ambiguous"]:
             notes.append("AMBIGUOUS: more than one best scan")
         print(pad + mark_line(r))
+        if syllables:
+            print(pad + divided(r))
         print(pad + " | ".join(r["feet"]) + f"    [{'; '.join(notes)}]")
     if greek:
         by_reason: dict = {}
