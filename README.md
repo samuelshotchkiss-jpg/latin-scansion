@@ -31,7 +31,7 @@ student's *own* marks, so a scansion that does not fall into six feet shows exac
 neighbours, enlarged, divided before the student's eyes. The words close up into one big word; the
 consonants between this vowel and the next lift out and drop into the syllable they belong to — a
 mūta cum liquida tied by a swoosh and pushed together into the next one, an *x* splitting into *c* +
-*s*; then what decides the mark lights up — the long vowel, the consonant that ends the syllable, the
+*s*, an *i* that is a consonant (*iam*, *coniugis*, *Troia*) growing its tail into a *j*; then what decides the mark lights up — the long vowel, the consonant that ends the syllable, the
 end of the line, the vowel an elision runs into — and a sentence says why. ↻ plays it again.
 
 ## Tutorial, practice, and progress

@@ -1240,19 +1240,36 @@
   }
 
   // The letters shrink until the widest moment (the words apart, or the syllables apart) fits the card.
+  // Nothing moves while it measures, and the card is left at the step it was on (a resize mid-way).
   function fitZoom() {
     const zs = zoomEl.querySelector('.zs'), row = zoomEl.querySelector('.zs-row');
     if (!zs) return;
-    zs.style.fontSize = '';
     const all = STEPS.map(([c]) => c);
+    const was = all.filter((c) => zoomEl.classList.contains(c));
     zoomEl.classList.add('measure');
+    zs.style.fontSize = '';
     zoomEl.classList.remove(...all);
     let need = row.getBoundingClientRect().width;
     zoomEl.classList.add(...all);
     need = Math.max(need, row.getBoundingClientRect().width);
-    zoomEl.classList.remove('measure', ...all);
+    zoomEl.classList.remove(...all);
     const room = zs.clientWidth;
     if (need > room) zs.style.fontSize = (parseFloat(getComputedStyle(zs).fontSize) * room / need * 0.95) + 'px';
+    clipTails();
+    zoomEl.classList.add(...was);
+    void zoomEl.offsetWidth;
+    zoomEl.classList.remove('measure');
+  }
+
+  // A consonant i is drawn as a j with its tail clipped off at the baseline, so it reads as the i of
+  // the line; step 1 lets the tail grow down out of it. The baseline is measured, not assumed: the
+  // font differs from one device to the next.
+  function clipTails() {
+    zoomEl.querySelectorAll('.zs-grow').forEach((g) => {
+      const base = g.querySelector('.zs-base').getBoundingClientRect().top;
+      const below = g.getBoundingClientRect().bottom - base;
+      g.style.setProperty('--tail', (below / parseFloat(getComputedStyle(g).fontSize)) + 'em');
+    });
   }
 
   // Under the syllable, its caret pointing at it; kept inside the screen, and scrolled into view.
@@ -1311,7 +1328,10 @@
       : nucOf.has(p) ? (N[nucOf.get(p)].mark === 'merged' ? 'glide' : 'v') : silent.has(p) ? 'h' : 'c';
     const span = (a, b) => Array.from({ length: Math.max(0, b - a) }, (_, k) => a + k);
     const isCons = (p) => role(p) === 'c' || role(p) === 'glide';
-    const letters = (ps, side) => ps.map((p) => (halves.has(p) ? halves.get(p)[side] : chars[p].toLowerCase())).join('');
+    // an i the scanner counts as a consonant (iam, coniugis; omnia by synizesis) is a j
+    const isJ = (p) => /^i$/i.test(chars[p]) && isCons(p) && !halves.has(p);
+    const said = (p) => (isJ(p) ? (chars[p] === 'I' ? 'J' : 'j') : chars[p]);
+    const letters = (ps, side) => ps.map((p) => (halves.has(p) ? halves.get(p)[side] : said(p).toLowerCase())).join('');
 
     // the consonants between this syllable's vowel and the next: those that stay, those that go on
     const coda = span(N[me].end, N[me].syllable[1]).filter(isCons);
@@ -1319,7 +1339,9 @@
     const z = { coda: letters(coda, 0), onset: letters(onset, 1), codaAt: coda[coda.length - 1] };
     const [sa, sb] = N[me].syllable;
     z.said = span(sa, sb).filter((p) => isLetter(chars[p]) && !gone.has(p))
-      .map((p) => (halves.has(p) ? halves.get(p)[p === sa ? 1 : 0] : chars[p])).join('');
+      .map((p) => (halves.has(p) ? halves.get(p)[p === sa ? 1 : 0] : said(p))).join('');
+    // a j in this syllable or at the head of the next is worth a word (not synizesis: it says its own)
+    z.j = n.mark !== 'merged' && [...span(sa, sb), ...onset].some((p) => isJ(p) && role(p) === 'c');
     z.crossed = onset.length > 0 && chars.slice(onset[onset.length - 1] + 1, N[nx].start).some((c) => !isLetter(c));
     z.h = nx != null && span(N[me].end, N[nx].start).some((p) => silent.has(p));
     z.qu = /qu/.test(n.followed_by || '');
@@ -1380,6 +1402,11 @@
       ties.push(...cuts);
     }
 
+    // an i becoming a j: a small one grows its tail down out of the i; a capital fades into J
+    const toJ = (ch) => (ch === 'I'
+      ? '<span class="zs-morph"><span class="from">I</span><span class="to">J</span></span>'
+      : '<span class="zs-grow">j<span class="zs-base"></span></span>');
+
     let html = '<div class="zs"><span class="zs-row" lang="la">';
     for (let t = lo; t <= hi; t++) {
       const k = act[t];
@@ -1391,12 +1418,15 @@
         if (p === N[k].start) html += '<span class="zs-nuc">';
         const c = escapeHTML(chars[p]);
         if (halves.has(p) && p === b - 1 && p !== a) {       // a letter that counts twice: its first sound
-          html += `<span class="zs-l zs-dbl${key.has(p) ? ' key' : ''}"><span class="zs-morph">` +
-                  `<span class="from">${c}</span><span class="to">${escapeHTML(halves.get(p)[0])}</span></span></span>`;
+          const first = halves.get(p)[0];
+          html += `<span class="zs-l zs-dbl${key.has(p) ? ' key' : ''}">` + (first === 'j' && /i/i.test(chars[p]) ? toJ(chars[p])
+            : `<span class="zs-morph"><span class="from">${c}</span><span class="to">${escapeHTML(first)}</span></span>`) + '</span>';
         } else if (halves.has(p) && p === a) {                 // ... and its second, in the next syllable
           html += `<span class="zs-l zs-dbl zs-half"><span>${escapeHTML(halves.get(p)[1])}</span></span>`;
         } else if (role(p) === 'sp') {
           html += `<span class="zs-sp">${chars[p] === ' ' ? '&nbsp;' : c}</span>`;
+        } else if (isJ(p)) {
+          html += `<span class="zs-l zs-${role(p)} zs-jay${key.has(p) ? ' key' : ''}">${toJ(chars[p])}</span>`;
         } else {
           // a consonant u is the u of qu (or sanguis, suāvis): no sound of its own, like h
           const mute = role(p) === 'c' && /u/i.test(chars[p]) ? ' zs-u' : '';
@@ -1415,8 +1445,13 @@
     return z;
   }
 
-  // What lit up, named (the tag), and said in a sentence.
+  // What lit up, named (the tag), and said in a sentence -- and a word on any i that turned into a j.
   function zoomWhy(l, n, z) {
+    const [tag, why] = zoomReason(l, n, z);
+    const j = z && z.j ? ' The <i>i</i> before a vowel is a consonant, <i>j</i> (say it like English <i>y</i>).' : '';
+    return [tag, why + j];
+  }
+  function zoomReason(l, n, z) {
     const b = (s) => `<b class="la">${escapeHTML(s)}</b>`;
     const v = b(n.text);
     const quNote = z && z.qu ? ' (<i>qu</i> is one consonant: its <i>u</i> is not a vowel.)' : '';
@@ -1457,7 +1492,7 @@
       case 'prodelided':
         return ['est after a vowel', `After a vowel or <i>-m</i>, the <i>e</i> of <i>est</i> drops out: ${b(z.word + ' est')} is said ${b(z.word + '’st')}.`];
       case 'merged':
-        return ['run together', `${v} runs together with the next vowel into one syllable (synizesis)${/i/i.test(n.text) ? ': say it like English <i>y</i>' : ''}.`];
+        return ['run together', `${v} runs together with the next vowel into one syllable (synizesis)${/i/i.test(n.text) ? ': it becomes a consonant, <i>j</i>, said like English <i>y</i>' : ''}.`];
       default: return ['', ''];
     }
   }
@@ -1469,7 +1504,7 @@
     const c = [...l.text][d.at].toLowerCase();
     if (c === 'x') return ' <i>x</i> is two consonants, <i>c</i> + <i>s</i>, and they divide between the syllables.';
     if (c === 'z') return ' <i>z</i> is two consonants, <i>d</i> + <i>z</i>, and they divide between the syllables.';
-    if (c === 'i') return ' An <i>i</i> between two vowels is a consonant (say it like English <i>y</i>), and it counts twice: once to end this syllable, once to begin the next.';
+    if (c === 'i') return ' An <i>i</i> between two vowels is a consonant, <i>j</i> (say it like English <i>y</i>), and it counts twice: once to end this syllable, once to begin the next.';
     if (d.as[0] === 'c' && d.as[1] === 'c') return ' <i>hic</i> and <i>hoc</i> before a vowel are really <i>hicc</i> and <i>hocc</i>.';
     return ` This word hides an unwritten <i>j</i> after its <i>${escapeHTML(d.as[0])}</i>: <i>in-jiciō</i>.`;
   }

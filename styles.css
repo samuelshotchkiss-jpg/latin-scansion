@@ -276,6 +276,15 @@ body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tuto
   font: 600 .7rem/1 system-ui, sans-serif; letter-spacing: .03em; color: var(--muted); white-space: nowrap;
 }
 .zs-half { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; vertical-align: bottom; }
+/* a consonant i is a j with its tail clipped off at the baseline (--tail, measured in app.js
+   clipTails), so it reads as the i of the line; in step 1 the tail grows down out of it */
+.zs-grow {
+  display: inline-block; clip-path: inset(-.6em -.5em var(--tail, .25em) -.5em);
+  transition: clip-path .8s cubic-bezier(.45, 0, .25, 1) .15s, color .3s;
+}
+.zs-base { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+.zoom.is-word .zs-grow { clip-path: inset(-.6em -.5em -.5em -.5em); }
+.zoom.is-word .zs-jay, .zoom.is-word .zs-dbl .zs-grow { color: var(--accent); }
 .zs-morph { display: inline-grid; }
 .zs-morph > span { grid-area: 1 / 1; text-align: center; transition: opacity .35s; }
 .zs-morph .to { opacity: 0; }
