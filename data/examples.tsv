@@ -1,0 +1,32 @@
+# The tutorial's worked examples: lines from OUTSIDE the reader, so a student meets each one fresh.
+# A lesson shows one with <div class="demo" data-line="Met. 13.607" data-show="volucrī:u volucris:u">
+# (see data/tutorial.json), and the app divides the named syllables with the zoom-in's animation.
+#
+# Text: Perseus Digital Library -- Ovid, ed. Hugo Magnus (1914); Vergil, ed. J. B. Greenough (1900),
+# both public domain. Spelling brought to the reader's norm. Macrons: drafted by Alatius's
+# latin-macronizer scanning each line as a hexameter, then proofread by hand, 2026-10-24 (it had
+# written volūcrīs for volucris in Met. 13.607). Macrons are CC BY-NC-SA 4.0, like the rest of data/.
+#
+# After any edit, rebuild the key the app reads:
+#     python scansion/scan.py data/examples.tsv --json data/examples.json
+# Keep a line's NEXT line beside it when the line runs on into it (Aen. 4.558-559, hypermetry):
+# the scanner allows hypermetry only where the next line begins with a vowel.
+Met. 1.1	In nova fert animus mūtātās dīcere fōrmās
+Met. 1.11	nec nova crēscendō reparābat cornua Phoebē,
+Met. 1.17	lūcis egēns āēr: nūllī sua fōrma manēbat,
+Met. 1.27	ēmicuit summāque locum sibi fēcit in arce:
+Met. 1.51	temperiemque dedit mixtā cum frīgore flamma.
+Met. 1.69	Vix ita līmitibus dissaepserat omnia certīs,
+Met. 1.86	iussit et ērēctōs ad sīdera tollere vultūs.
+Met. 1.89	Aurea prīma sata est aetās, quae vindice nūllō,
+Met. 1.128	Prōtinus irrūpit vēnae peiōris in aevum
+Met. 1.136	cautus humum longō signāvit līmite mēnsor.
+Met. 3.467	Ō utinam ā nostrō sēcēdere corpore possem!
+Met. 10.31	Eurydicēs, ōrō, properāta retexite fāta.
+Met. 13.607	et prīmō similis volucrī, mox vēra volucris
+Aen. 1.726	ātria; dēpendent lychnī laqueāribus aureīs
+Aen. 2.1	Conticuēre omnēs, intentīque ōra tenēbant.
+Aen. 3.658	mōnstrum horrendum, īnfōrme, ingēns, cui lūmen adēmptum.
+Aen. 4.558	omnia Mercuriō similis, vōcemque colōremque
+Aen. 4.559	et crīnīs flāvōs et membra decōra iuventā:
+Aen. 6.129	hoc opus, hic labor est. Paucī, quōs aequus amāvit

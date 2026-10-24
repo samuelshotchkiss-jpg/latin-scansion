@@ -4,7 +4,10 @@ This repository combines three bodies of material under three sets of terms.
 
 ## 1. The Latin texts — public domain
 
-The words of Ovid's *Metamorphoses* and Vergil's *Aeneid* are in the public domain.
+The words of Ovid's *Metamorphoses* and Vergil's *Aeneid* are in the public domain. The tutorial's
+worked examples (`data/examples.tsv`), lines from outside the reader, take their text from the Perseus
+Digital Library's editions of Hugo Magnus (Ovid, 1914) and J. B. Greenough (Vergil, 1900), both in the
+public domain; the macrons are this project's.
 
 ## 2. Editorial content — CC BY-NC-SA 4.0
 
@@ -45,6 +48,6 @@ open.
 ## Combining the two licenses
 
 CC BY-NC-SA 4.0 and AGPL-3.0 are not compatible within a single file, and in this project they never
-share one: content lives in HTML, JSON and Markdown; code lives in Python, JavaScript and CSS. If you
+share one: content lives in HTML, JSON, TSV and Markdown; code lives in Python, JavaScript and CSS. If you
 extract material, keep that boundary — reuse the code under AGPL-3.0 and the content under
 CC BY-NC-SA 4.0, and attribute the Latin texts as public domain.

@@ -28,6 +28,7 @@
   let lastShown = null;    // the citation shown before this one: a step to a neighbour scrolls
   let byCitation = {};
   let stages = [];         // tutorial stages whose lines all exist
+  let examples = {};       // the lessons' worked examples, by citation (data/examples.json)
   let pool = [], index = 0;
   let marks = {}, tieOf = {}, junctions = [];
   let checked = false, revealed = false, helped = false;
@@ -45,7 +46,9 @@
     // not), so a push reaches students on their next load instead of after the cache expires
     fetch('data/lines.json', { cache: 'no-cache' }).then((r) => r.json()),
     fetch('data/tutorial.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => ({ stages: [] })),
-  ]).then(([data, tutorial]) => {
+    fetch('data/examples.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => []),
+  ]).then(([data, tutorial, worked]) => {
+    worked.filter((l) => l.scans).forEach((l) => { examples[l.citation] = l; });
     rows = data.filter((l) => l.passage)
       .map((l, i) => ({ ...l, _at: i }))
       .sort((a, b) => (a.passage_order - b.passage_order) || (a._at - b._at));
@@ -203,6 +206,7 @@
     $('lesson-body').innerHTML = lesson;
     $('lesson-body').hidden = false;
     $('lesson-toggle').textContent = 'Hide lesson';
+    buildDemos($('lesson-body'));
     pool = stage.lines.map((c) => byCitation[c]);
     const saved = resume ? S.stagePos[stage.id] : null;
     const at = saved ? pool.findIndex((l) => l.citation === saved) : -1;
@@ -220,6 +224,7 @@
     const body = $('lesson-body');
     body.hidden = !body.hidden;
     $('lesson-toggle').textContent = body.hidden ? 'Show lesson' : 'Hide lesson';
+    if (!body.hidden) body.querySelectorAll('.demo.zplay').forEach(fitZoom);   // measured while hidden: 0 wide
   });
 
   // ---- where a swoosh may go ------------------------------------------------------------------------
@@ -1195,77 +1200,84 @@
     'word-initial cluster ignored'];
   const CLOSED = ['two consonants', 'muta cum liquida, long', 'word-initial cluster makes position',
     'lengthened syllable'];
-  let zoomAt = null, zoomTimers = [];
+  let zoomAt = null;
+  const AGAIN = '<button type="button" class="zoom-again" title="Divide it again" aria-label="Divide it again">↻</button>';
+  const CLOSE = '<button type="button" class="zoom-close" title="Close" aria-label="Close">×</button>';
 
   function showReason(i) {
     const l = current(); if (!l || !(checked || revealed)) return;
-    zoomTimers.forEach(clearTimeout); zoomTimers = [];
     zoomAt = i;
+    const want = expected(l.nuclei[i]), got = marks[i];
+    const note = checked && got !== want ? `— you marked it ${got ? WORD[got] : 'nothing'}` : '';
+    zoomEl.innerHTML = zoomCard(l, i, note, AGAIN + CLOSE);
+    zoomEl.hidden = false;
+    fitZoom(zoomEl);
+    placeZoom();
+    playZoom(zoomEl);
+  }
+
+  // What a card holds -- the heading, the strip, the sentence -- for the pop-up and for a lesson's
+  // worked example alike.
+  function zoomCard(l, i, note, buttons) {
     const n = l.nuclei[i];
-    const want = expected(n), got = marks[i];
     const z = zoomStrip(l, i);
     const [tag, why] = zoomWhy(l, n, z);
     // the syllable, as it sounds (dīxit: dīc), or the vowel an elision takes (with its -m)
     const said = z && n.syllable ? z.said : n.text + (z && z.m ? 'm' : '');
     let head = n.mark === 'merged' ? `<b class="la">${escapeHTML(said)}</b> <b>runs into the next vowel</b>`
-      : `<b class="la">${escapeHTML(said)}</b> is <b>${WORD[want]}</b>`;
-    if (checked && got !== want) head += ` <span class="note">— you marked it ${got ? WORD[got] : 'nothing'}</span>`;
-    zoomEl.innerHTML =
-      `<div class="zoom-head"><span>${head}</span><span class="zoom-buttons">` +
-      `<button type="button" class="zoom-again" title="Divide it again" aria-label="Divide it again">↻</button>` +
-      `<button type="button" class="zoom-close" title="Close" aria-label="Close">×</button></span></div>` +
+      : `<b class="la">${escapeHTML(said)}</b> is <b>${WORD[expected(n)]}</b>`;
+    if (note) head += ` <span class="note">${note}</span>`;
+    return `<div class="zoom-head"><span>${head}</span><span class="zoom-buttons">${buttons}</span></div>` +
       (z ? z.html : '') +
       `<p class="zoom-why" aria-live="polite"><span class="zoom-tag">${tag}</span> ${why}</p>`;
-    zoomEl.hidden = false;
-    fitZoom();
-    placeZoom();
-    playZoom();
   }
 
   function closeZoom() {
-    zoomTimers.forEach(clearTimeout); zoomTimers = [];
+    stopZoom(zoomEl);
     zoomAt = null;
     zoomEl.hidden = true;
     zoomEl.innerHTML = '';
   }
 
-  function playZoom() {
-    zoomTimers.forEach(clearTimeout); zoomTimers = [];
+  // The four steps play on a box: the pop-up, or a worked example in a lesson.
+  function stopZoom(box) { (box.zoomTimers || []).forEach(clearTimeout); box.zoomTimers = []; }
+  function playZoom(box) {
+    stopZoom(box);
     const all = STEPS.map(([c]) => c);
-    zoomEl.classList.remove(...all);
+    box.classList.remove(...all);
     const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (still) { zoomEl.classList.add(...all); return; }
-    void zoomEl.offsetWidth;                         // start from the line as it is written
-    STEPS.forEach(([c, t]) => zoomTimers.push(setTimeout(() => zoomEl.classList.add(c), t)));
+    if (still) { box.classList.add(...all); return; }
+    void box.offsetWidth;                            // start from the line as it is written
+    STEPS.forEach(([c, t]) => box.zoomTimers.push(setTimeout(() => box.classList.add(c), t)));
   }
 
   // The letters shrink until the widest moment (the words apart, or the syllables apart) fits the card.
   // Nothing moves while it measures, and the card is left at the step it was on (a resize mid-way).
-  function fitZoom() {
-    const zs = zoomEl.querySelector('.zs'), row = zoomEl.querySelector('.zs-row');
-    if (!zs) return;
+  function fitZoom(box) {
+    const zs = box.querySelector('.zs'), row = box.querySelector('.zs-row');
+    if (!zs || !zs.clientWidth) return;              // not on screen (a hidden lesson): fit it when shown
     const all = STEPS.map(([c]) => c);
-    const was = all.filter((c) => zoomEl.classList.contains(c));
-    zoomEl.classList.add('measure');
+    const was = all.filter((c) => box.classList.contains(c));
+    box.classList.add('measure');
     zs.style.fontSize = '';
-    zoomEl.classList.remove(...all);
+    box.classList.remove(...all);
     let need = row.getBoundingClientRect().width;
-    zoomEl.classList.add(...all);
+    box.classList.add(...all);
     need = Math.max(need, row.getBoundingClientRect().width);
-    zoomEl.classList.remove(...all);
+    box.classList.remove(...all);
     const room = zs.clientWidth;
     if (need > room) zs.style.fontSize = (parseFloat(getComputedStyle(zs).fontSize) * room / need * 0.95) + 'px';
-    clipTails();
-    zoomEl.classList.add(...was);
-    void zoomEl.offsetWidth;
-    zoomEl.classList.remove('measure');
+    clipTails(box);
+    box.classList.add(...was);
+    void box.offsetWidth;
+    box.classList.remove('measure');
   }
 
   // A consonant i is drawn as a j with its tail clipped off at the baseline, so it reads as the i of
   // the line; step 1 lets the tail grow down out of it. The baseline is measured, not assumed: the
   // font differs from one device to the next.
-  function clipTails() {
-    zoomEl.querySelectorAll('.zs-grow').forEach((g) => {
+  function clipTails(box) {
+    box.querySelectorAll('.zs-grow').forEach((g) => {
       const base = g.querySelector('.zs-base').getBoundingClientRect().top;
       const below = g.getBoundingClientRect().bottom - base;
       g.style.setProperty('--tail', (below / parseFloat(getComputedStyle(g).fontSize)) + 'em');
@@ -1290,7 +1302,7 @@
 
   zoomEl.addEventListener('click', (e) => {
     if (e.target.closest('.zoom-close')) closeZoom();
-    else if (e.target.closest('.zoom-again')) playZoom();
+    else if (e.target.closest('.zoom-again')) playZoom(zoomEl);
   });
   // a tap anywhere else closes it -- except on another syllable, which opens that one instead
   document.addEventListener('pointerdown', (e) => {
@@ -1298,7 +1310,120 @@
     closeZoom();
   }, true);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !zoomEl.hidden) closeZoom(); });
-  window.addEventListener('resize', () => { if (!zoomEl.hidden) { fitZoom(); placeZoom(); } });
+  window.addEventListener('resize', () => {
+    if (!zoomEl.hidden) { fitZoom(zoomEl); placeZoom(); }
+    document.querySelectorAll('.demo.zplay').forEach(fitZoom);
+  });
+
+  // ---- worked examples in the lessons ----------------------------------------------------------------
+  // A lesson may hold <div class="demo" data-line="Met. 13.607" data-show="volucrī:u volucris:u">: a
+  // line from data/examples.json (lines from outside the reader, so they are new to the student) or from
+  // the reader itself, shown scanned, with the syllables `data-show` names picked out -- a word and the
+  // vowel of its syllable, with #2 for a second one (colōremque:e#2, est#2:e). The first divides itself
+  // with the zoom-in's animation when the example comes into view; a tap divides any other.
+  const seen = 'IntersectionObserver' in window ? new IntersectionObserver((hits) => {
+    hits.forEach((h) => {
+      if (!h.isIntersecting || h.target.played) return;
+      h.target.played = true;
+      fitZoom(h.target);
+      playZoom(h.target);
+    });
+  }, { threshold: 0.6 }) : null;
+
+  function buildDemos(root) {
+    root.querySelectorAll('.demo[data-line]').forEach((box) => {
+      const l = examples[box.dataset.line] || byCitation[box.dataset.line];
+      const picks = l ? (box.dataset.show || '').split(/\s+/).filter(Boolean).map((s) => {
+        const k = findNucleus(l, s);
+        if (k == null) console.warn(`tutorial: ${box.dataset.line} has no syllable "${s}"`);
+        return k;
+      }).filter((k) => k != null) : [];
+      if (!l || !picks.length) {
+        if (!l) console.warn(`tutorial: no example line ${box.dataset.line}`);
+        box.hidden = true;
+        return;
+      }
+      box.line = l; box.picks = picks;
+      box.classList.add('zplay');
+      // a chip names the syllable as it sounds (lu, luc) -- or, for one elided away, its word
+      const chips = picks.length < 2 ? '' : '<div class="demo-picks">' + picks.map((k) => {
+        const n = l.nuclei[k], chars = [...l.text];
+        let label = n.syllable ? zoomStrip(l, k).said : '';
+        if (!label) {
+          let a = n.start, b = n.end;
+          while (a > 0 && isLetter(chars[a - 1])) a--;
+          while (b < chars.length && isLetter(chars[b])) b++;
+          label = chars.slice(a, b).join('');
+        }
+        return `<button type="button" data-k="${k}" lang="la">${escapeHTML(label)}</button>`;
+      }).join('') + '</div>';
+      box.innerHTML = `<div class="demo-cite">${escapeHTML(l.citation)}</div>` +
+        `<div class="demo-line" lang="la">${demoLine(l, picks)}</div>${chips}<div class="demo-card"></div>`;
+      showDemo(box, picks[0], false);
+      if (seen) seen.observe(box); else playZoom(box);
+    });
+  }
+
+  // The example line, scanned: every syllable's mark above it, the picked ones underlined.
+  function demoLine(l, picks) {
+    const chars = [...l.text];
+    let html = '', at = 0;
+    l.nuclei.forEach((n, k) => {
+      html += escapeHTML(chars.slice(at, n.start).join(''));
+      const m = SYMBOL[n.mark] || '';
+      html += `<span class="dnuc${picks.includes(k) ? ' pick' : ''}${m ? '' : ' gone'}" data-k="${k}" tabindex="0" role="button">` +
+        `${escapeHTML(chars.slice(n.start, n.end).join(''))}<span class="dmark">${m}</span></span>`;
+      at = n.end;
+    });
+    return html + escapeHTML(chars.slice(at).join(''));
+  }
+
+  function showDemo(box, k, play) {
+    box.querySelectorAll('[data-k]').forEach((e) => e.classList.toggle('on', Number(e.dataset.k) === k));
+    stopZoom(box);
+    box.classList.remove(...STEPS.map(([c]) => c));
+    box.querySelector('.demo-card').innerHTML = zoomCard(box.line, k, '', AGAIN);
+    box.at = k;
+    fitZoom(box);
+    if (play) { box.played = true; playZoom(box); }
+  }
+
+  // "volucris:u" -> the nucleus u of the word volucris; "colōremque:e#2" the second e; "est#2:e" the e
+  // of the second est. Case and macrons count, as written in the line.
+  function findNucleus(l, spec) {
+    const m = spec.match(/^(.+?)(?:#(\d+))?:(.+?)(?:#(\d+))?$/);
+    if (!m) return null;
+    const [, word, wn, vowel, vn] = m;
+    const chars = [...l.text];
+    const words = [];
+    for (let p = 0; p < chars.length;) {
+      if (!isLetter(chars[p])) { p++; continue; }
+      let e = p;
+      while (e < chars.length && isLetter(chars[e])) e++;
+      words.push([p, e, chars.slice(p, e).join('')]);
+      p = e;
+    }
+    const w = words.filter(([, , t]) => t.toLowerCase() === word.toLowerCase())[(Number(wn) || 1) - 1];
+    if (!w) return null;
+    const ks = l.nuclei.map((_, k) => k).filter((k) => l.nuclei[k].start >= w[0] && l.nuclei[k].end <= w[1]
+      && l.nuclei[k].text.toLowerCase() === vowel.toLowerCase());
+    const k = ks[(Number(vn) || 1) - 1];
+    return k == null ? null : k;
+  }
+
+  $('lesson-body').addEventListener('click', (e) => {
+    const box = e.target.closest('.demo.zplay');
+    if (!box) return;
+    if (e.target.closest('.zoom-again')) { playZoom(box); return; }
+    const pick = e.target.closest('[data-k]');
+    if (pick) showDemo(box, Number(pick.dataset.k), true);
+  });
+  $('lesson-body').addEventListener('keydown', (e) => {
+    const pick = e.target.closest('.demo .dnuc');
+    if (!pick || (e.key !== 'Enter' && e.key !== ' ')) return;
+    e.preventDefault();
+    showDemo(pick.closest('.demo'), Number(pick.dataset.k), true);
+  });
 
   // The strip of letters: the syllable that holds nucleus i, with one neighbour on each side (two on one
   // side at the ends of the line). Returns its HTML and the letters the explanation names.
@@ -1344,7 +1469,7 @@
     z.j = n.mark !== 'merged' && [...span(sa, sb), ...onset].some((p) => isJ(p) && role(p) === 'c');
     z.crossed = onset.length > 0 && chars.slice(onset[onset.length - 1] + 1, N[nx].start).some((c) => !isLetter(c));
     z.h = nx != null && span(N[me].end, N[nx].start).some((p) => silent.has(p));
-    z.qu = /qu/.test(n.followed_by || '');
+    z.qu = /qu/.test(n.followed_by || '') || /qu/i.test(z.said);   // after the vowel, or opening its syllable
 
     // what decides the mark: these letters light up (or the end of the line)
     const key = new Set();
@@ -1362,7 +1487,9 @@
       z.next = N[me].start > n.start;              // the vowel it runs into -- or the next line's
       if (z.next) {
         nucleus(me).forEach((p) => key.add(p));
-        span(n.end, N[me].start).filter((p) => silent.has(p)).forEach((p) => key.add(p));
+        const h = span(n.end, N[me].start).filter((p) => silent.has(p));   // horrendum: an h before it
+        h.forEach((p) => key.add(p));
+        z.hNext = h.length > 0;
       } else keyEnd = true;
       z.m = n.end < chars.length && isLetter(chars[n.end]);     // an elided syllable ends in a vowel or -m
     }
@@ -1488,7 +1615,7 @@
         return ['lengthened at the beat', `Only one consonant follows, ${b(z.coda)}, so it ought to be short. But the beat falls here: the poet keeps ${b(z.coda)} in this syllable and lengthens it.`];
       case 'elided':
         if (!z.next) return ['into the next line', 'The line has one syllable too many: its last vowel elides into the next line, which begins with a vowel (hypermetry).'];
-        return ['the next word begins with a vowel', `Its word ends in a vowel${z.m ? ' + <i>m</i>' : ''}, and the next word begins with a vowel${z.h ? ' (the <i>h</i> does not count)' : ''}. So ${v}${z.m ? b('m') : ''} is elided, and the swoosh joins what is left to the next vowel.`];
+        return ['the next word begins with a vowel', `Its word ends in a vowel${z.m ? ' + <i>m</i>' : ''}, and the next word begins with ${z.hNext ? 'an <i>h</i> and a vowel — the <i>h</i> does not count' : 'a vowel'}. So ${v}${z.m ? b('m') : ''} is elided, and the swoosh joins what is left to the next vowel.`];
       case 'prodelided':
         return ['est after a vowel', `After a vowel or <i>-m</i>, the <i>e</i> of <i>est</i> drops out: ${b(z.word + ' est')} is said ${b(z.word + '’st')}.`];
       case 'merged':

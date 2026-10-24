@@ -241,8 +241,8 @@ body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tuto
   background: var(--panel); border-left: 1px solid var(--line); border-top: 1px solid var(--line);
   transform: translateX(-50%) rotate(45deg);
 }
-.zoom .la { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; }
-.zoom .note { color: var(--muted); }
+.zplay .la { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; }
+.zplay .note { color: var(--muted); }
 .zoom-head { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
 .zoom-buttons { display: flex; gap: .15rem; flex-shrink: 0; }
 .zoom-buttons button {
@@ -283,8 +283,8 @@ body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tuto
   transition: clip-path .8s cubic-bezier(.45, 0, .25, 1) .15s, color .3s;
 }
 .zs-base { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
-.zoom.is-word .zs-grow { clip-path: inset(-.6em -.5em -.5em -.5em); }
-.zoom.is-word .zs-jay, .zoom.is-word .zs-dbl .zs-grow { color: var(--accent); }
+.zplay.is-word .zs-grow { clip-path: inset(-.6em -.5em -.5em -.5em); }
+.zplay.is-word .zs-jay, .zplay.is-word .zs-dbl .zs-grow { color: var(--accent); }
 .zs-morph { display: inline-grid; }
 .zs-morph > span { grid-area: 1 / 1; text-align: center; transition: opacity .35s; }
 .zs-morph .to { opacity: 0; }
@@ -301,31 +301,52 @@ body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tuto
 .zs-cut-l, .zs-cut-r { transition: margin .55s ease, transform .55s ease; }
 
 /* 1 · one big word: spaces close, h fades, elided letters grey out, x becomes c + s */
-.zoom.is-word .zs-sp { max-width: 0; opacity: 0; }
-.zoom.is-word .zs-h, .zoom.is-word .zs-u { opacity: .35; }
-.zoom.is-word .zs-gone { opacity: .45; text-decoration: line-through; text-decoration-thickness: .06em; }
-.zoom.is-word .zs-elide::after, .zoom.is-word .zs-cut-r.tied::after { opacity: 1; }
-.zoom.is-word .zs-morph .from { opacity: 0; }
-.zoom.is-word .zs-morph .to, .zoom.is-word .zs-half { opacity: 1; color: var(--accent); }
-.zoom.is-word .zs-half { max-width: 1em; transition: max-width .45s ease, opacity .35s; }
-.zoom.is-word .zs-glide { color: var(--accent); }
-.zoom.is-word:not(.is-split) .zs-cut-l,
-.zoom.is-word:not(.is-split) .zs-cut-r { margin: 0 .2em; transform: translateY(-.3em); }
+.zplay.is-word .zs-sp { max-width: 0; opacity: 0; }
+.zplay.is-word .zs-h, .zplay.is-word .zs-u { opacity: .35; }
+.zplay.is-word .zs-gone { opacity: .45; text-decoration: line-through; text-decoration-thickness: .06em; }
+.zplay.is-word .zs-elide::after, .zplay.is-word .zs-cut-r.tied::after { opacity: 1; }
+.zplay.is-word .zs-morph .from { opacity: 0; }
+.zplay.is-word .zs-morph .to, .zplay.is-word .zs-half { opacity: 1; color: var(--accent); }
+.zplay.is-word .zs-half { max-width: 1em; transition: max-width .45s ease, opacity .35s; }
+.zplay.is-word .zs-glide { color: var(--accent); }
+.zplay.is-word:not(.is-split) .zs-cut-l,
+.zplay.is-word:not(.is-split) .zs-cut-r { margin: 0 .2em; transform: translateY(-.3em); }
 /* 2 · the syllables part */
-.zoom.is-split .zs-syl + .zs-syl { margin-left: .42em; }
-.zoom.is-split .zs-syl { background: var(--target); box-shadow: 0 0 0 .1em var(--target); }
-.zoom.is-split .zs-syl.here { background: var(--here); box-shadow: 0 0 0 .1em var(--here); }
+.zplay.is-split .zs-syl + .zs-syl { margin-left: .42em; }
+.zplay.is-split .zs-syl { background: var(--target); box-shadow: 0 0 0 .1em var(--target); }
+.zplay.is-split .zs-syl.here { background: var(--here); box-shadow: 0 0 0 .1em var(--here); }
 /* 3 · what decides it */
-.zoom.is-why .key { color: var(--key-ink); background: var(--key-bg); box-shadow: 0 0 0 .05em var(--key-bg); border-radius: .1em; }
-.zoom.is-why .zs-end.key { background: var(--key-ink); box-shadow: 0 0 0 .07em var(--key-bg); }
-.zoom.is-why .zs-end.key span { color: var(--key-ink); }
+.zplay.is-why .key { color: var(--key-ink); background: var(--key-bg); box-shadow: 0 0 0 .05em var(--key-bg); border-radius: .1em; }
+.zplay.is-why .zs-end.key { background: var(--key-ink); box-shadow: 0 0 0 .07em var(--key-bg); }
+.zplay.is-why .zs-end.key span { color: var(--key-ink); }
 /* 4 · the mark */
-.zoom.is-mark .zs-mark { opacity: 1; transform: translate(-50%, 0); }
+.zplay.is-mark .zs-mark { opacity: 1; transform: translate(-50%, 0); }
 .zoom-why { margin: .2rem 0 0; opacity: 0; transition: opacity .4s; }
-.zoom.is-why .zoom-why { opacity: 1; }
+.zplay.is-why .zoom-why { opacity: 1; }
 .zoom-tag { padding: .05em .4em; border-radius: .3em; background: var(--key-bg); color: var(--key-ink); font-weight: 600; white-space: nowrap; }
 .zoom-tag:empty { display: none; }
-.zoom.measure, .zoom.measure * { transition: none !important; }
+.zplay.measure, .zplay.measure * { transition: none !important; }
+
+/* ---- a worked example in a lesson: a line from outside the reader, scanned, with the zoom-in's
+   animation below it (app.js buildDemos) ---- */
+.demo { margin: .9rem 0 1rem; padding: .55rem .85rem .75rem; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+.demo-cite { font-size: .8rem; color: var(--muted); }
+.demo-line { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.2rem; line-height: 2.5; padding-top: .45rem; }
+.dnuc { position: relative; cursor: pointer; border-radius: 3px; }
+.dnuc .dmark { position: absolute; left: 50%; bottom: 1.05em; transform: translateX(-50%); font-size: .9em; line-height: 1; color: var(--muted); pointer-events: none; }
+.dnuc.gone { color: var(--muted); }
+.dnuc.pick { box-shadow: inset 0 -2px 0 var(--accent); }
+.dnuc.on { background: var(--here); box-shadow: 0 0 0 2px var(--here); }
+.dnuc.on .dmark { color: var(--mark); }
+.dnuc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.demo-picks { display: flex; flex-wrap: wrap; gap: .4rem; margin: .1rem 0 .4rem; }
+.demo-picks button {
+  padding: .15rem .7rem; border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+  background: var(--panel); color: var(--ink); font: 1rem/1.4 Tahoma, "Noto Sans", sans-serif;
+}
+.demo-picks button.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.demo-card { border-top: 1px dashed var(--line); padding-top: .4rem; }
+.demo .zs { font-size: clamp(1.8rem, 7vw, 2.4rem); padding: .75em 0 .55em; }
 
 .ghost {
   position: fixed; z-index: 10; pointer-events: none;
@@ -441,7 +462,7 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   .nuc .mark { transition: none; }
   .line-check.fresh { animation: none; }
   .stage-lines.slide-up, .stage-lines.slide-down { animation: none; }
-  .zoom *, .zoom *::after { transition: none !important; }   /* the zoom-in opens at its last step */
+  .zplay *, .zplay *::after { transition: none !important; }   /* the zoom-in opens at its last step */
 }
 
 /* ---- phones --------------------------------------------------------------------------------------- */

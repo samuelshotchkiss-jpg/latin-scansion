@@ -1,0 +1,3979 @@
+[
+ {
+  "citation": "Met. 1.1",
+  "text": "In nova fert animus mūtātās dīcere fōrmās",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 1,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 1,
+    "text": "I",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nn",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "o",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "v",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "f",
+    "syllable": [
+     5,
+     8
+    ]
+   },
+   {
+    "start": 9,
+    "end": 10,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rt",
+    "syllable": [
+     8,
+     11
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "a",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     11,
+     14
+    ]
+   },
+   {
+    "start": 15,
+    "end": 16,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     14,
+     16
+    ]
+   },
+   {
+    "start": 17,
+    "end": 18,
+    "text": "u",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "sm",
+    "syllable": [
+     16,
+     20
+    ]
+   },
+   {
+    "start": 21,
+    "end": 22,
+    "text": "ū",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     20,
+     22
+    ]
+   },
+   {
+    "start": 23,
+    "end": 24,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     22,
+     24
+    ]
+   },
+   {
+    "start": 25,
+    "end": 26,
+    "text": "ā",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     24,
+     28
+    ]
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     28,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     30,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "f",
+    "syllable": [
+     32,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     35,
+     38
+    ]
+   },
+   {
+    "start": 39,
+    "end": 40,
+    "text": "ā",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     38,
+     41
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 1.11",
+  "text": "nec nova crēscendō reparābat cornua Phoebē,",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 6,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LSS",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "h, x, z",
+   "muta cum liquida at word start"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "cn",
+    "syllable": [
+     0,
+     4
+    ]
+   },
+   {
+    "start": 5,
+    "end": 6,
+    "text": "o",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "v",
+    "syllable": [
+     4,
+     6
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "a",
+    "mark": "S",
+    "why": "muta cum liquida at word start",
+    "followed_by": "cr",
+    "syllable": [
+     6,
+     9
+    ]
+   },
+   {
+    "start": 11,
+    "end": 12,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     9,
+     13
+    ]
+   },
+   {
+    "start": 14,
+    "end": 15,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nd",
+    "syllable": [
+     13,
+     16
+    ]
+   },
+   {
+    "start": 17,
+    "end": 18,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     16,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "p",
+    "syllable": [
+     19,
+     21
+    ]
+   },
+   {
+    "start": 22,
+    "end": 23,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     21,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     23,
+     25
+    ]
+   },
+   {
+    "start": 26,
+    "end": 27,
+    "text": "a",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "tc",
+    "syllable": [
+     25,
+     29
+    ]
+   },
+   {
+    "start": 30,
+    "end": 31,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rn",
+    "syllable": [
+     29,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     32,
+     34
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "ph",
+    "syllable": [
+     34,
+     36
+    ]
+   },
+   {
+    "start": 38,
+    "end": 40,
+    "text": "oe",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     36,
+     40
+    ]
+   },
+   {
+    "start": 41,
+    "end": 42,
+    "text": "ē",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     40,
+     43
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 1.17",
+  "text": "lūcis egēns āēr: nūllī sua fōrma manēbat,",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 7,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "greekiness"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "ū",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     0,
+     2
+    ]
+   },
+   {
+    "start": 3,
+    "end": 4,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     2,
+     4
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "e",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "g",
+    "syllable": [
+     4,
+     7
+    ]
+   },
+   {
+    "start": 8,
+    "end": 9,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     7,
+     10
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     10,
+     13
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     13,
+     17
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "ū",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     17,
+     20
+    ]
+   },
+   {
+    "start": 21,
+    "end": 22,
+    "text": "ī",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     20,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "u",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     23,
+     25
+    ]
+   },
+   {
+    "start": 25,
+    "end": 26,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "f",
+    "syllable": [
+     25,
+     27
+    ]
+   },
+   {
+    "start": 28,
+    "end": 29,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     27,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     30,
+     33
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     33,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     35,
+     37
+    ]
+   },
+   {
+    "start": 38,
+    "end": 39,
+    "text": "a",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     37,
+     41
+    ]
+   }
+  ],
+  "difficult_words": [
+   {
+    "word": "āēr",
+    "start": 12,
+    "end": 15,
+    "why": [
+     "looks like a diphthong, isn't"
+    ]
+   }
+  ]
+ },
+ {
+  "citation": "Met. 1.27",
+  "text": "ēmicuit summāque locum sibi fēcit in arce:",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 2,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LSS",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "qu"
+  ],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 1,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     0,
+     1
+    ]
+   },
+   {
+    "start": 2,
+    "end": 3,
+    "text": "i",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     1,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 5,
+    "end": 6,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ts",
+    "syllable": [
+     5,
+     8
+    ]
+   },
+   {
+    "start": 9,
+    "end": 10,
+    "text": "u",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mm",
+    "syllable": [
+     8,
+     11
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     11,
+     13
+    ]
+   },
+   {
+    "start": 15,
+    "end": 16,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "l",
+    "syllable": [
+     13,
+     17
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "o",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     17,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "u",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ms",
+    "syllable": [
+     19,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "i",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "b",
+    "syllable": [
+     23,
+     25
+    ]
+   },
+   {
+    "start": 26,
+    "end": 27,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "f",
+    "syllable": [
+     25,
+     28
+    ]
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     28,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     30,
+     32
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     32,
+     35
+    ]
+   },
+   {
+    "start": 37,
+    "end": 38,
+    "text": "a",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rc",
+    "syllable": [
+     35,
+     39
+    ]
+   },
+   {
+    "start": 40,
+    "end": 41,
+    "text": "e",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     39,
+     42
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 1.51",
+  "text": "temperiemque dedit mixtā cum frīgore flamma.",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 6,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "f + liquid at word start",
+   "qu"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mp",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     5,
+     7
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mqu",
+    "syllable": [
+     7,
+     9
+    ]
+   },
+   {
+    "start": 11,
+    "end": 12,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "d",
+    "syllable": [
+     9,
+     13
+    ]
+   },
+   {
+    "start": 14,
+    "end": 15,
+    "text": "e",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "d",
+    "syllable": [
+     13,
+     15
+    ]
+   },
+   {
+    "start": 16,
+    "end": 17,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "tm",
+    "syllable": [
+     15,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "i",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "xt",
+    "syllable": [
+     19,
+     22
+    ]
+   },
+   {
+    "start": 23,
+    "end": 24,
+    "text": "ā",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     22,
+     25
+    ]
+   },
+   {
+    "start": 26,
+    "end": 27,
+    "text": "u",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mfr",
+    "syllable": [
+     25,
+     29
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     29,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "o",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     32,
+     34
+    ]
+   },
+   {
+    "start": 35,
+    "end": 36,
+    "text": "e",
+    "mark": "S",
+    "why": "f + liquid at word start",
+    "followed_by": "fl",
+    "syllable": [
+     34,
+     37
+    ]
+   },
+   {
+    "start": 39,
+    "end": 40,
+    "text": "a",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mm",
+    "syllable": [
+     37,
+     41
+    ]
+   },
+   {
+    "start": 42,
+    "end": 43,
+    "text": "a",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     41,
+     44
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 1.69",
+  "text": "Vix ita līmitibus dissaepserat omnia certīs,",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 3,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LSS",
+   "LL",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "h, x, z"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "i",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "x",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "i",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     2,
+     5
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "l",
+    "syllable": [
+     5,
+     8
+    ]
+   },
+   {
+    "start": 9,
+    "end": 10,
+    "text": "ī",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     8,
+     10
+    ]
+   },
+   {
+    "start": 11,
+    "end": 12,
+    "text": "i",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     10,
+     12
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "b",
+    "syllable": [
+     12,
+     14
+    ]
+   },
+   {
+    "start": 15,
+    "end": 16,
+    "text": "u",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "sd",
+    "syllable": [
+     14,
+     18
+    ]
+   },
+   {
+    "start": 19,
+    "end": 20,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ss",
+    "syllable": [
+     18,
+     21
+    ]
+   },
+   {
+    "start": 22,
+    "end": 24,
+    "text": "ae",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     21,
+     25
+    ]
+   },
+   {
+    "start": 26,
+    "end": 27,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     25,
+     27
+    ]
+   },
+   {
+    "start": 28,
+    "end": 29,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     27,
+     29
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mn",
+    "syllable": [
+     29,
+     33
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     33,
+     35
+    ]
+   },
+   {
+    "start": 35,
+    "end": 36,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     35,
+     37
+    ]
+   },
+   {
+    "start": 38,
+    "end": 39,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rt",
+    "syllable": [
+     37,
+     40
+    ]
+   },
+   {
+    "start": 41,
+    "end": 42,
+    "text": "ī",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     40,
+     44
+    ]
+   }
+  ],
+  "doubled": [
+   {
+    "at": 2,
+    "as": [
+     "c",
+     "s"
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 1.86",
+  "text": "iussit et ērēctōs ad sīdera tollere vultūs.",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 1,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "u",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ss",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     5,
+     8
+    ]
+   },
+   {
+    "start": 10,
+    "end": 11,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     8,
+     11
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     11,
+     14
+    ]
+   },
+   {
+    "start": 15,
+    "end": 16,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     14,
+     16
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "a",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ds",
+    "syllable": [
+     16,
+     21
+    ]
+   },
+   {
+    "start": 22,
+    "end": 23,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     21,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     23,
+     25
+    ]
+   },
+   {
+    "start": 26,
+    "end": 27,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     25,
+     28
+    ]
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ll",
+    "syllable": [
+     28,
+     31
+    ]
+   },
+   {
+    "start": 32,
+    "end": 33,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     31,
+     33
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "v",
+    "syllable": [
+     33,
+     36
+    ]
+   },
+   {
+    "start": 37,
+    "end": 38,
+    "text": "u",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "lt",
+    "syllable": [
+     36,
+     39
+    ]
+   },
+   {
+    "start": 40,
+    "end": 41,
+    "text": "ū",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     39,
+     43
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 1.89",
+  "text": "Aurea prīma sata est aetās, quae vindice nūllō,",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 7,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "greekiness",
+   "muta cum liquida at word start",
+   "prodelision",
+   "qu"
+  ],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 2,
+    "text": "Au",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     0,
+     2
+    ]
+   },
+   {
+    "start": 3,
+    "end": 4,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     2,
+     4
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "a",
+    "mark": "S",
+    "why": "muta cum liquida at word start",
+    "followed_by": "pr",
+    "syllable": [
+     4,
+     6
+    ]
+   },
+   {
+    "start": 8,
+    "end": 9,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     6,
+     9
+    ]
+   },
+   {
+    "start": 10,
+    "end": 11,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     9,
+     12
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "a",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     12,
+     14
+    ]
+   },
+   {
+    "start": 15,
+    "end": 16,
+    "text": "a",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "st",
+    "syllable": [
+     14,
+     19
+    ]
+   },
+   {
+    "start": 17,
+    "end": 18,
+    "text": "e",
+    "mark": "prodelided"
+   },
+   {
+    "start": 21,
+    "end": 23,
+    "text": "ae",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     19,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "ā",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     23,
+     28
+    ]
+   },
+   {
+    "start": 30,
+    "end": 32,
+    "text": "ae",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     28,
+     33
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "i",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nd",
+    "syllable": [
+     33,
+     36
+    ]
+   },
+   {
+    "start": 37,
+    "end": 38,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     36,
+     38
+    ]
+   },
+   {
+    "start": 39,
+    "end": 40,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     38,
+     41
+    ]
+   },
+   {
+    "start": 42,
+    "end": 43,
+    "text": "ū",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     41,
+     44
+    ]
+   },
+   {
+    "start": 45,
+    "end": 46,
+    "text": "ō",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     44,
+     47
+    ]
+   }
+  ],
+  "difficult_words": [
+   {
+    "word": "Aurea",
+    "start": 0,
+    "end": 5,
+    "why": [
+     "vowels side by side in a name",
+     "many vowels"
+    ]
+   }
+  ]
+ },
+ {
+  "citation": "Met. 1.128",
+  "text": "Prōtinus irrūpit vēnae peiōris in aevum",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 3,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "h, x, z"
+  ],
+  "nuclei": [
+   {
+    "start": 2,
+    "end": 3,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     5,
+     7
+    ]
+   },
+   {
+    "start": 9,
+    "end": 10,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rr",
+    "syllable": [
+     7,
+     11
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "ū",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     11,
+     13
+    ]
+   },
+   {
+    "start": 14,
+    "end": 15,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "tv",
+    "syllable": [
+     13,
+     17
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     17,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 22,
+    "text": "ae",
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     19,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "i",
+    "syllable": [
+     23,
+     26
+    ]
+   },
+   {
+    "start": 26,
+    "end": 27,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     25,
+     27
+    ]
+   },
+   {
+    "start": 28,
+    "end": 29,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     27,
+     29
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     29,
+     32
+    ]
+   },
+   {
+    "start": 34,
+    "end": 36,
+    "text": "ae",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     32,
+     36
+    ]
+   },
+   {
+    "start": 37,
+    "end": 38,
+    "text": "u",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     36,
+     39
+    ]
+   }
+  ],
+  "doubled": [
+   {
+    "at": 25,
+    "as": [
+     "j",
+     "j"
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 1.136",
+  "text": "cautus humum longō signāvit līmite mēnsor.",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 3,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "h, x, z"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 3,
+    "text": "au",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 8,
+    "end": 9,
+    "text": "u",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     5,
+     9
+    ]
+   },
+   {
+    "start": 10,
+    "end": 11,
+    "text": "u",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ml",
+    "syllable": [
+     9,
+     13
+    ]
+   },
+   {
+    "start": 14,
+    "end": 15,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ng",
+    "syllable": [
+     13,
+     16
+    ]
+   },
+   {
+    "start": 17,
+    "end": 18,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     16,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "gn",
+    "syllable": [
+     19,
+     22
+    ]
+   },
+   {
+    "start": 23,
+    "end": 24,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     22,
+     24
+    ]
+   },
+   {
+    "start": 25,
+    "end": 26,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "tl",
+    "syllable": [
+     24,
+     28
+    ]
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     28,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     30,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     32,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     35,
+     38
+    ]
+   },
+   {
+    "start": 39,
+    "end": 40,
+    "text": "o",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     38,
+     42
+    ]
+   }
+  ],
+  "silent": [
+   7
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 3.467",
+  "text": "Ō utinam ā nostrō sēcēdere corpore possem!",
+  "scans": true,
+  "stage": 2,
+  "penalty": 3,
+  "ambiguous": false,
+  "level": 8,
+  "advanced": true,
+  "feet": [
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "elision",
+   "hiatus"
+  ],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 1,
+    "text": "Ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     0,
+     1
+    ],
+    "hiatus": true
+   },
+   {
+    "start": 2,
+    "end": 3,
+    "text": "u",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     1,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "a",
+    "mark": "elided"
+   },
+   {
+    "start": 9,
+    "end": 10,
+    "text": "ā",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     5,
+     11
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "str",
+    "syllable": [
+     11,
+     14
+    ]
+   },
+   {
+    "start": 16,
+    "end": 17,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     14,
+     18
+    ]
+   },
+   {
+    "start": 19,
+    "end": 20,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     18,
+     20
+    ]
+   },
+   {
+    "start": 21,
+    "end": 22,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     20,
+     22
+    ]
+   },
+   {
+    "start": 23,
+    "end": 24,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     22,
+     24
+    ]
+   },
+   {
+    "start": 25,
+    "end": 26,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     24,
+     27
+    ]
+   },
+   {
+    "start": 28,
+    "end": 29,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rp",
+    "syllable": [
+     27,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "o",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     30,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "p",
+    "syllable": [
+     32,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ss",
+    "syllable": [
+     35,
+     38
+    ]
+   },
+   {
+    "start": 39,
+    "end": 40,
+    "text": "e",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     38,
+     42
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Met. 10.31",
+  "text": "Eurydicēs, ōrō, properāta retexite fāta.",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 7,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LSS",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "greekiness",
+   "h, x, z"
+  ],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 2,
+    "text": "Eu",
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     0,
+     2
+    ]
+   },
+   {
+    "start": 3,
+    "end": 4,
+    "text": "y",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "d",
+    "syllable": [
+     2,
+     4
+    ]
+   },
+   {
+    "start": 5,
+    "end": 6,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     4,
+     6
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     6,
+     8
+    ]
+   },
+   {
+    "start": 11,
+    "end": 12,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     8,
+     12
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     12,
+     16
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "o",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "p",
+    "syllable": [
+     16,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     19,
+     21
+    ]
+   },
+   {
+    "start": 22,
+    "end": 23,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     21,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     23,
+     26
+    ]
+   },
+   {
+    "start": 27,
+    "end": 28,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     26,
+     28
+    ]
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "x",
+    "syllable": [
+     28,
+     31
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     30,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "f",
+    "syllable": [
+     32,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     35,
+     37
+    ]
+   },
+   {
+    "start": 38,
+    "end": 39,
+    "text": "a",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     37,
+     40
+    ]
+   }
+  ],
+  "doubled": [
+   {
+    "at": 30,
+    "as": [
+     "c",
+     "s"
+    ]
+   }
+  ],
+  "difficult_words": [
+   {
+    "word": "Eurydicēs",
+    "start": 0,
+    "end": 9,
+    "why": [
+     "y",
+     "eu diphthong"
+    ]
+   }
+  ]
+ },
+ {
+  "citation": "Met. 13.607",
+  "text": "et prīmō similis volucrī, mox vēra volucris",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 5,
+  "advanced": false,
+  "feet": [
+   "LL",
+   "LSS",
+   "LSS",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "muta cum liquida"
+  ],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 1,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "tpr",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 5,
+    "end": 6,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     3,
+     6
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     6,
+     9
+    ]
+   },
+   {
+    "start": 10,
+    "end": 11,
+    "text": "i",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     9,
+     11
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "l",
+    "syllable": [
+     11,
+     13
+    ]
+   },
+   {
+    "start": 14,
+    "end": 15,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "sv",
+    "syllable": [
+     13,
+     17
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "o",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "l",
+    "syllable": [
+     17,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "u",
+    "mark": "S",
+    "why": "muta cum liquida, short",
+    "followed_by": "cr",
+    "syllable": [
+     19,
+     21
+    ]
+   },
+   {
+    "start": 23,
+    "end": 24,
+    "text": "ī",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     21,
+     26
+    ]
+   },
+   {
+    "start": 27,
+    "end": 28,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "xv",
+    "syllable": [
+     26,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     30,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "v",
+    "syllable": [
+     32,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "o",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "l",
+    "syllable": [
+     35,
+     37
+    ]
+   },
+   {
+    "start": 38,
+    "end": 39,
+    "text": "u",
+    "accent": true,
+    "mark": "L",
+    "why": "muta cum liquida, long",
+    "followed_by": "cr",
+    "syllable": [
+     37,
+     40
+    ]
+   },
+   {
+    "start": 41,
+    "end": 42,
+    "text": "i",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     40,
+     43
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Aen. 1.726",
+  "text": "ātria; dēpendent lychnī laqueāribus aureīs",
+  "scans": true,
+  "stage": 2,
+  "penalty": 4,
+  "ambiguous": false,
+  "level": 8,
+  "advanced": true,
+  "feet": [
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "qu",
+   "synizesis"
+  ],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 1,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     0,
+     1
+    ]
+   },
+   {
+    "start": 3,
+    "end": 4,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     1,
+     4
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "d",
+    "syllable": [
+     4,
+     7
+    ]
+   },
+   {
+    "start": 8,
+    "end": 9,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     7,
+     9
+    ]
+   },
+   {
+    "start": 10,
+    "end": 11,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nd",
+    "syllable": [
+     9,
+     12
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ntl",
+    "syllable": [
+     12,
+     17
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "y",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "chn",
+    "syllable": [
+     17,
+     21
+    ]
+   },
+   {
+    "start": 22,
+    "end": 23,
+    "text": "ī",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     21,
+     24
+    ]
+   },
+   {
+    "start": 25,
+    "end": 26,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "qu",
+    "syllable": [
+     24,
+     26
+    ]
+   },
+   {
+    "start": 28,
+    "end": 29,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     26,
+     29
+    ]
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     29,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "b",
+    "syllable": [
+     30,
+     32
+    ]
+   },
+   {
+    "start": 33,
+    "end": 34,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     32,
+     34
+    ]
+   },
+   {
+    "start": 36,
+    "end": 38,
+    "text": "au",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     34,
+     39
+    ]
+   },
+   {
+    "start": 39,
+    "end": 40,
+    "text": "e",
+    "mark": "merged"
+   },
+   {
+    "start": 40,
+    "end": 41,
+    "text": "ī",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     39,
+     42
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Aen. 2.1",
+  "text": "Conticuēre omnēs, intentīque ōra tenēbant.",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 4,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LL",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "elision",
+   "qu"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "o",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nt",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     3,
+     5
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     5,
+     7
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     7,
+     8
+    ]
+   },
+   {
+    "start": 9,
+    "end": 10,
+    "text": "e",
+    "mark": "elided"
+   },
+   {
+    "start": 11,
+    "end": 12,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mn",
+    "syllable": [
+     8,
+     13
+    ]
+   },
+   {
+    "start": 14,
+    "end": 15,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     13,
+     15
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nt",
+    "syllable": [
+     15,
+     20
+    ]
+   },
+   {
+    "start": 21,
+    "end": 22,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nt",
+    "syllable": [
+     20,
+     23
+    ]
+   },
+   {
+    "start": 24,
+    "end": 25,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     23,
+     25
+    ]
+   },
+   {
+    "start": 27,
+    "end": 28,
+    "text": "e",
+    "mark": "elided"
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     25,
+     30
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "t",
+    "syllable": [
+     30,
+     33
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     33,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     35,
+     37
+    ]
+   },
+   {
+    "start": 38,
+    "end": 39,
+    "text": "a",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     37,
+     42
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Aen. 3.658",
+  "text": "mōnstrum horrendum, īnfōrme, ingēns, cui lūmen adēmptum.",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 4,
+  "advanced": false,
+  "feet": [
+   "LL",
+   "LL",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "elision"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     0,
+     4
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "u",
+    "mark": "elided"
+   },
+   {
+    "start": 10,
+    "end": 11,
+    "text": "o",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rr",
+    "syllable": [
+     4,
+     12
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nd",
+    "syllable": [
+     12,
+     15
+    ]
+   },
+   {
+    "start": 16,
+    "end": 17,
+    "text": "u",
+    "mark": "elided"
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "ī",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     15,
+     22
+    ]
+   },
+   {
+    "start": 23,
+    "end": 24,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     22,
+     25
+    ]
+   },
+   {
+    "start": 26,
+    "end": 27,
+    "text": "e",
+    "mark": "elided"
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "i",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ng",
+    "syllable": [
+     25,
+     31
+    ]
+   },
+   {
+    "start": 32,
+    "end": 33,
+    "text": "ē",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     31,
+     37
+    ]
+   },
+   {
+    "start": 38,
+    "end": 40,
+    "text": "ui",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     37,
+     41
+    ]
+   },
+   {
+    "start": 42,
+    "end": 43,
+    "text": "ū",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     41,
+     43
+    ]
+   },
+   {
+    "start": 44,
+    "end": 45,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "n",
+    "syllable": [
+     43,
+     45
+    ]
+   },
+   {
+    "start": 47,
+    "end": 48,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "d",
+    "syllable": [
+     45,
+     48
+    ]
+   },
+   {
+    "start": 49,
+    "end": 50,
+    "text": "ē",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     48,
+     52
+    ]
+   },
+   {
+    "start": 53,
+    "end": 54,
+    "text": "u",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     52,
+     56
+    ]
+   }
+  ],
+  "silent": [
+   9
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Aen. 4.558",
+  "text": "omnia Mercuriō similis, vōcemque colōremque",
+  "scans": true,
+  "stage": 2,
+  "penalty": 3,
+  "ambiguous": false,
+  "level": 8,
+  "advanced": true,
+  "feet": [
+   "LSS",
+   "LSS",
+   "LSS",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "hypermetry",
+   "qu"
+  ],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 1,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mn",
+    "syllable": [
+     0,
+     2
+    ]
+   },
+   {
+    "start": 3,
+    "end": 4,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     2,
+     4
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     4,
+     6
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "rc",
+    "syllable": [
+     6,
+     9
+    ]
+   },
+   {
+    "start": 10,
+    "end": 11,
+    "text": "u",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     9,
+     11
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "syllable": [
+     11,
+     13
+    ]
+   },
+   {
+    "start": 13,
+    "end": 14,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     13,
+     15
+    ]
+   },
+   {
+    "start": 16,
+    "end": 17,
+    "text": "i",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     15,
+     17
+    ]
+   },
+   {
+    "start": 18,
+    "end": 19,
+    "text": "i",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "l",
+    "syllable": [
+     17,
+     19
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "i",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "sv",
+    "syllable": [
+     19,
+     24
+    ]
+   },
+   {
+    "start": 25,
+    "end": 26,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     24,
+     26
+    ]
+   },
+   {
+    "start": 27,
+    "end": 28,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mqu",
+    "syllable": [
+     26,
+     29
+    ]
+   },
+   {
+    "start": 31,
+    "end": 32,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     29,
+     33
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "o",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "l",
+    "syllable": [
+     33,
+     35
+    ]
+   },
+   {
+    "start": 36,
+    "end": 37,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     35,
+     37
+    ]
+   },
+   {
+    "start": 38,
+    "end": 39,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     37,
+     43
+    ]
+   },
+   {
+    "start": 42,
+    "end": 43,
+    "text": "e",
+    "mark": "elided"
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Aen. 4.559",
+  "text": "et crīnīs flāvōs et membra decōra iuventā:",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 1,
+  "advanced": false,
+  "feet": [
+   "LL",
+   "LL",
+   "LL",
+   "LSS",
+   "LSS",
+   "LL"
+  ],
+  "flags": [],
+  "nuclei": [
+   {
+    "start": 0,
+    "end": 1,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "tcr",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 5,
+    "end": 6,
+    "text": "ī",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     3,
+     6
+    ]
+   },
+   {
+    "start": 7,
+    "end": 8,
+    "text": "ī",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     6,
+     10
+    ]
+   },
+   {
+    "start": 12,
+    "end": 13,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     10,
+     13
+    ]
+   },
+   {
+    "start": 14,
+    "end": 15,
+    "text": "ō",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     13,
+     15
+    ]
+   },
+   {
+    "start": 17,
+    "end": 18,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "tm",
+    "syllable": [
+     15,
+     20
+    ]
+   },
+   {
+    "start": 21,
+    "end": 22,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "mbr",
+    "syllable": [
+     20,
+     23
+    ]
+   },
+   {
+    "start": 25,
+    "end": 26,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "d",
+    "syllable": [
+     23,
+     27
+    ]
+   },
+   {
+    "start": 28,
+    "end": 29,
+    "text": "e",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "c",
+    "syllable": [
+     27,
+     29
+    ]
+   },
+   {
+    "start": 30,
+    "end": 31,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     29,
+     31
+    ]
+   },
+   {
+    "start": 32,
+    "end": 33,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "i",
+    "syllable": [
+     31,
+     34
+    ]
+   },
+   {
+    "start": 35,
+    "end": 36,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "v",
+    "syllable": [
+     34,
+     36
+    ]
+   },
+   {
+    "start": 37,
+    "end": 38,
+    "text": "e",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "nt",
+    "syllable": [
+     36,
+     39
+    ]
+   },
+   {
+    "start": 40,
+    "end": 41,
+    "text": "ā",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     39,
+     42
+    ]
+   }
+  ],
+  "difficult_words": []
+ },
+ {
+  "citation": "Aen. 6.129",
+  "text": "hoc opus, hic labor est. Paucī, quōs aequus amāvit",
+  "scans": true,
+  "stage": 1,
+  "penalty": 0,
+  "ambiguous": false,
+  "level": 3,
+  "advanced": false,
+  "feet": [
+   "LSS",
+   "LSS",
+   "LL",
+   "LL",
+   "LSS",
+   "LL"
+  ],
+  "flags": [
+   "h, x, z",
+   "qu"
+  ],
+  "nuclei": [
+   {
+    "start": 1,
+    "end": 2,
+    "text": "o",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "c",
+    "syllable": [
+     0,
+     3
+    ]
+   },
+   {
+    "start": 4,
+    "end": 5,
+    "text": "o",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "p",
+    "syllable": [
+     2,
+     5
+    ]
+   },
+   {
+    "start": 6,
+    "end": 7,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     5,
+     7
+    ]
+   },
+   {
+    "start": 11,
+    "end": 12,
+    "text": "i",
+    "accent": true,
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "cl",
+    "syllable": [
+     7,
+     14
+    ]
+   },
+   {
+    "start": 15,
+    "end": 16,
+    "text": "a",
+    "accent": true,
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "b",
+    "syllable": [
+     14,
+     16
+    ]
+   },
+   {
+    "start": 17,
+    "end": 18,
+    "text": "o",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "r",
+    "syllable": [
+     16,
+     18
+    ]
+   },
+   {
+    "start": 20,
+    "end": 21,
+    "text": "e",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "stp",
+    "syllable": [
+     18,
+     25
+    ]
+   },
+   {
+    "start": 26,
+    "end": 28,
+    "text": "au",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     25,
+     28
+    ]
+   },
+   {
+    "start": 29,
+    "end": 30,
+    "text": "ī",
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     28,
+     32
+    ]
+   },
+   {
+    "start": 34,
+    "end": 35,
+    "text": "ō",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     32,
+     35
+    ]
+   },
+   {
+    "start": 37,
+    "end": 39,
+    "text": "ae",
+    "accent": true,
+    "mark": "L",
+    "why": "diphthong",
+    "syllable": [
+     35,
+     39
+    ]
+   },
+   {
+    "start": 41,
+    "end": 42,
+    "text": "u",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "s",
+    "syllable": [
+     39,
+     42
+    ]
+   },
+   {
+    "start": 44,
+    "end": 45,
+    "text": "a",
+    "mark": "S",
+    "why": "short vowel",
+    "followed_by": "m",
+    "syllable": [
+     42,
+     45
+    ]
+   },
+   {
+    "start": 46,
+    "end": 47,
+    "text": "ā",
+    "accent": true,
+    "mark": "L",
+    "why": "long vowel",
+    "syllable": [
+     45,
+     47
+    ]
+   },
+   {
+    "start": 48,
+    "end": 49,
+    "text": "i",
+    "mark": "L",
+    "why": "final syllable",
+    "syllable": [
+     47,
+     50
+    ]
+   }
+  ],
+  "doubled": [
+   {
+    "at": 2,
+    "as": [
+     "c",
+     "c"
+    ]
+   }
+  ],
+  "silent": [
+   0,
+   10
+  ],
+  "difficult_words": []
+ }
+]

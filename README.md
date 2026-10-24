@@ -40,7 +40,12 @@ end of the line, the vowel an elision runs into — and a sentence says why. ↻
   *qu, h, x, z*; elision; mūta cum liquida; consonants at the start of a word; Greek words; the
   poets' licences — each with a short lesson and lines to practice it on. The lessons and their
   lines live in [`data/tutorial.json`](data/tutorial.json): edit the text, reorder the stages, or
-  swap in lines from your own texts by citation.
+  swap in lines from your own texts by citation. A lesson can also carry **worked examples** —
+  lines from *outside* the reader, so they are new to the student (*et prīmō similis volucrī, mox
+  vēra volucris* for mūta cum liquida) — shown scanned, with the syllables that teach the lesson
+  divided by the same animation as the zoom-in. They live in
+  [`data/examples.tsv`](data/examples.tsv), hand-macronized; rebuild their key with
+  `python scansion/scan.py data/examples.tsv --json data/examples.json`.
 - **Practice** chooses lines by passage and by the kinds of line ticked — only lines with elision,
   say, or only the advanced ones. Every tutorial stage after the first links to a practice set of
   lines like its own (`?practice=<stage id>`), ticking the matching kinds.

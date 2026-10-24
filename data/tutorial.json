@@ -1,10 +1,12 @@
 {
-  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the kinds of line its 'Practice more' link ticks -- `levels` (1 long and short only, 2 qu, 3 h/x/z, 4 elision, 5 muta cum liquida, 6 consonants at the start of a word, 7 Greek words, 8 advanced). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0. A stage may also carry `revised` (the date its lesson last grew, YYYY-MM-DD) and `new` (one line of HTML: what grew). A student who finished the stage BEFORE that date sees ✱ beside it and the `new` line atop its lesson, until they finish the stage again; set `revised` to the day AFTER the change is pushed -- the app records those dates in UTC, so an evening finish is already tomorrow, and a revision date on the push day itself would miss students who finished that morning. The cost of the day after is only that a student who finished on push day is shown the note once.",
+  "_comment": "The tutorial: one stage per idea, in the order the course teaches meter. Each stage has a lesson (HTML), the lines to practice it on (by citation), and optionally `practice`: the kinds of line its 'Practice more' link ticks -- `levels` (1 long and short only, 2 qu, 3 h/x/z, 4 elision, 5 muta cum liquida, 6 consonants at the start of a word, 7 Greek words, 8 advanced). Edit freely; the app checks that every citation exists. Content licence: CC BY-NC-SA 4.0. A lesson may hold WORKED EXAMPLES: <div class=\"demo\" data-line=\"Met. 13.607\" data-show=\"volucrī:u volucris:u\"></div> shows a line from data/examples.json (lines from outside the reader) or from the reader, scanned, and divides the syllables data-show names -- a word, a colon, the vowel of its syllable, with #2 for a second one (colōremque:e#2) -- with the zoom-in's animation; a name that matches nothing is reported in the browser console. A stage may also carry `revised` (the date its lesson last grew, YYYY-MM-DD) and `new` (one line of HTML: what grew). A student who finished the stage BEFORE that date sees ✱ beside it and the `new` line atop its lesson, until they finish the stage again; set `revised` to the day AFTER the change is pushed -- the app records those dates in UTC, so an evening finish is already tomorrow, and a revision date on the push day itself would miss students who finished that morning. The cost of the day after is only that a student who finished on push day is shown the note once.",
   "stages": [
     {
       "id": "syllables",
       "title": "Syllables, long and short",
-      "lesson": "<p>Scansion starts with syllables. Treat the whole line as one big word:</p><p class=\"latin\">fistula disparibus paulātim surgit avēnīs<br>fistuladisparibuspaulātimsurgitavēnīs</p><p><b>Each vowel or diphthong gets a syllable.</b> A diphthong is two vowels pronounced as one: <i>ae, oe, au</i> — sometimes <i>ui, ei, eu</i>. Split <b>before one consonant</b>, <b>between two</b>:</p><p class=\"latin\">fis-tu-la-dis-pa-ri-bus-pau-lā-tim-sur-gi-ta-vē-nīs</p><p>Notice that <i>avēnīs</i> stole the final consonant of <i>surgit</i>!</p><p><b>A syllable is long if:</b></p><ul><li>it has a long vowel (one marked with a macron: ā);</li><li>it has a diphthong;</li><li>it ends in a consonant — true whenever its vowel is followed by two or more consonants;</li><li>it is the last syllable of the line.</li></ul><p>All other syllables are short.</p><p class=\"howto\"><b>In this app</b> you don't write the dashes. Drag a long mark ¯ or a short mark ˘ onto each vowel — the marks snap into place — and press <b>Check</b>.</p>",
+      "revised": "2026-10-25",
+      "new": "a worked example from the first line of the <i>Metamorphoses</i>, divided before your eyes.",
+      "lesson": "<p>Scansion starts with syllables. Treat the whole line as one big word:</p><p class=\"latin\">fistula disparibus paulātim surgit avēnīs<br>fistuladisparibuspaulātimsurgitavēnīs</p><p><b>Each vowel or diphthong gets a syllable.</b> A diphthong is two vowels pronounced as one: <i>ae, oe, au</i> — sometimes <i>ui, ei, eu</i>. Split <b>before one consonant</b>, <b>between two</b>:</p><p class=\"latin\">fis-tu-la-dis-pa-ri-bus-pau-lā-tim-sur-gi-ta-vē-nīs</p><p>Notice that <i>avēnīs</i> stole the final consonant of <i>surgit</i>!</p><p><b>A syllable is long if:</b></p><ul><li>it has a long vowel (one marked with a macron: ā);</li><li>it has a diphthong;</li><li>it ends in a consonant — true whenever its vowel is followed by two or more consonants;</li><li>it is the last syllable of the line.</li></ul><p>All other syllables are short.</p><p>All four at work in the first line of the <i>Metamorphoses</i>. Choose a syllable and watch it divided: the words run together into one big word, the consonants between two vowels drop into their syllables, and the reason for the mark lights up.</p><div class=\"demo\" data-line=\"Met. 1.1\" data-show=\"In:I fert:e mūtātās:ū dīcere:e fōrmās:ā\"></div><p class=\"howto\"><b>In this app</b> you don't write the dashes. Drag a long mark ¯ or a short mark ˘ onto each vowel — the marks snap into place — and press <b>Check</b>.</p>",
       "lines": [
         "Met. 8.192",
         "Met. 8.198",
@@ -29,9 +31,9 @@
     {
       "id": "refinements",
       "title": "Some refinements: qu, h, x, z, and letters that count twice",
-      "revised": "2026-09-26",
-      "new": "letters that count twice — an <i>i</i> between vowels (<i>Troia</i>), and <i>hic</i> and <i>hoc</i> before a vowel. Two new practice lines at the end.",
-      "lesson": "<ul><li><b>qu</b>: the <i>u</i> doesn't exist. It is neither a consonant nor a vowel, and has no effect on length.</li><li><b>h</b>: also doesn't exist. It was very lightly pronounced.</li><li><b>x</b> is actually two consonants, c + s — so <i>dīxit et</i> is <i>dīc-si-tet</i>.</li><li><b>z</b> is also two consonants (it only shows up in Greek words).</li><li><b>i between two vowels</b> is a consonant — say it like English <i>y</i> — and, like <i>x</i>, it counts as two: <i>Troiae quī</i> is <i>Troy-yae-quī</i>. The <i>o</i> has no macron, but its syllable ends in a consonant, so it is long.</li><li><b>hic</b> and <b>hoc</b> before a vowel are really <i>hicc</i> and <i>hocc</i>: <i>dabit hic in</i> is <i>da-bi-thic-cin</i>. Short vowel, long syllable.</li></ul>",
+      "revised": "2026-10-25",
+      "new": "worked examples, divided before your eyes, and the <i>i</i> that begins a word (<i>iussit</i> = <i>jus-sit</i>).",
+      "lesson": "<ul><li><b>qu</b>: the <i>u</i> doesn't exist. It is neither a consonant nor a vowel, and has no effect on length.<div class=\"demo\" data-line=\"Met. 1.27\" data-show=\"summāque:e\"></div></li><li><b>h</b>: also doesn't exist. It was very lightly pronounced.<div class=\"demo\" data-line=\"Met. 1.136\" data-show=\"cautus:u\"></div></li><li><b>x</b> is actually two consonants, c + s — so <i>dīxit et</i> is <i>dīc-si-tet</i>.<div class=\"demo\" data-line=\"Met. 1.69\" data-show=\"Vix:i\"></div></li><li><b>z</b> is also two consonants (it only shows up in Greek words).</li><li><b>i between two vowels</b> is a consonant — say it like English <i>y</i> — and, like <i>x</i>, it counts as two: <i>Troiae quī</i> is <i>Troj-jae-quī</i>. The <i>o</i> has no macron, but its syllable ends in a consonant, so it is long.<div class=\"demo\" data-line=\"Met. 1.128\" data-show=\"peiōris:e\"></div></li><li><b>hic</b> and <b>hoc</b> before a vowel are really <i>hicc</i> and <i>hocc</i>: <i>dabit hic in</i> is <i>da-bi-thic-cin</i>. Short vowel, long syllable.<div class=\"demo\" data-line=\"Aen. 6.129\" data-show=\"hoc:o\"></div></li><li><b>i at the start of a word, before a vowel,</b> is a consonant too — <i>iam</i>, <i>iussit</i>, <i>Iuppiter</i> — but it counts only once: <i>iussit et</i> is <i>jus-si-tet</i>. So is an <i>i</i> after a prefix: <i>coniugis</i> is <i>con-ju-gis</i>.<div class=\"demo\" data-line=\"Met. 1.86\" data-show=\"iussit:u\"></div></li></ul>",
       "lines": [
         "Met. 8.190",
         "Met. 8.188",
@@ -50,7 +52,9 @@
     {
       "id": "elision",
       "title": "Elision",
-      "lesson": "<p>Whenever a word ends in a <b>vowel or m</b>, and the next word begins with a <b>vowel or h</b>, one of the syllables gets eaten — <b>elided</b>. Delicious!</p><p>Generally it's the first one: <i>atque ita</i> = <i>atqu' ita</i>; <i>Īcare, ait</i> = <i>Īcar' ait</i>.</p><p>Unless the second word is <b>est</b> or <b>es</b>: <i>imposita est</i> = <i>imposita 'st</i>; <i>ubi es</i> = <i>ubi 's</i>.</p><p class=\"howto\">Mark an elision with the swoosh ‿ — drag it under the gap between the two syllables. The elided vowel turns grey and takes no long or short mark.</p>",
+      "revised": "2026-10-25",
+      "new": "worked examples from the <i>Aeneid</i> and Ovid's Golden Age, divided before your eyes.",
+      "lesson": "<p>Whenever a word ends in a <b>vowel or m</b>, and the next word begins with a <b>vowel or h</b>, one of the syllables gets eaten — <b>elided</b>. Delicious!</p><p>Generally it's the first one: <i>atque ita</i> = <i>atqu' ita</i>; <i>Īcare, ait</i> = <i>Īcar' ait</i>.</p><p>Unless the second word is <b>est</b> or <b>es</b>: <i>imposita est</i> = <i>imposita 'st</i>; <i>ubi es</i> = <i>ubi 's</i>.</p><p>Two elisions open Aeneas's story in <i>Aeneid</i> 2:</p><div class=\"demo\" data-line=\"Aen. 2.1\" data-show=\"Conticuēre:e intentīque:e#2\"></div><p>A final <i>m</i> goes with its vowel, and an <i>h</i> doesn't stop the elision. The Cyclops, in <i>Aeneid</i> 3:</p><div class=\"demo\" data-line=\"Aen. 3.658\" data-show=\"mōnstrum:u horrendum:u\"></div><p>And <i>est</i> after a vowel, in Ovid's Golden Age:</p><div class=\"demo\" data-line=\"Met. 1.89\" data-show=\"est:e\"></div><p class=\"howto\">Mark an elision with the swoosh ‿ — drag it under the gap between the two syllables. The elided vowel turns grey and takes no long or short mark.</p>",
       "lines": [
         "Met. 8.201",
         "Met. 8.203",
@@ -66,7 +70,9 @@
     {
       "id": "muta",
       "title": "Mūta cum liquida",
-      "lesson": "<p><b>Mutes</b> are hard sounds that fully interrupt the flow of air: <i>c, g; t, d; p, b</i>. <b>Liquids</b> are just two: <i>l, r</i>.</p><p>(<i>s</i> and <i>f</i> are fricatives, <i>i/j</i> and <i>v</i> are semivowels, and <i>m</i> and <i>n</i> are nasals: none of them matter here.)</p><p>In actual speech, a mute + liquid usually <i>began</i> a syllable: <i>patris</i> was <i>pa-tris</i>, with the first syllable short. In poetry, either pronunciation was permitted — <i>pat-ris</i>, first syllable long, or <i>pa-tris</i>, first syllable short. Let the rest of the line decide.</p>",
+      "revised": "2026-10-25",
+      "new": "one word scanned both ways in a single line of Ovid, divided before your eyes.",
+      "lesson": "<p><b>Mutes</b> are hard sounds that fully interrupt the flow of air: <i>c, g; t, d; p, b</i>. <b>Liquids</b> are just two: <i>l, r</i>.</p><p>(<i>s</i> and <i>f</i> are fricatives, <i>i/j</i> and <i>v</i> are semivowels, and <i>m</i> and <i>n</i> are nasals: none of them matter here.)</p><p>In actual speech, a mute + liquid usually <i>began</i> a syllable: <i>patris</i> was <i>pa-tris</i>, with the first syllable short. In poetry, either pronunciation was permitted — <i>pat-ris</i>, first syllable long, or <i>pa-tris</i>, first syllable short. Let the rest of the line decide.</p><p>Ovid scans the same word both ways in a single line. The ashes of Memnon's pyre take shape as a bird, <i>at first like a bird, soon a true bird</i>:</p><div class=\"demo\" data-line=\"Met. 13.607\" data-show=\"volucrī:u volucris:u\"></div>",
       "lines": [
         "Met. 8.199",
         "Met. 8.211",
@@ -81,7 +87,9 @@
     {
       "id": "clusters",
       "title": "Consonants at the start of a word",
-      "lesson": "<p>In Greek, two consonants at the start of a word tend to lengthen the last vowel of the word before. Not so much in Latin:</p><p class=\"latin\">atque ita compositās parvō curvāmine flectit</p><p>The <i>-e</i> of <i>curvāmine</i> stays short before <i>fl-</i>. A short vowel before a mute + liquid that begins the next word usually stays short too: <i>unda gravet</i>.</p>",
+      "revised": "2026-10-25",
+      "new": "two worked examples, divided before your eyes.",
+      "lesson": "<p>In Greek, two consonants at the start of a word tend to lengthen the last vowel of the word before. Not so much in Latin:</p><p class=\"latin\">atque ita compositās parvō curvāmine flectit</p><p>The <i>-e</i> of <i>curvāmine</i> stays short before <i>fl-</i>. A short vowel before a mute + liquid that begins the next word usually stays short too: <i>unda gravet</i>.</p><p>Two more from the opening of the <i>Metamorphoses</i>: a mute + liquid that begins a word, and <i>fl-</i>.</p><div class=\"demo\" data-line=\"Met. 1.11\" data-show=\"nova:a\"></div><div class=\"demo\" data-line=\"Met. 1.51\" data-show=\"frīgore:e\"></div>",
       "lines": [
         "Met. 8.205",
         "Met. 8.224",
@@ -96,7 +104,9 @@
     {
       "id": "greek",
       "title": "Greek words",
-      "lesson": "<p>Most of the names in these stories are Greek, and Greek words put vowels together in ways Latin usually doesn't. Trust the macrons, and watch for:</p><ul><li>pairs that <b>look</b> like diphthongs but aren't: <i>āera</i> is <i>ā-e-ra</i>, three syllables; <i>Pāsiphaē</i> ends <i>-pha-ē</i>;</li><li>vowels side by side: <i>Mīnōia</i>, <i>Boōtēn</i>, <i>Aenēās</i>;</li><li>the diphthong <b>eu</b> in names like <i>Teucrī</i>.</li></ul>",
+      "revised": "2026-10-25",
+      "new": "two worked examples, <i>āēr</i> and <i>Eurydicē</i>, divided before your eyes.",
+      "lesson": "<p>Most of the names in these stories are Greek, and Greek words put vowels together in ways Latin usually doesn't. Trust the macrons, and watch for:</p><ul><li>pairs that <b>look</b> like diphthongs but aren't: <i>āera</i> is <i>ā-e-ra</i>, three syllables; <i>Pāsiphaē</i> ends <i>-pha-ē</i>;</li><li>vowels side by side: <i>Mīnōia</i>, <i>Boōtēn</i>, <i>Aenēās</i>;</li><li>the diphthong <b>eu</b> in names like <i>Teucrī</i>.</li></ul><p>Ovid's <i>āēr</i> is two syllables, <i>ā-ēr</i>: the macrons say so.</p><div class=\"demo\" data-line=\"Met. 1.17\" data-show=\"āēr:ā\"></div><p>And Orpheus, begging the gods below to give Eurydice back, begins his line with the diphthong <i>eu</i>:</p><div class=\"demo\" data-line=\"Met. 10.31\" data-show=\"Eurydicēs:Eu\"></div>",
       "lines": [
         "Met. 8.187",
         "Aen. 6.14",
@@ -111,7 +121,9 @@
     {
       "id": "licences",
       "title": "The poets' licences",
-      "lesson": "<p>Now and then a poet bends the rules. You won't meet these often, but you'll learn to recognize them:</p><ul><li><b>Hiatus</b>: no elision where you'd expect one — <i>dea. ille</i>.</li><li><b>Synizesis</b>: two vowels in one word run together into a single syllable — <i>Lāvīnia</i> becomes <i>Lā-vīn-ya</i>. Mark it with the swoosh between the two vowels.</li><li><b>Hypermetry</b>: the line has one syllable too many, and its last vowel elides into the next line — <i>locōrumque</i>. Put the swoosh after the last syllable.</li></ul>",
+      "revised": "2026-10-25",
+      "new": "a worked example of each licence, divided before your eyes.",
+      "lesson": "<p>Now and then a poet bends the rules. You won't meet these often, but you'll learn to recognize them:</p><ul><li><b>Hiatus</b>: no elision where you'd expect one — <i>dea. ille</i>. An interjection like <i>Ō</i> never elides — Narcissus, in love with his own reflection:<div class=\"demo\" data-line=\"Met. 3.467\" data-show=\"Ō:Ō\"></div></li><li><b>Synizesis</b>: two vowels in one word run together into a single syllable — <i>Lāvīnia</i> becomes <i>Lā-vīn-ja</i>. Mark it with the swoosh between the two vowels. Dido's hall has lamps hanging from <i>golden</i> ceilings, <i>aureīs</i>:<div class=\"demo\" data-line=\"Aen. 1.726\" data-show=\"aureīs:e\"></div></li><li><b>Hypermetry</b>: the line has one syllable too many, and its last vowel elides into the next line — <i>locōrumque</i>. Put the swoosh after the last syllable. Mercury, appearing to Aeneas in a dream; the next line begins <i>et</i>:<div class=\"demo\" data-line=\"Aen. 4.558\" data-show=\"colōremque:e#2\"></div></li></ul>",
       "lines": [
         "Aen. 1.405",
         "Aen. 1.2",
