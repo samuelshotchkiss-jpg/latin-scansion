@@ -210,8 +210,17 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
                         i += 1
                         continue
                 elif PREFIX_BEFORE_I.match(t[:i]):                      # coniugis, iniūria, obiectus
+                    # Where the stem is iungō, iuvō, iūs, iaceō or iaciō -- an i before u or a, or before
+                    # the e of -iec-/-iēc- -- the i is a consonant unless the meter says otherwise:
+                    # con-jūnx, ad-jū-tus, sub-jec-ta. Before any other vowel it is the i of eō, "go"
+                    # (ab-i-it, sub-i-ēre), or of a word that is no compound at all (a-bi-ēs), and a vowel
+                    # unless the meter says otherwise. Until 2026-10-26 the vowel won every tie, and eight
+                    # lines of the reader scanned co-ni-ūnx, i-ni-ū-ri-a.
+                    after = base(nxt)
+                    cons = after in "ua" or (after == "e" and i + 2 < n and t[i + 2] == "c")
                     if pick(("i after prefix", wi, i),
-                            [("vocalic", 0, 1), ("consonantal", 1, 1)]) == "consonantal":
+                            [("consonantal", 0, 1), ("vocalic", 1, 1)] if cons
+                            else [("vocalic", 0, 1), ("consonantal", 1, 1)]) == "consonantal":
                         units.append(Unit("C", ws + i, ws + i + 1, wi))
                         i += 1
                         continue

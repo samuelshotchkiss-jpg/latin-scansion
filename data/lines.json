@@ -15104,7 +15104,7 @@
   "feet": [
    "LSS",
    "LL",
-   "LSS",
+   "LL",
    "LSS",
    "LSS",
    "LL"
@@ -15189,23 +15189,12 @@
     "start": 20,
     "end": 21,
     "text": "u",
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "b",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "bi",
     "syllable": [
      19,
-     21
-    ]
-   },
-   {
-    "start": 22,
-    "end": 23,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     21,
-     23
+     22
     ]
    },
    {
@@ -15217,7 +15206,7 @@
     "why": "two consonants",
     "followed_by": "ct",
     "syllable": [
-     23,
+     22,
      25
     ]
    },
@@ -18931,7 +18920,7 @@
    "LSS",
    "LSS",
    "LL",
-   "LSS",
+   "LL",
    "LSS",
    "LL"
   ],
@@ -19052,23 +19041,12 @@
     "start": 28,
     "end": 29,
     "text": "a",
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "d",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "di",
     "syllable": [
      26,
-     29
-    ]
-   },
-   {
-    "start": 30,
-    "end": 31,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     29,
-     31
+     30
     ]
    },
    {
@@ -19079,7 +19057,7 @@
     "mark": "L",
     "why": "long vowel",
     "syllable": [
-     31,
+     30,
      32
     ]
    },
@@ -22307,7 +22285,7 @@
   "feet": [
    "LSS",
    "LSS",
-   "LSS",
+   "LL",
    "LSS",
    "LSS",
    "LL"
@@ -22405,23 +22383,12 @@
     "end": 24,
     "text": "o",
     "accent": true,
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "n",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ni",
     "syllable": [
      22,
-     24
-    ]
-   },
-   {
-    "start": 25,
-    "end": 26,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     24,
-     26
+     25
     ]
    },
    {
@@ -22431,7 +22398,7 @@
     "mark": "L",
     "why": "long vowel",
     "syllable": [
-     26,
+     25,
      30
     ]
    },
@@ -68075,7 +68042,7 @@
    "LSS",
    "LSS",
    "LL",
-   "LSS",
+   "LL",
    "LSS",
    "LL"
   ],
@@ -68203,23 +68170,12 @@
     "start": 29,
     "end": 30,
     "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "s",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "si",
     "syllable": [
      28,
-     30
-    ]
-   },
-   {
-    "start": 31,
-    "end": 32,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     30,
-     32
+     31
     ]
    },
    {
@@ -68231,7 +68187,7 @@
     "why": "two consonants",
     "followed_by": "ng",
     "syllable": [
-     32,
+     31,
      34
     ]
    },
@@ -86697,7 +86653,7 @@
    "LL",
    "LSS",
    "LL",
-   "LSS",
+   "LL",
    "LSS",
    "LL"
   ],
@@ -86811,23 +86767,12 @@
     "start": 28,
     "end": 29,
     "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "n",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ni",
     "syllable": [
      26,
-     29
-    ]
-   },
-   {
-    "start": 30,
-    "end": 31,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     29,
-     31
+     30
     ]
    },
    {
@@ -86838,7 +86783,7 @@
     "mark": "L",
     "why": "long vowel",
     "syllable": [
-     31,
+     30,
      32
     ]
    },
@@ -87097,7 +87042,7 @@
   "level": 7,
   "advanced": false,
   "feet": [
-   "LSS",
+   "LL",
    "LL",
    "LSS",
    "LL",
@@ -87125,23 +87070,12 @@
     "end": 7,
     "text": "o",
     "accent": true,
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "n",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ni",
     "syllable": [
      5,
-     7
-    ]
-   },
-   {
-    "start": 8,
-    "end": 9,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     7,
-     9
+     8
     ]
    },
    {
@@ -87151,7 +87085,7 @@
     "mark": "L",
     "why": "long vowel",
     "syllable": [
-     9,
+     8,
      13
     ]
    },
@@ -89380,7 +89314,7 @@
   "text": "coniugis ōra modīs attollēns pallida mīrīs;",
   "scans": true,
   "stage": 1,
-  "penalty": 1,
+  "penalty": 0,
   "ambiguous": false,
   "level": 1,
   "advanced": false,
@@ -105662,7 +105596,7 @@
   "feet": [
    "LSS",
    "LL",
-   "LSS",
+   "LL",
    "LL",
    "LSS",
    "LL"
@@ -105748,23 +105682,12 @@
     "start": 21,
     "end": 22,
     "text": "o",
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "n",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ni",
     "syllable": [
      20,
-     22
-    ]
-   },
-   {
-    "start": 23,
-    "end": 24,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     22,
-     24
+     23
     ]
    },
    {
@@ -105776,7 +105699,7 @@
     "why": "two consonants",
     "followed_by": "ct",
     "syllable": [
-     24,
+     23,
      26
     ]
    },
@@ -111424,7 +111347,7 @@
   "text": "coniugium vocat, hōc praetexit nōmine culpam.",
   "scans": true,
   "stage": 1,
-  "penalty": 1,
+  "penalty": 0,
   "ambiguous": false,
   "level": 3,
   "advanced": false,
@@ -120842,7 +120765,7 @@
   "text": "(hoc sōlum nōmen quoniam dē coniuge restat)?",
   "scans": true,
   "stage": 1,
-  "penalty": 1,
+  "penalty": 0,
   "ambiguous": false,
   "level": 2,
   "advanced": false,
@@ -123798,7 +123721,7 @@
   "text": "spērāvī (nē finge) fugam, nec coniugis umquam",
   "scans": true,
   "stage": 1,
-  "penalty": 1,
+  "penalty": 0,
   "ambiguous": false,
   "level": 2,
   "advanced": false,
@@ -127120,7 +127043,7 @@
    "LSS",
    "LSS",
    "LSS",
-   "LSS",
+   "LL",
    "LSS",
    "LL"
   ],
@@ -127260,23 +127183,12 @@
     "start": 28,
     "end": 29,
     "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "followed_by": "n",
+    "mark": "L",
+    "why": "two consonants",
+    "followed_by": "ni",
     "syllable": [
      24,
-     29
-    ]
-   },
-   {
-    "start": 30,
-    "end": 31,
-    "text": "i",
-    "mark": "S",
-    "why": "short vowel",
-    "syllable": [
-     29,
-     31
+     30
     ]
    },
    {
@@ -127287,7 +127199,7 @@
     "mark": "L",
     "why": "long vowel",
     "syllable": [
-     31,
+     30,
      32
     ]
    },
