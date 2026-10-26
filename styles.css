@@ -326,6 +326,10 @@ body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tuto
 .zoom-tag { padding: .05em .4em; border-radius: .3em; background: var(--key-bg); color: var(--key-ink); font-weight: 600; white-space: nowrap; }
 .zoom-tag:empty { display: none; }
 .zplay.measure, .zplay.measure * { transition: none !important; }
+/* the lesson that teaches the reason: comes in with the sentence */
+.zoom-lesson { margin: .45rem 0 0; font-size: .9rem; color: var(--muted); opacity: 0; transition: opacity .4s; }
+.zplay.is-why .zoom-lesson { opacity: 1; }
+.zoom-lesson .link { text-align: left; }
 
 /* ---- a worked example in a lesson: a line from outside the reader, scanned, with the zoom-in's
    animation below it (app.js buildDemos) ---- */
@@ -382,6 +386,14 @@ main > .controls { justify-content: center; align-items: center; margin-bottom: 
 .lesson-body .latin { font-family: Tahoma, "Noto Sans", sans-serif; font-size: 1.1rem; }
 .lesson-body .howto { color: var(--muted); }
 .lesson-body .whats-new { border-left: 3px solid var(--accent); padding-left: .6rem; }
+.lesson-back { margin: 0 0 .5rem; font-size: .9rem; }
+/* the part of a lesson a zoom-in's link went to, lit up for a moment */
+.lesson-body [data-topic] { border-radius: 6px; scroll-margin-top: .75rem; }
+.lesson-body [data-topic].lit { animation: topic-lit 2.6s ease-out; }
+@keyframes topic-lit {
+  0%, 35% { background: var(--target); box-shadow: 0 0 0 .4rem var(--target); }
+  100% { background: transparent; box-shadow: 0 0 0 .4rem transparent; }
+}
 .no-storage { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid #c0392b; border-radius: 8px; padding: .7rem 1rem; margin: 0 0 1rem; }
 .stage-done { margin-top: .5rem; }
 .stage-done button { margin-top: .5rem; }

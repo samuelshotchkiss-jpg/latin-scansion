@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-10-24c">
+  <link rel="stylesheet" href="styles.css?v=2026-10-26">
 </head>
 <body>
   <header class="top">
@@ -58,6 +58,8 @@
     </div>
 
     <article id="lesson" class="lesson" hidden>
+      <!-- after a zoom-in's lesson link: the way back to the line (app.js, showLessonBack) -->
+      <p id="lesson-back" class="lesson-back" hidden><button type="button" id="lesson-back-go" class="link"></button></p>
       <div class="lesson-head">
         <h2 id="lesson-title"></h2>
         <button type="button" id="lesson-toggle" class="link">Hide lesson</button>
@@ -135,6 +137,7 @@
         <li>which lines you have scanned correctly, and how many tries each one took;</li>
         <li>your points, your streaks, and the badges you have earned;</li>
         <li>which passages and levels you have practiced, and how far you are in the tutorial;</li>
+        <li>the marks on a line you leave before finishing it, so that it is still there when you come back;</li>
         <li>your settings: fast scanning, once you unlock it, and whether the rhythm plays by itself;</li>
         <li>your name, only if you type it in to make a progress report.</li>
       </ul>
@@ -209,8 +212,8 @@
     </div>
   </div>
 
-  <script src="progress.js?v=2026-09-28"></script>
+  <script src="progress.js?v=2026-10-26"></script>
   <script src="rhythm.js?v=2026-09-29"></script>
-  <script src="app.js?v=2026-10-24c"></script>
+  <script src="app.js?v=2026-10-26"></script>
 </body>
 </html>

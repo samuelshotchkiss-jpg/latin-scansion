@@ -32,12 +32,20 @@ neighbours, enlarged, divided before the student's eyes. The words close up into
 consonants between this vowel and the next lift out and drop into the syllable they belong to — a
 mūta cum liquida tied by a swoosh and pushed together into the next one, an *x* splitting into *c* +
 *s*, an *i* that is a consonant (*iam*, *coniugis*, *Troia*) growing its tail into a *j*; then what decides the mark lights up — the long vowel, the consonant that ends the syllable, the
-end of the line, the vowel an elision runs into — and a sentence says why. ↻ plays it again.
+end of the line, the vowel an elision runs into — and a sentence says why. ↻ plays it again. Under
+the sentence, a link opens the tutorial at the lesson that teaches the reason, scrolled to the part
+that does (*qu*, hiatus, diphthongs…), with a way back to the line.
+
+**A line left unfinished waits.** The marks on the line a student is working on — and after Check,
+its greens and reds — are kept for each place: Practice, and each stage of the tutorial. A look at a
+lesson and back finds the line as it was left, even after a reload; stepping to another line in the
+same place lets it go, as Next always has.
 
 ## Tutorial, practice, and progress
 
 - **Tutorial** walks through meter one idea at a time — syllables, long and short; the pattern;
-  *qu, h, x, z*; elision; mūta cum liquida; consonants at the start of a word; Greek words; the
+  *qu, h, x, z*; two vowels side by side (a diphthong, two syllables, or an *i* or *u* that turns
+  consonant); elision; mūta cum liquida; consonants at the start of a word; Greek words; the
   poets' licences — each with a short lesson and lines to practice it on. The lessons and their
   lines live in [`data/tutorial.json`](data/tutorial.json): edit the text, reorder the stages, or
   swap in lines from your own texts by citation. A lesson can also carry **worked examples** —
@@ -48,7 +56,8 @@ end of the line, the vowel an elision runs into — and a sentence says why. ↻
   `python scansion/scan.py data/examples.tsv --json data/examples.json`.
 - **Practice** chooses lines by passage and by the kinds of line ticked — only lines with elision,
   say, or only the advanced ones. Every tutorial stage after the first links to a practice set of
-  lines like its own (`?practice=<stage id>`), ticking the matching kinds.
+  lines like its own (`?practice=<stage id>`), ticking the matching kinds — except two vowels side
+  by side, which no kind of line singles out.
 - **My progress** shows lines figured out (and what share of the whole), points, streaks, days
   practiced, badges, and what has been practiced. A line solved after **Show answer** earns nothing
   until it is solved again on another visit.

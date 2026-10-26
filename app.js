@@ -17,6 +17,7 @@
   const WORD = { L: 'long', S: 'short', X: 'elided' };
   const TIE = '<span class="tie-sym"></span>';
   const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z, letters that count twice', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
+  const EIGHT_STAGES = ['syllables', 'pattern', 'refinements', 'elision', 'muta', 'clusters', 'greek', 'licences'];
 
   const $ = (id) => document.getElementById(id);
   const lineEl = $('line');
@@ -34,6 +35,7 @@
   let checked = false, revealed = false, helped = false;
   let tool = null, overlay = null;
   let cursor = null;       // FAST SCANNING: the syllable the next key or tap marks (null when off)
+  let cameFrom = null;     // where a zoom-in's lesson link was followed from, for the way back
 
   // Fast scanning's keys: a straight stroke is long, a cup is short, an empty circle is nothing.
   // l, s and e -- the keys a focused vowel always took -- work too.
@@ -83,6 +85,10 @@
       S.kinds = 8;
       delete S.focus;
     }
+    // The stage a student is on was kept by NUMBER, until a ninth stage went in fourth (2026-10-26, two
+    // vowels side by side). It is kept by id now; a number saved without one counts in the old list.
+    if (!S.stageId) S.stageId = EIGHT_STAGES[S.stage || 0] || EIGHT_STAGES[0];
+    S.stage = Math.max(0, stages.findIndex((s) => s.id === S.stageId));
     setKinds(S.levels);
     fillStageMenu();
     fillWorkMenu();
@@ -119,6 +125,11 @@
   document.querySelectorAll('.mode[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
 
   function setMode(mode) {
+    // a lesson looked up from Practice was a visit: back in Practice, the tutorial stays where it was
+    if (mode === 'practice' && cameFrom && cameFrom.mode === 'practice' && S.stage === cameFrom.to) {
+      S.stage = cameFrom.stage; S.stageId = cameFrom.stageId;
+    }
+    if (mode === 'practice') cameFrom = null;
     S.mode = mode; P.save();
     document.querySelectorAll('.mode[data-mode]').forEach((b) => b.classList.toggle('active', b.dataset.mode === mode));
     document.body.classList.toggle('tutorial', mode === 'tutorial');
@@ -128,6 +139,7 @@
     $('lesson').hidden = mode !== 'tutorial';
     if (mode === 'tutorial') openStage(Math.min(S.stage || 0, stages.length - 1), true);
     else rebuildPool(S.citation);
+    showLessonBack();
   }
 
   // Practice: a passage, and the KINDS of line ticked. A kind is a level, not "up to" one: ticking
@@ -192,7 +204,8 @@
   function openStage(k, resume, atEnd) {
     const stage = stages[k];
     if (!stage) return;
-    S.stage = k; P.save();
+    S.stage = k; S.stageId = stage.id; P.save();
+    showLessonBack();
     $('stage').value = String(k);
     $('lesson-title').textContent = `Stage ${k + 1} of ${stages.length}: ${stage.title}`;
     let lesson = stage.lesson;
@@ -295,6 +308,8 @@
     lineEl.innerHTML = html + '<span class="line-check" title="You have figured out this line" hidden>✓</span><div class="overlay"></div>';
     overlay = lineEl.querySelector('.overlay');
     junctions = computeJunctions(l);
+    const draft = takeDraft(l);
+    if (draft) restoreDraft(l, draft);
     $('citation').textContent = l.citation;
     showContext(l);
     slide(l.citation);
@@ -310,6 +325,53 @@
     else S.citation = l.citation;
     P.save();
     render();
+    if (checked || revealed) showResult(l);
+  }
+
+  // ---- a line left unfinished -------------------------------------------------------------------------
+  // The line a student is working on is kept for each PLACE -- Practice, and each stage of the tutorial --
+  // with its marks and, after a Check, its greens and reds: a look at a lesson and back finds it as it was
+  // left. Stepping to another line in the same place lets it go, as Next always has. It lives in S.drafts,
+  // so a reload keeps it too. Its nuclei are recorded with it: if the key has been rebuilt since and the
+  // line's syllables moved, the draft is dropped rather than put its marks in the wrong places.
+  const drafts = () => (S.drafts = S.drafts || {});
+  const placeNow = () => (S.mode !== 'tutorial' ? 'practice' : stages[S.stage] ? `stage:${stages[S.stage].id}` : null);
+  const nucleiOf = (l) => l.nuclei.map((n) => `${n.start}-${n.end}`).join(',');
+  function keepDraft() {
+    const l = current(), at = placeNow();
+    if (!l || !at) return;
+    if (!Object.keys(marks).length && !checked && !revealed && !helped) delete drafts()[at];
+    else drafts()[at] = { citation: l.citation, nuclei: nucleiOf(l), marks: { ...marks }, tieOf: { ...tieOf }, checked, revealed, helped };
+    P.save();
+  }
+  function takeDraft(l) {
+    const at = placeNow(), d = at && drafts()[at];
+    if (!d) return null;
+    if (d.citation === l.citation && d.nuclei === nucleiOf(l)) return d;
+    delete drafts()[at];                                  // another line here now: the old one goes
+    return null;
+  }
+  function restoreDraft(l, d) {
+    Object.entries(d.marks || {}).forEach(([i, m]) => { if (l.nuclei[i] && ['L', 'S', 'X'].includes(m)) marks[i] = m; });
+    Object.entries(d.tieOf || {}).forEach(([i, j]) => { if (marks[i] === 'X' && junctions[j]) tieOf[i] = j; });
+    checked = !!d.checked; revealed = !!d.revealed; helped = !!d.helped;
+    if (cursor != null) {                                 // fast scanning: on at the first syllable not marked
+      const k = l.nuclei.findIndex((_, i) => !marks[i]);
+      cursor = k < 0 ? l.nuclei.length : k;
+    }
+  }
+  // What a line Checked or answered before shows again: the colours, the dividers, and what was said
+  // about it -- not the points or badges, which were given then.
+  function showResult(l) {
+    if (revealed) {
+      $('feedback').innerHTML = revealedHTML(l);
+    } else {
+      const right = markResults(l);
+      const shape = render();
+      $('feedback').innerHTML = right === l.nuclei.length
+        ? '<div><b>Correct!</b></div>' + spondaicNote(l) + rhythmControls() : wrongHTML(l, right, shape);
+    }
+    wireRhythm();
   }
 
   function updatePosition() {
@@ -575,6 +637,7 @@
       $('feedback').innerHTML = ''; closeZoom();
     }
     render();
+    keepDraft();
   }
 
   // Where a drop at (x, y) lands: a nucleus for long/short, a junction for the swoosh. {i, j} or null.
@@ -821,8 +884,8 @@
   // ---- checking -----------------------------------------------------------------------------------
   function expected(n) { return n.mark === 'L' || n.mark === 'S' ? n.mark : 'X'; }
 
-  $('check').addEventListener('click', () => {
-    const l = current(); if (!l) return;
+  // Green or red on each long and short mark (drawOverlay colours the swooshes); how many marks are right.
+  function markResults(l) {
     let right = 0;
     nucEls().forEach((el) => {
       const i = Number(el.dataset.i);
@@ -831,7 +894,23 @@
       if (marks[i] === want) right++;
       if (marks[i] === 'L' || marks[i] === 'S') el.classList.add(marks[i] === want ? 'ok' : 'bad');
     });
+    return right;
+  }
+  function wrongHTML(l, right, shape) {
+    const total = l.nuclei.length;
+    const unmarked = l.nuclei.filter((n, i) => !marks[i]).length;
+    let html = `${right} of ${total} right.`;
+    if (unmarked) html += ` ${unmarked} syllable${unmarked === 1 ? ' has' : 's have'} no mark.`;
+    if (shape && !shape.complete) html += ` <span class="note">Your marks don’t divide into ${l.meter === 'half-line' ? 'feet' : 'six feet'} yet — see where the dividers stop.</span>`;
+    return html + ' <span class="note">Tap any syllable to see why.</span>';
+  }
+  const revealedHTML = (l) => spondaicNote(l) + '<div class="note">Tap any syllable to see why.</div>' + rhythmControls();
+
+  $('check').addEventListener('click', () => {
+    const l = current(); if (!l) return;
+    const right = markResults(l);
     checked = true; revealed = false;
+    keepDraft();
     const shape = render();
     const total = l.nuclei.length;
     const correct = right === total;
@@ -852,11 +931,7 @@
       }
       html += '</div>' + spondaicNote(l);
     } else {
-      const unmarked = l.nuclei.filter((n, i) => !marks[i]).length;
-      html = `${right} of ${total} right.`;
-      if (unmarked) html += ` ${unmarked} syllable${unmarked === 1 ? ' has' : 's have'} no mark.`;
-      if (shape && !shape.complete) html += ` <span class="note">Your marks don’t divide into ${l.meter === 'half-line' ? 'feet' : 'six feet'} yet — see where the dividers stop.</span>`;
-      html += ' <span class="note">Tap any syllable to see why.</span>';
+      html = wrongHTML(l, right, shape);
     }
     let badges = result.badges;
     if (correct && S.mode === 'tutorial') {
@@ -940,9 +1015,10 @@
     });
     revealed = true; checked = false; helped = true;
     P.recordReveal(l);
+    keepDraft();
     nucEls().forEach((el) => el.classList.remove('ok', 'bad'));
     render();
-    $('feedback').innerHTML = spondaicNote(l) + '<div class="note">Tap any syllable to see why.</div>' + rhythmControls();
+    $('feedback').innerHTML = revealedHTML(l);
     wireRhythm();
     closeZoom();
   });
@@ -1209,7 +1285,7 @@
     zoomAt = i;
     const want = expected(l.nuclei[i]), got = marks[i];
     const note = checked && got !== want ? `— you marked it ${got ? WORD[got] : 'nothing'}` : '';
-    zoomEl.innerHTML = zoomCard(l, i, note, AGAIN + CLOSE);
+    zoomEl.innerHTML = zoomCard(l, i, note, AGAIN + CLOSE, true);
     zoomEl.hidden = false;
     fitZoom(zoomEl);
     placeZoom();
@@ -1217,8 +1293,8 @@
   }
 
   // What a card holds -- the heading, the strip, the sentence -- for the pop-up and for a lesson's
-  // worked example alike.
-  function zoomCard(l, i, note, buttons) {
+  // worked example alike. The pop-up adds a link to the lesson that teaches the reason.
+  function zoomCard(l, i, note, buttons, withLessons) {
     const n = l.nuclei[i];
     const z = zoomStrip(l, i);
     const [tag, why] = zoomWhy(l, n, z);
@@ -1229,8 +1305,103 @@
     if (note) head += ` <span class="note">${note}</span>`;
     return `<div class="zoom-head"><span>${head}</span><span class="zoom-buttons">${buttons}</span></div>` +
       (z ? z.html : '') +
-      `<p class="zoom-why" aria-live="polite"><span class="zoom-tag">${tag}</span> ${why}</p>`;
+      `<p class="zoom-why" aria-live="polite"><span class="zoom-tag">${tag}</span> ${why}</p>` +
+      (withLessons ? lessonLinks(l, n, z) : '');
   }
+
+  // ---- from the zoom-in to the lesson behind it -------------------------------------------------------
+  // Each reason names the stage that teaches it -- and the part of the lesson (data-topic in
+  // tutorial.json) when a stage teaches several things. The notes a reason adds (qu, h, x, a j) bring
+  // their own. A stage missing from the tutorial drops its link.
+  const LESSON = {
+    'long vowel': ['syllables'], 'two consonants': ['syllables'], 'short vowel': ['syllables'],
+    'final syllable': ['syllables'], 'diphthong': ['vowels', 'diphthong'],
+    'muta cum liquida, long': ['muta'], 'muta cum liquida, short': ['muta'],
+    'muta cum liquida at word start': ['clusters'], 'f + liquid at word start': ['clusters'],
+    'word-initial cluster makes position': ['clusters'], 'word-initial cluster ignored': ['clusters'],
+    'elided': ['elision'], 'prodelided': ['elision'],
+    'correption': ['licences'], 'lengthened syllable': ['licences'], 'merged': ['licences', 'synizesis'],
+  };
+  const TOPICS = {
+    diphthong: 'Diphthongs', apart: 'Two vowels, two syllables', semivowel: 'i and u as consonants',
+    qu: 'qu', h: 'h', x: 'x', z: 'z', 'i-between': 'i between two vowels', hic: 'hic and hoc',
+    hiatus: 'Hiatus', synizesis: 'Synizesis', hypermetry: 'Hypermetry',
+  };
+  function lessonsFor(l, n, z) {
+    if (!z) return [];
+    const why = n.why || n.mark;
+    let main = LESSON[why];
+    if (why === 'short vowel' && n.hiatus) main = ['licences', 'hiatus'];
+    else if (vowelNext(l, n) && (why === 'short vowel' || why === 'long vowel')) main = ['vowels', 'apart'];
+    else if (why === 'elided' && !z.next) main = ['licences', 'hypermetry'];
+    const out = main ? [main] : [];
+    // the notes zoomReason adds, under the same conditions
+    const notes = why === 'two consonants' || (why === 'short vowel' && !n.hiatus && z.onset);
+    if (notes && z.qu) out.push(['refinements', 'qu']);
+    if (notes && z.h) out.push(['refinements', 'h']);
+    const d = why === 'two consonants' && (l.doubled || []).find((x) => x.at === z.codaAt);
+    if (d) {
+      const c = [...l.text][d.at].toLowerCase();
+      out.push(['refinements', c === 'x' || c === 'z' ? c : c === 'i' ? 'i-between' : d.as.join('') === 'cc' ? 'hic' : null]);
+    }
+    if (z.j) out.push(['vowels', 'semivowel']);
+    return out;
+  }
+  function lessonLinks(l, n, z) {
+    const seen = new Set();
+    const links = lessonsFor(l, n, z).filter(([id, topic]) => {
+      const key = `${id}#${topic || ''}`;
+      if (seen.has(key) || !stages.some((s) => s.id === id)) return false;
+      seen.add(key);
+      return true;
+    });
+    if (!links.length) return '';
+    return '<p class="zoom-lesson">Lesson: ' + links.map(([id, topic]) => {
+      const k = stages.findIndex((s) => s.id === id);
+      const name = topic ? TOPICS[topic] : stages[k].title;
+      return `<button type="button" class="link" data-lesson="${id}"${topic ? ` data-topic="${topic}"` : ''}>` +
+        `${escapeHTML(name)} (stage ${k + 1}) →</button>`;
+    }).join(' · ') + '</p>';
+  }
+
+  // The tutorial, at the stage that teaches it, scrolled to the part that does. From Practice, or from
+  // another stage, the lesson shows a way back to the line, as it was left (see keepDraft).
+  function openLesson(id, topic) {
+    const k = stages.findIndex((s) => s.id === id);
+    if (k < 0) return;
+    closeZoom();
+    if (S.mode !== 'tutorial' || S.stage !== k) {
+      const l = current();
+      cameFrom = { mode: S.mode, stage: S.stage, stageId: S.stageId, citation: l && l.citation, to: k };
+      if (S.mode === 'tutorial') openStage(k, true);
+      else { S.stage = k; setMode('tutorial'); }
+    }
+    const body = $('lesson-body');
+    if (body.hidden) $('lesson-toggle').click();
+    const part = (topic && body.querySelector(`[data-topic="${topic}"]`)) || $('lesson');
+    const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    part.scrollIntoView({ block: 'start', behavior: still ? 'auto' : 'smooth' });
+    if (part !== $('lesson')) {
+      part.classList.remove('lit');
+      void part.offsetWidth;                          // light it up again if it is already lit
+      part.classList.add('lit');
+    }
+  }
+  function showLessonBack() {
+    if (cameFrom && (S.mode !== 'tutorial' || S.stage !== cameFrom.to)) cameFrom = null;
+    $('lesson-back').hidden = !cameFrom;
+    if (!cameFrom) return;
+    $('lesson-back-go').textContent = cameFrom.mode === 'practice'
+      ? `← Back to your line in Practice, ${cameFrom.citation}`
+      : `← Back to stage ${cameFrom.stage + 1}, ${cameFrom.citation}`;
+  }
+  $('lesson-back-go').addEventListener('click', () => {
+    const from = cameFrom;
+    if (!from) return;
+    if (from.mode === 'practice') setMode('practice');
+    else { cameFrom = null; openStage(from.stage, true); }
+    $('line-box').scrollIntoView({ block: 'center' });
+  });
 
   function closeZoom() {
     stopZoom(zoomEl);
@@ -1301,7 +1472,9 @@
   }
 
   zoomEl.addEventListener('click', (e) => {
-    if (e.target.closest('.zoom-close')) closeZoom();
+    const go = e.target.closest('[data-lesson]');
+    if (go) openLesson(go.dataset.lesson, go.dataset.topic);
+    else if (e.target.closest('.zoom-close')) closeZoom();
     else if (e.target.closest('.zoom-again')) playZoom(zoomEl);
   });
   // a tap anywhere else closes it -- except on another syllable, which opens that one instead
@@ -1578,16 +1751,24 @@
     const j = z && z.j ? ' The <i>i</i> before a vowel is a consonant, <i>j</i> (say it like English <i>y</i>).' : '';
     return [tag, why + j];
   }
+  // The vowel straight after this one in its word, nothing between them: de-us, fī-li-us, il-lī-us.
+  function vowelNext(l, n) {
+    const next = l.nuclei[l.nuclei.indexOf(n) + 1];
+    return next && next.start === n.end ? next : null;
+  }
   function zoomReason(l, n, z) {
     const b = (s) => `<b class="la">${escapeHTML(s)}</b>`;
     const v = b(n.text);
+    const after = vowelNext(l, n);
     const quNote = z && z.qu ? ' (<i>qu</i> is one consonant: its <i>u</i> is not a vowel.)' : '';
     const hNote = z && z.h ? ' The <i>h</i> does not count.' : '';
     const hiatus = n.hiatus ? ' The next word begins with a vowel, but here the poet does not elide: that is hiatus.' : '';
     if (!z) return ['', ''];
     const open = 'So the syllable ends in its short vowel.';
     switch (n.why || n.mark) {
-      case 'long vowel': return ['long vowel', `Its vowel, ${v}, is long — it has a macron.${hiatus}`];
+      case 'long vowel':
+        return ['long vowel', `Its vowel, ${v}, is long — it has a macron.` +
+          (after ? ` A vowel before another vowel is usually short; the macron says this one is not.` : '') + hiatus];
       case 'diphthong': return ['diphthong', `${v} is a diphthong, two vowels said as one, and diphthongs are long.${hiatus}`];
       case 'two consonants':
         return ['ends in a consonant', `It ends in a consonant, ${b(z.coda)}: two consonants come after its vowel, and they divide between this syllable and the next.${quNote}${doubledNote(l, z)}${hNote}`];
@@ -1605,6 +1786,10 @@
         return ['short vowel', `The next word begins with ${b(n.followed_by)}, but the poet lets them go together into the next syllable. ${open}`];
       case 'short vowel':
         if (n.hiatus) return ['no elision', `${hiatus.trim()} ${open}`];
+        if (after) {
+          return ['vowel before a vowel', `${v} comes straight before another vowel, ${b(after.text)}. They are not a ` +
+            'diphthong, so they are two syllables — and a vowel before another vowel is short.'];
+        }
         if (!z.onset) return ['short vowel', `Its vowel is short, and the next syllable begins with a vowel. ${open}`];
         return ['short vowel', `Its vowel is short, and only one consonant follows: ${b(z.onset)} begins the next syllable${z.crossed ? ', even across the space between words' : ''}. ${open}${quNote}${hNote}`];
       case 'correption':

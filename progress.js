@@ -27,6 +27,7 @@ window.Progress = (function () {
   S.badges = S.badges || {};
   S.tutorial = S.tutorial || {};
   S.stagePos = S.stagePos || {};
+  S.drafts = S.drafts || {};                         // a line left unfinished, by place (app.js keepDraft)
   S.points = S.points || 0;
 
   // ---- two tabs, one storage ------------------------------------------------------------------------
@@ -69,7 +70,8 @@ window.Progress = (function () {
     if (!S.name && o.name) S.name = o.name;
     // points come only from solved lines, so the total is recomputed rather than added twice
     S.points = Object.values(S.lines).reduce((n, e) => n + (e.points || 0), 0);
-    // what this tab is showing -- mode, stage, levels, passage -- stays this tab's
+    // what this tab is showing -- mode, stage, levels, passage, the marks on a line left unfinished --
+    // stays this tab's
   }
 
   let onChange = null;                               // the app's hook: redraw after another tab saved
@@ -235,7 +237,7 @@ window.Progress = (function () {
 
   function reset() {
     Object.keys(S).forEach((k) => { if (k !== 'acknowledged') delete S[k]; });
-    Object.assign(S, { version: 2, lines: {}, configs: {}, days: {}, streak: { current: 0, best: 0 }, badges: {}, tutorial: {}, stagePos: {}, points: 0,
+    Object.assign(S, { version: 2, lines: {}, configs: {}, days: {}, streak: { current: 0, best: 0 }, badges: {}, tutorial: {}, stagePos: {}, drafts: {}, points: 0,
       resetAt: new Date().toISOString() });
     try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* not save(): nothing to merge in */ }
   }
