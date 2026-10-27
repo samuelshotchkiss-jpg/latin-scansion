@@ -309,3 +309,27 @@ test("the rules file is untouched by this mode: a tap is accepted only for the c
   assert.match(rules.n[".validate"], /round'\)\.child\('n'\)/);
   assert.match(rules[".validate"], /\[0-9\]\{1,6\}_\[0-9\]/);       // at most ten taps (0-9) per round number
 });
+
+test("auto teams for the real class sizes (5, 6, 7 players) are sensible and never a team of one", () => {
+  const expected = { 5: ["3+2"], 6: ["2+2+2", "3+3"], 7: ["3+2+2"] };
+  for (const teamSize of [2, 3]) for (const n of [5, 6, 7]) {
+    const seen = new Set();
+    for (let k = 0; k < 300; k++) {
+      const t = Live.makeTeams(uids(n), teamSize);
+      const sizes = {};
+      Object.values(t).forEach((x) => { sizes[x] = (sizes[x] || 0) + 1; });
+      const split = Object.values(sizes).sort((a, b) => b - a);
+      assert.ok(split.every((s) => s >= 2), `${n} players, size ${teamSize}: a team of one (${split})`);
+      assert.ok(Math.max(...split) - Math.min(...split) <= 1, `${n} players: uneven split ${split}`);
+      seen.add(split.join("+"));
+    }
+    for (const s of seen) assert.ok(expected[n].includes(s), `${n} players, size ${teamSize}: unexpected split ${s}`);
+  }
+});
+
+test("a 3-player day still works: one team of 3, or a team of one forced in the lobby, both are dealt", () => {
+  for (const sizes of [[3], [2, 1]]) {
+    const g = game(sizes);
+    for (const t of Object.keys(g.T)) assert.ok(rightOf(g, t).length === 2, `team of ${g.T[t].uids.length}`);
+  }
+});
