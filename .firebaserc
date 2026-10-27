@@ -1,3 +1,7 @@
 {
-  "projects": { "default": "demo-latin-live" }
+  "projects": {
+    "default": "latin-live-game"
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -13,11 +13,13 @@ window.LIVE_CONFIG = {
   pagesHost: "samuelshotchkiss-jpg.github.io",
 
   web: {
-    apiKey: "PASTE-API-KEY-HERE",
-    authDomain: "PASTE-PROJECT-ID.firebaseapp.com",
-    databaseURL: "https://PASTE-PROJECT-ID-default-rtdb.firebaseio.com",
-    projectId: "PASTE-PROJECT-ID",
-    appId: "PASTE-APP-ID",
+    apiKey: "AIzaSyBHpDlEWkXVxv4hJ1Y84N50B6JEVLvqXSo",
+    authDomain: "latin-live-game.firebaseapp.com",
+    databaseURL: "https://latin-live-game-default-rtdb.firebaseio.com",
+    projectId: "latin-live-game",
+    storageBucket: "latin-live-game.firebasestorage.app",
+    messagingSenderId: "465118345596",
+    appId: "1:465118345596:web:54336f992c5bf66ff8ccf9",
   },
 
   // The local test setup (npm run emulate). The project id must start with "demo-": Firebase refuses
