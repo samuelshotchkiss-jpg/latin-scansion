@@ -53,22 +53,21 @@ own rule, imported, not copied -- picks the lowest level that admits them all:
       6    mcl-start   comes before a mute + liquid, or f + liquid, that begins the next word (unda gravet,
                        curvāmine flectit): short
       7    greek       lies in a word the scanner calls Greek-looking (āera, Aenēās, Pēnēia)
-      8    advanced    carries a licence: hiatus, synizesis, a syllable lengthened at the beat, an ignored or
-                       position-making word-initial cluster
+      8    advanced    (NOT ASKED: the owner left every licence out -- hiatus, synizesis, a syllable
+                       lengthened at the beat, an ignored or position-making word-initial cluster)
 A syllable of several kinds takes the highest, as a line does. Two judgements that are this file's own, and
 are listed in the --audit and the report so the owner can overrule them:
   * a vowel before a mute + liquid that the poet DIVIDES (long: pat-ris) is `mcl`, because the zoom-in
     teaches it as mūta cum liquida; the scanner raises no flag for it (a closed syllable like another);
   * a syllable in a Greek-looking word is `greek` whatever its reason, as the scanner levels a whole line.
 
-WHICH SYLLABLES ARE ASKED. Never: a vowel that carries a macron in the text (the answer would show, and a
-long vowel elided would mislead); a diphthong, or a written ae/au/oe read as two syllables; the last
+WHICH SYLLABLES ARE ASKED. Never: a vowel that carries a macron in the text, unless it is elided (then the answer
+is X, which the macron does not give away); a diphthong, or a written ae/au/oe read as two syllables; the last
 syllable of a line (anceps, long by definition) or a vowel elided into the next line (hypermetry);
 anything at or after a line's `reading_ends`; the e of est lost by prodelision (not the final vowel of a
 word that elides -- INCLUDE_PRODELISION or --prodelision asks them); a line that does not scan or scans
-two ways equally well (none today). Lines flagged `advanced` give questions only for the syllable that
-carries the licence (kind advanced); the rest of such a line is not asked, because the licence is what
-let the line scan. Everything else the data marks L, S or elided is asked, once.
+two ways equally well (none today). Lines flagged `advanced` (they needed a licence to scan) give no
+questions at all: no licence is asked, and the rest of such a line is left out with it. Everything else the data marks L, S or elided is asked, once.
 
 REASONS. Every sentence is the app's (app.js zoomStrip / zoomReason / doubledNote), ported line for line;
 the one input the app takes from its drawing -- which letters the zoom-in lifts out -- is recomputed here
@@ -105,7 +104,8 @@ KIND_OF_LEVEL = {1: "plain", 2: "qu", 3: "hxz", 4: "elision", 5: "mcl", 6: "mcl-
                  8: "advanced"}
 LABELS = ["Long and short only", "qu", "h, x, z, letters that count twice", "Elision", "Mūta cum liquida",
           "Consonants at the start of a word", "Greek words", "Advanced"]
-KINDS = {KIND_OF_LEVEL[k]: {"level": k, "label": LABELS[k - 1]} for k in KIND_OF_LEVEL}
+# kind `advanced` (level 8) is never asked (owner's ruling, 2026-10-27), so the file does not list it
+KINDS = {KIND_OF_LEVEL[k]: {"level": k, "label": LABELS[k - 1]} for k in KIND_OF_LEVEL if k != 8}
 LEVEL_OF_KIND = {k: v["level"] for k, v in KINDS.items()}
 SPLIT_PAIRS = {"ae", "au", "oe"}      # written diphthongs the scanner may read as two syllables
 THIN = 50                             # a kind with fewer questions than this is "thin" in the report
@@ -392,8 +392,8 @@ def skip_reason(l: dict, i: int, prodelision: bool = INCLUDE_PRODELISION):
         return "last syllable of the line"
     if i == len(N) - 1 and n["mark"] == "elided":
         return "last vowel elided into the next line (hypermetry)"
-    if has_macron(n, text):
-        return "macron on the vowel (elided)" if n["mark"] == "elided" else "macron on the vowel"
+    if has_macron(n, text) and n["mark"] != "elided":     # an elided vowel with a macron IS asked (ruling 1)
+        return "macron on the vowel"
     if n.get("why") == "diphthong" or n["end"] - n["start"] > 1:    # (an elided diphthong has no `why`)
         return "diphthong"
     if text[n["start"]:n["end"]] + (text[n["end"]] if n["end"] < len(text) else "") in SPLIT_PAIRS \
@@ -403,8 +403,8 @@ def skip_reason(l: dict, i: int, prodelision: bool = INCLUDE_PRODELISION):
         return "beyond the line's reading_ends"
     if n["mark"] == "prodelided" and not prodelision:
         return "e of est lost by prodelision"
-    if l.get("advanced") and syllable_level(l, i) != 8:
-        return "ordinary syllable of an advanced line"
+    if l.get("advanced"):                                  # no licence is asked, so nor is its line (ruling 3)
+        return "syllable of a line that needed a licence"
     return None
 
 
@@ -485,17 +485,17 @@ def audit(lines: list[dict]) -> list[tuple]:
             if why == "two consonants" and not fb:
                 add("long by position with no consonant after it")
             if mark == "elided" and mac:
-                add("elided vowel carries a macron (kept out of the bank by the macron rule)")
+                add("elided vowel carries a macron (asked, as elision with the answer X)")
             if mark == "elided" and i == len(N) - 1:
                 add("last vowel elided into the next line (hypermetry): kept out of the bank")
             if mark == "prodelided":
                 add("e of est lost by prodelision: kept out of the bank unless --prodelision")
             if mark == "merged":
-                add("synizesis: asked as 'elided' (X), though the vowel runs together rather than elides")
+                add("synizesis: not asked (its line needed a licence)")
             if n.get("hiatus"):
-                add("hiatus: a licence the scanner needed")
+                add("hiatus: a licence the scanner needed (not asked)")
             if why == "lengthened syllable":
-                add("syllable lengthened at the beat: a licence the scanner needed")
+                add("syllable lengthened at the beat: a licence the scanner needed (not asked)")
             if why == "muta cum liquida, long":
                 add("mūta cum liquida scanned long: kind mcl, though the scanner raises no flag for it")
             if why == "diphthong" and text[n["start"]:n["end"]].lower() not in ("ae", "au", "oe", "eu", "ei", "ui"):
@@ -503,7 +503,7 @@ def audit(lines: list[dict]) -> list[tuple]:
             if (i + 1 < len(N) and N[i + 1]["start"] == n["end"] and text[n["start"]:n["end"] + 1] in SPLIT_PAIRS):
                 add("ae/au/oe read as two syllables (diphthong split)")
         if l.get("stage") == 2:
-            out.append((l["citation"], -1, ", ".join(l["flags"]), "line needed an advanced licence to scan"))
+            out.append((l["citation"], -1, ", ".join(l["flags"]), "line needed an advanced licence to scan (whole line not asked)"))
         if l.get("reading_ends") is not None:
             out.append((l["citation"], -1, str(l["reading_ends"]), "the reading stops part-way; the rest is grey"))
         if l.get("meter"):
@@ -580,8 +580,6 @@ def report(bank: dict, skipped: Counter, lines: list[dict]) -> str:
     p(f"  (no two in a row of one kind needs {20} lines holding a non-plain question for a 40-question "
       f"game; there are {odd})")
     p("")
-    adv = Counter(q["tag"] for q in qs if q["kind"] == "advanced")
-    p("Advanced questions: " + (", ".join(f"{t} ×{c}" for t, c in adv.items()) or "none"))
     docs = audit(lines)
     p(f"Doubtful items in the data (python tools/make_meter_questions.py --audit lists them): {len(docs)}")
     return "\n".join(out)

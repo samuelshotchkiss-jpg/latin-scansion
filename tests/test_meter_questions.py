@@ -50,7 +50,7 @@ class Shape(unittest.TestCase):
             self.assertIn(q["answer"], ("L", "S", "X"))
             self.assertIn(q["kind"], mq.KINDS)
             self.assertEqual(q["level"], mq.KINDS[q["kind"]]["level"])
-            self.assertTrue(1 <= q["level"] <= 8)
+            self.assertTrue(1 <= q["level"] <= 7)
             self.assertTrue(q["why"] and q["tag"], q["id"])
 
     def test_only_lines_with_questions_are_stored(self):
@@ -60,7 +60,7 @@ class Shape(unittest.TestCase):
         src = (ROOT / "app.js").read_text(encoding="utf-8")
         names = re.search(r"const KIND_NAMES = (\[.*?\]);", src).group(1)
         labels = json.loads(names.replace("'", '"'))
-        self.assertEqual(labels, [mq.KINDS[mq.KIND_OF_LEVEL[k]]["label"] for k in range(1, 9)])
+        self.assertEqual(labels, [mq.KINDS[mq.KIND_OF_LEVEL[k]]["label"] for k in range(1, 8)] + ["Advanced"])
 
     def test_reasons_use_only_the_apps_markup(self):
         for q in QS:
@@ -70,13 +70,28 @@ class Shape(unittest.TestCase):
 
 
 class WhatIsNeverAsked(unittest.TestCase):
-    def test_no_macron_on_the_highlighted_vowel(self):
+    def test_no_macron_on_the_highlighted_vowel_unless_it_is_elided(self):
+        # ruling 1: an elided vowel with a macron IS asked (answer X); any other macron never is
         for q in QS:
             e = BANK["lines"][q["line"]]
             a, b = q["span"]
-            self.assertFalse(macron(e["text"][a:b]), q["id"])
             n = BY_CIT[q["line"]]["nuclei"][q["i"]]
-            self.assertFalse(macron(n["text"]), q["id"])
+            if n["mark"] != "elided":
+                self.assertFalse(macron(e["text"][a:b]), q["id"])
+                self.assertFalse(macron(n["text"]), q["id"])
+
+    def test_every_elided_vowel_with_a_macron_is_asked_as_elision(self):
+        asked = {(q["line"], q["i"]): q for q in QS}
+        found = 0
+        for l in LINES:
+            for i, n in enumerate(l["nuclei"]):
+                if n["mark"] == "elided" and macron(n["text"]) and not (
+                        i == len(l["nuclei"]) - 1 or n["end"] - n["start"] > 1 or l.get("advanced")
+                        or not l.get("scans") or n["start"] >= (l.get("reading_ends") or 10**9)):
+                    found += 1
+                    q = asked[(l["citation"], i)]
+                    self.assertEqual((q["answer"], q["kind"] in ("elision", "greek")), ("X", True), q["id"])
+        self.assertEqual(found, 46)         # 47 in the data; 1 is in a line that needed a licence
 
     def test_no_diphthong(self):
         for q in QS:
@@ -109,10 +124,19 @@ class WhatIsNeverAsked(unittest.TestCase):
         asked = {(q["line"], q["i"]) for q in QS}
         self.assertFalse(asked & set(late))
 
-    def test_advanced_lines_ask_only_about_the_licence(self):
+    def test_no_licence_is_asked_and_so_no_advanced_kind(self):
+        # ruling 3: no `advanced` kind, no synizesis, and nothing from a line that needed a licence
+        self.assertNotIn("advanced", mq.KINDS)
         for q in QS:
-            if BY_CIT[q["line"]]["advanced"]:
-                self.assertEqual(q["kind"], "advanced", q["id"])
+            l = BY_CIT[q["line"]]
+            n = l["nuclei"][q["i"]]
+            self.assertNotEqual(q["kind"], "advanced", q["id"])
+            self.assertFalse(l["advanced"], q["id"])
+            self.assertNotEqual(n["mark"], "merged", q["id"])
+            self.assertFalse(n.get("hiatus"), q["id"])
+        for c in ("Aen. 1.2", "Aen. 1.256", "Aen. 4.168"):
+            self.assertFalse([q for q in QS if q["line"] == c], c)
+        self.assertEqual(sum(1 for l in LINES if l["advanced"]), 11)
 
     def test_unsettled_lines_are_never_used(self):
         for q in QS:
@@ -174,7 +198,7 @@ class WhatIsAsked(unittest.TestCase):
             if q["kind"] == "elision":
                 self.assertEqual(n["mark"], "elided", q["id"])
             if q["answer"] == "X":
-                self.assertIn(q["kind"], ("elision", "greek", "advanced"), q["id"])
+                self.assertIn(q["kind"], ("elision", "greek"), q["id"])
             if q["kind"] == "qu":
                 self.assertIn("qu", fb, q["id"])
             if q["kind"] == "mcl":
@@ -183,10 +207,6 @@ class WhatIsAsked(unittest.TestCase):
                 self.assertIn(why, ("muta cum liquida at word start", "f + liquid at word start"), q["id"])
             if q["kind"] == "greek":
                 self.assertTrue(any(d["start"] <= n["start"] < d["end"] for d in l["difficult_words"]), q["id"])
-            if q["kind"] == "advanced":
-                self.assertTrue(n["mark"] == "merged" or n.get("hiatus") or why in (
-                    "lengthened syllable", "word-initial cluster makes position", "word-initial cluster ignored"),
-                    q["id"])
             if q["kind"] == "plain":
                 self.assertIn(why, ("short vowel", "two consonants"), q["id"])
                 self.assertFalse(n.get("hiatus"), q["id"])
