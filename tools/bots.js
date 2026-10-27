@@ -72,22 +72,35 @@ async function makeBot(i, strategy) {
 
   let lastRound = 0, hand = null;
   g("hands/" + uid).on("value", (s) => { hand = s.val(); });
+  let latest = null, busy = false, again = false;
+  const used = {};                                            // round -> taps sent in it
+  const send = async (v) => {                                 // always for the CURRENT round (a refused tap is the strategy's to retry)
+    for (let w = 0; w < 10 && !(latest && latest.open); w++) await sleep(100);
+    const r = latest;
+    if (!r || !r.open) return false;
+    const k = used[r.n] = (used[r.n] === undefined ? 0 : used[r.n] + 1);
+    if (k > 9) return false;
+    try { await g("taps/" + uid + "/" + r.n + "_" + k).set({ n: r.n, v, at: TS }); bot.taps++; log("  bot " + String(i).padStart(2) + " tapped " + v + " in round " + r.n); return true; }
+    catch (e) { log("  bot " + i + " refused in round " + r.n + " (" + (e.code || e.message) + ")"); return false; }
+  };
+  const pass = async () => {                                  // one strategy run at a time per bot; run again if the round moved on meanwhile
+    if (busy) { again = true; return; }
+    busy = true;
+    try { await strategy.run({ round: latest, hand: () => hand, rng, bot, tap: send }); } catch (e) { /* a bad hand just skips a turn */ }
+    busy = false;
+    if (again) { again = false; pass(); }
+  };
   g("round").on("value", (s) => {
     const r = s.val();
+    latest = r;
+    if (strategy.run && r && r.open && !bot.done) { pass(); return; }
     if (!r || !r.open || r.n <= lastRound) return;
     lastRound = r.n;
     if (rng() < DROPOUT) { log("  bot " + i + " skips round " + r.n); return; }
     const [lo, hi] = DELAYS[SPEED];
-    const lo0 = () => lo;
     const wait = Math.min(lo + rng() * (hi - lo), Math.max(300, (r.ms || 8000) - 500));
-    if (strategy.run) {                     // a strategy that plays the whole round itself (several taps)
-      let k = 0;
-      const send = async (v) => {
-        if (k > 9) return;
-        try { await g("taps/" + uid + "/" + r.n + "_" + (k++)).set({ n: r.n, v, at: TS }); bot.taps++; log("  bot " + String(i).padStart(2) + " tapped " + v + " in round " + r.n); }
-        catch (e) { log("  bot " + i + " too late for round " + r.n); }
-      };
-      setTimeout(() => { strategy.run({ round: r, hand: () => hand, rng, bot, tap: send }).catch(() => {}); }, Math.min(lo0(), 400));
+    if (strategy.run) {                     // a strategy that plays on its own, looking at the current hand each time
+      pass();
       return;
     }
     setTimeout(async () => {

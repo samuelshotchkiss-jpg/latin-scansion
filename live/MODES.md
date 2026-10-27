@@ -209,6 +209,17 @@ standings and sections follow it. A mode without `summary` simply gets the stand
 ### `lobbyNote(ctx, players)` (optional)
 Returns one line of plain text shown under the lobby (for example "a team of one is playable").
 
+### A mode whose players move at different speeds (devices mode does this)
+The shell has one round at a time, and the rules accept a tap only for the current round number `n`
+(at most ten per player per `n`). A mode where groups advance independently can use the round as a
+*generation counter*: when someone advances, call `ctx.requestLock()`; `lock()` returns an almost-empty
+reveal; from `renderHost`, once `view.stage === "revealed"`, call `ctx.requestNext(0)`; `nextRound()` then
+returns hands for **every** player (unchanged for groups that did not advance, so all hands carry the new
+`n`) and `ms: 0`. A tap refused while the round is closed must be sent again by the phone when the round
+reopens with a new `n`, and must be dropped if that player's own cards have changed meanwhile. Put a
+counter for the player's deal in the tap value (devices uses `index + 4 x (deal mod 2)`) so the host never
+maps an old tap onto new cards. See `makeSender` and `createGame.tap` in `modes/devices.js`.
+
 ### `keys` (optional)
 `keys: { r: { label: "Replay rhythm", run(ctx) {...} } }` adds a button and a keyboard shortcut to the
 teacher's bar during play. Space is always Lock now / Next.

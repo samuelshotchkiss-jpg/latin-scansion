@@ -59,3 +59,12 @@
 .dv-live-wintext { text-align: center; color: var(--ok); }
 .dv-live-winner { text-align: center; padding: 1rem; border: 4px double var(--ok); border-radius: 16px; background: color-mix(in srgb, var(--ok) 10%, var(--panel)); }
 .dv-live-confetti { font-size: 2rem; letter-spacing: .4em; margin: 0; }
+
+/* teams race on their own: each lane carries its team's current prompt */
+.dv-live-laneprompt { margin: .5rem 0; }
+.dv-live-laneprompt .dv-live-face { font-size: 1.1rem; }
+.dv-live-lane { display: flex; flex-direction: column; }
+.dv-live-last { margin: .3rem 0 0; color: var(--muted); font-size: .9rem; }
+.dv-live-clock { font-weight: 600; }
+.dv-live-clocknum { font-variant-numeric: tabular-nums; }
+.dv-live-clockline { margin: .2rem 0; color: var(--muted); }
