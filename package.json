@@ -1,0 +1,15 @@
+{
+  "name": "latin-scansion-live-dev",
+  "private": true,
+  "description": "Dev-only tooling for the live classroom game (rules tests, emulator, simulated phones). The site itself has no build step and needs none of this.",
+  "license": "AGPL-3.0-only",
+  "scripts": {
+    "emulate": "firebase emulators:start --only auth,database --project demo-latin-live",
+    "test": "firebase emulators:exec --only auth,database --project demo-latin-live \"node --test tests/*.test.js\"",
+    "test:mutate": "firebase emulators:exec --only auth,database --project demo-latin-live \"node tests/mutate_rules.js\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "6.0.0",
+    "firebase": "13.0.0"
+  }
+}

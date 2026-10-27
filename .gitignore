@@ -1,2 +1,11 @@
 __pycache__/
 *.pyc
+
+# dev tooling for the live game (npm install); never committed
+node_modules/
+
+# emulator logs
+firebase-debug.log
+database-debug.log
+ui-debug.log
+auth-debug.log
