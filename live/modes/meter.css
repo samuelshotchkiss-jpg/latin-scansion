@@ -1,2 +1,76 @@
 /* meter.css -- styles for the meter mode only, prefixed mt-live-. AGPL-3.0.
-   Already linked from host.html and live.html; see live/MODES.md. */
+   Already linked from host.html and live.html; see live/MODES.md.
+   The boxed syllable is shown by a box, a heavy underline AND an arrow below it, so it needs no colour. */
+
+.mt-live-line {
+  font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif;
+  font-size: clamp(1.45rem, 6.2vw, 2.2rem); line-height: 1.7; margin: .9rem 0; overflow-wrap: anywhere; user-select: none; -webkit-user-select: none;
+}
+.mt-live-target {
+  position: relative; display: inline-block; min-width: .9em; text-align: center; font-weight: 800;
+  padding: 0 .12em; margin: 0 .04em; border: 3px solid var(--accent); border-radius: 6px;
+  background: var(--target); text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: .12em;
+}
+.mt-live-target::after { content: "▲"; position: absolute; left: 50%; bottom: -1.05em; transform: translateX(-50%); font-size: .45em; line-height: 1; color: var(--accent); }
+
+.mt-live-buttons { display: grid; gap: .6rem; margin: 1.4rem 0 .6rem; }
+.live .mt-live-btn { display: flex; align-items: center; gap: 1rem; min-height: 4.2rem; width: 100%; text-align: left; font-size: 1.5rem; font-weight: 600; border-width: 2px; }
+.mt-live-sym { display: inline-flex; align-items: center; justify-content: center; min-width: 3rem; height: 2rem; }
+/* the three answers as shapes: a bar, a cup, a wide arch */
+.mt-live-glyph { display: inline-block; vertical-align: middle; color: var(--accent); }
+.mt-live-glyph.long { width: 1.9rem; height: 0; border-top: 5px solid currentColor; border-radius: 2px; }
+.mt-live-glyph.short { width: 1.1rem; height: .6rem; border: 5px solid currentColor; border-top: none; border-radius: 0 0 100% 100% / 0 0 100% 100%; }
+.mt-live-glyph.elide { width: 2rem; height: 1.1rem; border: 4px solid currentColor; border-bottom: none; border-radius: 100% 100% 0 0 / 100% 100% 0 0; }
+.live .mt-live-btn.chosen { border-color: var(--accent); background: var(--target); border-style: double; border-width: 5px; }
+.live .mt-live-btn.right { border-color: var(--ok); }
+.live .mt-live-btn.wrong { border-color: var(--bad); text-decoration: line-through; }
+.live .mt-live-btn:disabled { opacity: 1; }
+.live .mt-live-btn:disabled:not(.chosen):not(.right) { opacity: .6; }
+.mt-live-locked { text-align: center; font-size: 1.1rem; font-weight: 600; }
+@media (min-width: 40rem) {
+  .mt-live-buttons { grid-template-columns: repeat(3, 1fr); }
+  .live .mt-live-btn { justify-content: center; }
+}
+
+/* the answer line: marks above each syllable, as the practice page draws them */
+.mt-live-scanned { line-height: 2.3; padding-top: .6em; }
+.mt-live-nuc { position: relative; border-radius: 4px; }
+.mt-live-nuc.target { background: var(--target); box-shadow: 0 0 0 3px var(--target), 0 0 0 5px var(--accent); }
+.mt-live-nuc.elided { color: var(--muted); }
+.mt-live-mark { position: absolute; left: 50%; bottom: .3em; transform: translateX(-50%); font-size: .95em; line-height: 1; color: var(--mark); transition: transform .12s ease-out, color .12s; }
+.mt-live-scanned.singing .mt-live-nuc { transition: color .15s; }
+.mt-live-scanned.singing .mt-live-nuc.sung { color: var(--accent); }
+.mt-live-nuc.beat { background: var(--target); color: var(--accent); }
+.mt-live-nuc.beat .mt-live-mark { transform: translateX(-50%) scale(1.7); color: var(--accent); }
+.mt-live-small { font-size: clamp(1.15rem, 5vw, 1.6rem); }
+.mt-live-why { font-size: 1.05rem; line-height: 1.45; margin: .5rem 0; }
+.mt-live-why .la { font-family: Tahoma, "Noto Sans", sans-serif; }
+
+/* the projector: the question screen */
+.mt-live-stage { text-align: center; }
+.live-host .mt-live-stage .mt-live-line { font-size: clamp(1.8rem, min(4vw, 7vh), 3.6rem); margin: .3rem 0 1.1rem; line-height: 1.5; }
+.mt-live-ask { font-size: clamp(1.1rem, 2vw, 1.6rem); margin: .2rem 0; }
+.mt-live-legend { display: flex; justify-content: center; gap: 2rem; font-size: clamp(1.1rem, 1.8vw, 1.5rem); color: var(--muted); margin: .4rem 0 .6rem; }
+.mt-live-legend .mt-live-glyph { transform: scale(.7); }
+.mt-live-who { text-align: center; margin-top: .6rem; }
+.mt-live-count { display: block; font-size: 1.2rem; margin-bottom: .4rem; }
+.mt-live-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; }
+.mt-live-chip { padding: .15rem .7rem; border: 2px dashed var(--line); border-radius: 999px; color: var(--muted); font-family: Tahoma, "Noto Sans", sans-serif; }
+.mt-live-chip.on { border-style: solid; border-color: var(--accent); color: var(--ink); font-weight: 700; }
+
+/* the projector: the reveal, laid out to fit one 1280 x 720 screen */
+.mt-live-reveal { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: 1.5rem; align-items: start; }
+.live-host .mt-live-reveal .mt-live-line { font-size: clamp(1.6rem, 3.3vw, 2.8rem); margin: .3rem 0 .6rem; }
+.mt-live-answer { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1.2rem; margin: .3rem 0; }
+.mt-live-answer b { font-size: clamp(1.8rem, 3.4vw, 2.8rem); color: var(--ok); display: inline-flex; align-items: center; gap: .5rem; }
+.mt-live-answer .mt-live-glyph { color: var(--ok); }
+.mt-live-cite { color: var(--muted); font-size: 1.1rem; }
+.live-host .mt-live-why { font-size: clamp(1.05rem, 1.5vw, 1.4rem); line-height: 1.4; margin: .3rem 0; }
+.mt-live-tally { display: flex; flex-wrap: wrap; gap: .2rem 1.1rem; margin: .3rem 0; font-size: 1.05rem; color: var(--muted); }
+.mt-live-tally b { color: var(--ink); }
+.mt-live-tally .right { color: var(--ink); font-weight: 700; }
+.mt-live-right h3 { margin: 0; }
+.mt-live-right .live-board { gap: .25rem; margin: .3rem 0 .6rem; }
+.mt-live-right .live-board-row { padding: .25rem .6rem; font-size: 1rem; }
+@media (max-width: 52rem) { .mt-live-reveal { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .mt-live-mark { transition: none; } }

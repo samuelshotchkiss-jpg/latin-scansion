@@ -1,6 +1,6 @@
 # Live game — the contract
 
-Status: SPEC, written 2026-10-27; corrected the same day after P1 built the core (see "Corrections made by P1" at the foot). Work packages and who builds what are
+Status: SPEC, written 2026-10-27; corrected the same day after P1 built the core and again by P5 (see "Corrections" at the foot). Work packages and who builds what are
 in [`PLAN.md`](PLAN.md); this file is the one set of facts they all share. If a package needs this
 file to change, change it HERE first, in the same commit, and say so in the commit message.
 
@@ -239,3 +239,22 @@ P1 writes `live/MODES.md` with the exact hooks. The shape (P1 may refine, but P4
 6. **The privacy notice must mention two Firebase IndexedDB databases** that outlive the tab (section 2.3).
 7. **Per-mode stylesheets** `live/modes/<id>.css` replace "a section in `live/live.css`" so that two modes
    can be written at once without editing the same file.
+
+## Corrections made by P5 (meter mode)
+
+1. **Meter publishes only the line and the boxed letters before a round locks** (`round.t` the text, `round.a`/`round.b`
+   the boxed letters, `round.tot` the number of questions). The answer, the reason, the marks and the syllable
+   positions go out in `reveal` (`a` answer 0/1/2, `c` citation, `tg` tag, `why`, `mk` marks, `ac` accents, `nu`
+   syllable spans, `cnt` how many tapped each, `pts` points won by uid). The question's *kind* is never published
+   (an "elision" question would give itself away). The 2.4 MB bank is fetched by the teacher's page only
+   (`host.start`); `tests/meter_mode.test.js` fails if the phone's code could reach it.
+2. **`hands/<uid>` is used as a marker in meter**: an empty hand (just `n`) is written to each player present when a
+   question opens, so a student who joins mid-question (no hand) is told "you'll play from the next question" and
+   a tap of theirs is not graded.
+3. **Settings values cannot contain a hyphen** (`Live.registerMode` checks `^[A-Za-z0-9]{1,16}$`, flags included),
+   so the bank's kind `mcl-start` is the option `mclstart`.
+4. **PLAN's "no two in a row of the same kind" holds for every kind but `plain`.** With plain, elision and mūta cum
+   liquida ticked, strict alternation made a third of a 20-question game mūta cum liquida (plain is 88 % of the
+   bank). Plain may now repeat; the rest may not (when another ticked kind can supply the answer).
+5. **Tools:** `tools/bot_strategies/meter.js` plays meter (skill per bot 45-95 %, or `SKILL=1` for a bot that is always right: a
+   check that what the phones were shown is what the host graded).
