@@ -1,0 +1,159 @@
+/* live.css -- the live classroom game: the teacher's page (host.html) and the student's phone (live.html).
+   AGPL-3.0. Uses the colour tokens from styles.css, so light and dark follow it.
+
+   Phones first: every tap target is at least 48px; every state (chosen, right, wrong, locked) is shown
+   by a SHAPE or a WORD as well as a colour. The projector page uses the same classes at a larger size.
+
+   Each mode keeps its OWN styles in live/modes/<id>.css (already linked from both pages), prefixed
+   with its own short name (dv-live-, mt-live-, ...), so that two people writing two modes never edit
+   the same file. This file is only the shell and what every mode shares. */
+
+.live { --tap: 3rem; }
+.live main.live-main { max-width: 72rem; padding: 1rem 1rem 6rem; }
+.live .top { padding: .6rem 1rem; }
+.live .top h1 { font-size: 1.05rem; }
+.live .top a, .live .top button { font-size: .85rem; }
+.live-foot { max-width: 46rem; margin: 0 auto; text-align: left; line-height: 1.4; }
+.live-foot p { margin: .35rem 0; }
+
+.live-testbanner {
+  background: #ffe39a; color: #5a3b00; text-align: center; font-weight: 600; font-size: .85rem;
+  padding: .3rem .75rem; border-bottom: 2px dashed #c07a00;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .live-testbanner { background: #5b4512; color: #ffe08a; border-color: #e7b35c; } }
+
+/* ---- buttons and fields (styles.css styles buttons only in a few places, so the live pages do it) ---- */
+.live button, .live select, .live input[type="text"] { font: inherit; }
+.live button {
+  min-height: var(--tap); padding: .4rem 1rem; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--panel); color: var(--ink); cursor: pointer;
+}
+.live button:hover:not(:disabled) { border-color: var(--accent); }
+.live button:focus-visible, .live select:focus-visible, .live input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.live button:disabled { opacity: .45; cursor: default; }
+.live button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.live button.danger { border-color: var(--bad); color: var(--bad); font-weight: 600; }
+.live-bigbtn { min-height: 3.5rem; font-size: 1.2rem; padding: .5rem 1.6rem; }
+.live select { min-height: 2.5rem; }
+kbd { margin-left: .5rem; padding: 0 .4rem; border: 1px solid currentColor; border-radius: 4px; font-size: .75em; opacity: .75; }
+
+.live-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.25rem; margin: 0 0 1rem; }
+.live-card h2 { margin: 0 0 .5rem; font-size: 1.3rem; }
+.live-note { color: var(--muted); font-size: .9rem; margin: .4rem 0; }
+.live-center { text-align: center; }
+.live-error { color: var(--bad); font-weight: 600; }
+.live-big { font-size: clamp(1.6rem, 4vw, 3rem); font-weight: 700; margin: .5rem 0; }
+.live-code-sm { font-family: ui-monospace, Consolas, monospace; letter-spacing: .15em; font-size: 1.1em; }
+.live-uid { display: inline-block; padding: .4rem .6rem; background: var(--target); border-radius: 6px; user-select: all; word-break: break-all; }
+
+/* ---- teacher: setup ------------------------------------------------------------------------------ */
+.live-setup { display: grid; gap: 1rem; max-width: 46rem; margin: 0 auto; }
+.live-modes { display: grid; gap: .5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); margin: .5rem 0 1rem; }
+.live-modebtn { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: .15rem; }
+.live-modebtn span { color: var(--muted); font-size: .85rem; }
+.live-modebtn em { font-size: .75rem; color: var(--missing); font-style: normal; text-transform: uppercase; letter-spacing: .06em; }
+.live-modebtn.on { border: 2px solid var(--accent); background: var(--target); }
+.live-modebtn.on::before { content: "\2713  Selected"; font-size: .75rem; color: var(--accent); font-weight: 700; }
+.live-form { display: grid; gap: .75rem; margin: .5rem 0 1rem; }
+.live-field label, .live-field { font-size: 1rem; }
+.live-flabel { display: block; margin-bottom: .25rem; }
+.live-flags { display: flex; flex-wrap: wrap; gap: .4rem 1rem; }
+.live-gamerow { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding: .4rem 0; border-top: 1px solid var(--line); }
+.live-gamerow span { flex: 1; }
+
+/* ---- teacher: the lobby --------------------------------------------------------------------------- */
+.live-lobby { display: grid; grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr); gap: 2rem; align-items: start; }
+.live-join { text-align: center; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 1rem; }
+.live-url { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin: 0; word-break: break-all; }
+.live-code { font-family: ui-monospace, Consolas, "Courier New", monospace; font-size: clamp(3.5rem, 9vw, 6.5rem); font-weight: 800; letter-spacing: .12em; margin: .1em 0 .2em; padding-left: .12em; line-height: 1.05; }
+.live-qr { width: min(13rem, 100%); margin: .5rem auto; background: #fff; padding: .4rem; border-radius: 8px; }
+.live-qr svg { display: block; width: 100%; height: auto; }
+.live-roster h2 { font-size: 1.5rem; margin: 0 0 .75rem; }
+.live-chips, .live-team { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .5rem; }
+.live-teams { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .75rem; }
+.live-team { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .75rem; }
+.live-team h3 { margin: 0 0 .4rem; font-size: 1.1rem; color: var(--accent); }
+.live-team .live-chip { margin-bottom: .4rem; }
+.live-chip { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .45rem .7rem; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+.live-chip-name { display: flex; flex-direction: column; min-width: 0; }
+.live-chip-name b { font-size: 1.15rem; font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; }
+.live-chip-name small { color: var(--muted); }
+.live-chip-ctrl { display: flex; gap: .3rem; align-items: center; }
+.live-chip-ctrl select { max-width: 7rem; }
+.live-x { min-width: 2.5rem; min-height: 2.5rem; padding: 0; color: var(--muted); }
+.live-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem; margin: 1.5rem 0 .5rem; }
+.live-confirm { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+
+/* ---- teacher: during the game --------------------------------------------------------------------- */
+.live-strip { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; color: var(--muted); font-size: 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+.live-controls {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem;
+  padding: .6rem 1rem; background: var(--panel); border-top: 1px solid var(--line);
+}
+.live-done { max-width: 40rem; margin: 0 auto; }
+.live-done h2 { font-size: 2rem; text-align: center; }
+
+/* ---- shared by projector and phone: questions, answers, clock, scores ------------------------------------ */
+.live-q-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.live-q-n { color: var(--muted); font-weight: 600; margin: 0; }
+.live-clock { display: inline-block; min-width: 2.2em; text-align: center; font-size: 1.8rem; font-weight: 800; font-variant-numeric: tabular-nums; border: 3px solid var(--accent); border-radius: 999px; padding: 0 .5em; }
+.live-clock.live-low { border-color: var(--bad); color: var(--bad); }
+.live-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: .75rem; margin: 1rem 0; }
+.live-choice { display: flex; flex-direction: column; gap: .2rem; padding: .8rem 1rem; background: var(--panel); border: 2px solid var(--line); border-radius: 12px; font-size: 1.5rem; }
+.live-choice b { color: var(--accent); }
+.live-choice em { font-style: normal; font-size: 1.1rem; color: var(--muted); }
+.live-choice.right { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--panel)); }
+.live-choice.right b { color: var(--ok); }
+.live-choice.dim { opacity: .55; }
+
+.live-q { font-size: 1.5rem; margin: .5rem 0 1rem; }
+.live-answers { display: grid; gap: .6rem; }
+.live-answer { display: flex; align-items: center; gap: .8rem; min-height: 4rem; width: 100%; text-align: left; font-size: 1.25rem; border-width: 2px; }
+.live-answer b { min-width: 2.2rem; color: var(--accent); }
+.live-answer.chosen { border-color: var(--accent); background: var(--target); border-style: double; border-width: 5px; }
+.live-answer.right { border-color: var(--ok); }
+.live-answer.wrong { border-color: var(--bad); text-decoration: line-through; }
+.live-answer:disabled { opacity: 1; }
+.live-answer:disabled:not(.chosen):not(.right) { opacity: .6; }
+.live-result { font-size: 1.4rem; font-weight: 700; text-align: center; margin: 1rem 0 .25rem; }
+.live-result.ok { color: var(--ok); }
+.live-result.bad { color: var(--bad); }
+
+.live-board { list-style: none; padding: 0; margin: .5rem 0 1rem; display: grid; gap: .35rem; }
+.live-board-row { display: grid; grid-template-columns: 2.2rem 1fr auto; align-items: center; gap: .5rem; padding: .4rem .7rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; font-size: 1.15rem; }
+.live-board-row.you { border: 3px double var(--accent); }
+.live-rank { color: var(--muted); font-weight: 700; }
+.live-board-name { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; }
+.live-board-name small { display: block; color: var(--muted); font-family: system-ui, sans-serif; font-size: .75rem; }
+.live-board-score { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ---- phone: who I am, the lobby, waiting ------------------------------------------------------------------ */
+.live-player main.live-main { max-width: 34rem; }
+.live-me { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1rem; padding: .4rem .2rem .6rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
+.live-me-name { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-weight: 700; }
+.live-me-team { color: var(--accent); font-weight: 700; }
+.live-me-off { color: var(--bad); font-weight: 700; margin-left: auto; }
+.live-yourname { text-align: center; }
+.live-codename { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.8rem, 9vw, 2.6rem); margin: .1em 0 0; }
+.live-gloss { color: var(--muted); margin: 0 0 .75rem; font-style: italic; }
+.live-waiting { text-align: center; font-size: 1.2rem; font-weight: 600; margin: 1.25rem 0 .25rem; }
+.live-waiting::after { content: ""; display: inline-block; width: .5em; height: .5em; margin-left: .4em; border-radius: 50%; background: var(--accent); animation: live-pulse 1.2s ease-in-out infinite; }
+@keyframes live-pulse { 50% { opacity: .2; } }
+@media (prefers-reduced-motion: reduce) { .live-waiting::after { animation: none; } }
+.live-names { list-style: none; padding: 0; margin: .5rem 0; display: flex; flex-wrap: wrap; gap: .35rem .5rem; }
+.live-names li { padding: .2rem .6rem; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; }
+.live-names li.you { border: 2px solid var(--accent); font-weight: 700; }
+.live-wait { text-align: center; padding: 2rem 1rem; }
+.live-wait h2 { font-size: 1.6rem; }
+.live-codeform { display: grid; gap: .75rem; }
+.live-codebox { font-family: ui-monospace, Consolas, monospace; font-size: 2.2rem; letter-spacing: .3em; text-align: center; text-transform: uppercase; padding: .4rem; border: 2px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); width: 100%; }
+
+/* ---- the projector is bigger ---------------------------------------------------------------------------------- */
+@media (min-width: 60rem) {
+  .live-host { font-size: 1.15rem; }
+  .live-host .live-q-head { font-size: 1.3rem; }
+  .live-host .live-big { font-size: clamp(2rem, 4.2vw, 3.6rem); }
+}
+@media (max-width: 50rem) {
+  .live-lobby { grid-template-columns: 1fr; gap: 1rem; }
+}

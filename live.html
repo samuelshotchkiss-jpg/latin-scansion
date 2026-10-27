@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f5d8a">
+  <title>Play live · Latin Scansion</title>
+  <!-- ?v= must change whenever the file beside it changes (GitHub Pages lets browsers cache a file for ten
+       minutes, and a new page running an old script breaks). See index.html. -->
+  <link rel="stylesheet" href="styles.css?v=2026-10-26">
+  <link rel="stylesheet" href="live/live.css?v=2026-10-27">
+  <link rel="stylesheet" href="live/modes/devices.css?v=2026-10-27">
+  <link rel="stylesheet" href="live/modes/meter.css?v=2026-10-27">
+  <link rel="stylesheet" href="live/modes/poll.css?v=2026-10-27">
+</head>
+<body class="live live-player">
+  <header class="top">
+    <h1><span class="wide">Latin Scansion · </span>Play live</h1>
+  </header>
+  <div id="live-banner" class="live-testbanner" hidden></div>
+
+  <main id="app" class="live-main" aria-live="polite"><p>Starting…</p></main>
+
+  <footer class="foot live-foot">
+    <div id="notice-text"></div>
+    <p>Texts: Ovid and Vergil (public domain) · Questions and page text: CC BY-NC-SA 4.0 · Code: AGPL-3.0</p>
+  </footer>
+
+  <!-- The Firebase library, pinned to one exact version and checked against a fingerprint (integrity=), so a
+       changed file on the CDN would simply not load. The only third-party script on these pages. -->
+  <script src="https://www.gstatic.com/firebasejs/13.0.0/firebase-app-compat.js" integrity="sha384-TlPrn6ucRHEvycwgV0QgSFXJhJyUwaN4N9iqLak1MWy0/G1VhVwgttErzSlUDfa2" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/13.0.0/firebase-auth-compat.js" integrity="sha384-VRJm5/qS935RWeVBR4A4ZoWzrWZpqPmTgnvM/z2R4A1+mlGxWYVjjlE5ZWXZE2un" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/13.0.0/firebase-database-compat.js" integrity="sha384-LXlcKfZa4dKRGTde8HcsjmxloF7wRHDvUWCV/UFqEsccZaCsOue3gUiDYzknmbW+" crossorigin="anonymous"></script>
+  <script src="live/firebase-config.js?v=2026-10-27"></script>
+  <script src="live/common.js?v=2026-10-27"></script>
+  <script src="live/names.js?v=2026-10-27"></script>
+  <script src="live/net.js?v=2026-10-27"></script>
+  <script src="live/modes/devices.js?v=2026-10-27"></script>
+  <script src="live/modes/meter.js?v=2026-10-27"></script>
+  <script src="live/modes/poll.js?v=2026-10-27"></script>
+  <script src="live/player.js?v=2026-10-27"></script>
+</body>
+</html>
