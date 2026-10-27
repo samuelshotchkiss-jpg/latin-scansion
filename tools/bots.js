@@ -78,7 +78,18 @@ async function makeBot(i, strategy) {
     lastRound = r.n;
     if (rng() < DROPOUT) { log("  bot " + i + " skips round " + r.n); return; }
     const [lo, hi] = DELAYS[SPEED];
+    const lo0 = () => lo;
     const wait = Math.min(lo + rng() * (hi - lo), Math.max(300, (r.ms || 8000) - 500));
+    if (strategy.run) {                     // a strategy that plays the whole round itself (several taps)
+      let k = 0;
+      const send = async (v) => {
+        if (k > 9) return;
+        try { await g("taps/" + uid + "/" + r.n + "_" + (k++)).set({ n: r.n, v, at: TS }); bot.taps++; log("  bot " + String(i).padStart(2) + " tapped " + v + " in round " + r.n); }
+        catch (e) { log("  bot " + i + " too late for round " + r.n); }
+      };
+      setTimeout(() => { strategy.run({ round: r, hand: () => hand, rng, bot, tap: send }).catch(() => {}); }, Math.min(lo0(), 400));
+      return;
+    }
     setTimeout(async () => {
       const v = strategy.choose({ round: r, hand: hand && hand.n === r.n ? hand : null, rng, bot });
       if (v === null || v === undefined) return;

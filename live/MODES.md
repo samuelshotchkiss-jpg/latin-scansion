@@ -183,6 +183,32 @@ Sound is projector-only: play it from here (`Rhythm.play(...)`), never on a phon
 If `true`, your `renderHost` is also called with `view.phase === "done"` and draws the game-over screen.
 Otherwise the shell draws "Final scores" from `score`.
 
+### `summary(ctx, view)` (optional) -- the end-of-game breakdown
+When the game ends, the teacher's page shows a breakdown, built **only from that page's own memory**
+(`ctx.mem`, the published scores). Nothing is exported or saved, and *End game* still deletes the
+game. The shell always draws, first, a generic fallback: **Final standings** (every codename with its
+score from `score[uid]`) and, in a team game, **Teams** (members' codenames with `score[team]`). Define
+`host.summary` to add sections after those. It is called once, synchronously, when the done screen is
+drawn (and again on each redraw of it), with the same `view` shape as `renderHost` (`phase: "done"`).
+Return an array (or nothing) of sections; each is plain data, drawn by the shell:
+
+```js
+host: { summary(ctx, view) { return [
+  { title: "Devices the class missed most",          // optional heading
+    note: "Wrong taps per device.",                    // optional small print
+    columns: ["Device", "Wrong taps"],                 // optional; with rows, makes a table
+    rows: [["simile", 4], ["chiasmus", 2]],            // cells are shown as text
+    lines: ["any extra", "bullet lines"] },            // optional bullet list
+]; } }
+```
+
+Keep it to what the page already knows; do not write anything to the database from here. A mode with
+`ownsDone: true` has its `renderHost` called first for a headline (a winner banner, say), and the
+standings and sections follow it. A mode without `summary` simply gets the standings.
+
+### `lobbyNote(ctx, players)` (optional)
+Returns one line of plain text shown under the lobby (for example "a team of one is playable").
+
 ### `keys` (optional)
 `keys: { r: { label: "Replay rhythm", run(ctx) {...} } }` adds a button and a keyboard shortcut to the
 teacher's bar during play. Space is always Lock now / Next.

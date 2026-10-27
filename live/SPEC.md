@@ -18,7 +18,9 @@ Classes are small (3–9 students). Both modes must be fun at 3 players and stil
 
 **Non-goals.** No accounts for students. No stored history or per-student results — ever. No
 leaderboard that survives the game. No anti-cheating (the answers are in the public data files; this
-is a review game, not a test). No payments, no ads, no analytics, no third-party scripts except the
+is a review game, not a test). The one cheap precaution taken: a hand holds only the faces a phone
+draws, never a card's key or id (card ids name their device), so the answer is not in the student's own
+data; going further is out of scope. No payments, no ads, no analytics, no third-party scripts except the
 Firebase SDK. Not a replacement for the practice pages, which stay exactly as they are.
 
 ## 2. Privacy rules (hard — a test or a review checks each)
@@ -107,7 +109,9 @@ games/$code/
                                                  its player record are ONE atomic write (see below)
   teams/$uid    int 0..9                         host writes (team number)
   round    { n:int, open:bool, t0:ts, ms:int, …public data for the mode… }   host writes
-  hands/$uid    { n:int, cards:[…] }             host writes; readable by that uid and the teacher only
+  hands/$uid    { n:int, …mode data… }           host writes; readable by that uid and the teacher only. (SPEC once said
+                                                 `cards:[…]`: the rules only require `n`; each mode chooses the rest. Devices
+                                                 mode writes `cards` as bare faces with NO key or id, and later adds `res`.)
   taps/$uid/$id { n:int, v:int 0..9, at:ts }     the player appends; never edited. $id is "<n>_<k>" (digits), k 0-9:
                                                  at most ten taps per player per round
   reveal   { n:int, … }                          host writes AFTER the round locks (this holds the key)
@@ -164,6 +168,10 @@ Rules, in words (the exact JSON is the P1 deliverable; its tests are section 7):
    `meta.live:false`) is stale, phones show "Waiting for the teacher…" rather than a frozen question.
 7. **Late joiners.** `meter`: welcome at the next question. `devices`: "A game is in progress — you'll
    join the next one" (teams are fixed once play starts).
+
+8. **End-of-game breakdown.** When a game ends, the teacher's page shows final standings and an optional
+   mode-supplied summary (`host.summary`, MODES.md), built only from that page's memory. Nothing is exported
+   or saved; End game still deletes everything. Devices mode's summary lists the devices the class missed most.
 
 ## 7. Rules tests — the adversarial list (P1 must write every one, and all must pass)
 

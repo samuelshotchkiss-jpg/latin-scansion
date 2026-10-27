@@ -1,2 +1,61 @@
 /* devices.css -- styles for the devices mode only, prefixed dv-live-. AGPL-3.0.
-   Already linked from host.html and live.html; see live/MODES.md. */
+   Already linked from host.html and live.html; see live/MODES.md.
+   Works from a phone (375px) to a laptop (1280px): the hand is a grid that fills the width it is given. */
+
+.dv-live-card { display: flex; flex-direction: column; gap: .25rem; text-align: left; padding: .6rem .8rem; background: var(--panel); border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 10px; }
+.dv-live-card.dv-live-definition { border-left-color: var(--missing); }
+.dv-live-card.dv-live-example { border-left-color: var(--ok); }
+.dv-live-kind { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.dv-live-face { display: flex; flex-direction: column; gap: .15rem; font-size: 1.05rem; line-height: 1.35; }
+.dv-live-cite { font-size: .8rem; color: var(--muted); }
+.dv-live-latin { font-style: italic; }
+.dv-live-latin b { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.dv-live-english { font-size: .9rem; color: var(--muted); }
+
+.dv-live-top { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; }
+.dv-live-streak { font-weight: 700; font-variant-numeric: tabular-nums; }
+.dv-live-ask { margin: .6rem 0 .3rem; font-weight: 600; }
+.dv-live-promptcard { border-width: 2px; border-left-width: 8px; }
+.dv-live-promptcard .dv-live-face { font-size: 1.2rem; }
+.dv-live-cols { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0; }
+.dv-live-chip { display: inline-block; padding: .15rem .6rem; border: 1px dashed var(--line); border-radius: 999px; font-size: .9rem; }
+.dv-live-chip.on { border-style: solid; border-color: var(--ok); color: var(--ok); font-weight: 700; }
+.dv-live-oops { color: var(--bad); font-weight: 700; margin: .4rem 0; }
+
+.dv-live-bar { display: flex; gap: 3px; margin: .4rem 0; }
+.dv-live-bar i { flex: 1; height: .75rem; border: 1px solid var(--line); border-radius: 3px; background: var(--panel); }
+.dv-live-bar i.on { background: var(--accent); border-color: var(--accent); }
+
+/* the player's own cards: one column on a phone, more on a tablet or laptop */
+.dv-live-hand { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: .6rem; }
+.dv-live-mine { display: flex; flex-direction: column; align-items: stretch; gap: .3rem; padding: .3rem; text-align: left; border: 2px solid var(--line); min-height: 4rem; }
+.dv-live-mine .dv-live-card { border: 0; border-left: 6px solid var(--accent); }
+.dv-live-mine.picked { border: 5px double var(--accent); background: var(--target); }
+.dv-live-mine.right { border-color: var(--ok); }
+.dv-live-mine.wrong { border-color: var(--bad); border-style: dashed; }
+.dv-live-mine.wrong .dv-live-card { text-decoration: line-through; }
+.dv-live-mine.dim, .dv-live-mine.wrong { opacity: .6; }
+.dv-live-mine:disabled { opacity: .6; }
+.dv-live-mine.right:disabled { opacity: 1; }
+.dv-live-tag { font-weight: 700; font-size: .9rem; padding: 0 .4rem .2rem; text-decoration: none; }
+.dv-live-confirm { position: sticky; bottom: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-top: .8rem; padding: .6rem; background: var(--panel); border: 2px solid var(--accent); border-radius: 12px; }
+.dv-live-confirm span { flex: 1 1 14rem; }
+
+.dv-live-three { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: .6rem; margin: .5rem 0; }
+.dv-live-isprompt { box-shadow: 0 0 0 3px var(--accent); }
+
+/* the projector */
+.dv-live-stage { margin: .5rem 0 1rem; }
+.dv-live-big { border-width: 2px; border-left-width: 10px; padding: 1rem 1.4rem; }
+.dv-live-big .dv-live-face { font-size: clamp(1.4rem, 2.8vw, 2.4rem); }
+.dv-live-big .dv-live-cite { font-size: 1rem; }
+.dv-live-lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: .75rem; }
+.dv-live-lane { padding: .6rem .9rem; background: var(--panel); border: 2px solid var(--line); border-radius: 12px; }
+.dv-live-lane.done { border-color: var(--ok); }
+.dv-live-lane.won { border: 4px double var(--ok); }
+.dv-live-lane-head { display: flex; justify-content: space-between; font-size: 1.3rem; }
+.dv-live-members { color: var(--muted); font-size: .95rem; }
+.dv-live-status { display: flex; flex-wrap: wrap; gap: .4rem; min-height: 2rem; align-items: center; }
+.dv-live-wintext { text-align: center; color: var(--ok); }
+.dv-live-winner { text-align: center; padding: 1rem; border: 4px double var(--ok); border-radius: 16px; background: color-mix(in srgb, var(--ok) 10%, var(--panel)); }
+.dv-live-confetti { font-size: 2rem; letter-spacing: .4em; margin: 0; }

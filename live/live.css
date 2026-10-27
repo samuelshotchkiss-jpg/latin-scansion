@@ -90,7 +90,13 @@ kbd { margin-left: .5rem; padding: 0 .4rem; border: 1px solid currentColor; bord
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem;
   padding: .6rem 1rem; background: var(--panel); border-top: 1px solid var(--line);
 }
-.live-done { max-width: 40rem; margin: 0 auto; }
+.live-done { max-width: 52rem; margin: 0 auto; }
+.live-sum { margin: 1.25rem 0; }
+.live-sum h3 { margin: 0 0 .4rem; }
+.live-sum-lines { margin: .3rem 0; padding-left: 1.2rem; }
+.live-table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.live-table th, .live-table td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.live-table th { color: var(--muted); font-size: .85rem; }
 .live-done h2 { font-size: 2rem; text-align: center; }
 
 /* ---- shared by projector and phone: questions, answers, clock, scores ------------------------------------ */
@@ -129,6 +135,7 @@ kbd { margin-left: .5rem; padding: 0 .4rem; border: 1px solid currentColor; bord
 
 /* ---- phone: who I am, the lobby, waiting ------------------------------------------------------------------ */
 .live-player main.live-main { max-width: 34rem; }
+@media (min-width: 40rem) { .live-player main.live-main { max-width: 56rem; } }
 .live-me { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1rem; padding: .4rem .2rem .6rem; border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
 .live-me-name { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-weight: 700; }
 .live-me-team { color: var(--accent); font-weight: 700; }

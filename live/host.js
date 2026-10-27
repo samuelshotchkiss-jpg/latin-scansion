@@ -468,6 +468,8 @@
     actions.push(endButton());
     app.appendChild(h("div", { class: "live-lobby" }, left, right));
     showBar(actions);
+    const lobbyNote = S.def.host.lobbyNote ? S.def.host.lobbyNote(ctx, who) : "";
+    if (lobbyNote) app.appendChild(h("p", { class: "live-note live-center", id: "lobby-note" }, lobbyNote));
     app.appendChild(h("p", { class: "live-note live-center" }, S.def.title + (ctx.teamsOn ? " · teams" : "") + ". Don’t close or reload this page during the game: the answers are kept in it."));
   }
   function chip(p) {
@@ -537,25 +539,52 @@
     bar.appendChild(endButton());
   }
 
+  // The final breakdown, built only from this page's own memory and the published scores. Nothing is
+  // saved or exported; ending the game still deletes everything. A mode may add sections with
+  // host.summary(ctx, view) (see MODES.md section 4); the standings are always shown first.
+  function summaryNodes(view) {
+    const out = [];
+    const score = view.score || {};
+    const rows = view.players.map((p) => ({ name: p.name, gloss: p.gloss, score: score[p.uid] || 0 }));
+    out.push(h("section", { class: "live-sum" }, h("h3", {}, "Final standings"), Live.scoreboard(rows, { top: 50 })));
+    if (S.ctx.teamsOn) {
+      const groups = teamGroups();
+      const trows = Object.keys(groups).map((t) => ({
+        name: "Team " + Live.teamLabel(+t) + ": " + groups[t].map((u) => S.ctx.nameOf(u)).join(", "), score: score[t] || 0 }));
+      out.push(h("section", { class: "live-sum" }, h("h3", {}, "Teams"), Live.scoreboard(trows, { top: 10 })));
+    }
+    let extra = [];
+    if (S.def.host.summary) {
+      try { extra = S.def.host.summary(S.ctx, view) || []; } catch (e) { console.error("mode summary failed", e); }
+    }
+    for (const sec of extra) {
+      const box = h("section", { class: "live-sum" });
+      if (sec.title) box.appendChild(h("h3", {}, sec.title));
+      if (sec.note) box.appendChild(h("p", { class: "live-note" }, sec.note));
+      if (sec.columns && sec.rows && sec.rows.length) {
+        box.appendChild(h("table", { class: "live-table" },
+          h("thead", {}, h("tr", {}, sec.columns.map((c) => h("th", { scope: "col" }, String(c))))),
+          h("tbody", {}, sec.rows.map((r) => h("tr", {}, r.map((c) => h("td", {}, c === null || c === undefined ? "" : String(c))))))));
+      }
+      if (sec.lines && sec.lines.length) box.appendChild(h("ul", { class: "live-sum-lines" }, sec.lines.map((l) => h("li", {}, String(l)))));
+      out.push(box);
+    }
+    return out;
+  }
+
   function drawDone(app) {
     clear(app);
     const who = playerList();
     const box = h("div", { class: "live-done" }, h("h2", {}, "Game over"));
+    const view = { phase: "done", stage: "done", round: S.round, reveal: S.reveal, score: S.score, state: S.state, tapped: {}, players: who, teams: S.teams };
     if (S.def.host.ownsDone) {
       const area = h("div", { class: "live-area" });
       box.appendChild(area);
-      try { S.def.host.renderHost(S.ctx, area, { phase: "done", stage: "done", round: S.round, reveal: S.reveal, score: S.score, state: S.state, tapped: {}, players: who, teams: S.teams }); } catch (e) { console.error(e); }
-    } else {
-      const score = S.score || {};
-      box.appendChild(h("h3", {}, "Final scores"));
-      box.appendChild(Live.scoreboard(who.map((p) => ({ name: p.name, gloss: p.gloss, score: score[p.uid] || 0 })), { top: 10 }));
-      if (S.ctx.teamsOn) {
-        box.appendChild(h("h3", {}, "Teams"));
-        box.appendChild(Live.scoreboard(Object.keys(teamGroups()).map((t) => ({ name: "Team " + Live.teamLabel(+t), score: score[t] || 0 })), { top: 10 }));
-      }
+      try { S.def.host.renderHost(S.ctx, area, view); } catch (e) { console.error(e); }
     }
+    summaryNodes(view).forEach((n) => box.appendChild(n));
     box.appendChild(h("div", { class: "live-actions" }, endButton()));
-    box.appendChild(h("p", { class: "live-note live-center" }, "Ending the game deletes it, and every player’s codename with it."));
+    box.appendChild(h("p", { class: "live-note live-center" }, "This breakdown exists only on this page. Ending the game deletes it, and every player’s codename with it."));
     app.appendChild(box);
     $("live-controls").hidden = true;
   }
