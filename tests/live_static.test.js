@@ -70,11 +70,15 @@ describe("what the live pages may do", () => {
       }
     }
   });
-  test("the config is committed with placeholders only (no real key, no email, no UID)", () => {
+  // The real web config has been committed since 2026-10-27 (it only names the project). What must
+  // never be here is an email, the teacher's UID, or a server-side secret.
+  test("the config holds only the web config (no email, no UID, no server secret)", () => {
     const cfg = read("live/firebase-config.js");
-    assert.match(cfg, /PASTE-API-KEY-HERE/);
-    assert.ok(!/@[a-z0-9.-]+\.[a-z]{2,}/i.test(cfg.replace(/\/\/.*$/gm, "")), "an email address is in the config");
-    assert.ok(!/AIza[0-9A-Za-z_-]{20,}/.test(cfg), "a real-looking API key is in the config");
+    const code = cfg.replace(/\/\/.*$/gm, "");
+    assert.ok(!/@[a-z0-9.-]+\.[a-z]{2,}/i.test(code), "an email address is in the config");
+    assert.ok(!/teacherUid|private_key|client_email|BEGIN PRIVATE KEY/i.test(code), "a UID or a service-account secret is in the config");
+    const keys = Object.keys(new Function("window", cfg + "\n; return window.LIVE_CONFIG;")({}).web);
+    for (const k of keys) assert.ok(["apiKey", "authDomain", "databaseURL", "projectId", "storageBucket", "messagingSenderId", "appId"].includes(k), "unexpected web config field " + k);
   });
 });
 

@@ -98,7 +98,8 @@ window.LiveNet = (function () {
   // ---- paths -----------------------------------------------------------------------------------------
   const G = (code, p) => "games/" + code + (p ? "/" + p : "");
   const R = (code, p) => db.ref(G(code, p));
-  const errCode = (e) => (e && (e.code || (/PERMISSION_DENIED/.test(e.message) ? "PERMISSION_DENIED" : ""))) || "";
+  // A refused ref.get() has no code, only the message "Permission denied" (SDK 13), so match both.
+  const errCode = (e) => (e && (e.code || (/permission[_ ]denied/i.test(e.message) ? "PERMISSION_DENIED" : ""))) || "";
 
   // Watch one node (a "value" listener). Returns an unsubscribe function.
   function watch(path, cb, onError) {
