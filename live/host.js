@@ -440,7 +440,7 @@
     clear(app);
     const who = playerList(), ctx = S.ctx;
     const left = h("div", { class: "live-join" },
-      h("p", { class: "live-note" }, "On your phone, go to"),
+      h("p", { class: "live-note" }, "On your device, go to"),
       h("p", { class: "live-url" }, joinUrl().replace(/^https?:\/\//, "").replace(/\?c=.*/, "")),
       h("p", { class: "live-note" }, "and enter the code"),
       h("p", { class: "live-code", id: "game-code", "aria-label": "Game code " + S.code.split("").join(" ") }, S.code),

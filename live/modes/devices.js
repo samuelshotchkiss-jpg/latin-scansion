@@ -285,7 +285,7 @@
 
       lobbyNote(ctx, who) {
         const small = Object.values(ctx.teams()).some((u) => u.length === 1);
-        return (small || who.length < 4 ? "A team of one is playable: its single phone holds both right cards. " : "") +
+        return (small || who.length < 4 ? "A team of one is playable: one student's device holds both right cards." : "") +
           "Teams race on their own: each moves to its next prompt as soon as it finishes. Late joiners wait for the next game.";
       },
 
