@@ -265,19 +265,24 @@
   // The three answers drawn as shapes, so they sit in the middle of a button whatever the font does with ¯ ˘ ⌒
   const glyph = (v) => h("span", { class: "mt-live-glyph " + ["long", "short", "elide"][v], "aria-hidden": "true" });
 
-  // The drums, once per question when it is revealed and again on the Replay key.
+  // The drums, once per question when it is revealed and again on the Replay key. On the teacher's page, with
+  // the music loaded, live/music.js lays the line over Hustle (stops it on a bar line, drums from that instant,
+  // resumes it after); otherwise, or if the music is muted, the line is simply played.
   function playRhythm(ctx) {
     const sc = ctx.mem.scanned;
     if (!sc || typeof Rhythm === "undefined") return;
     Rhythm.stop();
     sc.nucs.forEach((n) => n.classList.remove("beat", "sung"));
     sc.el.classList.add("singing");
-    const rv = sc.rv, marks = rv.mk.split("");
-    Rhythm.play(marks, (i, len) => {
+    const rv = sc.rv, marks = rv.mk.split(""), accents = rv.ac.split("").map((c) => c === "1");
+    const onBeat = (i, len) => {
       sc.nucs.forEach((n, k) => { if (k < i) n.classList.add("sung"); });
       const n = sc.nucs[i];
       if (n) { n.classList.add("beat"); setTimeout(() => n.classList.remove("beat"), len * 900); }
-    }, () => { sc.el.classList.remove("singing"); sc.nucs.forEach((n) => n.classList.remove("beat", "sung")); }, rv.ac.split("").map((c) => c === "1"));
+    };
+    const onEnd = () => { sc.el.classList.remove("singing"); sc.nucs.forEach((n) => n.classList.remove("beat", "sung")); };
+    if (typeof Music !== "undefined" && Music.line(marks, accents, onBeat, onEnd)) return;
+    Rhythm.play(marks, onBeat, onEnd, accents);
   }
 
   const MODE = Live.registerMode({
@@ -314,6 +319,7 @@
       nextRound(ctx) {
         const g = ctx.mem.g;
         if (typeof Rhythm !== "undefined") Rhythm.stop();
+        if (typeof Music !== "undefined") Music.questionOpen();      // the music comes back to full under the new question
         ctx.mem.scanned = null;
         const roster = ctx.players().map((p) => p.uid);
         const q = g.open(roster);
@@ -372,7 +378,7 @@
         if (!ctx.mem.scanned || ctx.mem.scanned.n !== r.n) {
           const sc = scannedLine(r.t, rv);
           ctx.mem.scanned = { n: r.n, el: sc.el, nucs: sc.nucs, rv };
-          setTimeout(() => playRhythm(ctx), 350);     // (the first time only: later redraws keep the same element)
+          playRhythm(ctx);                            // (the first time only: later redraws keep the same element)
         }
         const cnt = asList(rv.cnt);
         const score = view.score || {};

@@ -52,6 +52,28 @@ unchanged and used under the MIT licence; its notice and the licence text are in
 licence lets anyone use, copy and change it, provided that notice travels with it. "QR Code" is a
 registered trademark of DENSO WAVE INCORPORATED.
 
+## 5. Music — CC BY 4.0
+
+The live game plays background music on the teacher's page only (never on students' devices). The two
+tracks are by Kevin MacLeod, whose music is licensed Creative Commons Attribution 4.0 (CC BY 4.0): anyone
+may use it, including commercially, provided the credit below travels with it. They are not part of this
+project's own content or code and are not under its licences. The files are kept unchanged.
+
+`live/audio/venus.mp3` (lobby and final breakdown):
+
+> Vibing Over Venus Kevin MacLeod (incompetech.com)
+> Licensed under Creative Commons: By Attribution 4.0
+> https://creativecommons.org/licenses/by/4.0/
+
+`live/audio/hustle.mp3` (during a game):
+
+> Hustle Kevin MacLeod (incompetech.com)
+> Licensed under Creative Commons: By Attribution 4.0
+> https://creativecommons.org/licenses/by/4.0/
+
+The teacher's page also carries a one-line credit in its footer (`host.html`). The code that plays the music
+(`live/music.js`) is AGPL-3.0 like the rest of the code.
+
 ## Why this split
 
 It follows the reasoning of this project's sibling, the Pharr *Aeneid* grammar edition. Making the

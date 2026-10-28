@@ -200,3 +200,4 @@ Three sets of terms — see [`COPYRIGHT.md`](COPYRIGHT.md) for which files fall 
 - **Code** (the scanner, the app's JavaScript and CSS) — **AGPL-3.0** ([`LICENSE-CODE`](LICENSE-CODE)).
   Use it for your own texts; if you run a modified version as a website, share your changes.
 - **The QR-code library** in `live/vendor/` — **MIT**, by Kazuhiko Arase (see `COPYRIGHT.md` §4).
+- **The live game's music** in `live/audio/` — two tracks by Kevin MacLeod (incompetech.com), **CC BY 4.0** (see `COPYRIGHT.md` §5).

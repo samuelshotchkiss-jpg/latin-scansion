@@ -112,24 +112,45 @@ window.Rhythm = (function () {
   // Play marks ('L', 'S' or 'X', one per syllable). onBeat(i, seconds) fires as syllable i sounds;
   // onEnd() when the line is over. accents[i] true: syllable i carries its word's accent (cymbal).
   // Returns false if this browser has no Web Audio.
-  function play(marks, onBeat, onEnd, accents) {
+  //
+  // An optional fifth argument { ctx, at, beat } lets the live game's teacher page lay the line over music:
+  //   ctx   the AudioContext to use (the page's own, so music and drums share one clock; used only if no
+  //         context has been made yet)
+  //   at    the context time (seconds, ctx.currentTime's clock) at which the first syllable sounds
+  //   beat  seconds per short syllable (default BEAT, 0.2); a long takes two
+  // Called with four arguments, or with none of these keys, it behaves exactly as it always has.
+  function play(marks, onBeat, onEnd, accents, opts) {
     stop();
+    if (opts && opts.ctx && !ctx) ctx = opts.ctx;
     if (!audio()) return false;
+    const beat = (opts && opts.beat) || BEAT;
     const ictus = beats(marks);
-    let t = ctx.currentTime + 0.12;
+    const scheduled = !!(opts && typeof opts.at === 'number');
+    // the old way starts 0.12 s from now; a scheduled start is the given time, never in the past
+    let t = scheduled ? Math.max(opts.at, ctx.currentTime + 0.02) : ctx.currentTime + 0.12;
     const start = t;
+    const lead = scheduled ? t - ctx.currentTime : 0.12;     // seconds from now until the first syllable
     marks.forEach((m, i) => {
       if (m === 'X') return;
-      const len = m === 'L' ? 2 * BEAT : BEAT;
+      const len = m === 'L' ? 2 * beat : beat;
       if (m === 'L') dum(t, ictus.has(i)); else di(t);
       if (accents && accents[i]) cymbal(t);
-      const at = (t - start + 0.12) * 1000;
+      const at = (t - start + lead) * 1000;
       timers.push(setTimeout(() => onBeat && onBeat(i, len), at));
       t += len;
     });
-    timers.push(setTimeout(() => onEnd && onEnd(), (t - start + 0.12) * 1000 + 150));
+    timers.push(setTimeout(() => onEnd && onEnd(), (t - start + lead) * 1000 + 150));
     return true;
   }
 
-  return { play, stop };
+  // How long a line lasts in seconds at a given beat: a long is two beats, a short one, an elision none.
+  function length(marks, beat) {
+    return marks.reduce((sum, m) => sum + (m === 'L' ? 2 : m === 'S' ? 1 : 0), 0) * (beat || BEAT);
+  }
+
+  // The shared AudioContext (made on first use; may start suspended until a click or key), so that other
+  // sound on the page, such as the live game's music, can run on the same clock as the drums.
+  function context() { return audio(); }
+
+  return { play, stop, length, context };
 })();

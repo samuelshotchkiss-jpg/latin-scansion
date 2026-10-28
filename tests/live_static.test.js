@@ -97,4 +97,10 @@ describe("the privacy notice", () => {
     for (const f of ["live/host.js", "live/player.js"]) assert.match(read(f), /Live\.noticeLines\(/);
     for (const p of ["live.html", "host.html"]) assert.match(read(p), /id="notice-text"/);
   });
+  test("the music is for the teacher's page only: live.html and the students' scripts never name it", () => {
+    for (const f of ["live.html", "live/player.js", "live/net.js", "live/common.js"]) {
+      assert.ok(!/live\/audio|music\.js|Music|\.mp3/.test(read(f)), f);
+    }
+    assert.ok(/live\/music\.js/.test(read("host.html")));
+  });
 });
