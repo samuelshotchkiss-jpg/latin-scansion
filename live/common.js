@@ -17,6 +17,15 @@
 
   const Live = {};
 
+  // ---- a game whose teacher has gone ---------------------------------------------------------------
+  // The teacher's page writes meta/beat (server time) every 5 s. If it has been silent for GONE_MS, the page
+  // was closed, reloaded or crashed, and the answers it held are lost: the game can never continue. The
+  // teacher's page deletes such games of its own on opening, and the join page and the bots refuse them.
+  // A shorter silence is a dropped connection, which recovers by itself (players see "Waiting for the
+  // teacher…" meanwhile), so it is left alone.
+  Live.GONE_MS = 60000;
+  Live.isGone = (meta, nowMs) => !!meta && meta.phase !== "done" && typeof meta.beat === "number" && nowMs - meta.beat > Live.GONE_MS;
+
   // ---- game codes ----------------------------------------------------------------------------------
   // Four consonants and no vowels, so a code can never spell a word. database.rules.json holds the
   // same list; tests/rules.test.js and tests/static.test.js fail if the two disagree.

@@ -179,6 +179,13 @@ window.LiveNet = (function () {
     await Promise.all(codes.map((c) => R(c).remove()));
     return codes.length;
   }
+  // Delete every game whose teacher's page has stopped (Live.isGone): it can never be resumed. Returns how many.
+  async function sweepGone() {
+    must();
+    const gone = (await listGames()).filter((g) => Live.isGone(g.meta, now())).map((g) => g.code);
+    await Promise.all(gone.map((c) => R(c).remove()));
+    return gone.length;
+  }
   async function deleteGame(code) { must(); await R(code).remove(); }
 
   // The host's view: the same nodes as a student, plus every player's taps as they arrive.
@@ -246,7 +253,7 @@ window.LiveNet = (function () {
     env, init, now, TS, uid, provider, onConnection,
     signInAnon, signInGoogle, signInTestTeacher, signOut, onAuth,
     watch, readMeta, watchGame, join, reroll, tap,
-    createGame, listGames, sweepOld, deleteGame, watchGameHost, fetchTaps, update, heartbeat, armDisconnect, removePlayer,
+    createGame, listGames, sweepOld, sweepGone, deleteGame, watchGameHost, fetchTaps, update, heartbeat, armDisconnect, removePlayer,
     auditStorage, errCode,
     isEmulator: () => kind === "emulator",
   };

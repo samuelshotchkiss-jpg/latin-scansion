@@ -107,8 +107,8 @@
     S.screen = "setup"; S.setup = null; S.myGames = null; S.notTeacher = false;
     draw();
     try {
-      const swept = await Net.sweepOld(SWEEP_MS);
-      S.myGames = await Net.listGames();
+      const swept = (await Net.sweepOld(SWEEP_MS)) + (await Net.sweepGone());
+      S.myGames = await Net.listGames();      // what is left is alive: a game running in another tab of this teacher
       S.swept = swept;
     } catch (e) {
       if (Net.errCode(e) === "PERMISSION_DENIED") S.notTeacher = true; else return fail(e);
@@ -138,19 +138,12 @@
     const su = S.setup, def = Live.modes[su.modeId];
 
     const wrap = h("div", { class: "live-setup" });
-    // earlier games of this teacher (the page was closed, or a game was left behind)
+    // Games left behind by a closed page were deleted on opening (Net.sweepGone). Anything still listed is
+    // alive, which means another tab of this teacher is running it: say so, and touch nothing.
     if (S.myGames && S.myGames.length) {
-      const box = h("div", { class: "live-card" }, h("h2", {}, "Your games"));
-      for (const g of S.myGames) {
-        const d = Live.modes[g.meta.mode];
-        const resumable = g.meta.phase === "lobby" && d && d.built !== false;
-        box.appendChild(h("div", { class: "live-gamerow" },
-          h("b", { class: "live-code-sm" }, g.code),
-          h("span", {}, (d ? d.title : g.meta.mode) + " · " + g.meta.phase + (g.meta.phase === "play" ? " (cannot be resumed: its answers were only in the page that was closed)" : "")),
-          resumable ? h("button", { type: "button", onclick: () => enterGame(g.code) }, "Open") : null,
-          h("button", { type: "button", onclick: async () => { await Net.deleteGame(g.code); S.myGames = await Net.listGames(); draw(); } }, "Delete")));
-      }
-      wrap.appendChild(box);
+      const codes = S.myGames.map((g) => g.code).join(", ");
+      wrap.appendChild(h("p", { class: "live-note" }, (S.myGames.length === 1 ? "A game (" : "Games (") + codes +
+        ") is running in another tab of this browser or on another computer. It is left alone; ending it there deletes it."));
     }
 
     const card = h("div", { class: "live-card" }, h("h2", {}, "New game"));

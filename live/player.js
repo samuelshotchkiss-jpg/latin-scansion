@@ -75,6 +75,7 @@
     try {
       const meta = await Net.readMeta(code);
       if (!meta) { P.screen = "nogame"; P.code = null; return draw(); }
+      if (Live.isGone(meta, Net.now())) { P.screen = "ended"; P.code = null; return draw(); }
       const def = Live.modes[meta.mode];
       if (!def || def.built === false) { P.screen = "error"; P.error = "This page does not know the game type “" + meta.mode + "” yet. Reload it; if that does not help, tell your teacher."; return draw(); }
       history.replaceState(null, "", "?c=" + code);

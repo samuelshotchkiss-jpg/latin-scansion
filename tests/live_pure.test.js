@@ -55,6 +55,25 @@ describe("codenames", () => {
   });
 });
 
+describe("a game whose teacher has gone", () => {
+  test("is gone after a minute of silence from the teacher's page, and not before", () => {
+    const t = 1e12;
+    assert.equal(Live.isGone({ phase: "lobby", beat: t - 61000, live: false }, t), true);
+    assert.equal(Live.isGone({ phase: "play", beat: t - 61000, live: true }, t), true);   // a beat that stopped, whatever live says
+    assert.equal(Live.isGone({ phase: "play", beat: t - 30000, live: false }, t), false); // a dropped connection: it may come back
+    assert.equal(Live.isGone({ phase: "lobby", beat: t - 5000, live: true }, t), false);
+    assert.equal(Live.isGone({ phase: "done", beat: t - 600000 }, t), false);             // finished: shown as ended anyway
+    assert.equal(Live.isGone(null, t), false);
+  });
+  test("the teacher's page sweeps gone games on opening, and the join page and the bots refuse them", () => {
+    const src = (f) => fs.readFileSync(path.join(__dirname, "..", f), "utf8");
+    assert.match(src("live/host.js"), /Net\.sweepGone\(\)/);
+    assert.match(src("live/player.js"), /Live\.isGone\(meta, Net\.now\(\)\)/);
+    assert.match(src("tools/bots.js"), /Live\.isGone\(meta,/);
+    assert.doesNotMatch(src("live/host.js"), /"Delete"\)/);
+  });
+});
+
 describe("game codes", () => {
   test("the code alphabet and shape are the rules' (consonants only, four of them)", () => {
     assert.match(game[".write"], new RegExp("\\[" + Live.CODE_LETTERS + "\\]\\{4\\}"));

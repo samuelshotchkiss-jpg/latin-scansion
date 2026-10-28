@@ -126,6 +126,10 @@ async function main() {
   const meta = (await probe.database().ref("games/" + CODE + "/meta").get()).val();
   if (!meta) { console.error("No game " + CODE + " in the emulator. Create it on http://localhost:8770/host.html first."); process.exit(1); }
   const def = Live.modes[meta.mode] || {};
+  if (Live.isGone(meta, Date.now())) {
+    console.error("Game " + CODE + " has ended: its teacher's page has been closed for over a minute.");
+    process.exit(1);
+  }
   if (meta.phase === "play" && def.lateJoin === false) {
     console.error("Game " + CODE + " is already being played and its mode does not take late joiners.");
     process.exit(1);
