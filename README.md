@@ -80,6 +80,17 @@ It is a page of its own: it shares nothing with the scansion practice, and it st
 in the browser. Its data, [`data/devices.json`](data/devices.json), is generated from the same
 pool the quiz is drawn from, so the practice and the quiz cannot disagree.
 
+## Live class game
+
+Two more pages run a live game for a class: the teacher opens `host.html` on the projector, and
+students join on their own devices at `live.html` with a four-letter code. There are two games, a
+team race that matches the literary devices' names, definitions and examples, and **Longa an
+brevis?**, where everyone judges the same syllable of a real line. Unlike the rest of the site,
+these two pages do talk to a server (a free Firebase project). Students do not sign in: each gets
+an anonymous sign-in and an assigned Latin codename, stored as a number. Nothing a student types is
+stored, and a game is deleted when it ends. The details, including how to try it on your own
+computer, are in [`live/HOWTO.md`](live/HOWTO.md) and [`live/SPEC.md`](live/SPEC.md).
+
 ## Running it locally
 
 The app is plain HTML, CSS and JavaScript with no build step, but it loads its lines with `fetch`, so
@@ -90,7 +101,8 @@ python -m http.server 8770
 ```
 
 then open `http://localhost:8770`. Progress is kept in the browser's local storage; nothing is sent
-anywhere.
+anywhere. (The live game is the exception; `live/HOWTO.md` explains how to run it against a local
+test copy of its database.)
 
 ## Levels
 
@@ -187,3 +199,4 @@ Three sets of terms — see [`COPYRIGHT.md`](COPYRIGHT.md) for which files fall 
   ([`LICENSE-CONTENT`](LICENSE-CONTENT)).
 - **Code** (the scanner, the app's JavaScript and CSS) — **AGPL-3.0** ([`LICENSE-CODE`](LICENSE-CODE)).
   Use it for your own texts; if you run a modified version as a website, share your changes.
+- **The QR-code library** in `live/vendor/` — **MIT**, by Kazuhiko Arase (see `COPYRIGHT.md` §4).
