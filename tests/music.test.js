@@ -18,7 +18,7 @@ function loadRhythm(currentTime) {
   const node = () => ({ connect(n) { return n; }, gain: param(), frequency: param(), start(t) { starts.push(t); }, stop() {}, getChannelData: () => new Float32Array(8) });
   const ctx = {
     currentTime, sampleRate: 8000, state: "running", destination: {}, resume() {},
-    createOscillator: () => Object.assign(node(), { type: "" }), createGain: node, createBiquadFilter: () => Object.assign(node(), { type: "" }),
+    createOscillator: () => Object.assign(node(), { type: "" }), createGain: node, createBiquadFilter: () => Object.assign(node(), { type: "", Q: param() }),
     createBufferSource: node, createBuffer: () => ({ getChannelData: () => new Float32Array(160) }),
   };
   const win = { AudioContext: function () { return ctx; } };
@@ -41,6 +41,17 @@ test("rhythm.js: the old call (four arguments) schedules exactly as before", () 
   near(timeouts[0], 120);                      // onBeat for the first syllable: 0.12 s from now, in ms
   near(timeouts[1], 520);
   near(timeouts[timeouts.length - 1], (R.length(MARKS, 0.2) + 0.12) * 1000 + 150);
+});
+
+test("rhythm.js: { ride: true } adds one faint tick per beat for the whole line, and nothing without it", () => {
+  const plain = loadRhythm(5);
+  plain.R.play(MARKS, null, null, null, { at: 9, beat: 0.25 });
+  const withRide = loadRhythm(5);
+  withRide.R.play(MARKS, null, null, null, { at: 9, beat: 0.25, ride: true });
+  const ticks = withRide.starts.slice(plain.starts.length);
+  near(ticks.length, withRide.R.length(MARKS, 0.25) / 0.25);         // under the longs too: 2 ticks per long
+  ticks.forEach((t, k) => near(t, 9 + k * 0.25));
+  assert.deepEqual(withRide.starts.slice(0, plain.starts.length), plain.starts);   // the drums themselves are unchanged
 });
 
 test("rhythm.js: { at, beat } starts on the given clock time at the given beat; { ctx } is used if none exists yet", () => {

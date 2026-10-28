@@ -62,14 +62,17 @@ window.Rhythm = (function () {
   }
   // A cymbal: a long hiss of noise, filtered high so it shimmers, kept quiet under the drums.
   let noise = null;
-  function cymbal(t) {
+  function noiseBuffer() {
     if (!noise) {
       noise = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 1.2), ctx.sampleRate);
       const d = noise.getChannelData(0);
       for (let k = 0; k < d.length; k++) d[k] = Math.random() * 2 - 1;
     }
+    return noise;
+  }
+  function cymbal(t) {
     const n = ctx.createBufferSource();
-    n.buffer = noise;
+    n.buffer = noiseBuffer();
     const hp = ctx.createBiquadFilter();
     hp.type = 'highpass';
     hp.frequency.value = 6000;
@@ -84,6 +87,24 @@ window.Rhythm = (function () {
     n.connect(hp).connect(peak).connect(g).connect(ctx.destination);
     n.start(t);
     n.stop(t + 1.05);
+    sources.push(n);
+  }
+  // A ride cymbal: a short, faint metallic tick (noise through a narrow band high up), for counting out the
+  // subdivisions under the drums. Much quieter and shorter than the accent cymbal, so the two stay distinct.
+  function ride(t, level) {
+    const n = ctx.createBufferSource();
+    n.buffer = noiseBuffer();
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = 7500;
+    bp.Q.value = 1.5;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(level, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+    n.connect(bp).connect(g).connect(ctx.destination);
+    n.start(t);
+    n.stop(t + 0.2);
     sources.push(n);
   }
   const dum = (t, strong) => drum(t, strong ? 230 : 200, 95, 0.32, strong ? 0.9 : 0.6);
@@ -118,6 +139,8 @@ window.Rhythm = (function () {
   //         context has been made yet)
   //   at    the context time (seconds, ctx.currentTime's clock) at which the first syllable sounds
   //   beat  seconds per short syllable (default BEAT, 0.2); a long takes two
+  //   ride  true: a faint ride cymbal ticks every short-syllable beat for the whole line, under the longs too,
+  //         so the subdivision of music with strong eighth notes carries on through the line
   // Called with four arguments, or with none of these keys, it behaves exactly as it always has.
   function play(marks, onBeat, onEnd, accents, opts) {
     stop();
@@ -139,6 +162,11 @@ window.Rhythm = (function () {
       timers.push(setTimeout(() => onBeat && onBeat(i, len), at));
       t += len;
     });
+    if (opts && opts.ride) {
+      // one tick per beat from the first syllable to the line's end; a little stronger on the long-syllable grid
+      const n = Math.round((t - start) / beat);
+      for (let k = 0; k < n; k++) ride(start + k * beat, k % 2 === 0 ? 0.05 : 0.035);
+    }
     timers.push(setTimeout(() => onEnd && onEnd(), (t - start + lead) * 1000 + 150));
     return true;
   }

@@ -32,6 +32,8 @@
   const DUCK = 0.4;                    // Hustle's volume under the reveal
   const LEAD = 0.25;                   // seconds of warning before the stop
   const LINE_BEAT = HUSTLE.period / 2; // a hexameter's short syllable lasts half a beat of the track
+  const RIDE = true;                   // a faint ride cymbal on every eighth under the line: Hustle hits every
+                                       // eighth, so without it the drummed line (fewer attacks) sounds slower
   const BAR_S = HUSTLE.period * HUSTLE.beatsPerBar;
   const FILES = { venus: "live/audio/venus.mp3", hustle: "live/audio/hustle.mp3" };
 
@@ -190,7 +192,7 @@
     if (H.state === "playing") { T = nextBarLine(H.origin, t); pauseAt(T); }
     else { clearTimeout(H.timer); Rhythm.stop(); T = nextOnGrid(H.pausedAt, BAR_S, t); }
     const D = Rhythm.length(marks, LINE_BEAT), R = T + padToBar(D);
-    Rhythm.play(marks, onBeat, onEnd, accents, { ctx, at: T, beat: LINE_BEAT });
+    Rhythm.play(marks, onBeat, onEnd, accents, { ctx, at: T, beat: LINE_BEAT, ride: RIDE });
     resumeAt(R, DUCK);
     line.last = { T, D, R };                    // for the tests and the console: the scheduled times
     return true;
