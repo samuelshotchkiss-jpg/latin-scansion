@@ -165,7 +165,7 @@ window.Rhythm = (function () {
     if (opts && opts.ride) {
       // one tick per beat from the first syllable to the line's end; a little stronger on the long-syllable grid
       const n = Math.round((t - start) / beat);
-      for (let k = 0; k < n; k++) ride(start + k * beat, k % 2 === 0 ? 0.05 : 0.035);
+      for (let k = 0; k < n; k++) ride(start + k * beat, k % 2 === 0 ? 0.15 : 0.11);
     }
     timers.push(setTimeout(() => onEnd && onEnd(), (t - start + lead) * 1000 + 150));
     return true;
