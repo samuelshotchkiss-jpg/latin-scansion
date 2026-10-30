@@ -634,7 +634,7 @@
     app.appendChild(box);
     showBar([
       h("button", { type: "button", id: "again", class: "primary live-bigbtn", disabled: S.busy, onclick: playAgain },
-        a.teamsOn ? "Play again: teams next" : "Play again"),
+        "Play again"),
       h("button", { type: "button", id: "again-settings", "aria-expanded": String(a.open), onclick: () => { a.open = !a.open; draw(); } },
         a.open ? "Hide settings" : "Change settings"),
       endButton()]);
