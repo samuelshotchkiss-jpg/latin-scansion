@@ -16,13 +16,13 @@ syllable begins and ends, for the app to show once the student has checked the l
 
 WHY THE TEXT MUST BE MACRONIZED. A scanner working from an unmacronized text has to guess vowel
 length. Here a macron is a long vowel and an unmarked vowel is short, so every mark has a stated
-reason. What remains is what the poet chose -- elision, a mute + liquid inside a word, a consonantal
+reason. What remains is what the poet chose -- elision, a mute (stop) + liquid inside a word, a consonantal
 i -- and the meter decides it. A line that will not scan therefore usually carries a wrong macron.
 
 CONVENTIONS. Change these if you teach differently:
   * the final syllable of the line is long by definition;
-  * muta cum liquida is a stop (p b t d c g) + l or r. Inside a word the meter decides. CONSONANTS AT THE
-    START OF A WORD are their own kind: a mute + liquid there leaves a short final vowel short, and so
+  * muta cum liquida is a mute (stop: p b t d c g) + l or r. Inside a word the meter decides. CONSONANTS AT THE
+    START OF A WORD are their own kind: a mute (stop) + liquid there leaves a short final vowel short, and so
     does f + l / f + r -- which is not muta cum liquida at all;
   * ADVANCED, and tried only when a line will not scan without them: hiatus, synizesis, correption,
     a dissolved diphthong, hypermetry, lengthening at the beat, a word-initial cluster the poet
@@ -120,7 +120,7 @@ ADVANCED = {"hiatus", "synizesis", "correption", "diphthong split", "hypermetry"
             "ignored cluster", "word-initial cluster makes position"}
 ELISION = {"elision", "prodelision"}
 MUTA = {"muta cum liquida"}                                                  # inside a word
-WORD_START = {"muta cum liquida at word start", "f + liquid at word start"}  # not a kind of muta: fl- is no mute
+WORD_START = {"muta cum liquida at word start", "f + liquid at word start"}  # not a kind of muta: fl- is no mute (stop)
 
 
 def level_of(flags: set, advanced: bool) -> int:

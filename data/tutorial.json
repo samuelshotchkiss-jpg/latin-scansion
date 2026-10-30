@@ -84,7 +84,7 @@
       "title": "Mūta cum liquida",
       "revised": "2026-10-25",
       "new": "one word scanned both ways in a single line of Ovid, divided before your eyes.",
-      "lesson": "<p><b>Mutes</b> are hard sounds that fully interrupt the flow of air: <i>c, g; t, d; p, b</i>. <b>Liquids</b> are just two: <i>l, r</i>.</p><p>(<i>s</i> and <i>f</i> are fricatives, <i>i/j</i> and <i>v</i> are semivowels, and <i>m</i> and <i>n</i> are nasals: none of them matter here.)</p><p>In actual speech, a mute + liquid usually <i>began</i> a syllable: <i>patris</i> was <i>pa-tris</i>, with the first syllable short. In poetry, either pronunciation was permitted — <i>pat-ris</i>, first syllable long, or <i>pa-tris</i>, first syllable short. Let the rest of the line decide.</p><p>Ovid scans the same word both ways in a single line. The ashes of Memnon's pyre take shape as a bird, <i>at first like a bird, soon a true bird</i>:</p><div class=\"demo\" data-line=\"Met. 13.607\" data-show=\"volucrī:u volucris:u\"></div>",
+      "lesson": "<p><b>Mutes</b>, also called <b>stops</b>, are hard sounds that fully interrupt the flow of air: <i>c, g; t, d; p, b</i>. <b>Liquids</b> are just two: <i>l, r</i>.</p><p>(<i>s</i> and <i>f</i> are fricatives, <i>i/j</i> and <i>v</i> are semivowels, and <i>m</i> and <i>n</i> are nasals: none of them matter here.)</p><p>In actual speech, a mute + liquid usually <i>began</i> a syllable: <i>patris</i> was <i>pa-tris</i>, with the first syllable short. In poetry, either pronunciation was permitted — <i>pat-ris</i>, first syllable long, or <i>pa-tris</i>, first syllable short. Let the rest of the line decide.</p><p>Ovid scans the same word both ways in a single line. The ashes of Memnon's pyre take shape as a bird, <i>at first like a bird, soon a true bird</i>:</p><div class=\"demo\" data-line=\"Met. 13.607\" data-show=\"volucrī:u volucris:u\"></div>",
       "lines": [
         "Met. 8.199",
         "Met. 8.211",
@@ -101,7 +101,7 @@
       "title": "Consonants at the start of a word",
       "revised": "2026-10-25",
       "new": "two worked examples, divided before your eyes.",
-      "lesson": "<p>In Greek, two consonants at the start of a word tend to lengthen the last vowel of the word before. Not so much in Latin:</p><p class=\"latin\">atque ita compositās parvō curvāmine flectit</p><p>The <i>-e</i> of <i>curvāmine</i> stays short before <i>fl-</i>. A short vowel before a mute + liquid that begins the next word usually stays short too: <i>unda gravet</i>.</p><p>Two more from the opening of the <i>Metamorphoses</i>: a mute + liquid that begins a word, and <i>fl-</i>.</p><div class=\"demo\" data-line=\"Met. 1.11\" data-show=\"nova:a\"></div><div class=\"demo\" data-line=\"Met. 1.51\" data-show=\"frīgore:e\"></div>",
+      "lesson": "<p>In Greek, two consonants at the start of a word tend to lengthen the last vowel of the word before. Not so much in Latin:</p><p class=\"latin\">atque ita compositās parvō curvāmine flectit</p><p>The <i>-e</i> of <i>curvāmine</i> stays short before <i>fl-</i>. A short vowel before a mute (stop) + liquid that begins the next word usually stays short too: <i>unda gravet</i>.</p><p>Two more from the opening of the <i>Metamorphoses</i>: a mute + liquid that begins a word, and <i>fl-</i>.</p><div class=\"demo\" data-line=\"Met. 1.11\" data-show=\"nova:a\"></div><div class=\"demo\" data-line=\"Met. 1.51\" data-show=\"frīgore:e\"></div>",
       "lines": [
         "Met. 8.205",
         "Met. 8.224",

@@ -144,7 +144,7 @@ wording for the reasons**; only write new sentences where the app has none.
 - **Which syllables are asked about.** NEVER: a syllable whose vowel carries a macron in the text (the
   answer is visible), a diphthong, or the last syllable of a line (anceps). Ask about: a vowel long **by
   position** (unmarked, two consonants — within a word and across a word boundary), an unmarked short
-  vowel (including before a vowel — hiatus), a vowel before a mute-and-liquid (poet's scansion as in the
+  vowel (including before a vowel — hiatus), a vowel before a mute-and-liquid (a mute is a stop) (poet's scansion as in the
   data), a vowel after a word-initial cluster that is ignored, vowels before `qu`, `h`/`x`/`z`, a Greek
   word, and the final vowel of a word that is **elided**. Report how many of each exist. Exclude lines
   flagged `advanced` unless their kind is `advanced`.

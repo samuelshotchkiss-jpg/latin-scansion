@@ -48,16 +48,16 @@ own rule, imported, not copied -- picks the lowest level that admits them all:
                        count: a short vowel before h + a consonant (captat harundine), a long syllable
                        whose only consonant is x or z (dīxit)
       4    elision     is an elided vowel (and its -m): the answer is X
-      5    mcl         comes before a mute + liquid inside a word (patris), short or divided and long, as the
+      5    mcl         comes before a mute (stop) + liquid inside a word (patris), short or divided and long, as the
                        poet scans it in the data
-      6    mcl-start   comes before a mute + liquid, or f + liquid, that begins the next word (unda gravet,
+      6    mcl-start   comes before a mute (stop) + liquid, or f + liquid, that begins the next word (unda gravet,
                        curvāmine flectit): short
       7    greek       lies in a word the scanner calls Greek-looking (āera, Aenēās, Pēnēia)
       8    advanced    (NOT ASKED: the owner left every licence out -- hiatus, synizesis, a syllable
                        lengthened at the beat, an ignored or position-making word-initial cluster)
 A syllable of several kinds takes the highest, as a line does. Two judgements that are this file's own, and
 are listed in the --audit and the report so the owner can overrule them:
-  * a vowel before a mute + liquid that the poet DIVIDES (long: pat-ris) is `mcl`, because the zoom-in
+  * a vowel before a mute (stop) + liquid that the poet DIVIDES (long: pat-ris) is `mcl`, because the zoom-in
     teaches it as mūta cum liquida; the scanner raises no flag for it (a closed syllable like another);
   * a syllable in a Greek-looking word is `greek` whatever its reason, as the scanner levels a whole line.
 
@@ -254,11 +254,11 @@ def reason(l: dict, i: int):
             f"between this syllable and the next.{qu_note}{doubled_note(l, z)}{h_note}")
     elif why == "muta cum liquida, long":
         tag, s = "mūta cum liquida, divided", (
-            f"{b(n['followed_by'])} is a mūta cum liquida (a stop + <i>l</i> or <i>r</i>), which can go "
+            f"{b(n['followed_by'])} is a mūta cum liquida: a mute (stop) + <i>l</i> or <i>r</i>, which can go "
             f"either way. Here the poet divides it: {b(z['coda'])} ends this syllable, so it is long.")
     elif why == "muta cum liquida, short":
         tag, s = "mūta cum liquida", (
-            f"{b(z['onset'])} is a mūta cum liquida (a stop + <i>l</i> or <i>r</i>), which can go either "
+            f"{b(z['onset'])} is a mūta cum liquida: a mute (stop) + <i>l</i> or <i>r</i>, which can go either "
             f"way. Here it goes together into the next syllable. {open_}")
     elif why == "muta cum liquida at word start":
         tag, s = "mūta cum liquida", (

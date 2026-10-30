@@ -9,7 +9,7 @@ Practice scanning Latin hexameter — Ovid and Vergil — **from macronized text
 Most scansion practice starts from an unmacronized text, so the student has to guess which vowels
 are long — usually from a list of endings that are "usually long" or "usually short". This project
 starts from the other end: every long vowel is marked, so **every long or short syllable has a reason
-the student can see**. Long by nature, long by position, a mute and liquid that stays short, a vowel
+the student can see**. Long by nature, long by position, a mute (stop) and liquid that stays short, a vowel
 removed by elision — nothing is a guess, and the rules stop looking arbitrary.
 
 ## How a student scans
@@ -153,8 +153,8 @@ These are the choices built into the scanner. They are stated at the top of `sca
 and they are the place to start if you teach differently.
 
 - The final syllable of a line counts as long.
-- *Muta cum liquida* is a stop (p b t d c g) followed by l or r; inside a word the meter decides.
-- Consonants at the start of a word are their own kind: a mute + liquid there leaves a short final
+- *Muta cum liquida* is a mute (stop: p b t d c g) followed by l or r; inside a word the meter decides.
+- Consonants at the start of a word are their own kind: a mute (stop) + liquid there leaves a short final
   vowel short, and in Ovid and Vergil so does *fl-* or *fr-* — which is not muta cum liquida.
 - Advanced licences are tried only when a line will not scan without them.
 

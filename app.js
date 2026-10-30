@@ -1267,7 +1267,7 @@
   // After Check or Show answer, a tap on a syllable opens a card under it: that syllable and its
   // neighbours, enlarged, divided before the student's eyes. The words close up into one big word (the
   // tutorial's own method); the consonants between this vowel and the next lift out, and drop into the
-  // syllable they belong to -- a mute + liquid tied by a swoosh and pushed together into the next one;
+  // syllable they belong to -- a mute (stop) + liquid tied by a swoosh and pushed together into the next one;
   // then what decides the mark lights up: the long vowel, the consonant that ends the syllable, the end
   // of the line, the vowel an elision runs into. The division is the scanner's (`syllable`, `doubled`,
   // `silent` in the key), never worked out here.
@@ -1687,7 +1687,7 @@
         ties.push([p, x.end, 'zs-elide' + (k === i ? ' mine' : '')]);
       }
     });
-    // the consonants in play lift out and drop into their syllables; a mute + liquid goes as one.
+    // the consonants in play lift out and drop into their syllables; a mute (stop) + liquid goes as one.
     // Each belongs to one syllable (a letter that counts twice is in both), and not where a swoosh
     // already spans them: the wrappers must nest.
     const clear = (f, e) => !ties.some(([g, h]) => f < h && g < e);
@@ -1773,9 +1773,9 @@
       case 'two consonants':
         return ['ends in a consonant', `It ends in a consonant, ${b(z.coda)}: two consonants come after its vowel, and they divide between this syllable and the next.${quNote}${doubledNote(l, z)}${hNote}`];
       case 'muta cum liquida, long':
-        return ['mūta cum liquida, divided', `${b(n.followed_by)} is a mūta cum liquida (a stop + <i>l</i> or <i>r</i>), which can go either way. Here the poet divides it: ${b(z.coda)} ends this syllable, so it is long.`];
+        return ['mūta cum liquida, divided', `${b(n.followed_by)} is a mūta cum liquida: a mute (stop) + <i>l</i> or <i>r</i>, which can go either way. Here the poet divides it: ${b(z.coda)} ends this syllable, so it is long.`];
       case 'muta cum liquida, short':
-        return ['mūta cum liquida', `${b(z.onset)} is a mūta cum liquida (a stop + <i>l</i> or <i>r</i>), which can go either way. Here it goes together into the next syllable. ${open}`];
+        return ['mūta cum liquida', `${b(z.onset)} is a mūta cum liquida: a mute (stop) + <i>l</i> or <i>r</i>, which can go either way. Here it goes together into the next syllable. ${open}`];
       case 'muta cum liquida at word start':
         return ['mūta cum liquida', `The next word begins with ${b(z.onset)}, a mūta cum liquida. It goes together into the next syllable. ${open}`];
       case 'f + liquid at word start':
