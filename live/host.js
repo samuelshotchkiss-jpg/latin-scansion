@@ -24,7 +24,7 @@
   // A short address the projector shows instead of the long one: a link the owner made with a URL
   // shortener, pointing at live.html with NO code (the students type the code). "" = show the real one.
   // The QR square always carries the full address, code included. Never shown in practice mode.
-  const SHORT_JOIN = "";
+  const SHORT_JOIN = "tinyurl.com/ludus-latinus";      // made by the owner 2026-10-30
   const WRITABLE_BY_MODES = /^(state|hands|score)(\/|$)/;   // ctx.write may touch only these parts of the game
 
   // ---- state -----------------------------------------------------------------------------------------
