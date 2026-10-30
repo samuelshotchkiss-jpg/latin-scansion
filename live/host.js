@@ -21,6 +21,10 @@
   const SWEEP_MS = 12 * 3600 * 1000;       // a game older than this is deleted when the teacher next opens this page
   const BEAT_MS = 5000;                    // heartbeat: phones show "Waiting for the teacher" if it stops
   const DEBUG = /(^|[?&])debug\b/.test(location.search);
+  // A short address the projector shows instead of the long one: a link the owner made with a URL
+  // shortener, pointing at live.html with NO code (the students type the code). "" = show the real one.
+  // The QR square always carries the full address, code included. Never shown in practice mode.
+  const SHORT_JOIN = "";
   const WRITABLE_BY_MODES = /^(state|hands|score)(\/|$)/;   // ctx.write may touch only these parts of the game
 
   // ---- state -----------------------------------------------------------------------------------------
@@ -482,7 +486,7 @@
     const who = playerList(), ctx = S.ctx;
     const left = h("div", { class: "live-join" },
       h("p", { class: "live-note" }, "On your device, go to"),
-      h("p", { class: "live-url" }, joinUrl().replace(/^https?:\/\//, "").replace(/\?c=.*/, "")),
+      h("p", { class: "live-url" }, SHORT_JOIN && !Net.isEmulator() ? SHORT_JOIN : joinUrl().replace(/^https?:\/\//, "").replace(/\?c=.*/, "")),
       h("p", { class: "live-note" }, "and enter the code"),
       h("p", { class: "live-code", id: "game-code", "aria-label": "Game code " + S.code.split("").join(" ") }, S.code),
       qrBlock(joinUrl()),
