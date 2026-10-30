@@ -66,7 +66,9 @@ They join, and answer every question after a realistic pause. When you end the g
 
 **8. Play.** On the teacher page press **Make teams** (if you ticked teams) and **Start**. Each
 question has a clock; it ends when the time is up, or everyone has answered, or you press **Lock now**;
-then **Next** (or the space bar) shows the next one. **End game** deletes everything.
+then **Next** (or the space bar) shows the next one. At the end, **Play again** starts a new game with the
+same players: a team game goes back to the teams (shuffle them or keep them, then **Start**), any other
+starts at once. **Change settings** beside it opens the game's options first. **End game** deletes everything.
 
 **Checking it is safe.** `npm test` runs about 130 checks, including 80 that try to break the database
 rules (see `live/RULES.md`). Run it any time; it starts and stops its own pretend database.

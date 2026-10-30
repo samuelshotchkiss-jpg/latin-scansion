@@ -100,8 +100,15 @@ teacher presses Start
        shell writes reveal + score; the screens show the reveal
        the teacher presses Next / Space   (or the mode called ctx.requestNext(ms))
 game over: meta.phase = "done"; every screen shows the final scoreboard
-the teacher presses End game: the whole game is deleted
+the teacher presses Play again: the same players, a fresh ctx (new settings, an empty mem); round,
+  reveal, score, state, hands and taps are wiped. A team game goes back to the lobby (teams kept
+  unless their size changed); any other goes straight to meta.phase = "play" -> host.start(ctx) ...
+or the teacher presses End game: the whole game is deleted
 ```
+
+After Play again, `round.n` counts on from the last game's (a phone may remember things by `n`), so
+round 1 of the second game may be `n` = 11. **Show `round.q`** (this game's question number, 1, 2,
+3 ...) wherever a person sees the number; `n` is for matching hands, reveals and taps.
 
 The teacher is always in control of the pace. Nothing advances on its own unless the mode asks
 (`ctx.requestNext`).
@@ -116,7 +123,7 @@ Pick the next question. `ctx.n` is the number of the round you are making (1, 2,
 
 - `ms`: the time limit in milliseconds (0 = no clock; at most 600000).
 - `round`: an object of **public** data every screen needs to draw the question. **Never put the answer
-  in it.** Do not use the keys `n`, `open`, `t0`, `ms` (the shell sets them). Values may be numbers,
+  in it.** Do not use the keys `n`, `q`, `open`, `t0`, `ms` (the shell sets them). Values may be numbers,
   strings, booleans, arrays and nested objects. Realtime Database turns arrays into objects with
   numeric keys: read them back as arrays (they come back as arrays when the indexes are 0, 1, 2 ...
   and none is missing; do not leave holes) and do not store an empty array or object (it vanishes).
@@ -250,7 +257,7 @@ replaced under a finger. `view`:
 { phase, round, hand, myTaps, reveal, score, state, players, teams, live }
 ```
 
-- `round`: the public round data (including `n`, `open`, `t0`, `ms`), or `null` before round 1.
+- `round`: the public round data (including `n`, `q`, `open`, `t0`, `ms`), or `null` before round 1.
 - `hand`: this player's `hands/<uid>` or `null`. **Check `hand.n === round.n`**: a player who joined
   mid-round has no hand for it (poll shows "You'll play from the next question").
 - `myTaps`: this player's taps in this round, `[{ id, n, v, at }]`, including one just sent that the

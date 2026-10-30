@@ -36,6 +36,8 @@
     setup: null,                 // the form being filled in on the setup screen
     myGames: null, notTeacher: false, confirmEnd: false, storageReport: null, busy: false,
     dom: null,                   // persistent pieces of the play screen
+    lastN: 0, base: 0,           // the round number to count on from, and where this game's question 1 is (see playAgain)
+    again: null,                 // the "Change settings" form on the Game over screen
   };
 
   // ---- drawing -----------------------------------------------------------------------------------------
@@ -239,6 +241,7 @@
     leaveGame();
     S.code = code; S.screen = "game"; S.stage = "idle"; S.seen = new Set(); S.tapped = {}; S.assigned = new Set();
     S.meta = null; S.players = {}; S.claims = {}; S.teams = {}; S.round = null; S.reveal = null; S.score = null; S.state = null; S.confirmEnd = false;
+    S.lastN = 0; S.base = 0; S.again = null;
     let first = true;
     S.unwatch = Net.watchGameHost(code, {
       meta: (v) => {
@@ -357,12 +360,20 @@
     S.busy = true;
     try {
       if (S.ctx.teamsOn && !Object.keys(S.teams).length) await Net.update(S.code, { teams: Live.makeTeams(Object.keys(S.players), S.meta.teamSize) });
+      else if (S.ctx.teamsOn) {                 // the teams were made (or kept by Play again) before someone joined: put them in the smallest
+        const t = Object.assign({}, S.teams), up = {};
+        for (const u of Object.keys(S.players)) if (!Number.isInteger(t[u])) { t[u] = Live.smallestTeam(t); up["teams/" + u] = t[u]; }
+        if (Object.keys(up).length) await Net.update(S.code, up);
+      }
       await Net.update(S.code, { "meta/phase": "play" });
-      S.stage = "idle";
-      if (S.def.host.start) await S.def.host.start(S.ctx);
-      S.busy = false;
-      await advance();
+      await begin();
     } catch (e) { S.busy = false; fail(e); }
+  }
+  async function begin() {                  // the phase is already "play": let the mode set up, then open round 1
+    S.stage = "idle";
+    if (S.def.host.start) await S.def.host.start(S.ctx);
+    S.busy = false;
+    await advance();
   }
 
   async function advance() {
@@ -371,12 +382,13 @@
     clearTimeout(S.autoTimer);
     S.stage = "starting"; draw();
     try {
-      const n = (S.round ? S.round.n : 0) + 1;
+      const n = (S.round ? S.round.n : S.lastN) + 1;
       S.ctx.n = n;
       const out = await S.def.host.nextRound(S.ctx);
       if (!out) return finish();
       const ms = Math.max(0, Math.min(600000, Math.round(out.ms || 0)));
-      const up = { reveal: null, round: Object.assign({}, out.round, { n, open: true, t0: Net.TS(), ms }) };
+      // n counts on across "Play again" (a device keeps per-round memory by n); q is this game's question number
+      const up = { reveal: null, round: Object.assign({}, out.round, { n, q: n - S.base, open: true, t0: Net.TS(), ms }) };
       for (const [uid, hand] of Object.entries(out.hands || {})) up["hands/" + uid] = Object.assign({}, hand, { n });
       S.tapped = {};
       await Net.update(S.code, up);                 // hands and round together: no phone sees a round without its hand
@@ -407,6 +419,42 @@
     S.stage = "done";
     await Net.update(S.code, { "meta/phase": "done" });
     draw();
+  }
+
+  // ---- play again ----------------------------------------------------------------------------------------
+  // The same code and the same players, so nobody joins again: the rounds, scores, hands and taps are wiped
+  // and the mode starts from nothing (a new ctx, so a new mem). A team game goes back to the lobby with the
+  // same teams, where the teacher may shuffle them and press Start; any other game starts at once. The round
+  // number counts on from the last game's (round.q restarts at 1), so nothing left on a device from the last
+  // game can be taken for the new one's.
+  function againForm() {
+    if (!S.again) {
+      const t = S.def.teams;
+      S.again = { open: false, values: Live.decodeSettings(S.def, S.meta.set), teamsOn: S.ctx.teamsOn,
+        teamSize: S.ctx.teamsOn ? S.meta.teamSize : (t && t.sizes ? t.sizes[0] : 3) };
+    }
+    return S.again;
+  }
+  async function playAgain() {
+    if (S.busy) return;
+    const def = S.def, a = againForm();
+    S.busy = true; S.confirmEnd = false; draw();
+    try {
+      const set = Live.encodeSettings(def, a.values);
+      if (def.teams && def.teams.optional) set.teams = a.teamsOn ? "on" : "off";
+      const teamsOn = !!(def.teams && (!def.teams.optional || a.teamsOn));
+      const teamSize = teamsOn ? a.teamSize : 0;
+      clearTimeout(S.timer); clearTimeout(S.autoTimer);
+      S.lastN = S.round ? S.round.n : S.lastN; S.base = S.lastN;
+      const up = { "meta/set": set, "meta/teamSize": teamSize, "meta/phase": teamsOn ? "lobby" : "play",
+        round: null, reveal: null, score: null, state: null, hands: null, taps: null };
+      if (!teamsOn || teamSize !== S.meta.teamSize) up.teams = null;        // another size: the teams are made again at Start
+      S.stage = "idle"; S.tapped = {}; S.again = null;
+      S.meta = Object.assign({}, S.meta, { set, teamSize, phase: up["meta/phase"] });
+      buildCtx();                                                            // the new settings, and an empty mem
+      await Net.update(S.code, up);
+      if (teamsOn) { S.busy = false; draw(); } else await begin();
+    } catch (e) { S.busy = false; fail(e); }
   }
 
   async function endGame() {
@@ -575,11 +623,34 @@
       box.appendChild(area);
       try { S.def.host.renderHost(S.ctx, area, view); } catch (e) { console.error(e); }
     }
+    const a = againForm();
+    if (a.open) box.appendChild(againSettings(a));
     summaryNodes(view).forEach((n) => box.appendChild(n));
-    box.appendChild(h("div", { class: "live-actions" }, endButton()));
-    box.appendChild(h("p", { class: "live-note live-center" }, "This breakdown exists only on this page. Ending the game deletes it, and every player’s codename with it."));
+    box.appendChild(h("p", { class: "live-note live-center" }, "This breakdown exists only on this page. Playing again clears it but keeps the players; ending the game deletes it, and every player’s codename with it."));
     app.appendChild(box);
-    $("live-controls").hidden = true;
+    showBar([
+      h("button", { type: "button", id: "again", class: "primary live-bigbtn", disabled: S.busy, onclick: playAgain },
+        a.teamsOn ? "Play again: teams next" : "Play again"),
+      h("button", { type: "button", id: "again-settings", "aria-expanded": String(a.open), onclick: () => { a.open = !a.open; draw(); } },
+        a.open ? "Hide settings" : "Change settings"),
+      endButton()]);
+  }
+  // The mode's own settings, and its teams, as on the setup screen (the game type stays the same).
+  function againSettings(a) {
+    const def = S.def, t = def.teams;
+    const form = h("div", { class: "live-form" });
+    for (const s of def.settings) form.appendChild(settingControl(s, a.values));
+    if (t && t.optional) {
+      form.appendChild(h("label", { class: "live-field" }, h("input", { type: "checkbox", checked: a.teamsOn, onchange: (e) => { a.teamsOn = e.target.checked; draw(); } }), " Play in teams"));
+    }
+    if (t && (a.teamsOn || !t.optional)) {
+      const opts = (t.sizes || [2, 3]).map((n) => [String(n), "teams of about " + n]);
+      if (t.all) opts.push(["0", "everyone in one team"]);
+      form.appendChild(h("label", { class: "live-field" }, "Teams ",
+        h("select", { id: "again-teamsize", onchange: (e) => { a.teamSize = +e.target.value; } },
+          opts.map(([v, l]) => h("option", { value: v, selected: +v === a.teamSize }, l)))));
+    }
+    return h("section", { class: "live-card live-again" }, h("h3", {}, "Next game’s settings"), form);
   }
 
   // ---- keyboard ---------------------------------------------------------------------------------------

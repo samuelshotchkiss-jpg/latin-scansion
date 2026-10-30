@@ -74,6 +74,25 @@ describe("a game whose teacher has gone", () => {
   });
 });
 
+describe("play again", () => {
+  const src = (f) => fs.readFileSync(path.join(__dirname, "..", f), "utf8");
+  test("wipes the last game but keeps the players, and a team game goes back to the lobby", () => {
+    const host = src("live/host.js");
+    const body = /async function playAgain\(\) \{([\s\S]*?)\r?\n  \}\r?\n/.exec(host)[1];
+    for (const k of ["round", "reveal", "score", "state", "hands", "taps"]) assert.match(body, new RegExp("\\b" + k + ": null"), k);
+    assert.doesNotMatch(body, /players: null|claims: null/);
+    assert.match(body, /teamsOn \? "lobby" : "play"/);
+    assert.match(body, /buildCtx\(\)/);                                       // a fresh mem for the mode
+  });
+  test("the round number counts on, and every screen shows the game's own question number", () => {
+    assert.match(src("live/host.js"), /q: n - S\.base/);
+    for (const f of ["live/modes/meter.js", "live/modes/poll.js"]) assert.doesNotMatch(src(f), /"Question " \+ r\.n/, f);
+  });
+  test("a player who joined after the teams were made is put in a team at Start", () => {
+    assert.match(src("live/host.js"), /if \(!Number\.isInteger\(t\[u\]\)\) \{ t\[u\] = Live\.smallestTeam\(t\)/);
+  });
+});
+
 describe("game codes", () => {
   test("the code alphabet and shape are the rules' (consonants only, four of them)", () => {
     assert.match(game[".write"], new RegExp("\\[" + Live.CODE_LETTERS + "\\]\\{4\\}"));

@@ -62,7 +62,7 @@
       case "nogame": return say("No game with that code", ["Check the four letters on the teacher’s screen."], codeForm());
       case "ended": return say("The game has ended", ["The teacher ended this game. Thanks for playing!", h("button", { type: "button", onclick: () => { leave(); P.screen = "code"; draw(); } }, "Join another game")]);
       case "removed": return say("You were removed", ["The teacher took you out of this game.", h("button", { type: "button", onclick: () => { P.wasJoined = false; decide(); } }, "Join again")]);
-      case "later": return say("A game is in progress", ["You’ll join the next one.", "When the teacher starts a new game, use the new code. You can keep this page open."]);
+      case "later": return say("A game is in progress", ["You’ll join the next one.", "Keep this page open: if your teacher plays again with this code, you join by yourself. A new code means a new game: enter it."]);
       case "finished": return say("This game has finished", ["Thanks for playing!"]);
       case "game": return drawGame();
     }
@@ -269,7 +269,7 @@
       area.appendChild(h("h3", {}, "Teams"));
       area.appendChild(Live.scoreboard(teams.map((t) => ({ name: "Team " + Live.teamLabel(t), score: score[t] || 0, you: t === P.ctx.team })), { top: 10 }));
     }
-    area.appendChild(h("p", { class: "live-note" }, "Thanks for playing! Close this tab when you are done: it forgets you."));
+    area.appendChild(h("p", { class: "live-note" }, "Thanks for playing! Keep this tab open if there is another game: it starts here. Close it when you are done: it forgets you."));
   }
 
   // ---- start ----------------------------------------------------------------------------------------------------------------

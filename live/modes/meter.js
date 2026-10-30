@@ -357,7 +357,7 @@
         const who = ctx.players();
         const tot = r.tot || ctx.settings.rounds;
         const head = h("div", { class: "live-q-head" },
-          h("span", { class: "live-q-n" }, "Question " + r.n + " of " + tot),
+          h("span", { class: "live-q-n" }, "Question " + (r.q || r.n) + " of " + tot),
           r.open ? h("span", { class: "live-clock", "aria-label": "seconds left" }) : null);
         el.appendChild(head);
         if (r.open) countdown(head.querySelector(".live-clock"), r.t0 + r.ms, ctx.now);
@@ -404,7 +404,7 @@
         if (!hand) { el.appendChild(h("p", { class: "live-big" }, "Welcome! You’ll play from the next question.")); return; }
         const mine = view.myTaps[0];
         const revealed = view.reveal && view.reveal.n === r.n ? view.reveal : null;
-        const head = h("div", { class: "live-q-head" }, h("p", { class: "live-q-n" }, "Question " + r.n + (r.tot ? " of " + r.tot : "")));
+        const head = h("div", { class: "live-q-head" }, h("p", { class: "live-q-n" }, "Question " + (r.q || r.n) + (r.tot ? " of " + r.tot : "")));
         if (r.open && !mine) {
           const clock = h("span", { class: "live-clock", "aria-label": "seconds left" });
           head.appendChild(clock);

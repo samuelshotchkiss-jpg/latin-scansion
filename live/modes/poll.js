@@ -110,7 +110,7 @@
         for (const a of Object.values(ctx.mem.answers || {})) tally[a.v]++;
         const answered = who.filter((p) => live[p.uid]).length;
         el.appendChild(h("div", { class: "live-q-head" },
-          h("span", { class: "live-q-n" }, "Question " + r.n + " of " + ctx.settings.rounds),
+          h("span", { class: "live-q-n" }, "Question " + (r.q || r.n) + " of " + ctx.settings.rounds),
           r.open ? h("span", { class: "live-clock", "aria-label": "seconds left" }, "") : null));
         if (r.open) countdown(el.querySelector(".live-clock"), r.t0 + r.ms, ctx.now);
         el.appendChild(h("h2", { class: "live-big" }, r.q));
@@ -150,7 +150,7 @@
         }
         const mine = view.myTaps[0];                // this round's first tap (pending ones included)
         const revealed = view.reveal && view.reveal.n === r.n;
-        el.appendChild(h("p", { class: "live-q-n" }, "Question " + r.n));
+        el.appendChild(h("p", { class: "live-q-n" }, "Question " + (r.q || r.n)));
         if (r.open && !mine) {
           const clock = h("span", { class: "live-clock", "aria-label": "seconds left" });
           el.appendChild(clock);
