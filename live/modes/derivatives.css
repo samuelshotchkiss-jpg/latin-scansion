@@ -1,0 +1,54 @@
+/* derivatives.css -- styles for the derivatives mode only, prefixed dr-live-. AGPL-3.0.
+   Linked from host.html and live.html. One colour per kind of card, the same on the projector and the devices. */
+
+.dr-live-card { display: flex; flex-direction: column; gap: .25rem; text-align: left; padding: .6rem .8rem; background: var(--panel); border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 10px; }
+.dr-live-card.dr-live-ldef { border-left-color: var(--missing); }
+.dr-live-card.dr-live-deriv { border-left-color: var(--ok); }
+.dr-live-card.dr-live-ddef { border-left-color: var(--muted); }
+.dr-live-kind { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.dr-live-face { font-size: 1.1rem; line-height: 1.35; }
+.dr-live-latin .dr-live-face { font-style: italic; font-weight: 600; }
+.dr-live-deriv .dr-live-face { font-weight: 700; }
+
+.dr-live-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; font-weight: 600; }
+.dr-live-promptcard { margin: .5rem 0; border-width: 2px; border-left-width: 8px; }
+.dr-live-promptcard .dr-live-face { font-size: 1.3rem; }
+.dr-live-cols { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0; }
+.dr-live-chip { display: inline-block; padding: .15rem .6rem; border: 1px dashed var(--line); border-radius: 999px; font-size: .9rem; }
+.dr-live-chip.mine { border-color: var(--accent); font-weight: 700; }
+.dr-live-chip.on { border-style: solid; border-color: var(--ok); color: var(--ok); font-weight: 700; }
+.dr-live-oops { color: var(--bad); font-weight: 700; margin: .4rem 0; }
+
+.dr-live-hand { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: .6rem; }
+.dr-live-mine { display: flex; flex-direction: column; align-items: stretch; gap: .3rem; padding: .3rem; text-align: left; border: 2px solid var(--line); min-height: 4rem; }
+.dr-live-mine .dr-live-card { border: 0; border-left: 6px solid var(--accent); }
+.dr-live-mine .dr-live-card.dr-live-ldef { border-left-color: var(--missing); }
+.dr-live-mine .dr-live-card.dr-live-deriv { border-left-color: var(--ok); }
+.dr-live-mine .dr-live-card.dr-live-ddef { border-left-color: var(--muted); }
+.dr-live-mine.picked { border: 5px double var(--accent); background: var(--target); }
+.dr-live-mine.right { border-color: var(--ok); }
+.dr-live-mine.wrong { border-color: var(--bad); border-style: dashed; }
+.dr-live-mine.wrong .dr-live-card { text-decoration: line-through; }
+.dr-live-mine.dim, .dr-live-mine.wrong, .dr-live-mine:disabled { opacity: .6; }
+.dr-live-mine.right:disabled { opacity: 1; }
+.dr-live-tag { font-weight: 700; font-size: .9rem; padding: 0 .4rem .2rem; }
+.dr-live-confirm { position: sticky; bottom: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-top: .8rem; padding: .6rem; background: var(--panel); border: 2px solid var(--accent); border-radius: 12px; }
+.dr-live-confirm span { flex: 1 1 14rem; }
+
+/* the projector */
+.dr-live-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.6rem; }
+.dr-live-time { font-size: 1.6rem; }
+.dr-live-clock { font-variant-numeric: tabular-nums; }
+.dr-live-best { color: var(--muted); font-weight: 600; }
+.dr-live-pen { color: var(--bad); font-weight: 600; }
+.dr-live-big { margin: .6rem 0 1rem; border-width: 2px; border-left-width: 10px; padding: 1rem 1.4rem; }
+.dr-live-big .dr-live-face { font-size: clamp(1.5rem, 3vw, 2.6rem); }
+.dr-live-slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: .75rem; }
+.dr-live-slots .dr-live-face { font-size: clamp(1.1rem, 1.8vw, 1.6rem); }
+.dr-live-empty { border-style: dashed; border-left-style: solid; border-left-color: var(--line); min-height: 5rem; }
+.dr-live-who { color: var(--muted); }
+.dr-live-found { border-color: var(--ok); }
+.dr-live-got { text-align: center; color: var(--ok); }
+.dr-live-result { text-align: center; padding: 1rem; border: 2px solid var(--line); border-radius: 16px; }
+.dr-live-result.record { border: 4px double var(--ok); background: color-mix(in srgb, var(--ok) 10%, var(--panel)); }
+.dr-live-confetti { font-size: 2rem; margin: 0; }

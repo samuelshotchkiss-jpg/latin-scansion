@@ -1,0 +1,299 @@
+{
+ "generated_by": "Latin Vocab Toolkit: engine/export_derivative_cards.py -- do not edit by hand",
+ "generated": "2026-11-02",
+ "sets": [
+  {
+   "id": "ii04",
+   "title": "Latin II · Sōl Trial (cycle 4)",
+   "corpus": "latin-ii",
+   "cycles": [
+    4
+   ],
+   "words": [
+    {
+     "key": "fero",
+     "latin": "ferō, ferre, tulī, lātum",
+     "def": "to carry",
+     "derivs": [
+      {
+       "w": "fertile",
+       "d": "able to produce many crops, plants or young"
+      },
+      {
+       "w": "conifer",
+       "d": "a tree that bears cones and usually keeps its needles all year"
+      }
+     ]
+    },
+    {
+     "key": "dies",
+     "latin": "diēs, diēī, m./f.",
+     "def": "day",
+     "derivs": [
+      {
+       "w": "diary",
+       "d": "a book in which someone writes down what happens each day"
+      },
+      {
+       "w": "per diem",
+       "d": "an amount of money paid for each day, for example to cover travel costs"
+      }
+     ]
+    },
+    {
+     "key": "corpus",
+     "latin": "corpus, corporis, n.",
+     "def": "body",
+     "derivs": [
+      {
+       "w": "corpse",
+       "d": "a dead body"
+      },
+      {
+       "w": "corporal",
+       "d": "having to do with the body, as in punishment by hitting"
+      },
+      {
+       "w": "corpuscle",
+       "d": "a tiny cell floating in the blood, such as a red or white blood cell"
+      },
+      {
+       "w": "corps",
+       "d": "an organized group of people who work together, often in the military"
+      },
+      {
+       "w": "corpulent",
+       "d": "very fat; having a large, heavy body"
+      }
+     ]
+    },
+    {
+     "key": "sine",
+     "latin": "sine",
+     "def": "without",
+     "derivs": [
+      {
+       "w": "sinecure",
+       "d": "a paid job that requires little or no work"
+      }
+     ]
+    },
+    {
+     "key": "sequor",
+     "latin": "sequor, sequī, secūtus sum",
+     "def": "to follow",
+     "derivs": [
+      {
+       "w": "sequel",
+       "d": "a book, movie or game that continues the story of an earlier one"
+      },
+      {
+       "w": "persecute",
+       "d": "to treat someone cruelly and unfairly again and again, especially for their beliefs"
+      }
+     ]
+    },
+    {
+     "key": "uis",
+     "latin": "vīs, vīs, f.",
+     "def": "force",
+     "derivs": [
+      {
+       "w": "vim",
+       "d": "energy and enthusiasm"
+      }
+     ]
+    },
+    {
+     "key": "caput",
+     "latin": "caput, capitis, n.",
+     "def": "head",
+     "derivs": [
+      {
+       "w": "decapitate",
+       "d": "to cut off the head of"
+      },
+      {
+       "w": "per capita",
+       "d": "for each person, when a total is divided among a population"
+      }
+     ]
+    },
+    {
+     "key": "grauis",
+     "latin": "gravis, grave",
+     "def": "heavy",
+     "derivs": [
+      {
+       "w": "gravity",
+       "d": "the force that pulls objects toward the earth"
+      },
+      {
+       "w": "aggravate",
+       "d": "to make a problem or an injury worse; also, to annoy"
+      },
+      {
+       "w": "gravitas",
+       "d": "a serious, dignified manner that earns respect"
+      }
+     ]
+    },
+    {
+     "key": "moueo",
+     "latin": "moveō, movēre, mōvī, mōtum",
+     "def": "to move",
+     "derivs": [
+      {
+       "w": "momentum",
+       "d": "the force or speed something gains once it is moving"
+      }
+     ]
+    },
+    {
+     "key": "leuis",
+     "latin": "levis, leve",
+     "def": "light",
+     "derivs": [
+      {
+       "w": "levitate",
+       "d": "to rise and float in the air, as if by magic"
+      },
+      {
+       "w": "lever",
+       "d": "a bar pushed down at one end to lift a heavy object at the other"
+      },
+      {
+       "w": "elevate",
+       "d": "to lift something to a higher place or level"
+      },
+      {
+       "w": "elevator",
+       "d": "a moving room that carries people up and down between floors"
+      },
+      {
+       "w": "levity",
+       "d": "a lack of seriousness; joking at a time that calls for seriousness"
+      },
+      {
+       "w": "alleviate",
+       "d": "to make pain or a problem less severe"
+      }
+     ]
+    },
+    {
+     "key": "silua",
+     "latin": "silva, silvae, f.",
+     "def": "forest",
+     "derivs": [
+      {
+       "w": "Pennsylvania",
+       "d": "the U.S. state founded by William Penn, home of Philadelphia"
+      },
+      {
+       "w": "sylvan",
+       "d": "having to do with the woods; full of trees"
+      }
+     ]
+    },
+    {
+     "key": "is",
+     "latin": "is, ea, id",
+     "def": "he / she / it",
+     "derivs": [
+      {
+       "w": "i.e.",
+       "d": "an abbreviation meaning “that is,” used before saying something in other words"
+      },
+      {
+       "w": "id",
+       "d": "in psychology, the part of the mind that holds basic urges and desires"
+      }
+     ]
+    },
+    {
+     "key": "pono",
+     "latin": "pōnō, pōnere, posuī, positum",
+     "def": "to put, to place",
+     "derivs": [
+      {
+       "w": "postpone",
+       "d": "to move an event to a later time"
+      }
+     ]
+    },
+    {
+     "key": "eo",
+     "latin": "eō, īre, īvī / iī, itum",
+     "def": "to go",
+     "derivs": [
+      {
+       "w": "transit",
+       "d": "the moving of people or goods from place to place, as by bus or train"
+      },
+      {
+       "w": "itinerary",
+       "d": "a plan of the route and the stops of a trip"
+      },
+      {
+       "w": "circuit",
+       "d": "a path that goes all the way around and back to its start, like the path of electricity"
+      }
+     ]
+    },
+    {
+     "key": "pugno",
+     "latin": "pugnō, pugnāre, pugnāvī, pugnātum",
+     "def": "to fight",
+     "derivs": [
+      {
+       "w": "pugnacious",
+       "d": "eager to argue or fight"
+      },
+      {
+       "w": "impugn",
+       "d": "to attack something as false or wrong, especially someone's honesty"
+      }
+     ]
+    },
+    {
+     "key": "sumo",
+     "latin": "sūmō, sūmere, sūmpsī, sūmptum",
+     "def": "to pick up, to take up",
+     "derivs": [
+      {
+       "w": "presume",
+       "d": "to suppose something is true without proof"
+      },
+      {
+       "w": "consumption",
+       "d": "the using up of something, such as food, fuel or energy"
+      },
+      {
+       "w": "resume",
+       "d": "to begin again after a pause"
+      }
+     ]
+    },
+    {
+     "key": "cornu",
+     "latin": "cornū, cornūs, n.",
+     "def": "horn",
+     "derivs": [
+      {
+       "w": "unicorn",
+       "d": "an imaginary horse with a single horn on its forehead"
+      },
+      {
+       "w": "Capricorn",
+       "d": "the sign of the zodiac pictured as a goat"
+      },
+      {
+       "w": "cornucopia",
+       "d": "a horn-shaped basket overflowing with fruit and grain; a symbol of plenty"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

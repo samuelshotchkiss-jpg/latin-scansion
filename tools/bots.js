@@ -39,7 +39,7 @@ require("firebase/compat/auth");
 require("firebase/compat/database");
 global.Live = require("../live/common.js");              // so a mode file can be loaded here, only to read its flags
 const Names = require("../live/names.js");
-for (const m of ["poll", "devices", "meter"]) {
+for (const m of ["poll", "devices", "meter", "derivatives"]) {
   try { require("../live/modes/" + m + ".js"); } catch (e) { /* a mode that needs the browser is simply not known to the bots */ }
 }
 

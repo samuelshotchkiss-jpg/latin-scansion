@@ -17,7 +17,7 @@
           ".read": "auth != null",
           ".validate": "newData.hasChildren(['host', 'mode', 'phase', 'created', 'live', 'beat', 'teamSize'])",
           "host": { ".validate": "newData.isString() && newData.val() === auth.uid" },
-          "mode": { ".validate": "newData.isString() && newData.val().matches(/^(devices|meter|poll)$/)" },
+          "mode": { ".validate": "newData.isString() && newData.val().matches(/^(devices|meter|poll|derivatives)$/)" },
           "phase": { ".validate": "newData.isString() && newData.val().matches(/^(lobby|play|done)$/)" },
           "created": { ".validate": "newData.isNumber() && ((!data.exists() && newData.val() === now) || (data.exists() && newData.val() === data.val()))" },
           "live": { ".validate": "newData.isBoolean()" },

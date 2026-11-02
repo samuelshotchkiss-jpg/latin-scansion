@@ -586,12 +586,13 @@
 
   // The final breakdown, built only from this page's own memory and the published scores. Nothing is
   // saved or exported; ending the game still deletes everything. A mode may add sections with
-  // host.summary(ctx, view) (see MODES.md section 4); the standings are always shown first.
+  // host.summary(ctx, view) (see MODES.md section 4); the standings are shown first, unless the mode
+  // sets noStandings (a whole-class race has no one to rank).
   function summaryNodes(view) {
     const out = [];
     const score = view.score || {};
     const rows = view.players.map((p) => ({ name: p.name, gloss: p.gloss, score: score[p.uid] || 0 }));
-    out.push(h("section", { class: "live-sum" }, h("h3", {}, "Final standings"), Live.scoreboard(rows, { top: 50 })));
+    if (!S.def.noStandings) out.push(h("section", { class: "live-sum" }, h("h3", {}, "Final standings"), Live.scoreboard(rows, { top: 50 })));
     if (S.ctx.teamsOn) {
       const groups = teamGroups();
       const trows = Object.keys(groups).map((t) => ({

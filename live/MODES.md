@@ -47,6 +47,7 @@ Live.registerMode({
   built: true,                     // false = a stub: appears as "Not built yet" and cannot be started
   lateJoin: true,                  // may a student who arrives after Start join? (SPEC 6.7: meter yes, devices no)
   autoLock: true,                  // default true: when every player has tapped once, lock the round. false = never
+  noStandings: false,              // true = the end screen skips "Final standings" (derivatives: one class, one time)
   teams: false,                    // or { optional: true|false, sizes: [2,3,4], all: true|false }  (section 5)
   settings: [ ... ],               // section 3
   keys: { r: { label: "Replay rhythm", run(ctx) { ... } } },   // optional host-page keyboard shortcuts
