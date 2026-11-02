@@ -280,9 +280,9 @@
         el.appendChild(card(c.pk, c.row[c.pk], "dr-live-big"));
         const slots = h("div", { class: "dr-live-slots" });
         for (const k of c.cols) {
-          const who = ctx.players().filter((p) => c.holds[p.uid] && c.holds[p.uid].includes(k)).map((p) => p.name).join(" · ");
+          // An open slot does not name who holds it: the projector never shows whom the class is waiting on.
           slots.appendChild(c.found[k] ? card(k, c.row[k], "dr-live-found")
-            : h("div", { class: "dr-live-card dr-live-empty" }, h("span", { class: "dr-live-kind" }, KIND_LABEL[k]), h("span", { class: "dr-live-who" }, "… " + who)));
+            : h("div", { class: "dr-live-card dr-live-empty" }, h("span", { class: "dr-live-kind" }, KIND_LABEL[k]), h("span", { class: "dr-live-who" }, "… still open")));
         }
         el.appendChild(slots);
         if (c.bad) el.appendChild(h("p", { class: "dr-live-oops" }, "✗ " + c.bad + " wrong card" + (c.bad > 1 ? "s" : "") + " on this word"));
