@@ -21,6 +21,8 @@ i -- and the meter decides it. A line that will not scan therefore usually carri
 
 CONVENTIONS. Change these if you teach differently:
   * the final syllable of the line is long by definition;
+  * an i that begins a word before a vowel is a consonant (iam, Iūnō), except in the names listed in
+    VOCALIC_I_NAME (Ĭ-ū-lus, Ĭ-ā-sōn, Ĭ-ar-bās), where it is a vowel;
   * muta cum liquida is a mute (stop: p b t d c g) + l or r. Inside a word the meter decides. CONSONANTS AT THE
     START OF A WORD are their own kind: a mute (stop) + liquid there leaves a short final vowel short, and so
     does f + l / f + r -- which is not muta cum liquida at all;
@@ -28,6 +30,7 @@ CONVENTIONS. Change these if you teach differently:
     a dissolved diphthong, hypermetry, lengthening at the beat, a word-initial cluster the poet
     ignores. Also advanced, though tried first: a word-initial cluster (sc-, sp-, st-...) that makes
     position by itself. The s + t left by prodelision (vīsa 'st) is not one: that is ordinary position.
+    Hypermetry comes last of all: it is chosen only when nothing else will scan the line;
   * GREEKINESS: a word that looks unlike ordinary Latin -- a pair that looks like a diphthong and is
     not (āera), vowels side by side in a name (Aenēās), an eu diphthong (Teucrī), three vowels in a
     row, the same vowel twice, many vowels, or a name whose macron was hard to settle. A y alone is
@@ -115,6 +118,10 @@ JOINED_EI = {"dein", "deinde", "deinceps", "hei", "ei"}   # `ei` unmarked is the
 PREFIX_BEFORE_I = re.compile(r"(?:con|ad|ob|sub|ab|in|dis)$")   # con-iugis: the i is a consonant
 JOINED_UI = {"cui", "huic"}
 CONSONANTAL_SU = re.compile(r"su[āa][vd]|su[ēe](?:sc|t)")   # suāvis, suādeō, suēscō, mānsuētus
+# Names whose first i is a VOWEL: Ĭ-ū-lus, Ĭ-ā-sōn, Ĭ-ar-bās, against iam, Iūnō, Iūlius. Read as a
+# consonant they still scan, but only as a spondaic fifth foot (nōmen Iūlō, dēbēbit Iāsōn, Gaetūlus
+# Iarbās) -- every spondaic fifth in the app was one of these. Bare forms; add a name when you meet one.
+VOCALIC_I_NAME = re.compile(r"iul(?:us|i|o|um|e)|iason\w*|iarb\w*")
 MAX_DEVIATIONS = 4        # non-default choices per line; bounds the stage-2 search
 ADVANCED = {"hiatus", "synizesis", "correption", "diphthong split", "hypermetry", "lengthened syllable",
             "ignored cluster", "word-initial cluster makes position"}
@@ -197,7 +204,9 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
                     continue
             if c == "i" and nxt and is_vowel(nxt):
                 if i == 0:                                              # iam, iubeō, Iūnō
-                    if pick(("initial i", wi), [("consonantal", 0, 1), ("vocalic", 2, 2)]) == "consonantal":
+                    if VOCALIC_I_NAME.fullmatch(bare(t)):               # Iūlus, Iāsōn, Iarbās
+                        pass
+                    elif pick(("initial i", wi), [("consonantal", 0, 1), ("vocalic", 2, 2)]) == "consonantal":
                         units.append(Unit("C", ws, ws + 1, wi))
                         i += 1
                         continue
@@ -244,7 +253,11 @@ def parse_word(t: str, ws: int, wi: int, proper: bool, pick) -> list[Unit]:
                     units.append(Unit("V", ws + i, ws + i + 2, wi, long=True, why="diphthong"))
                     i += 2
                     continue
-            if units and units[-1].kind == "V" and not units[-1].long and units[-1].why != "split":
+            # A long vowel does not glide -- except the ē of a Greek genitive in -ēī, read as one
+            # syllable (Aen. 1.41 Oīlēī; owner, 2026-11-03: synizesis there, not hypermetry).
+            ei_genitive = t[i - 1:] == "ēī" and units and units[-1].why == "long vowel"
+            if (units and units[-1].kind == "V" and (not units[-1].long or ei_genitive)
+                    and units[-1].why != "split"):
                 # the first vowel becomes a consonant (te-ne-ant -> ten-yant), so it can close a syllable.
                 # Rarer than a short vowel before f + liquid, so it loses a tie; u rarer still.
                 cost = 5 if base(t[i - 1]) == "u" else 4
@@ -341,9 +354,11 @@ def build_line(s: str, low: str, words, pick, flags: set, meter: str = "hexamete
 
     # hypermetry: a final vowel that elides into the next line (locōrumque)
     # (a hexameter's licence: a pentameter closes its couplet, with nothing after it to elide into)
+    # The LAST resort, dearer than any other choices together (owner, 2026-11-03: "save hypermetry for
+    # when there's no other option") -- so Aen. 1.41 Oīlēī is a synizesis, not an ī elided into ipsa.
     tail = [u for u in units if u.word == len(words) - 1]
     if meter == "hexameter" and can_elide_on and tail and tail[-1].kind == "V" and not tail[-1].gone:
-        if pick(("hypermetry",), [("no", 0, 1), ("elide", 3, 2)]) == "elide":
+        if pick(("hypermetry",), [("no", 0, 1), ("elide", 100, 2)]) == "elide":
             tail[-1].gone = "elided"
             flags.add("hypermetry")
 

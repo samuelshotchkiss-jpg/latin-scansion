@@ -133,12 +133,13 @@
     {
       "id": "licences",
       "title": "The poets' licences",
-      "revised": "2026-10-25",
-      "new": "a worked example of each licence, divided before your eyes.",
-      "lesson": "<p>Now and then a poet bends the rules. You won't meet these often, but you'll learn to recognize them:</p><ul><li data-topic=\"hiatus\"><b>Hiatus</b>: no elision where you'd expect one — <i>dea. ille</i>. An interjection like <i>Ō</i> never elides — Narcissus, in love with his own reflection:<div class=\"demo\" data-line=\"Met. 3.467\" data-show=\"Ō:Ō\"></div></li><li data-topic=\"synizesis\"><b>Synizesis</b>: two vowels in one word run together into a single syllable — <i>Lāvīnia</i> becomes <i>Lā-vīn-ja</i>. Mark it with the swoosh between the two vowels. Dido's hall has lamps hanging from <i>golden</i> ceilings, <i>aureīs</i>:<div class=\"demo\" data-line=\"Aen. 1.726\" data-show=\"aureīs:e\"></div></li><li data-topic=\"hypermetry\"><b>Hypermetry</b>: the line has one syllable too many, and its last vowel elides into the next line — <i>locōrumque</i>. Put the swoosh after the last syllable. Mercury, appearing to Aeneas in a dream; the next line begins <i>et</i>:<div class=\"demo\" data-line=\"Aen. 4.558\" data-show=\"colōremque:e#2\"></div></li></ul>",
+      "revised": "2026-11-04",
+      "new": "lengthening at the caesura, with a line of Medea's.",
+      "lesson": "<p>Now and then a poet bends the rules. You won't meet these often, but you'll learn to recognize them:</p><ul><li data-topic=\"hiatus\"><b>Hiatus</b>: no elision where you'd expect one — <i>dea. ille</i>. An interjection like <i>Ō</i> never elides — Narcissus, in love with his own reflection:<div class=\"demo\" data-line=\"Met. 3.467\" data-show=\"Ō:Ō\"></div></li><li data-topic=\"synizesis\"><b>Synizesis</b>: two vowels in one word run together into a single syllable — <i>Lāvīnia</i> becomes <i>Lā-vīn-ja</i>. Mark it with the swoosh between the two vowels. Dido's hall has lamps hanging from <i>golden</i> ceilings, <i>aureīs</i>:<div class=\"demo\" data-line=\"Aen. 1.726\" data-show=\"aureīs:e\"></div></li><li data-topic=\"lengthening\"><b>Lengthening at the caesura</b>: a short syllable at the main pause of the line is lengthened at the beat. Mark it long. Medea dreams of life as Jason's wife, dear to the gods and touching the stars; <i>ferar</i> ends on a short syllable, but here it takes the beat:<div class=\"demo\" data-line=\"Met. 7.61\" data-show=\"ferar:a\"></div></li><li data-topic=\"hypermetry\"><b>Hypermetry</b>: the line has one syllable too many, and its last vowel elides into the next line — <i>locōrumque</i>. It is the last resort, used only when nothing else works. Put the swoosh after the last syllable. Mercury, appearing to Aeneas in a dream; the next line begins <i>et</i>:<div class=\"demo\" data-line=\"Aen. 4.558\" data-show=\"colōremque:e#2\"></div></li></ul>",
       "lines": [
         "Aen. 1.405",
         "Aen. 1.2",
+        "Met. 7.61",
         "Aen. 1.332"
       ],
       "practice": {

@@ -3554,7 +3554,7 @@
   "text": "omnia Mercuriō similis, vōcemque colōremque",
   "scans": true,
   "stage": 2,
-  "penalty": 3,
+  "penalty": 100,
   "ambiguous": false,
   "level": 8,
   "advanced": true,

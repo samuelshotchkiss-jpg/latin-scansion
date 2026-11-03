@@ -91,7 +91,7 @@ class WhatIsNeverAsked(unittest.TestCase):
                     found += 1
                     q = asked[(l["citation"], i)]
                     self.assertEqual((q["answer"], q["kind"] in ("elision", "greek")), ("X", True), q["id"])
-        self.assertEqual(found, 46)         # 47 in the data; 1 is in a line that needed a licence
+        self.assertEqual(found, 55)         # 56 in the data; 1 is in a line that needed a licence
 
     def test_no_diphthong(self):
         for q in QS:
@@ -136,7 +136,7 @@ class WhatIsNeverAsked(unittest.TestCase):
             self.assertFalse(n.get("hiatus"), q["id"])
         for c in ("Aen. 1.2", "Aen. 1.256", "Aen. 4.168"):
             self.assertFalse([q for q in QS if q["line"] == c], c)
-        self.assertEqual(sum(1 for l in LINES if l["advanced"]), 11)
+        self.assertEqual(sum(1 for l in LINES if l["advanced"]), 15)
 
     def test_unsettled_lines_are_never_used(self):
         for q in QS:

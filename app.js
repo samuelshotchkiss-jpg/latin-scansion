@@ -1320,12 +1320,12 @@
     'muta cum liquida at word start': ['clusters'], 'f + liquid at word start': ['clusters'],
     'word-initial cluster makes position': ['clusters'], 'word-initial cluster ignored': ['clusters'],
     'elided': ['elision'], 'prodelided': ['elision'],
-    'correption': ['licences'], 'lengthened syllable': ['licences'], 'merged': ['licences', 'synizesis'],
+    'correption': ['licences'], 'lengthened syllable': ['licences', 'lengthening'], 'merged': ['licences', 'synizesis'],
   };
   const TOPICS = {
     diphthong: 'Diphthongs', apart: 'Two vowels, two syllables', semivowel: 'i and u as consonants',
     qu: 'qu', h: 'h', x: 'x', z: 'z', 'i-between': 'i between two vowels', hic: 'hic and hoc',
-    hiatus: 'Hiatus', synizesis: 'Synizesis', hypermetry: 'Hypermetry',
+    hiatus: 'Hiatus', synizesis: 'Synizesis', lengthening: 'Lengthening at the caesura', hypermetry: 'Hypermetry',
   };
   function lessonsFor(l, n, z) {
     if (!z) return [];
