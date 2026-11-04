@@ -301,8 +301,8 @@
    "corpus": "latin-i",
    "words": [
     {
-     "key": "a",
-     "latin": "ā",
+     "key": "a-ab",
+     "latin": "ā, ab",
      "def": "from, by",
      "derivs": [
       {
@@ -526,8 +526,8 @@
    "corpus": "latin-i",
    "words": [
     {
-     "key": "a",
-     "latin": "ā",
+     "key": "a-ab",
+     "latin": "ā, ab",
      "def": "from, by",
      "derivs": [
       {
