@@ -1,6 +1,6 @@
 {
  "generated_by": "Latin Vocab Toolkit: engine/export_derivative_cards.py -- do not edit by hand",
- "generated": "2026-11-02",
+ "generated": "2026-11-04",
  "sets": [
   {
    "id": "ii04",
@@ -293,6 +293,615 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "id": "i04",
+   "title": "Latin I · Trial 4",
+   "corpus": "latin-i",
+   "words": [
+    {
+     "key": "a",
+     "latin": "ā",
+     "def": "from, by",
+     "derivs": [
+      {
+       "w": "absent",
+       "d": "not here; away"
+      },
+      {
+       "w": "abnormal",
+       "d": "not normal; strange"
+      }
+     ]
+    },
+    {
+     "key": "clare",
+     "latin": "clārē",
+     "def": "clearly",
+     "derivs": [
+      {
+       "w": "clear",
+       "d": "easy to see through, or easy to understand"
+      },
+      {
+       "w": "declare",
+       "d": "to say something strongly, so that everyone hears"
+      },
+      {
+       "w": "clarify",
+       "d": "to make something easier to understand"
+      },
+      {
+       "w": "clarity",
+       "d": "being easy to see or to understand"
+      }
+     ]
+    },
+    {
+     "key": "domi",
+     "latin": "domī",
+     "def": "at home",
+     "derivs": [
+      {
+       "w": "domestic",
+       "d": "about the home or the family; tame, not wild"
+      }
+     ]
+    },
+    {
+     "key": "domus",
+     "latin": "domus",
+     "def": "house, home",
+     "derivs": [
+      {
+       "w": "domestic",
+       "d": "about the home or the family; tame, not wild"
+      },
+      {
+       "w": "domicile",
+       "d": "the place where a person lives"
+      }
+     ]
+    },
+    {
+     "key": "falsum",
+     "latin": "falsum",
+     "def": "fake",
+     "derivs": [
+      {
+       "w": "false",
+       "d": "not true"
+      },
+      {
+       "w": "falsify",
+       "d": "to change a paper or a fact so that it is not true"
+      }
+     ]
+    },
+    {
+     "key": "iterum",
+     "latin": "iterum",
+     "def": "again",
+     "derivs": [
+      {
+       "w": "iterate",
+       "d": "to do a thing again and again"
+      },
+      {
+       "w": "reiterate",
+       "d": "to say a thing again"
+      }
+     ]
+    },
+    {
+     "key": "nox",
+     "latin": "nox",
+     "def": "night",
+     "derivs": [
+      {
+       "w": "nocturnal",
+       "d": "awake and active at night, like an owl"
+      },
+      {
+       "w": "equinox",
+       "d": "a day in spring or fall when day and night are the same length"
+      }
+     ]
+    },
+    {
+     "key": "oculi",
+     "latin": "oculī",
+     "def": "eyes",
+     "derivs": [
+      {
+       "w": "binoculars",
+       "d": "a tool you hold to both eyes to see things far away"
+      }
+     ]
+    },
+    {
+     "key": "parentes",
+     "latin": "parentēs",
+     "def": "parents",
+     "derivs": [
+      {
+       "w": "parent",
+       "d": "a mother or a father"
+      },
+      {
+       "w": "parental",
+       "d": "about a mother or a father"
+      }
+     ]
+    },
+    {
+     "key": "putat",
+     "latin": "putat",
+     "def": "supposes, thinks that",
+     "derivs": [
+      {
+       "w": "reputation",
+       "d": "what people think about a person"
+      },
+      {
+       "w": "dispute",
+       "d": "an argument; a fight with words"
+      }
+     ]
+    },
+    {
+     "key": "ridet",
+     "latin": "rīdet",
+     "def": "laughs, smiles",
+     "derivs": [
+      {
+       "w": "ridiculous",
+       "d": "so silly that people laugh"
+      },
+      {
+       "w": "ridicule",
+       "d": "to laugh at a person in a mean way"
+      },
+      {
+       "w": "deride",
+       "d": "to make fun of a person or an idea in a mean way"
+      }
+     ]
+    },
+    {
+     "key": "sentit",
+     "latin": "sentit",
+     "def": "senses, feels",
+     "derivs": [
+      {
+       "w": "sense",
+       "d": "seeing, hearing, smelling, tasting or touching"
+      },
+      {
+       "w": "sensitive",
+       "d": "quick to feel things; easy to hurt"
+      },
+      {
+       "w": "consent",
+       "d": "to say yes; to agree"
+      },
+      {
+       "w": "sensor",
+       "d": "a machine part that notices light, heat or movement"
+      }
+     ]
+    },
+    {
+     "key": "varii",
+     "latin": "variī",
+     "def": "various, different",
+     "derivs": [
+      {
+       "w": "various",
+       "d": "of many different kinds"
+      },
+      {
+       "w": "vary",
+       "d": "to change; to be different"
+      },
+      {
+       "w": "variety",
+       "d": "many different kinds of things together"
+      },
+      {
+       "w": "variable",
+       "d": "able to change; in math, a letter that stands for a number"
+      }
+     ]
+    }
+   ],
+   "sets": [
+    "trial-04"
+   ]
+  },
+  {
+   "id": "i0304",
+   "title": "Latin I · Trials 3–4",
+   "corpus": "latin-i",
+   "words": [
+    {
+     "key": "a",
+     "latin": "ā",
+     "def": "from, by",
+     "derivs": [
+      {
+       "w": "absent",
+       "d": "not here; away"
+      },
+      {
+       "w": "abnormal",
+       "d": "not normal; strange"
+      }
+     ]
+    },
+    {
+     "key": "amici",
+     "latin": "amīcī",
+     "def": "friends",
+     "derivs": [
+      {
+       "w": "amicable",
+       "d": "friendly, without fighting"
+      },
+      {
+       "w": "amiable",
+       "d": "friendly and nice"
+      }
+     ]
+    },
+    {
+     "key": "celeriter",
+     "latin": "celeriter",
+     "def": "quickly",
+     "derivs": [
+      {
+       "w": "accelerate",
+       "d": "to go faster"
+      }
+     ]
+    },
+    {
+     "key": "clare",
+     "latin": "clārē",
+     "def": "clearly",
+     "derivs": [
+      {
+       "w": "clear",
+       "d": "easy to see through, or easy to understand"
+      },
+      {
+       "w": "declare",
+       "d": "to say something strongly, so that everyone hears"
+      },
+      {
+       "w": "clarify",
+       "d": "to make something easier to understand"
+      },
+      {
+       "w": "clarity",
+       "d": "being easy to see or to understand"
+      }
+     ]
+    },
+    {
+     "key": "dixit",
+     "latin": "dīxit",
+     "def": "said",
+     "derivs": [
+      {
+       "w": "predict",
+       "d": "to say what will happen before it happens"
+      },
+      {
+       "w": "dictionary",
+       "d": "a book that tells what words mean"
+      },
+      {
+       "w": "verdict",
+       "d": "the decision at the end of a trial in court"
+      }
+     ]
+    },
+    {
+     "key": "domi",
+     "latin": "domī",
+     "def": "at home",
+     "derivs": [
+      {
+       "w": "domestic",
+       "d": "about the home or the family; tame, not wild"
+      }
+     ]
+    },
+    {
+     "key": "domus",
+     "latin": "domus",
+     "def": "house, home",
+     "derivs": [
+      {
+       "w": "domestic",
+       "d": "about the home or the family; tame, not wild"
+      },
+      {
+       "w": "domicile",
+       "d": "the place where a person lives"
+      }
+     ]
+    },
+    {
+     "key": "duo",
+     "latin": "duo",
+     "def": "two",
+     "derivs": [
+      {
+       "w": "dual",
+       "d": "having two parts; double"
+      },
+      {
+       "w": "duet",
+       "d": "a song or music for two people"
+      }
+     ]
+    },
+    {
+     "key": "falsum",
+     "latin": "falsum",
+     "def": "fake",
+     "derivs": [
+      {
+       "w": "false",
+       "d": "not true"
+      },
+      {
+       "w": "falsify",
+       "d": "to change a paper or a fact so that it is not true"
+      }
+     ]
+    },
+    {
+     "key": "in-urbe",
+     "latin": "in urbe",
+     "def": "in the city",
+     "derivs": [
+      {
+       "w": "urban",
+       "d": "about a city"
+      },
+      {
+       "w": "suburb",
+       "d": "an area of homes at the edge of a city"
+      }
+     ]
+    },
+    {
+     "key": "iterum",
+     "latin": "iterum",
+     "def": "again",
+     "derivs": [
+      {
+       "w": "iterate",
+       "d": "to do a thing again and again"
+      },
+      {
+       "w": "reiterate",
+       "d": "to say a thing again"
+      }
+     ]
+    },
+    {
+     "key": "loco",
+     "latin": "locō",
+     "def": "place",
+     "derivs": [
+      {
+       "w": "local",
+       "d": "from the place near you"
+      },
+      {
+       "w": "location",
+       "d": "a place"
+      },
+      {
+       "w": "locomotive",
+       "d": "the engine that pulls a train"
+      }
+     ]
+    },
+    {
+     "key": "maritus",
+     "latin": "marītus",
+     "def": "husband",
+     "derivs": [
+      {
+       "w": "marital",
+       "d": "about marriage"
+      }
+     ]
+    },
+    {
+     "key": "movent",
+     "latin": "movent",
+     "def": "they move",
+     "derivs": [
+      {
+       "w": "move",
+       "d": "to go to another place or position"
+      },
+      {
+       "w": "movement",
+       "d": "the act of going to another place or position"
+      },
+      {
+       "w": "remove",
+       "d": "to take a thing away"
+      }
+     ]
+    },
+    {
+     "key": "nox",
+     "latin": "nox",
+     "def": "night",
+     "derivs": [
+      {
+       "w": "nocturnal",
+       "d": "awake and active at night, like an owl"
+      },
+      {
+       "w": "equinox",
+       "d": "a day in spring or fall when day and night are the same length"
+      }
+     ]
+    },
+    {
+     "key": "oculi",
+     "latin": "oculī",
+     "def": "eyes",
+     "derivs": [
+      {
+       "w": "binoculars",
+       "d": "a tool you hold to both eyes to see things far away"
+      }
+     ]
+    },
+    {
+     "key": "parentes",
+     "latin": "parentēs",
+     "def": "parents",
+     "derivs": [
+      {
+       "w": "parent",
+       "d": "a mother or a father"
+      },
+      {
+       "w": "parental",
+       "d": "about a mother or a father"
+      }
+     ]
+    },
+    {
+     "key": "pater",
+     "latin": "pater",
+     "def": "father",
+     "derivs": [
+      {
+       "w": "paternal",
+       "d": "about a father; like a father"
+      },
+      {
+       "w": "patron",
+       "d": "a person who gives money to help an artist or a business"
+      }
+     ]
+    },
+    {
+     "key": "pedes",
+     "latin": "pedēs",
+     "def": "feet",
+     "derivs": [
+      {
+       "w": "pedestrian",
+       "d": "a person who is walking, not in a car"
+      },
+      {
+       "w": "pedal",
+       "d": "a part you push with your foot, as on a bicycle"
+      },
+      {
+       "w": "centipede",
+       "d": "a long, small animal with very many legs"
+      }
+     ]
+    },
+    {
+     "key": "putat",
+     "latin": "putat",
+     "def": "supposes, thinks that",
+     "derivs": [
+      {
+       "w": "reputation",
+       "d": "what people think about a person"
+      },
+      {
+       "w": "dispute",
+       "d": "an argument; a fight with words"
+      }
+     ]
+    },
+    {
+     "key": "ridet",
+     "latin": "rīdet",
+     "def": "laughs, smiles",
+     "derivs": [
+      {
+       "w": "ridiculous",
+       "d": "so silly that people laugh"
+      },
+      {
+       "w": "ridicule",
+       "d": "to laugh at a person in a mean way"
+      },
+      {
+       "w": "deride",
+       "d": "to make fun of a person or an idea in a mean way"
+      }
+     ]
+    },
+    {
+     "key": "sentit",
+     "latin": "sentit",
+     "def": "senses, feels",
+     "derivs": [
+      {
+       "w": "sense",
+       "d": "seeing, hearing, smelling, tasting or touching"
+      },
+      {
+       "w": "sensitive",
+       "d": "quick to feel things; easy to hurt"
+      },
+      {
+       "w": "consent",
+       "d": "to say yes; to agree"
+      },
+      {
+       "w": "sensor",
+       "d": "a machine part that notices light, heat or movement"
+      }
+     ]
+    },
+    {
+     "key": "varii",
+     "latin": "variī",
+     "def": "various, different",
+     "derivs": [
+      {
+       "w": "various",
+       "d": "of many different kinds"
+      },
+      {
+       "w": "vary",
+       "d": "to change; to be different"
+      },
+      {
+       "w": "variety",
+       "d": "many different kinds of things together"
+      },
+      {
+       "w": "variable",
+       "d": "able to change; in math, a letter that stands for a number"
+      }
+     ]
+    }
+   ],
+   "sets": [
+    "trial-03",
+    "trial-04"
    ]
   }
  ]
