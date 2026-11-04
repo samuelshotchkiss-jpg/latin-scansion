@@ -36,6 +36,21 @@ describe("the data file", () => {
 });
 
 describe("dealing", () => {
+  test("four players: the shared column passes round, so each player is half of the pair one word in two", () => {
+    const g = game(4);
+    const shared = { u0: 0, u1: 0, u2: 0, u3: 0 };
+    let words = 0, prevPair = null;
+    while (g.deal()) {
+      words++;
+      const c = g.cur;
+      const pair = c.cols.map((k) => uids(4).filter((u) => c.holds[u].includes(k))).find((who) => who.length === 2);
+      assert.ok(pair, "one column is shared");
+      if (prevPair) assert.notDeepEqual(pair.slice().sort(), prevPair, "the pair changes every word");
+      prevPair = pair.slice().sort();
+      pair.forEach((u) => shared[u]++);
+    }
+    for (const u of uids(4)) assert.ok(Math.abs(shared[u] - words / 2) <= 1, `${u} shared ${shared[u]} of ${words}`);
+  });
   test("three players: each holds exactly one of the three answer columns, and the columns move on every word", () => {
     const g = game(3);
     let prev = null;

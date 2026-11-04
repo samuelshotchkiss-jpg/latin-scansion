@@ -77,7 +77,10 @@
       const n = g.uids.length, out = {};
       g.uids.forEach((u) => { out[u] = []; });
       if (!n) return out;
-      if (n >= cols.length) g.uids.forEach((u, p) => out[u].push(cols[(p + i) % cols.length]));
+      // The PLAYERS rotate, not the columns: on word i the line-up starts at player i, and the columns
+      // are dealt down it. With four players the fourth shares the first column, so the shared pair
+      // moves on every word (owner, 2026-11-04: before, the same two always held half a hand).
+      if (n >= cols.length) for (let j = 0; j < n; j++) out[g.uids[(j + i) % n]].push(cols[j % cols.length]);
       else cols.forEach((c, j) => out[g.uids[(j + i) % n]].push(c));
       return out;
     };
