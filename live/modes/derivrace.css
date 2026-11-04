@@ -1,0 +1,24 @@
+/* derivrace.css -- styles for the derivatives team race only, prefixed dx-live-. AGPL-3.0.
+   It uses the card styles of derivatives.css (dr-live-). Linked from host.html and live.html. */
+
+.dx-live-lanes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: .6rem; }
+@media (max-width: 900px) { .dx-live-lanes { grid-template-columns: 1fr; } }
+.dx-live-lane { display: flex; flex-direction: column; gap: .5rem; padding: .8rem; border: 2px solid var(--line); border-radius: 14px; background: var(--panel); }
+.dx-live-lane.won { border: 4px double var(--ok); }
+.dx-live-lane.frozen { border-color: var(--bad); }
+.dx-live-lane-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 1.3rem; }
+.dx-live-word { font-variant-numeric: tabular-nums; font-weight: 700; }
+.dx-live-members { color: var(--muted); }
+.dx-live-bar { display: block; height: .7rem; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.dx-live-bar i { display: block; height: 100%; background: var(--ok); }
+.dx-live-prompt { margin: 0; padding: .7rem 1rem; }
+.dx-live-prompt .dr-live-face { font-size: clamp(1.3rem, 2.4vw, 2.1rem); }
+.dx-live-slots { display: grid; grid-template-columns: 1fr; gap: .5rem; }
+.dx-live-slots .dr-live-card { padding: .4rem .7rem; }
+.dx-live-slots .dr-live-empty { min-height: 0; }
+.dx-live-slots .dr-live-face { font-size: clamp(1rem, 1.5vw, 1.35rem); }
+.dx-live-frozen { margin: 0; padding: .4rem .8rem; border: 3px solid var(--bad); border-radius: 10px; color: var(--bad); font-weight: 800; font-size: 1.4rem; text-align: center; }
+.dx-live-count { font-variant-numeric: tabular-nums; }
+.dx-live-wrongs { margin: 0; color: var(--bad); font-weight: 600; }
+.dx-live-last { margin: 0; color: var(--muted); }
+.dx-live-wintext { text-align: center; color: var(--ok); }

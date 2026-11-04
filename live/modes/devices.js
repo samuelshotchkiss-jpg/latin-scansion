@@ -192,10 +192,11 @@
   // dealing a team a new prompt) is not final: when the round is open again with a NEW number, and this
   // player's own deal is the same, the tap is sent once more (at most MAX_RETRIES times). If the player's
   // own team has moved on, the old tap is dropped: it was about cards that are gone.
-  function makeSender(tap) {
+  function makeSender(tap, encode) {
+    encode = encode || encodeTap;                    // (the team race sends 5 cards a hand: it passes its own)
     let queued = null;
     const attempt = async (i, d, n, tries) => {
-      const r = await tap(encodeTap(i, d));
+      const r = await tap(encode(i, d));
       if (!r.ok && r.reason === "closed" && tries < MAX_RETRIES) queued = { i, d, n, tries: tries + 1 };
       return r;
     };
@@ -217,6 +218,7 @@
   if (typeof Live === "undefined") return;           // (loaded by a test with no page: only the game rules are wanted)
 
   // ---- the screens ---------------------------------------------------------------------------------
+  Live.DevicesKit = { makeSender };                    // (the team race reuses the phone's sender)
   const { h, clear } = Live;
   const asList = (x) => (Array.isArray(x) ? x : x ? Object.values(x) : []);
 

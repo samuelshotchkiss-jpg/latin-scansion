@@ -15,7 +15,7 @@
 // rules accept it only for the round that is open, so a tap can never land on the next word's cards.
 //
 // The data is data/derivatives.json, made by the Latin Vocab Toolkit (engine/export_derivative_cards.py):
-// several sets, one per Trial; the teacher picks one, and "Newest" is the last in the file.
+// several sets, one per Trial; the teacher picks one, or "Newest <class>" (the last set of that class in the file).
 //
 //   createGame -- the game's memory and rules, no screen (tests/derivatives_mode.test.js plays whole games)
 //   the mode   -- settings, the projector, the device, the end-of-game breakdown
@@ -30,19 +30,44 @@
   const KINDS = ["latin", "ldef", "deriv", "ddef"];
   const KIND_LABEL = { latin: "Latin word", ldef: "Latin meaning", deriv: "English derivative", ddef: "English meaning" };
 
-  // ---- the game's memory and rules, no screen ------------------------------------------------------
-  // words: [{ key, latin, def, derivs: [{ w, d }] }]
-  // opts: { count (0 = all), penalty (seconds), prompt: "rotate"|kind, uids: [uid...], rng }
-  function createGame(words, opts) {
+  // ---- the run: which words, which derivative, which prompt card -----------------------------------
+  // A plan can be drawn once and given to several games (the team race: every team plays the same words
+  // in the same order with the same prompt cards).
+  // words: [{ key, latin, def, derivs: [{ w, d }] }]; opts: { count (0 = all), prompt, rng }
+  // Returns { steps: [{ w, d, pk }] }.
+  function makePlan(words, opts) {
     const rng = opts.rng || Math.random;
     const below = (n) => Math.min(n - 1, Math.floor(rng() * n));
     const shuffled = (a) => { const x = a.slice(); for (let i = x.length - 1; i > 0; i--) { const j = below(i + 1); [x[i], x[j]] = [x[j], x[i]]; } return x; };
     const usable = words.filter((w) => w && w.key && w.latin && w.def && Array.isArray(w.derivs) && w.derivs.length);
     if (usable.length < 2) throw new Error("A derivatives set needs at least two words");
     const count = opts.count > 0 ? Math.min(opts.count, usable.length) : usable.length;
+    const pace = opts.prompt || "rotate", shift = below(4);
+    const steps = shuffled(usable).slice(0, count).map((w, i) => ({
+      w, d: w.derivs[below(w.derivs.length)], pk: pace === "rotate" ? KINDS[(shift + i) % 4] : pace,
+    }));
+    return { steps, usable };
+  }
+  // A wrong card must never be a second right answer: a decoy comes only from a word that shares no
+  // derivative word and no derivative meaning with the right word, and has a different Latin word and meaning.
+  function mayDecoy(w, x) {
+    if (x.key === w.key || x.latin === w.latin || x.def === w.def) return false;
+    const ws = new Set(w.derivs.map((d) => d.w)), wd = new Set(w.derivs.map((d) => d.d));
+    return !x.derivs.some((d) => ws.has(d.w) || wd.has(d.d));
+  }
+
+  // ---- the game's memory and rules, no screen ------------------------------------------------------
+  // opts: { count (0 = all), penalty (seconds), prompt: "rotate"|kind, uids: [uid...], rng, plan (from makePlan),
+  //         maxHand (set to 5 to keep every hand at 5 cards or fewer) }
+  function createGame(words, opts) {
+    const rng = opts.rng || Math.random;
+    const below = (n) => Math.min(n - 1, Math.floor(rng() * n));
+    const shuffled = (a) => { const x = a.slice(); for (let i = x.length - 1; i > 0; i--) { const j = below(i + 1); [x[i], x[j]] = [x[j], x[i]]; } return x; };
+    const plan = opts.plan || makePlan(words, opts);
+    const usable = plan.usable || words;
     const g = {
-      uids: opts.uids.slice(), penalty: opts.penalty || 0, pace: opts.prompt || "rotate",
-      order: shuffled(usable).slice(0, count), i: -1, shift: below(4),
+      uids: opts.uids.slice(), penalty: opts.penalty || 0, plan, steps: plan.steps,
+      order: plan.steps.map((x) => x.w), i: -1,
       cur: null, solved: 0, wrongs: 0, log: [], over: false,
     };
     const text = (w, kind, d) => (kind === "latin" ? w.latin : kind === "ldef" ? w.def : kind === "deriv" ? d.w : d.d);
@@ -61,18 +86,26 @@
     g.deal = function () {
       g.i++;
       if (g.i >= g.order.length) { g.over = true; g.cur = null; return null; }
-      const w = g.order[g.i], d = w.derivs[below(w.derivs.length)];
-      const pk = g.pace === "rotate" ? KINDS[(g.shift + g.i) % 4] : g.pace;
+      const { w, d, pk } = g.steps[g.i];
       const cols = KINDS.filter((k) => k !== pk);
       const holds = g.assign(cols, g.i);
-      const others = g.order.length > 1 ? usable.filter((x) => x.key !== w.key) : [];
+      const others = usable.filter((x) => mayDecoy(w, x));
       const sharers = (c) => g.uids.filter((u) => holds[u].includes(c)).length;
       const perPlayer = g.uids.length === 1 ? 3 : 4;            // a hand stays at 9 cards or fewer (a tap is 0-9)
+      // maxHand 5 (the team race, whose taps carry a deal parity): a device holding several columns gets
+      // fewer cards of each (two columns 3 + 2, three columns 2 + 2 + 1); a lone column has 4, split if shared.
+      const SPLIT = { 1: [4], 2: [3, 2], 3: [2, 2, 1] };
+      const sizeOf = (c) => {
+        const who = g.uids.filter((u) => holds[u].includes(c));
+        if (!opts.maxHand || who.length !== 1) return Math.max(perPlayer, sharers(c));
+        const mine = holds[who[0]];
+        return SPLIT[mine.length][mine.indexOf(c)];
+      };
       const hands = {}, meaning = {};
       g.uids.forEach((u) => { hands[u] = []; });
       for (const c of cols) {
         const right = { k: c, t: text(w, c, d) };
-        const want = Math.max(perPlayer, sharers(c)) - 1;
+        const want = sizeOf(c) - 1;
         const seen = new Set([right.t]), decoys = [];
         for (const x of shuffled(others)) {
           if (decoys.length >= want) break;
@@ -149,6 +182,31 @@
     return g;
   }
 
+
+  // ---- which sets the teacher may pick: "Newest Latin II", "Newest Latin I", then every set by title ---------
+  // A set's `corpus` ("latin-ii") names its class. "Newest <class>" is the LAST set of that corpus in the file.
+  const classLabel = (corpus) => String(corpus).replace(/^latin-/i, "Latin ").replace(/^Latin ([a-z]+)$/, (m, r) => "Latin " + r.toUpperCase());
+  const classValue = (corpus) => ("new" + String(corpus).toLowerCase().replace(/[^a-z0-9]/g, "")).slice(0, 16);
+  function classOptions(sets) {
+    const seen = new Set(), out = [];
+    for (const s of sets) {
+      if (!s.corpus || seen.has(s.corpus)) continue;
+      seen.add(s.corpus);
+      out.push([classValue(s.corpus), "Newest " + classLabel(s.corpus)]);
+    }
+    return out.concat(sets.slice().reverse().map((s) => [s.id, s.title]));
+  }
+  // id is a set's id or a "newlatinii"-style value; an unknown value falls back to the newest of `fallback`'s class
+  function chooseSet(sets, id, fallback) {
+    const byId = sets.find((x) => x.id === id);
+    if (byId) return byId;
+    for (const v of [id, fallback]) {
+      const of = sets.filter((x) => x.corpus && classValue(x.corpus) === v);
+      if (of.length) return of[of.length - 1];
+    }
+    return sets[sets.length - 1];
+  }
+
   const clockText = (ms) => {
     const t = Math.max(0, Math.round(ms / 100)) / 10, m = Math.floor(t / 60), s = t - m * 60;
     return m + ":" + (s < 10 ? "0" : "") + s.toFixed(1);
@@ -160,19 +218,32 @@
   const readBest = (id) => BEST[id] || 0;
   const saveBest = (id, ms) => { BEST[id] = Math.round(ms); };
 
-  if (typeof module === "object" && module.exports) module.exports = { createGame, clockText, KINDS };
+  if (typeof module === "object" && module.exports) module.exports = { createGame, makePlan, mayDecoy, clockText, KINDS, KIND_LABEL, classOptions, chooseSet };
   if (typeof Live === "undefined") return;           // (loaded by a test with no page: only the game rules are wanted)
 
   // ---- the data: which sets the settings offer --------------------------------------------------------
   // The settings are fixed when this file loads, but the sets are in a data file; the teacher's page
-  // fetches it and adds them to the choice ("Newest" stays first and is the default).
+  // fetches it and fills the choice. Each mode that plays these cards has its own copy of the setting
+  // (its own default); Live.Deriv.setSetting makes one and loadData fills them all.
   let DATA = null;
-  const SET_SETTING = { key: "set", label: "Word set", type: "enum", options: [["newest", "Newest Trial"]], default: "newest" };
+  const SET_SETTINGS = [];
+  const fillSetting = (s, sets) => {
+    const opts = classOptions(sets);
+    s.options.splice(0, s.options.length, ...opts);                 // (the same array: the shell already holds it)
+    if (!opts.some((o) => o[0] === s.default)) s.default = opts[0][0];
+  };
+  const setSetting = (dflt, label) => {
+    const s = { key: "set", label: "Word set", type: "enum", options: [[dflt, label]], default: dflt };
+    SET_SETTINGS.push(s);
+    if (DATA) DATA.then((j) => fillSetting(s, j.sets)).catch(() => {});
+    return s;
+  };
+  const SET_SETTING = setSetting("newlatinii", "Newest Latin II");
   const loadData = () => DATA || (DATA = fetch("data/derivatives.json", { cache: "no-cache" }).then((r) => {
     if (!r.ok) throw new Error("Could not load data/derivatives.json");
     return r.json();
   }).then((j) => {
-    for (const s of j.sets.slice().reverse()) if (!SET_SETTING.options.some((o) => o[0] === s.id)) SET_SETTING.options.push([s.id, s.title]);
+    for (const s of SET_SETTINGS) fillSetting(s, j.sets);
     return j;
   }));
   // (only on the teacher's page; this file runs before host.js's own tag is parsed, so ask the address)
@@ -191,6 +262,8 @@
     show();
     return el;
   }
+
+  Live.Deriv = { createGame, makePlan, loadData, setSetting, chooseSet, card, runningClock, clockText, KINDS, KIND_LABEL };
 
   let PICK = null, LAST = null, SENT = {}, LASTN = 0;     // device-only memory (this page, this game)
   const rerender = () => { if (LAST) MODE.player.render(LAST[0], LAST[1], LAST[2]); };
@@ -222,7 +295,7 @@
       async start(ctx) {
         const data = await loadData();
         const s = ctx.settings;
-        const set = (s.set !== "newest" && data.sets.find((x) => x.id === s.set)) || data.sets[data.sets.length - 1];
+        const set = chooseSet(data.sets, s.set, "newlatinii");
         if (!set) throw new Error("data/derivatives.json has no word sets");
         const uids = ctx.players().map((p) => p.uid);
         ctx.mem.set = set;
