@@ -99,3 +99,4 @@ main.dv { max-width: 84rem; }
   }
   .dv-drawer .dv-tray { grid-template-columns: 1fr; }
 }
+.dv-quizlink { color: var(--accent); font-weight: 600; white-space: nowrap; }

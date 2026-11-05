@@ -1,0 +1,130 @@
+/* quiz.css -- the practice quiz page (quiz.html). Uses the scansion page's tokens from styles.css, so light
+   and dark follow it. On paper it is the printed quiz: black on white, Part II on a page of its own, the
+   key (when it is shown) on another. */
+main.qz { max-width: 70rem; }
+.qz-title { margin: 0 0 .35rem; font-size: 1.25rem; }
+.qz-intro p { margin: 0 0 .9rem; color: var(--muted); max-width: 46rem; }
+.qz-controls { justify-content: flex-start; align-items: center; margin-bottom: .75rem; }
+.qz-controls .toggle { color: var(--ink); }
+.qz-buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.25rem; }
+.qz-buttons button {
+  padding: .45rem .9rem; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--panel); color: var(--ink); cursor: pointer; font: inherit;
+}
+.qz-buttons button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.qz-error { border-left: 4px solid var(--bad); padding: .5rem .8rem; background: var(--panel); }
+.print-only { display: none; }
+
+/* ---- the sheet ------------------------------------------------------------------------------------ */
+.qz-sheet {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 1.1rem 1.4rem 1.4rem; margin-bottom: 1.25rem;
+}
+.qz-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .25rem 1rem;
+  border-bottom: 1px solid var(--line); padding-bottom: .5rem; margin-bottom: .6rem; }
+.qz-name { font-weight: 700; font-size: 1.15rem; }
+.qz-no { color: var(--muted); font-size: .9rem; font-variant-numeric: tabular-nums; }
+.qz-part h3, .qz-key h3 { margin: 1rem 0 .2rem; font-size: 1.1rem; color: var(--accent); }
+.qz-how { margin: 0 0 .7rem; color: var(--muted); font-size: .92rem; }
+.qz-bank {
+  margin: 0 0 1rem; padding: .5rem .8rem; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;
+  background: var(--target); font-size: .92rem; line-height: 1.7;
+}
+.qz-bank b { margin-right: .5rem; color: var(--accent); }
+
+/* Part I: examples on the left, definitions on the right, as on paper */
+.qz-match { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 1.5rem; }
+.qz-colhead { margin: 0 0 .4rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.qz-examples, .qz-defs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
+.qz-ex, .qz-def { border: 1px solid var(--line); border-radius: 10px; padding: .5rem .7rem; break-inside: avoid; }
+.qz-ex-top, .qz-def-top { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .55rem; margin-bottom: .25rem; }
+.qz-cite { color: var(--muted); font-size: .8rem; }
+.qz-latin { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.05rem; line-height: 1.45; }
+.qz-latin b { color: var(--accent); }
+.qz-deftext { margin: 0; font-size: .95rem; }
+.qz-letter { font-size: 1.05rem; }
+
+/* a choice: a menu on screen, a blank on paper; after Check, right / wrong / still blank */
+.qz-pick { display: inline-flex; border-radius: 8px; }
+.qz-pick select { font: inherit; }
+.qz-letterpick select { width: 3.6rem; font-weight: 700; }
+.qz-namepick select { min-width: 11rem; max-width: 100%; }
+.qz-pick.ok select { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 16%, var(--panel)); box-shadow: 0 0 0 1px var(--ok); }
+.qz-pick.bad select { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 16%, var(--panel)); box-shadow: 0 0 0 1px var(--bad); }
+.qz-pick.empty select { border-color: var(--missing); box-shadow: 0 0 0 1px var(--missing); }
+.qz-pr { display: none; }
+.qz-check-row { justify-content: center; margin: 1rem 0 0; }
+#qz-feedback { margin-top: .6rem; }
+
+/* Part II: the lines to scan, big, with room above for the marks */
+.qz-scan-cite { margin: 0 0 .2rem; color: var(--muted); font-size: .85rem; }
+/* number | line | link; on a phone the link drops under the line, and the number stays beside it */
+.qz-line {
+  display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) auto; align-items: baseline; gap: .2rem .8rem;
+  padding: 1.1rem 0 .35rem; border-bottom: 1px dashed var(--line);
+}
+.qz-ln { color: var(--muted); font-size: .8rem; text-align: right; font-variant-numeric: tabular-nums; }
+.qz-line .qz-la { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.15rem, 2.6vw, 1.55rem); }
+.qz-open { color: var(--accent); font-weight: 600; font-size: .85rem; white-space: nowrap; }
+
+/* the key */
+.qz-key { border-color: var(--accent); }
+.qz-keytable { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.qz-keytable th { text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; padding: .2rem .5rem; }
+.qz-keytable td { padding: .4rem .5rem; border-top: 1px solid var(--line); vertical-align: top; }
+.qz-key-letter { font-weight: 700; color: var(--accent); }
+.qz-key-name { font-weight: 700; white-space: nowrap; }
+.qz-english { font-style: italic; color: var(--muted); }
+.qz-keyline { padding: .55rem 0; border-top: 1px solid var(--line); }
+.qz-keyline .qz-la { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.05rem; margin-left: .6rem; }
+.qz-feet { font-family: Tahoma, "Noto Sans", sans-serif; font-size: 1.35rem; letter-spacing: .06em; color: var(--accent); margin: .15rem 0 0 2.8rem; }
+.qz-elis { margin-left: 2.8rem; color: var(--muted); font-style: italic; font-size: .88rem; }
+
+/* ---- narrow screens: the definitions under the examples ------------------------------------------- */
+@media (max-width: 48rem) {
+  .qz-match { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 40rem) {
+  .qz-sheet { padding: .8rem .8rem 1rem; border-radius: 10px; }
+  .qz-controls > label.toggle { width: auto; }
+  .qz-buttons button { flex: 1 1 auto; }
+  .qz-line { grid-template-columns: 1.6rem minmax(0, 1fr); gap: .1rem .5rem; }
+  .qz-open { grid-column: 2; }
+  .qz-feet, .qz-elis { margin-left: 1.2rem; }
+  .qz-key-name { white-space: normal; }
+}
+
+/* ---- paper ----------------------------------------------------------------------------------------- */
+/* As the printed quiz: Part I on one page, examples and definitions SIDE BY SIDE (a page is narrower than the
+   screen's two-column width, so the columns are forced here). */
+@page { margin: .5in .6in; }
+@media print {
+  :root, :root:not([data-theme="light"]) {
+    --bg: #fff; --panel: #fff; --ink: #000; --muted: #555; --line: #999; --accent: #000; --target: #f2f2f2;
+  }
+  body { background: #fff; font-size: 10pt; line-height: 1.35; }
+  .qz-head { padding-bottom: .3rem; margin-bottom: .4rem; }
+  .qz-part h3 { margin: .5rem 0 .15rem; }
+  .qz-how { font-size: 9pt; margin-bottom: .4rem; }
+  .qz-bank { font-size: 9pt; line-height: 1.45; padding: .3rem .6rem; margin-bottom: .6rem; }
+  .qz-match { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.2rem; }
+  .qz-examples, .qz-defs { gap: .15rem; }
+  .qz-ex-top, .qz-def-top { margin-bottom: 0; }
+  .qz-latin { font-size: 11pt; line-height: 1.3; }
+  .qz-deftext { font-size: 9.5pt; }
+  .top, .qz-intro, .qz-check-row, #qz-feedback, #qz-key-row, .foot, .no-print, .qz-error { display: none !important; }
+  main.qz { max-width: none; padding: 0; }
+  .qz-sheet { border: none; border-radius: 0; padding: 0; margin: 0; }
+  .print-only { display: block; }
+  .qz-namedate { margin: .2rem 0 .6rem; }
+  .qz-ex, .qz-def { border: none; padding: .2rem 0; }
+  .qz-pick select { display: none; }
+  .qz-pr { display: inline; font-weight: 700; }
+  .qz-latin b { color: #000; }
+  .qz-part2 { break-before: page; }
+  .qz-line { border-bottom: none; padding-top: 2.4rem; grid-template-columns: 2.2rem minmax(0, 1fr); }
+  .qz-line .qz-la { font-size: 16pt; }
+  .qz-key:not([hidden]) { break-before: page; }
+  .qz-keytable tr { break-inside: avoid; }
+  .qz-keyline { break-inside: avoid; }
+}

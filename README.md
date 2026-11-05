@@ -80,6 +80,26 @@ It is a page of its own: it shares nothing with the scansion practice, and it st
 in the browser. Its data, [`data/devices.json`](data/devices.json), is generated from the same
 pool the quiz is drawn from, so the practice and the quiz cannot disagree.
 
+## Practice quiz
+
+A third page, **Practice quiz** (`quiz.html`), makes a whole practice version of the Meter &
+Literary Devices Quiz, laid out like the printed one. **Part I** is the triple match: ten Latin
+examples (the number can be changed), their definitions shuffled beside them, and a word bank of
+every device the class has learned; the student picks each example's definition letter, then each
+definition's name. **Check Part I** marks every answer right, wrong or blank. **Part II** is a short
+passage to scan, and each line has a link that opens it in the scanner (`index.html?line=…`, the
+same as *Go to*). **Show the answer key** gives the letters, the names, the English of each
+example, and the feet and elisions of the passage. **Print** gives the paper version: Part I on one
+page, Part II on the next, and the key on its own page if it is showing.
+
+A practice quiz is dealt by the real quiz's rules (`quiz-build.js` ports them): no two examples
+share a line of Latin, no example appears beside a device it also illustrates, and the passage is
+whole sentences of three to five lines, four when there is a four-line one. The passages come from
+the same `data/devices.json`, which lists every passage the quiz could set from the lines the
+class has read so far. Each practice quiz has a five-digit number, kept in the page's address, so
+a reload or a bookmark brings it back; the teacher's versions have four digits and cannot be
+rebuilt here. Like the Devices page, it stores nothing in the browser.
+
 ## Live class game
 
 Two more pages run a live game for a class: the teacher opens `host.html` on the projector, and

@@ -107,6 +107,13 @@
     showFastToggle();
     $('autoplay').checked = S.autoplay !== false;          // on unless the student turned it off
     setMode(S.mode || (Object.keys(S.lines).length ? 'practice' : 'tutorial'));
+    // A line asked for by another page (the practice quiz's "Scan it" links): ?line=<citation> opens it in
+    // Practice exactly as Go to does -- its kind ticked if it was not, a note saying so.
+    const askedLine = new URLSearchParams(location.search).get('line');
+    if (askedLine) {
+      if (byCitation[askedLine]) $('goto-msg').innerHTML = goTo(askedLine);
+      history.replaceState(null, '', location.pathname);
+    }
     updatePoints();
   }).catch((err) => {
     console.error(err);

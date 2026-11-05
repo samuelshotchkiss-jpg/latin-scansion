@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f5d8a">
+  <title>Practice quiz · Latin Scansion</title>
+  <!-- ?v= must change whenever styles.css, quiz.css, quiz-build.js or quiz.js change (see index.html). -->
+  <link rel="stylesheet" href="styles.css?v=2026-11-05">
+  <link rel="stylesheet" href="quiz.css?v=2026-11-05">
+</head>
+<body class="qz-page">
+  <header class="top">
+    <h1><span class="wide">Latin </span>Scansion</h1>
+    <nav class="modes" aria-label="Sections">
+      <a class="mode" href="index.html"><span class="wide">Scan lines</span><span class="narrow">Scan</span></a>
+      <a class="mode" href="devices.html">Devices</a>
+      <a class="mode active" href="quiz.html" aria-current="page"><span class="wide">Practice quiz</span><span class="narrow">Quiz</span></a>
+      <a class="mode" href="live.html"><span class="wide">Play live</span><span class="narrow">Live</span></a>
+    </nav>
+  </header>
+
+  <main class="qz">
+    <div class="qz-intro">
+      <h2 class="qz-title">Practice quiz: meter and literary devices</h2>
+      <p>A practice version of the Meter &amp; Literary Devices Quiz, made the same way as the real one: devices
+        your class has learned, examples from the lines you have read, and a few lines to scan. Every practice
+        quiz is different. Do it here, or print it and do it on paper.</p>
+      <div class="controls qz-controls">
+        <label>Devices
+          <select id="qz-n">
+            <option value="5">5</option>
+            <option value="8">8</option>
+            <option value="10" selected>10 (like the real quiz)</option>
+            <option value="12">12</option>
+          </select>
+        </label>
+        <label class="toggle"><input type="checkbox" id="qz-plain"> Lines to scan without macrons</label>
+      </div>
+      <div class="qz-buttons">
+        <button type="button" id="qz-new" class="primary">New practice quiz</button>
+        <button type="button" id="qz-print">Print</button>
+      </div>
+    </div>
+
+    <p id="qz-error" class="qz-error" hidden></p>
+
+    <article id="qz-sheet" class="qz-sheet" hidden>
+      <header class="qz-head">
+        <span class="qz-name">Meter &amp; Literary Devices Quiz</span>
+        <span id="qz-no" class="qz-no"></span>
+      </header>
+      <p class="qz-namedate print-only">Name ______________________________ &nbsp;&nbsp; Date ______________</p>
+
+      <section class="qz-part" aria-labelledby="qz-p1">
+        <h3 id="qz-p1">Part I · Literary devices</h3>
+        <p class="qz-how">Choose the letter of each example's definition. Then choose the device's name, from the
+          word bank, for each definition; some names are not used. Bold words show where to look.</p>
+        <div class="qz-bank"><b>Word bank</b> <span id="qz-bank"></span></div>
+        <div class="qz-match">
+          <div class="qz-col">
+            <h4 class="qz-colhead">Examples</h4>
+            <ol id="qz-examples" class="qz-examples"></ol>
+          </div>
+          <div class="qz-col">
+            <h4 class="qz-colhead">Definitions</h4>
+            <ol id="qz-defs" class="qz-defs"></ol>
+          </div>
+        </div>
+        <div class="qz-buttons qz-check-row">
+          <button type="button" id="qz-check" class="primary">Check Part I</button>
+        </div>
+        <div id="qz-feedback" class="feedback" aria-live="polite"></div>
+      </section>
+
+      <section id="qz-part2" class="qz-part qz-part2" aria-labelledby="qz-p2">
+        <h3 id="qz-p2">Part II · Scansion</h3>
+        <p class="qz-how">Scan these lines: mark every syllable long (¯) or short (˘), and mark each elision with a
+          curve under the gap between the two words.<span class="no-print"> Use paper, or open a line in the
+          scanner to mark it and check it there.</span></p>
+        <p id="qz-scan-cite" class="qz-scan-cite"></p>
+        <div id="qz-scan" class="qz-scan"></div>
+      </section>
+    </article>
+
+    <div id="qz-key-row" class="qz-buttons" hidden>
+      <button type="button" id="qz-key-toggle" aria-expanded="false" aria-controls="qz-key">Show the answer key</button>
+    </div>
+
+    <article id="qz-key" class="qz-sheet qz-key" hidden aria-labelledby="qz-key-title">
+      <header class="qz-head">
+        <span id="qz-key-title" class="qz-name">Answer key</span>
+        <span id="qz-key-no" class="qz-no"></span>
+      </header>
+      <h3>Part I</h3>
+      <p class="qz-how">Example → definition → name, and what the Latin says.</p>
+      <table class="qz-keytable">
+        <thead><tr><th scope="col">Example</th><th scope="col">Letter</th><th scope="col">Name</th><th scope="col">Where, and the English</th></tr></thead>
+        <tbody id="qz-key1"></tbody>
+      </table>
+      <div id="qz-key2-wrap">
+        <h3>Part II</h3>
+        <p id="qz-key2-how" class="qz-how"></p>
+        <div id="qz-key2"></div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    Texts: Ovid and Vergil (public domain) · Definitions, translations, examples and answer keys: CC BY-NC-SA 4.0 · Code: AGPL-3.0
+    <br>Nothing on this page is saved: it keeps no progress and stores nothing in your browser.
+  </footer>
+
+  <script src="quiz-build.js?v=2026-11-05"></script>
+  <script src="quiz.js?v=2026-11-05"></script>
+</body>
+</html>

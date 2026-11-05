@@ -369,6 +369,17 @@ body.tutorial .practice-only, body.tutorial [data-practice-only], body:not(.tuto
 .mode.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 a.mode { text-decoration: none; display: inline-block; }   /* the Devices link, dressed as a mode */
 .foot-link { color: var(--accent); font-weight: 600; font-size: .85rem; }
+/* the practice quiz (quiz.html), linked at the top of the scansion page */
+.quiz-callout {
+  display: flex; align-items: center; gap: .6rem; margin: 0 0 1rem; padding: .55rem .9rem;
+  border: 1px solid var(--accent); border-left-width: 5px; border-radius: 10px;
+  background: var(--target); color: var(--ink); text-decoration: none; font-size: .95rem;
+}
+.quiz-callout:hover, .quiz-callout:focus-visible { box-shadow: 0 0 0 2px var(--accent); outline: none; }
+.quiz-callout b { color: var(--accent); }
+.quiz-callout-icon { font-size: 1.15rem; line-height: 1; }
+.quiz-callout-text { min-width: 0; }
+.quiz-callout-go { margin-left: auto; color: var(--accent); font-weight: 700; white-space: nowrap; }
 .pill { font-size: .8rem; margin-left: .25rem; opacity: .85; }
 main > .controls { justify-content: center; align-items: center; margin-bottom: 1rem; }
 .kinds { display: flex; flex-wrap: wrap; gap: .25rem .9rem; border: 1px solid var(--line); border-radius: 8px; padding: .3rem .8rem .45rem; margin: 0; font-size: .9rem; }
@@ -488,6 +499,7 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   /* no room in a phone's header for a fourth pill: the footer link stands in for it */
   .top .mode-extra { display: none; }
   main { padding: .75rem .75rem 1rem; display: flex; flex-direction: column; }
+  .quiz-callout { margin: 0 0 .5rem; padding: .4rem .7rem; font-size: .88rem; gap: .45rem; }
   .controls { gap: .5rem; }
   .controls > label { width: 100%; }
   .controls select { flex: 1; min-width: 0; }

@@ -7,7 +7,7 @@
   <title>Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, progress.js or app.js change: GitHub Pages lets browsers
        cache files for ten minutes, and a new page running an old script breaks. -->
-  <link rel="stylesheet" href="styles.css?v=2026-10-26">
+  <link rel="stylesheet" href="styles.css?v=2026-11-05">
 </head>
 <body>
   <header class="top">
@@ -17,11 +17,19 @@
       <button type="button" class="mode" data-mode="practice">Practice</button>
       <button type="button" id="open-progress" class="mode"><span class="wide">My p</span><span class="narrow">P</span>rogress <span id="points-pill" class="pill"></span></button>
       <a class="mode mode-extra" href="devices.html">Literary devices</a>
+      <a class="mode mode-extra" href="quiz.html">Practice quiz</a>
       <a class="mode mode-extra" href="live.html">Play live</a>
     </nav>
   </header>
 
   <main>
+    <!-- the practice quiz, where every student sees it: in both modes, and on a phone, whose header has no
+         room for it -->
+    <a class="quiz-callout" href="quiz.html">
+      <span class="quiz-callout-icon" aria-hidden="true">📝</span>
+      <span class="quiz-callout-text"><b>Practice quiz</b><span class="wide"> · make your own Meter &amp; Literary Devices Quiz, with an answer key</span><span class="narrow"> · meter and literary devices</span></span>
+      <span class="quiz-callout-go" aria-hidden="true"><span class="wide">Make one </span>→</span>
+    </a>
     <p id="no-storage" class="no-storage" hidden><b>This browser is not saving your progress.</b> It is blocking
       website data — usually private browsing, or a setting that blocks cookies and website data. You can
       still practice, but nothing will be remembered when you close this page.</p>
@@ -125,6 +133,7 @@
   <div id="zoom" class="zoom zplay" role="dialog" aria-label="Why this syllable is long, short or elided" hidden></div>
 
   <footer class="foot">
+    <a class="foot-link" href="quiz.html">Practice quiz: literary devices and scansion →</a><br>
     <a class="foot-link" href="devices.html">Literary devices: match the rows →</a><br>
     <a class="foot-link" href="live.html">Play live: join your class's game →</a><br>
     Texts: Ovid and Vergil (public domain) · Macrons, answer keys and lessons: CC BY-NC-SA 4.0 · Code: AGPL-3.0
@@ -216,6 +225,6 @@
 
   <script src="progress.js?v=2026-10-29"></script>
   <script src="rhythm.js?v=2026-10-27s"></script>
-  <script src="app.js?v=2026-11-03"></script>
+  <script src="app.js?v=2026-11-05"></script>
 </body>
 </html>
