@@ -362,6 +362,30 @@
      "also": [
       "apostrophe"
      ]
+    },
+    {
+     "cite": "Met. 1.456",
+     "latin": [
+      [
+       [
+        "'",
+        false
+       ],
+       [
+        "quid",
+        true
+       ],
+       [
+        "' que 'tibī, lascīve puer, cum fortibus armīs?'",
+        false
+       ]
+      ]
+     ],
+     "english": "'And what have you to do with strong weapons, naughty boy?'",
+     "lines": [
+      "Met. 1.456"
+     ],
+     "also": []
     }
    ]
   },
@@ -698,6 +722,53 @@
      "also": [
       "rhetorical_question"
      ]
+    },
+    {
+     "cite": "Met. 1.488-489",
+     "latin": [
+      [
+       [
+        "sed ",
+        false
+       ],
+       [
+        "tē",
+        true
+       ],
+       [
+        " decor iste quod optās",
+        false
+       ]
+      ],
+      [
+       [
+        "esse vetat, vōtōque ",
+        false
+       ],
+       [
+        "tuō",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "tua",
+        true
+       ],
+       [
+        " fōrma repugnat",
+        false
+       ]
+      ]
+     ],
+     "english": "but that beauty of yours forbids you to be what you wish, and your looks fight your prayer",
+     "lines": [
+      "Met. 1.488",
+      "Met. 1.489"
+     ],
+     "also": []
     }
    ]
   },
@@ -1137,6 +1208,56 @@
      ],
      "also": [
       "hyperbaton"
+     ]
+    },
+    {
+     "cite": "Met. 1.474",
+     "latin": [
+      [
+       [
+        "prōtinus ",
+        false
+       ],
+       [
+        "alter",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "amat",
+        true
+       ],
+       [
+        ", ",
+        false
+       ],
+       [
+        "fugit",
+        true
+       ],
+       [
+        " ",
+        false
+       ],
+       [
+        "altera",
+        true
+       ],
+       [
+        " nōmen amantis",
+        false
+       ]
+      ]
+     ],
+     "english": "at once the one loves; the other flees the very name of a lover",
+     "lines": [
+      "Met. 1.474"
+     ],
+     "also": [
+      "antithesis"
      ]
     }
    ]
@@ -1786,6 +1907,59 @@
      ]
     },
     {
+     "cite": "Met. 4.158-159",
+     "latin": [
+      [
+       [
+        "at tū quae rāmīs arbor miserābile corpus",
+        false
+       ]
+      ],
+      [
+       [
+        "nunc",
+        true
+       ],
+       [
+        " tegis ",
+        false
+       ],
+       [
+        "ūnīus",
+        true
+       ],
+       [
+        ", ",
+        false
+       ],
+       [
+        "mox",
+        true
+       ],
+       [
+        " es tēctūra ",
+        false
+       ],
+       [
+        "duōrum",
+        true
+       ],
+       [
+        ",",
+        false
+       ]
+      ]
+     ],
+     "english": "but you, tree, who with your branches now cover the pitiable body of one, and soon will cover two",
+     "lines": [
+      "Met. 4.158",
+      "Met. 4.159"
+     ],
+     "also": [
+      "apostrophe"
+     ]
+    },
+    {
      "cite": "Met. 8.185-186",
      "latin": [
       [
@@ -1881,6 +2055,36 @@
       "Met. 8.205"
      ],
      "also": []
+    },
+    {
+     "cite": "Met. 1.469",
+     "latin": [
+      [
+       [
+        "fugat",
+        true
+       ],
+       [
+        " hoc, ",
+        false
+       ],
+       [
+        "facit",
+        true
+       ],
+       [
+        " illud amōrem;",
+        false
+       ]
+      ]
+     ],
+     "english": "this one puts love to flight, that one makes it",
+     "lines": [
+      "Met. 1.469"
+     ],
+     "also": [
+      "alliteration"
+     ]
     }
    ]
   },
@@ -2022,6 +2226,70 @@
      "also": [
       "chiasmus"
      ]
+    },
+    {
+     "cite": "Met. 4.156",
+     "latin": [
+      [
+       [
+        "ut, ",
+        false
+       ],
+       [
+        "quōs",
+        true
+       ],
+       [
+        " certus amor, ",
+        false
+       ],
+       [
+        "quōs",
+        true
+       ],
+       [
+        " hōra novissima iūnxit,",
+        false
+       ]
+      ]
+     ],
+     "english": "(let them be buried together) whom sure love, whom their last hour joined",
+     "lines": [
+      "Met. 4.156"
+     ],
+     "also": []
+    },
+    {
+     "cite": "Met. 4.164",
+     "latin": [
+      [
+       [
+        "vōta tamen ",
+        false
+       ],
+       [
+        "tetigēre",
+        true
+       ],
+       [
+        " deōs, ",
+        false
+       ],
+       [
+        "tetigēre",
+        true
+       ],
+       [
+        " parentēs;",
+        false
+       ]
+      ]
+     ],
+     "english": "but her prayers touched the gods, touched her parents",
+     "lines": [
+      "Met. 4.164"
+     ],
+     "also": []
     },
     {
      "cite": "Met. 8.231-233",
@@ -2329,6 +2597,82 @@
     "Met. 4.134",
     "Met. 4.135",
     "Met. 4.136"
+   ],
+   [
+    "Met. 4.143",
+    "Met. 4.144",
+    "Met. 4.145",
+    "Met. 4.146"
+   ],
+   [
+    "Met. 4.147",
+    "Met. 4.148",
+    "Met. 4.149",
+    "Met. 4.150"
+   ],
+   [
+    "Met. 4.151",
+    "Met. 4.152",
+    "Met. 4.153"
+   ],
+   [
+    "Met. 4.154",
+    "Met. 4.155",
+    "Met. 4.156",
+    "Met. 4.157"
+   ],
+   [
+    "Met. 4.158",
+    "Met. 4.159",
+    "Met. 4.160",
+    "Met. 4.161"
+   ],
+   [
+    "Met. 4.162",
+    "Met. 4.163",
+    "Met. 4.164"
+   ],
+   [
+    "Met. 4.162",
+    "Met. 4.163",
+    "Met. 4.164",
+    "Met. 4.165",
+    "Met. 4.166"
+   ],
+   [
+    "Met. 4.164",
+    "Met. 4.165",
+    "Met. 4.166"
+   ],
+   [
+    "Met. 1.457",
+    "Met. 1.458",
+    "Met. 1.459",
+    "Met. 1.460"
+   ],
+   [
+    "Met. 1.461",
+    "Met. 1.462",
+    "Met. 1.463",
+    "Met. 1.464",
+    "Met. 1.465"
+   ],
+   [
+    "Met. 1.463",
+    "Met. 1.464",
+    "Met. 1.465"
+   ],
+   [
+    "Met. 1.474",
+    "Met. 1.475",
+    "Met. 1.476"
+   ],
+   [
+    "Met. 1.483",
+    "Met. 1.484",
+    "Met. 1.485",
+    "Met. 1.486",
+    "Met. 1.487"
    ]
   ],
   "lines": {
@@ -2806,6 +3150,223 @@
    "Met. 4.136": {
     "text": "quod tremit, exiguā cum summum stringitur aurā.",
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.143": {
+    "text": "Pȳrame, respondē! tua tē cārissima Thisbē",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.144": {
+    "text": "nōminat; exaudī vultūsque attolle iacentēs!",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": [
+     "vultūsqu(e) attolle"
+    ]
+   },
+   "Met. 4.145": {
+    "text": "ad nōmen Thisbēs oculōs ā morte gravātōs",
+    "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.146": {
+    "text": "Pȳramus ērēxit vīsāque recondidit illā.",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.147": {
+    "text": "Quae postquam vestemque suam cognōvit et ēnse",
+    "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.148": {
+    "text": "vīdit ebur vacuum, tua tē manus inquit amorque",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.149": {
+    "text": "perdidit, īnfēlīx! est et mihi fortis in ūnum",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.150": {
+    "text": "hoc manus, est et amor: dabit hic in vulnera vīrēs.",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.151": {
+    "text": "persequar exstīnctum lētīque miserrima dīcar",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.152": {
+    "text": "causa comesque tuī: quīque ā mē morte revellī",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": [
+     "quīqu(e) ā"
+    ]
+   },
+   "Met. 4.153": {
+    "text": "heu sōlā poterās, poteris nec morte revellī.",
+    "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.154": {
+    "text": "hoc tamen ambōrum verbīs estōte rogātī,",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.155": {
+    "text": "ō multum miserī meus illīusque parentēs,",
+    "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.156": {
+    "text": "ut, quōs certus amor, quōs hōra novissima iūnxit,",
+    "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.157": {
+    "text": "compōnī tumulō nōn invideātis eōdem;",
+    "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.158": {
+    "text": "at tū quae rāmīs arbor miserābile corpus",
+    "feet": "¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.159": {
+    "text": "nunc tegis ūnīus, mox es tēctūra duōrum,",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.160": {
+    "text": "signa tenē caedis pullōsque et lūctibus aptōs",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": [
+     "pullōsqu(e) et"
+    ]
+   },
+   "Met. 4.161": {
+    "text": "semper habē fētūs, geminī monumenta cruōris.",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.162": {
+    "text": "dīxit et aptātō pectus mucrōne sub īmum",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.163": {
+    "text": "incubuit ferrō, quod adhūc ā caede tepēbat.",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.164": {
+    "text": "vōta tamen tetigēre deōs, tetigēre parentēs;",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 4.165": {
+    "text": "nam color in pōmō est, ubi permātūruit, āter,",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": [
+     "pōmō (e)st"
+    ]
+   },
+   "Met. 4.166": {
+    "text": "quodque rogīs superest, ūnā requiēscit in urnā.",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.457": {
+    "text": "dīxerat: ista decent umerōs gestāmina nostrōs,",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.458": {
+    "text": "quī dare certa ferae, dare vulnera possumus hostī,",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.459": {
+    "text": "quī modo pestiferō tot iūgera ventre prementem",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.460": {
+    "text": "strāvimus innumerīs tumidum Pȳthōna sagittīs.",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.461": {
+    "text": "tū face nescio quōs estō contentus amōrēs",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.462": {
+    "text": "irrītāre tuā, nec laudēs assere nostrās!",
+    "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.463": {
+    "text": "fīlius huic Veneris fīgat tuus omnia, Phoebe,",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.464": {
+    "text": "tē meus arcus ait; quantōque animālia cēdunt",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": [
+     "quantōqu(e) animālia"
+    ]
+   },
+   "Met. 1.465": {
+    "text": "cūncta deō, tantō minor est tua glōria nostrā.",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.474": {
+    "text": "prōtinus alter amat, fugit altera nōmen amantis",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.475": {
+    "text": "silvārum latebrīs captīvārumque ferārum",
+    "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.476": {
+    "text": "exuviīs gaudēns innūptaeque aemula Phoebēs:",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": [
+     "innūptaequ(e) aemula"
+    ]
+   },
+   "Met. 1.483": {
+    "text": "illa velut crīmen taedās exōsa iugālēs",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.484": {
+    "text": "pulchra verēcundō suffūderat ōra rubōre",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.485": {
+    "text": "inque patris blandīs haerēns cervīce lacertīs",
+    "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.486": {
+    "text": "dā mihi perpetuā, genitor cārissime, dīxit",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
+    "elisions": []
+   },
+   "Met. 1.487": {
+    "text": "virginitāte fruī! dedit hoc pater ante Diānae.",
+    "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    }
   }

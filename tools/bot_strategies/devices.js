@@ -11,14 +11,18 @@
 const path = require("node:path");
 const POOL = require(path.join(__dirname, "..", "..", "data", "devices.json")).devices;
 
-// what each card text/cite stands for: the devices it is a right answer for
+// what each card text/cite stands for: the devices it is a right answer for. An example is known by its
+// citation AND its Latin, as a student sees it: two examples can share a citation (Met. 8.185-186 is a
+// synecdoche cut short and an antithesis run on), and keyed by citation alone one hid the other.
 const NAME = new Map(), DEF = new Map(), EX = new Map();
+const asList = (x) => (Array.isArray(x) ? x : x ? Object.values(x) : []);
+const exKey = (cite, lines) => `${cite}|${lines.join("/")}`;
 for (const d of POOL) {
   NAME.set(d.name, [d.key]); DEF.set(d.definition, [d.key]);
-  for (const e of d.examples) EX.set(e.cite, [d.key, ...(e.also || [])]);
+  for (const e of d.examples) EX.set(exKey(e.cite, e.latin.map((l) => l.map((s) => s[0]).join(""))), [d.key, ...(e.also || [])]);
 }
-const devsOf = (f) => (f.k === "example" ? EX.get(f.c) : f.k === "name" ? NAME.get(f.t) : DEF.get(f.t)) || [];
-const asList = (x) => (Array.isArray(x) ? x : x ? Object.values(x) : []);
+const devsOf = (f) => (f.k === "example" ? EX.get(exKey(f.c, asList(f.l).map((l) => l.t)))
+  : f.k === "name" ? NAME.get(f.t) : DEF.get(f.t)) || [];
 const BLUNDER = Number(process.env.BLUNDER === undefined ? 0.08 : process.env.BLUNDER);
 const SCALE = Number(process.env.DELAY_SCALE || 1);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
