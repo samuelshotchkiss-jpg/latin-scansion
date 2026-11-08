@@ -320,7 +320,9 @@
       "Met. 8.211",
       "Met. 8.212"
      ],
-     "also": []
+     "also": [
+      "synchysis"
+     ]
     }
    ]
   },
@@ -720,6 +722,7 @@
       "Met. 4.69"
      ],
      "also": [
+      "chiasmus",
       "rhetorical_question"
      ]
     },
@@ -1326,7 +1329,8 @@
      ],
      "also": [
       "onomatopoeia",
-      "synecdoche"
+      "synecdoche",
+      "chiasmus"
      ]
     },
     {
@@ -2123,7 +2127,9 @@
      "lines": [
       "Met. 4.100"
      ],
-     "also": []
+     "also": [
+      "chiasmus"
+     ]
     },
     {
      "cite": "Aen. 6.30",
