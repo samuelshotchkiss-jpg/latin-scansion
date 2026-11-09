@@ -161,7 +161,7 @@ describe("the mode registry", () => {
   });
   test("the three shipped modes register (poll fully, the other two as 'not built yet' stubs)", () => {
     global.Live = Live;
-    for (const m of ["poll", "devices", "meter", "derivatives", "derivrace"]) require("../live/modes/" + m + ".js");
+    for (const m of ["poll", "devices", "meter", "derivatives", "derivrace", "idioms"]) require("../live/modes/" + m + ".js");
     assert.ok(Live.modes.poll.host.nextRound && Live.modes.poll.player.render);
     assert.equal(Live.modes.poll.hidden, true);
     assert.ok(["devices", "meter"].every((id) => Live.modes[id]));

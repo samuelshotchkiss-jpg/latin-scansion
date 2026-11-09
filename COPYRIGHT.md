@@ -21,6 +21,10 @@ Licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (see
   of examples.
 - The live game's question bank, `data/meter_questions.json`: the choice of syllables asked, their
   answers and the reasons given.
+- The live game's idiom cards, `data/idioms.json`: the choice of idioms, their word-for-word and
+  natural English renderings and their groups. The Latin phrases on them are short quotations (a few
+  words each) from the textbook the class reads (Via Latina IX–XII), used for teaching; that book's
+  own text is not in this repository.
 - HTML pages and the project's Markdown documentation (e.g. `README.md` and this file).
 
 In plain terms: others may share and adapt this material, but must credit it, may not use it

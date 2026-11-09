@@ -119,6 +119,13 @@ the survey app, and the free plan's ceiling means it can never bill you.
   they reload the page, they come back as the same player in the same game (same tab only; a new tab
   is a new player). If the **teacher** page goes quiet, phones say "Waiting for the teacher…".
 - A game you forget is deleted by the next time you open the teacher page after 12 hours.
+- **Idioms (Latin III).** Two games with the same cards: Latin phrase, word for word, natural English.
+  *Idioms: class relay* is the whole class against its own best time (any number of devices; a wrong
+  card adds seconds). *Idioms: team race* makes teams of about three (5 → 3 + 2, 4 → 2 + 2) racing the
+  same idioms (a wrong card freezes the team); with 3 students, play the relay. Pick the **Idiom set**
+  (one per reading). A new reading's handout becomes a set with
+  `python tools/export_idioms.py <handout.json> --id <id> --corpus latin-iii --title "<title>"`; idioms
+  close enough in meaning to be mistaken for each other go in that script's `NEAR` list first.
 
 ## What is stored, and for how long
 

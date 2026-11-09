@@ -39,7 +39,7 @@ fails if you do), never use `innerHTML` (build with `Live.h(...)`, which sets te
 
 ```js
 Live.registerMode({
-  id: "meter",                     // 3-12 lowercase letters; must be one of devices|meter|poll|derivatives|derivrace
+  id: "meter",                     // 3-12 lowercase letters; must be one of devices|meter|poll|derivatives|derivrace|idioms|idiomrace
                                    // (database.rules.json lists the legal ids; a new mode adds its id there)
   title: "Longa an brevis?",       // shown on the teacher's picker
   blurb: "One line for the picker.",
@@ -226,7 +226,7 @@ returns hands for **every** player (unchanged for groups that did not advance, s
 `n`) and `ms: 0`. A tap refused while the round is closed must be sent again by the phone when the round
 reopens with a new `n`, and must be dropped if that player's own cards have changed meanwhile. Put a
 counter for the player's deal in the tap value (devices uses `index + 4 x (deal mod 2)`) so the host never
-maps an old tap onto new cards. See `makeSender` and `createGame.tap` in `modes/devices.js`. `modes/derivrace.js` ("Derivatives: team race") does the same with 5-card hands (`v = index + 5 x (deal mod 2)`, `makeSender(tap, encode)`) and adds a per-team freeze: after a wrong card the host ignores that team's taps (by server time `tap.at`) until `frozenUntil`, which is public in `state` so devices can count down.
+maps an old tap onto new cards. See `makeSender` and `createGame.tap` in `modes/devices.js`. `modes/derivrace.js` ("Derivatives: team race") does the same with 5-card hands (`v = index + 5 x (deal mod 2)`, `makeSender(tap, encode)`) and adds a per-team freeze: after a wrong card the host ignores that team's taps (by server time `tap.at`) until `frozenUntil`, which is public in `state` so devices can count down. Both derivatives modes are built by factories that take a card **kit** (the columns and how to read a row; see the top of `modes/derivatives.js`): `Live.Deriv.relayMode(cfg)` and `Live.DerivRace.raceMode(cfg)`. `modes/idioms.js` uses them for the Latin III idioms (three columns: Latin, word for word, natural English; data `data/idioms.json` from `tools/export_idioms.py`): "Idioms: class relay" (`idioms`) and "Idioms: team race" (`idiomrace`, teams of about 3). A new card game of the same shape is a kit, a data file and two calls.
 
 ### `keys` (optional)
 `keys: { r: { label: "Replay rhythm", run(ctx) {...} } }` adds a button and a keyboard shortcut to the

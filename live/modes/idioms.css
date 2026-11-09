@@ -1,0 +1,6 @@
+/* idioms.css -- the idioms modes (idioms.js) use the derivatives modes' cards and lanes (derivatives.css,
+   derivrace.css); this adds only the colours of their two new kinds of card. AGPL-3.0. */
+.dr-live-card.dr-live-literal, .dr-live-mine .dr-live-card.dr-live-literal { border-left-color: var(--missing); }
+.dr-live-card.dr-live-english, .dr-live-mine .dr-live-card.dr-live-english { border-left-color: var(--ok); }
+.dr-live-literal .dr-live-face { font-style: italic; }
+.dr-live-english .dr-live-face { font-weight: 700; }
