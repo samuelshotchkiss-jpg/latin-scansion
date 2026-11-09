@@ -119,6 +119,10 @@ the survey app, and the free plan's ceiling means it can never bill you.
   they reload the page, they come back as the same player in the same game (same tab only; a new tab
   is a new player). If the **teacher** page goes quiet, phones say "Waiting for the teacher…".
 - A game you forget is deleted by the next time you open the teacher page after 12 hours.
+- **Literary devices with no finish line.** Normally the first team to the streak ends the game for
+  everyone. Under **How the game ends**, choose **No finish line** and every team plays for the whole time
+  limit (8 minutes if you leave the limit at 0); the team that matched the most leads. A wrong card still
+  sets that team's streak back to 0.
 - **Idioms (Latin III).** Two games with the same cards: Latin phrase, word for word, natural English.
   *Idioms: class relay* is the whole class against its own best time (any number of devices; a wrong
   card adds seconds). *Idioms: team race* makes teams of about three (5 → 3 + 2, 4 → 2 + 2) racing the

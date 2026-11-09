@@ -333,3 +333,47 @@ test("a 3-player day still works: one team of 3, or a team of one forced in the 
     for (const t of Object.keys(g.T)) assert.ok(rightOf(g, t).length === 2, `team of ${g.T[t].uids.length}`);
   }
 });
+
+// ---- no finish line (owner, 2026-11-09): every team plays until the time is up ---------------------
+test("no finish line: no streak ends the game; the team that matched the most leads, then the best streak", () => {
+  const g = game([2, 2], { goal: 0 });
+  for (let r = 0; r < 15; r++) { complete(g, "0"); advance(g); }
+  assert.equal(g.winner, null);
+  assert.equal(g.T[0].total, 15);
+  assert.equal(complete(g, "1").completed, true);              // the slower team still plays
+  advance(g);
+  assert.deepEqual(g.leaders(), ["0"]);
+  assert.equal(g.scores()[0], 15);                             // the score is the number matched
+  const st = g.publicState();
+  assert.equal(st.goal, 0);
+  assert.equal(st.win, -1);
+  assert.equal(st.t[0].n, 15);
+  assert.equal(st.t[0].m, 15);                                 // best streak
+  // same number matched: the better best streak leads
+  const h = game([2, 2], { goal: 0 });
+  complete(h, "0"); advance(h); complete(h, "0"); advance(h);
+  complete(h, "1"); advance(h);
+  const [u, i] = wrongOf(h, "1")[0];
+  h.tap(u, vOf(h, "1", i), "1");
+  complete(h, "1"); advance(h);
+  assert.equal(h.T[1].total, 2);
+  assert.equal(h.T[1].best, 1);
+  assert.deepEqual(h.leaders(), ["0"]);
+});
+
+test("no finish line is a setting; with no time limit chosen it runs 8 minutes, and the lobby says so", () => {
+  const end = def.settings.find((s) => s.key === "end");
+  assert.ok(end && end.default === "goal" && end.options.some((o) => o[0] === "clock"));
+  const set = Live.encodeSettings(def, Object.assign(Live.defaultSettings(def), { end: "clock" }));
+  assert.equal(Live.decodeSettings(def, set).end, "clock");
+  const ctx = (settings) => ({ settings: Object.assign(Live.defaultSettings(def), settings), teams: () => ({ 0: uids(3), 1: uids(2, "v") }) });
+  assert.match(def.host.lobbyNote(ctx({ end: "clock" }), uids(5)), /No finish line: every team plays for the full 8 minutes/);
+  assert.match(def.host.lobbyNote(ctx({ end: "clock", cap: 10 }), uids(5)), /full 10 minutes/);
+  assert.match(def.host.lobbyNote(ctx({}), uids(5)), /Teams race on their own/);
+  const src = fs.readFileSync(path.join(__dirname, "..", "live", "modes", "devices.js"), "utf8");
+  for (const word of ["phone", "ablative", "genitive"]) {
+    const shown = src.match(/"[^"\n]*"/g).filter((s) => /No finish line|matched|Time’s up|streak back to 0/.test(s));
+    assert.ok(shown.length >= 4);
+    assert.ok(shown.every((s) => !s.toLowerCase().includes(word)), word);
+  }
+});

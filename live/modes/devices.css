@@ -25,6 +25,8 @@
 .dv-live-bar { display: flex; gap: 3px; margin: .4rem 0; }
 .dv-live-bar i { flex: 1; height: .75rem; border: 1px solid var(--line); border-radius: 3px; background: var(--panel); }
 .dv-live-bar i.on { background: var(--accent); border-color: var(--accent); }
+.dv-live-tally { margin: .4rem 0; color: var(--muted); font-variant-numeric: tabular-nums; }
+.dv-live-tallies { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
 
 /* the player's own cards: one column on a phone, more on a tablet or laptop */
 .dv-live-hand { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: .6rem; }

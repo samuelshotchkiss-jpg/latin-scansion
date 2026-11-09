@@ -5,6 +5,11 @@
 // phone can answer alone: the team has to talk. A wrong tap sends the team's streak back to zero. The
 // first team to a streak of GOAL completed prompts wins.
 //
+// OR NO FINISH LINE (owner, 2026-11-09: one strong student's team ended the game before the others had
+// practised enough). With "end: clock" (goal 0 in createGame) no streak ends the game: every team plays
+// until the time limit, and the team that matched the most leads (then the best streak). A wrong tap still
+// sets the team's streak back to 0.
+//
 // TEAMS RACE INDEPENDENTLY, like Quizlet Live: a team that completes its prompt is given a new prompt and a
 // fresh deal at once, whatever the other teams are doing. The live shell, though, runs one "round" at a time
 // and the database rules accept a tap only for the current round number `n`. So the mode uses the shell's
@@ -33,6 +38,9 @@
   const KINDS = ["name", "definition", "example"];
   const KIND_LABEL = { name: "Name", definition: "Definition", example: "Example" };
   const MAX_RETRIES = 3;
+  const CLOCK_DEFAULT = 8;                           // minutes, for "no finish line" with no time limit chosen
+  // The game's finish line (0 = none) and length in minutes, from the settings.
+  const plan = (s) => (s.end === "clock" ? { goal: 0, cap: s.cap > 0 ? s.cap : CLOCK_DEFAULT } : { goal: s.goal, cap: s.cap });
 
   // ---- a card as the phone draws it: text and shape only, never a key or id -------------------------
   function face(c) {
@@ -42,14 +50,14 @@
   const encodeTap = (index, deal) => index + 4 * (deal % 2);
 
   // ---- the game's memory and rules, no screen ------------------------------------------------------
-  // opts: { goal, prompt: "rotate"|kind, teams: { team: [uid...] }, rng, capAt }
+  // opts: { goal (0 = no finish line), prompt: "rotate"|kind, teams: { team: [uid...] }, rng, capAt }
   function createGame(pool, opts) {
     const rng = opts.rng || Math.random;
     const below = (n) => Math.min(n - 1, Math.floor(rng() * n));
     const shuffled = (a) => { const x = a.slice(); for (let i = x.length - 1; i > 0; i--) { const j = below(i + 1); [x[i], x[j]] = [x[j], x[i]]; } return x; };
     const nameOf = (key) => (pool.find((d) => d.key === key) || {}).name || key;
     const g = {
-      pool, goal: opts.goal, pace: opts.prompt || "rotate", capAt: opts.capAt || 0, teams: opts.teams,
+      pool, goal: opts.goal || 0, pace: opts.prompt || "rotate", capAt: opts.capAt || 0, teams: opts.teams,
       T: {}, dealt: {}, res: {}, pending: [], stats: {}, right: {}, winner: null, began: false,
     };
     for (const [t, uids] of Object.entries(g.teams)) {
@@ -126,7 +134,7 @@
           T.streak++; T.total++; T.best = Math.max(T.best, T.streak);
           T.last = { cards: Object.assign({ [T.pk]: face(T.round.prompt) }, ...Object.entries(T.round.answers).map(([c, a]) => ({ [c]: face(a) }))) };
           g.pending.push(team);
-          if (T.streak >= g.goal && g.winner === null) { g.winner = team; won = true; }
+          if (g.goal && T.streak >= g.goal && g.winner === null) { g.winner = team; won = true; }
         }
         return { ok: true, completed, won, index };
       }
@@ -138,9 +146,16 @@
       return { ok: false, index };
     };
 
-    // The team(s) ahead right now: longest streak, then most prompts completed.
+    // The team(s) ahead right now: longest streak, then most prompts completed. With no finish line: most
+    // prompts completed, then best streak.
     g.leaders = function () {
       const ts = active();
+      if (!g.goal) {
+        const most = Math.max(...ts.map((t) => g.T[t].total));
+        const a = ts.filter((t) => g.T[t].total === most);
+        const best = Math.max(...a.map((t) => g.T[t].best));
+        return a.filter((t) => g.T[t].best === best);
+      }
       const top = Math.max(...ts.map((t) => g.T[t].streak));
       const a = ts.filter((t) => g.T[t].streak === top);
       const most = Math.max(...a.map((t) => g.T[t].total));
@@ -151,7 +166,7 @@
       const t = {};
       for (const k of active()) {
         const T = g.T[k];
-        t[k] = { s: T.streak, d: T.deal, k: T.pk, p: T.prompt, b: T.bad, x: T.resets, n: T.total, e: T.done ? 1 : 0 };
+        t[k] = { s: T.streak, m: T.best, d: T.deal, k: T.pk, p: T.prompt, b: T.bad, x: T.resets, n: T.total, e: T.done ? 1 : 0 };
         if (Object.keys(T.cols).length) t[k].c = Object.assign({}, T.cols);
         if (T.last) t[k].l = T.last.cards;
       }
@@ -161,7 +176,7 @@
     };
     g.scores = function () {
       const s = {};
-      for (const t of active()) { for (const u of g.T[t].uids) s[u] = g.right[u] || 0; s[t] = g.T[t].streak; }
+      for (const t of active()) { for (const u of g.T[t].uids) s[u] = g.right[u] || 0; s[t] = g.goal ? g.T[t].streak : g.T[t].total; }
       return s;
     };
     // The breakdown: sections for the end-of-game screen. `nameOfUid` gives a codename.
@@ -276,8 +291,9 @@
     autoLock: false,
     teams: { optional: false, sizes: [2, 3], all: true },
     settings: [
-      { key: "goal", label: "First team to complete this many in a row", type: "int", options: [6, 8, 10, 12], default: 8 },
-      { key: "cap", label: "Time limit for the whole game (minutes, 0 = none)", type: "int", options: [0, 5, 8, 10], default: 0 },
+      { key: "end", label: "How the game ends", type: "enum", options: [["goal", "First team to a streak wins"], ["clock", "No finish line: everyone plays until the time is up"]], default: "goal" },
+      { key: "goal", label: "First team to complete this many in a row (with a finish line)", type: "int", options: [6, 8, 10, 12], default: 8 },
+      { key: "cap", label: "Time limit for the whole game (minutes, 0 = none; with no finish line, 0 means " + CLOCK_DEFAULT + ")", type: "int", options: [0, 5, 8, 10], default: 0 },
       { key: "english", label: "Show the English under examples", type: "enum", options: [["yes", "Yes"], ["no", "No"]], default: "yes" },
       { key: "prompt", label: "Prompt card", type: "enum", options: [["rotate", "Rotate: name, definition, example"], ["name", "Always a name"], ["definition", "Always a definition"], ["example", "Always an example"]], default: "rotate" },
     ],
@@ -287,23 +303,26 @@
 
       lobbyNote(ctx, who) {
         const small = Object.values(ctx.teams()).some((u) => u.length === 1);
-        return (small || who.length < 4 ? "A team of one is playable: one student's device holds both right cards." : "") +
-          "Teams race on their own: each moves to its next prompt as soon as it finishes. Late joiners wait for the next game.";
+        const p = plan(ctx.settings);
+        return (small || who.length < 4 ? "A team of one is playable: one student's device holds both right cards. " : "") +
+          (p.goal ? "Teams race on their own: each moves to its next prompt as soon as it finishes. "
+            : "No finish line: every team plays for the full " + p.cap + " minutes, each at its own pace. The team that matched the most leads. ") +
+          "Late joiners wait for the next game.";
       },
 
       async start(ctx) {
         const res = await fetch("data/devices.json", { cache: "no-cache" });
         if (!res.ok) throw new Error("Could not load data/devices.json");
         const pool = (await res.json()).devices;
-        const s = ctx.settings;
-        const capAt = s.cap > 0 ? ctx.now() + s.cap * 60000 : 0;
-        ctx.mem.g = createGame(pool, { goal: s.goal, prompt: s.prompt, teams: ctx.teams(), rng: ctx.random, capAt });
+        const s = ctx.settings, p = plan(s);
+        const capAt = p.cap > 0 ? ctx.now() + p.cap * 60000 : 0;
+        ctx.mem.g = createGame(pool, { goal: p.goal, prompt: s.prompt, teams: ctx.teams(), rng: ctx.random, capAt });
         if (capAt) {
           ctx.mem.capTimer = setTimeout(() => {
             if (!window.LiveHost || window.LiveHost.state.ctx !== ctx) return;         // that game is gone
             ctx.mem.capped = true;
             ctx.requestLock();
-          }, s.cap * 60000);
+          }, p.cap * 60000);
         }
       },
 
@@ -346,18 +365,19 @@
         if (view.stage === "revealed" && g.winner === null) ctx.requestNext(0);
         const en = ctx.settings.english === "yes";
         el.appendChild(h("div", { class: "live-q-head" },
-          h("span", { class: "live-q-n" }, "First team to " + g.goal + " in a row wins"),
+          h("span", { class: "live-q-n" }, g.goal ? "First team to " + g.goal + " in a row wins" : "No finish line: most matches when the time is up"),
           g.capAt ? gameClock(g.capAt, ctx.now) : null));
         const lanes = h("div", { class: "dv-live-lanes" });
         for (const t of Object.keys(g.T).filter((k) => g.T[k].uids.length).sort()) {
           const T = g.T[t];
           const found = T.columns.map((c) => h("span", { class: "dv-live-chip" + (T.cols[c] ? " on" : "") }, (T.cols[c] ? "✓ " : "… ") + KIND_LABEL[c]));
           lanes.appendChild(h("div", { class: "dv-live-lane" + (g.winner === t ? " won" : "") },
-            h("div", { class: "dv-live-lane-head" }, h("b", {}, "Team " + Live.teamLabel(+t)), h("span", { class: "dv-live-streak" }, T.streak + " / " + g.goal)),
+            h("div", { class: "dv-live-lane-head" }, h("b", {}, "Team " + Live.teamLabel(+t)),
+              h("span", { class: "dv-live-streak" }, g.goal ? T.streak + " / " + g.goal : T.total + " matched")),
             h("div", { class: "dv-live-members" }, T.uids.map((u) => ctx.nameOf(u)).join(" · ")),
-            bar(T.streak, g.goal),
+            g.goal ? bar(T.streak, g.goal) : h("div", { class: "dv-live-tally" }, "Streak " + T.streak + " · best " + T.best),
             card(T.prompt, "dv-live-laneprompt", en),
-            h("div", { class: "dv-live-status" }, found, T.bad ? h("span", { class: "dv-live-oops" }, "✗ wrong card: back to 0") : null),
+            h("div", { class: "dv-live-status" }, found, T.bad ? h("span", { class: "dv-live-oops" }, g.goal ? "✗ wrong card: back to 0" : "✗ wrong card: streak back to 0") : null),
             T.last ? h("p", { class: "dv-live-last" }, h("b", {}, "Last match: "), gist(T.last.cards)) : null));
         }
         el.appendChild(lanes);
@@ -376,7 +396,7 @@
         if (view.phase === "done") return donePhone(ctx, el, state);
         if (ctx.team === null) { el.appendChild(h("p", { class: "live-big" }, "You’ll play from the next game.")); return; }
         if (!r) { el.appendChild(h("p", { class: "live-big" }, "Get ready…")); return; }
-        const goal = state.goal || ctx.settings.goal;
+        const goal = state.goal !== undefined ? state.goal : plan(ctx.settings).goal;
         const hand = view.hand && view.hand.n === r.n ? view.hand : null;
         const mine = state.t && state.t[ctx.team];
         const d = hand ? hand.d : 0;
@@ -389,8 +409,8 @@
         const mates = ctx.teammates().map((p) => p.name);
         el.appendChild(h("div", { class: "dv-live-top" },
           h("b", { class: "live-me-team" }, "Team " + Live.teamLabel(ctx.team)),
-          h("span", { class: "dv-live-streak" }, "Streak " + streak + " / " + goal)));
-        el.appendChild(bar(streak, goal));
+          h("span", { class: "dv-live-streak" }, goal ? "Streak " + streak + " / " + goal : (mine ? mine.n || 0 : 0) + " matched · streak " + streak)));
+        if (goal) el.appendChild(bar(streak, goal));
         if (state.cap) el.appendChild(h("p", { class: "dv-live-clockline" }, gameClock(state.cap, ctx.now)));
         if (mates.length) el.appendChild(h("p", { class: "live-note" }, "With: " + mates.join(", ")));
         if (state.win >= 0) {
@@ -404,7 +424,7 @@
         el.appendChild(card(hand.p, "dv-live-promptcard", en));
         el.appendChild(h("p", { class: "dv-live-cols" }, need.map((k) => h("span", { class: "dv-live-chip" + (now.c && now.c[k] ? " on" : "") },
           (now.c && now.c[k] ? "✓ " : "… ") + KIND_LABEL[k] + (now.c && now.c[k] ? " found" : " still open")))));
-        if (now.b) el.appendChild(h("p", { class: "dv-live-oops" }, "✗ Oops, a wrong card. The team is back to 0."));
+        if (now.b) el.appendChild(h("p", { class: "dv-live-oops" }, goal ? "✗ Oops, a wrong card. The team is back to 0." : "✗ Oops, a wrong card. The team’s streak is back to 0."));
         if (mine && mine.l && streak > 0) el.appendChild(h("p", { class: "dv-live-last" }, h("b", {}, "Last match: "), gist(mine.l)));
 
         const cards = asList(hand.cards);
@@ -429,7 +449,7 @@
         el.appendChild(grid);
         if (PICK && PICK.d === d) {
           el.appendChild(h("div", { class: "dv-live-confirm" },
-            h("span", {}, "Tapping a wrong card sends your team back to 0."),
+            h("span", {}, goal ? "Tapping a wrong card sends your team back to 0." : "Tapping a wrong card sets your team’s streak back to 0."),
             h("button", { type: "button", class: "primary live-bigbtn", onclick: () => {
               const i = PICK.i; PICK = null; sent.add(i); rerender();
               SENDER.send(i, d, r.n).then(rerender);
@@ -442,7 +462,7 @@
 
   function donePhone(ctx, el, state) {
     const win = state.win >= 0 ? +state.win : null;
-    el.appendChild(h("p", { class: "live-big" }, win === null ? "Game over" : win === ctx.team ? "🏆 Your team won!" : "Team " + Live.teamLabel(win) + " won!"));
+    el.appendChild(h("p", { class: "live-big" }, win === null ? (state.goal === 0 ? "Time’s up!" : "Game over") : win === ctx.team ? "🏆 Your team won!" : "Team " + Live.teamLabel(win) + " won!"));
     el.appendChild(h("p", { class: "live-note" }, "Thanks for playing. Your teacher has the breakdown."));
   }
 
@@ -452,8 +472,12 @@
     const box = h("div", { class: "dv-live-winner" });
     box.appendChild(h("p", { class: "dv-live-confetti", "aria-hidden": "true" }, "🏆 ✦ 🎉 ✦ 🏆"));
     box.appendChild(h("h2", { class: "live-big" }, (g.winner !== null ? "" : "Time! ") + (ids.length > 1 ? "A tie: " : "") +
-      ids.map((t) => "Team " + Live.teamLabel(+t)).join(" and ") + (g.winner !== null ? " wins!" : " " + (ids.length > 1 ? "lead" : "leads") + ".")));
+      ids.map((t) => "Team " + Live.teamLabel(+t)).join(" and ") + (g.winner !== null ? " wins!" : !g.goal ? " matched the most." : " " + (ids.length > 1 ? "lead" : "leads") + ".")));
     for (const t of ids) box.appendChild(h("p", { class: "dv-live-members" }, g.T[t].uids.map((u) => ctx.nameOf(u)).join(" · ")));
+    if (!g.goal) {                                   // no finish line: every team's tally, most matches first
+      const ts = Object.keys(g.T).filter((k) => g.T[k].uids.length).sort((a, b) => g.T[b].total - g.T[a].total || g.T[b].best - g.T[a].best);
+      box.appendChild(h("p", { class: "dv-live-tallies" }, ts.map((t) => "Team " + Live.teamLabel(+t) + ": " + g.T[t].total + " matched (best streak " + g.T[t].best + ")").join(" · ")));
+    }
     el.appendChild(box);
   }
 })();
