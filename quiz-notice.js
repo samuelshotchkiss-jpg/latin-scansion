@@ -2,7 +2,7 @@
 //
 // For the Meter & Literary Devices Quiz (Thu 2026-11-12) it tags, quietly:
 //   - each kind of line in Practice's checkboxes: on the quiz (levels 1-6) or not (7 Greek, 8 advanced);
-//   - each tutorial stage, by the levels its practice set ticks;
+//   - each tutorial stage, by the levels its practice set ticks (Syllables and Two vowels, which have none: on);
 //   - the line on screen: one of the lines the quiz could set (data/devices.json -> scansion.lines,
 //     written by the toolkit's quiz.py --app-json; never recomputed here), or a kind of line the quiz
 //     never sets (Greek, advanced, ambiguous), or else a kind of line the quiz sets (grey).
@@ -16,6 +16,7 @@
   const QUIZ_NOTICE = {
     until: '2026-11-12',                          // the last day it shows (the student's own date)
     onQuizLevels: [1, 2, 3, 4, 5, 6],             // levels 7 (Greek) and 8 (advanced) are not set
+    onQuizStages: ['syllables', 'vowels'],        // stages with no practice set, on the quiz all the same
     kindOn: 'on the quiz',
     kindOff: 'not on the quiz',
     lineCould: "This line could be on Thursday's quiz",
@@ -85,8 +86,9 @@
     if (old) old.remove();
     if (!stageLevels) return;
     const S = window.Progress && window.Progress.state;
+    if (S && QUIZ_NOTICE.onQuizStages.includes(S.stageId)) { title.after(tag(true, QUIZ_NOTICE.kindOn)); return; }
     const levels = S && stageLevels[S.stageId];
-    if (!levels) return;              // a stage with no practice set (syllables, two vowels): no tag
+    if (!levels) return;
     if (onQuiz(levels)) title.after(tag(true, QUIZ_NOTICE.kindOn));
     else if (offQuiz(levels)) title.after(tag(false, QUIZ_NOTICE.kindOff));
   }
