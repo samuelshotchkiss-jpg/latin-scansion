@@ -5,7 +5,7 @@
 //   - each tutorial stage, by the levels its practice set ticks;
 //   - the line on screen: one of the lines the quiz could set (data/devices.json -> scansion.lines,
 //     written by the toolkit's quiz.py --app-json; never recomputed here), or a kind of line the quiz
-//     never sets (Greek, advanced, ambiguous).
+//     never sets (Greek, advanced, ambiguous), or else a kind of line the quiz sets (grey).
 //
 // Everything is in this one file and this one constant. It hides itself after QUIZ_NOTICE.until.
 // To remove it for good: delete this file and its <script> tag in index.html. app.js knows nothing of
@@ -20,7 +20,7 @@
     kindOff: 'not on the quiz',
     lineCould: "This line could be on Thursday's quiz",
     lineWont: "Lines like this won't be on the quiz",
-    lineNeutral: null,                            // a quiz kind of line outside the quiz passages: no tag
+    lineNeutral: 'This kind of line is on the quiz', // a quiz kind of line outside the quiz passages (grey)
   };
 
   const pad = (n) => String(n).padStart(2, '0');
