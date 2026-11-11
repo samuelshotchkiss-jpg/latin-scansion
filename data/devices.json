@@ -855,30 +855,6 @@
       "Met. 8.184"
      ],
      "also": []
-    },
-    {
-     "cite": "Georg. 2.192",
-     "latin": [
-      [
-       [
-        "paterīs",
-        true
-       ],
-       [
-        " lībāmus et ",
-        false
-       ],
-       [
-        "aurō",
-        true
-       ]
-      ]
-     ],
-     "english": "we pour offerings from bowls and gold",
-     "lines": [
-      "Georg. 2.192"
-     ],
-     "also": []
     }
    ]
   },
@@ -997,7 +973,8 @@
       "Met. 8.187"
      ],
      "also": [
-      "alliteration"
+      "alliteration",
+      "antithesis"
      ]
     },
     {
@@ -1065,7 +1042,9 @@
       "Met. 4.55",
       "Met. 4.56"
      ],
-     "also": []
+     "also": [
+      "synchysis"
+     ]
     },
     {
      "cite": "Met. 4.64",
