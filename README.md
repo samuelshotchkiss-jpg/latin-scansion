@@ -93,6 +93,33 @@ The lines with a **tricky** example -- a consonantal *i*, the *i* of *eō* or a 
 more* link. Not every example: *ae*, *au*, *oe* are in four lines of five. Unlike the other
 kinds it is no level: it adds its lines, whatever their level, to what else is ticked.
 
+## Hexameter jumbles
+
+**Jumbles** (`jumbles.html`) shuffles a line's words until it no longer scans; the student drags them
+back. Any order that makes a hexameter and reads as Latin, is **right** and
+earns the points -- and when it is not the poet's own order, the poet's line is shown beside it.
+About half the lines have more than one right order.
+
+* **Two ways to start.** *Scanned*: every syllable is marked, and the marks follow the words -- a
+  final syllable lengthens or shortens, an elision comes and goes. *Unscanned*: no marks, but a tap on
+  a vowel marks it for reference; moving words sends the marks at the ends of words that changed
+  neighbours flying. The true scansion arrives with the drums.
+* **Lines**: no elision in the answer, at least one, or mixed; and by passage. Advanced lines
+  (hiatus, synizesis, hypermetry...) are left out.
+* **A jumble stays readable** (strict rules): no word crosses punctuation; a conjunction, relative or
+  *-que* word stays first in its clause; a preposition keeps its object after it; *nōn* and *ō* stay
+  before their word. It leans toward a plainer order (an adjective beside its noun, a verb last).
+* **An answer is held to looser rules** -- the poets' own licences: up to two words may slip in front
+  of a conjunction, a preposition may be followed by a word agreeing with its object if the object
+  is next to it (*in nova corpora*, *corpore in novō*), *enim* may come third.
+* Points, a first-try streak and twenty badges are kept in the browser under their own key
+  (`latinScansion.jumbles.v1`), apart from the Scan page's progress.
+
+The tiles, [`data/jumbles.json`](data/jumbles.json), are written by the Latin Vocab Toolkit's
+`engine/export_jumbles.py` from `data/lines.json` and the reader's grammatical tags (**run it again
+whenever `lines.json` changes**). [`jumble-core.js`](jumble-core.js) rescans any order exactly as the
+scanner joins words; `tests/jumbles.test.js` checks every line against the key.
+
 ## Literary devices
 
 A second page, **Devices** (`devices.html`), drills the literary devices of the course's

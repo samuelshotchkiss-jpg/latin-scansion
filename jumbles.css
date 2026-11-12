@@ -1,0 +1,154 @@
+/* jumbles.css -- Hexameter jumbles (jumbles.html): drag the poet's words back into a hexameter. */
+.jb { max-width: 60rem; margin: 0 auto; padding: 1rem 1rem 2rem; }
+.jb-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.jb-title { margin: .2rem 0; }
+.jb-statsbtn { padding: .4rem .9rem; border-radius: 999px; border: 1px solid var(--line); background: var(--panel);
+  color: var(--ink); cursor: pointer; font-weight: 600; }
+.jb-statsbtn .pill { margin-left: .3rem; }
+.jb-intro { margin: .2rem 0 .9rem; color: var(--muted); }
+
+.jb-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-bottom: .9rem; }
+.jb-controls label { display: flex; align-items: center; gap: .4rem; font-size: .9rem; color: var(--muted); }
+.jb-controls .toggle { color: var(--ink); }
+.jb-seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.jb-opt { border: none; background: var(--panel); color: var(--ink); padding: .4rem .9rem; cursor: pointer; }
+.jb-opt[aria-checked="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+
+.jb-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: .8rem 1rem 1rem; }
+.jb-where { margin: 0; color: var(--muted); font-size: .9rem; }
+
+/* ---- the line: tiles and walls --------------------------------------------------------------------- */
+.jb-line {
+  position: relative; display: flex; flex-wrap: wrap; align-items: flex-end; gap: .9rem .38rem;
+  margin: .8rem 0 .4rem; padding: .3rem .1rem 1.1rem; min-height: 4rem;
+  font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.2rem, 3.3vw, 1.85rem);
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+.jb-seg-wrap { display: contents; }
+.tile {
+  position: relative; display: inline-block; padding: .62em .32em .12em; line-height: 1.15;
+  border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink);
+  cursor: grab; touch-action: none; outline-offset: 2px;
+  transition: box-shadow .15s, border-color .15s, background-color .2s;
+}
+.tile:hover { border-color: var(--accent); }
+.tile:focus-visible { outline: 2px solid var(--accent); }
+.tile.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.tile.fixed { cursor: default; border-style: dashed; }
+.tile.placeholder { opacity: .25; }
+.tile.flip { transition: transform .18s ease-out; }
+.jb-line.locked .tile { cursor: default; }
+.jb-line.locked .tile:hover { border-color: var(--line); }
+.tile.ghost {
+  position: fixed; z-index: 50; pointer-events: none; margin: 0;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .22); border-color: var(--accent); transform: scale(1.06) rotate(-1.5deg);
+  transition: none;
+}
+.tile.ghost.landing { transition: left .14s ease-out, top .14s ease-out, transform .14s ease-out; transform: none; }
+.wall { color: var(--muted); padding: 0 .02em .12em; align-self: flex-end; line-height: 1.15; }
+
+/* a nucleus and its mark */
+.nu { position: relative; border-radius: 3px; }
+.nu .mk {
+  position: absolute; left: 50%; bottom: 100%; width: .6em; height: .46em; margin-bottom: .06em;
+  transform: translateX(-50%); overflow: visible; pointer-events: none;
+}
+.nu .mk path { fill: none; stroke: var(--mark); stroke-width: 2.1; stroke-linecap: round; }
+.jb-line.blind .nu { cursor: pointer; }
+.jb-line.blind .nu::before { content: ""; position: absolute; inset: -.45em -.18em -.1em; }   /* a fingertip */
+.jb-line.blind .nu:hover { background: var(--target); }
+.jb-line.blind .nu .mk path { stroke: var(--muted); }
+.jb-line.blind .nu.truth .mk path { stroke: var(--ok); }
+.nu.beat { background: var(--target); color: var(--accent); }
+.nu.beat .mk { transform: translateX(-50%) scale(1.5); transition: transform .08s; }
+
+/* an elided ending: a swoosh comes in and leaches the black out of it */
+.tail.gone { color: var(--muted); }
+.tail.leach {
+  background: linear-gradient(90deg, var(--muted) 0 42%, var(--ink) 58% 100%); background-size: 240% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: leach .34s ease-out forwards;
+}
+.tail.leach .nu { color: transparent; }
+@keyframes leach { from { background-position: 100% 0; } to { background-position: 0 0; } }
+.tail.unleach { animation: unleach .3s ease-out; }
+@keyframes unleach { from { color: var(--muted); } to { color: var(--ink); } }
+.jb-swooshes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.jb-swooshes path { fill: none; stroke: var(--mark); stroke-width: 2; stroke-linecap: round; }
+.jb-swooshes path.draw { animation: draw .3s ease-out both; }
+.jb-swooshes path.sw { transition: opacity .15s; }
+.jb-swooshes path.going, .jb-swooshes path.hush { opacity: 0; }
+@keyframes draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+.jb-swooshes .bar { stroke: var(--muted); stroke-width: 2; animation: fadein .25s both; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+/* an end-of-word mark that no longer applies, flying away */
+.flyaway { position: fixed; z-index: 55;   /* above the dragged copy (.tile.ghost, 50) */ pointer-events: none; animation: flyaway .42s ease-in forwards; }
+.flyaway path { fill: none; stroke: var(--muted); stroke-width: 2.1; stroke-linecap: round; }
+@keyframes flyaway { to { transform: translate(.7em, -1.6em) rotate(35deg) scale(.6); opacity: 0; } }
+
+/* lock in */
+.jb-line.rolling .tile { animation: roll .09s ease-in-out infinite alternate; }
+.jb-line.rolling .tile:nth-child(even) { animation-direction: alternate-reverse; }
+@keyframes roll { from { transform: translateY(0); } to { transform: translateY(-2px); } }
+.jb-line.shake { animation: shake .36s ease-in-out; }
+@keyframes shake { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+.jb-line.won .tile { animation: won .5s ease-out both; animation-delay: calc(var(--i) * 45ms); }
+@keyframes won { 40% { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 16%, var(--bg)); transform: translateY(-4px); } 100% { border-color: var(--ok); } }
+
+.jb-hint { margin: 0 0 .6rem; color: var(--muted); font-size: .88rem; min-height: 1.2em; }
+.jb-buttons { display: flex; flex-wrap: wrap; gap: .5rem; }
+.jb-buttons button { padding: .5rem .95rem; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+.jb-buttons button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.jb-buttons button:disabled { opacity: .45; cursor: default; }
+.jb-lock { min-width: 8rem; }
+
+.jb-verdict { margin-top: .9rem; padding: .7rem .9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); animation: fadein .2s; }
+.jb-verdict.ok { border-color: var(--ok); }
+.jb-verdict.bad { border-color: var(--bad); }
+.jb-verdict h3 { margin: 0 0 .3rem; font-size: 1.05rem; }
+.jb-verdict.ok h3 { color: var(--ok); }
+.jb-verdict.bad h3 { color: var(--bad); }
+.jb-verdict p { margin: .25rem 0; }
+.jb-compare { margin: .5rem 0 .2rem; display: grid; grid-template-columns: auto 1fr; gap: .2rem .7rem; align-items: baseline; }
+.jb-compare dt { color: var(--muted); font-size: .85rem; }
+.jb-compare dd { margin: 0; font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.1rem; }
+.jb-compare .moved { background: color-mix(in srgb, var(--accent) 18%, transparent); border-radius: 3px; }
+.jb-pts { font-weight: 700; color: var(--accent); }
+
+/* stats and badges */
+.jb-modal { max-width: 40rem; width: calc(100% - 2rem); border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--ink); padding: 1rem 1.2rem; }
+.jb-modal::backdrop { background: rgba(0, 0, 0, .35); }
+.jb-modal h2 { margin: 0 0 .6rem; }
+.jb-modal h3 { margin: 1rem 0 .4rem; font-size: 1rem; }
+.jb-nums { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: .5rem; }
+.jb-num { border: 1px solid var(--line); border-radius: 10px; padding: .45rem .6rem; background: var(--bg); }
+.jb-num b { display: block; font-size: 1.35rem; }
+.jb-num span { color: var(--muted); font-size: .8rem; }
+.jb-badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: .45rem; }
+.jb-badge { border: 1px solid var(--line); border-radius: 10px; padding: .4rem .6rem; font-size: .85rem; }
+.jb-badge b { display: block; font-size: .95rem; }
+.jb-badge.have { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--panel)); }
+.jb-badge.locked { opacity: .55; }
+.jb-badge small { color: var(--muted); }
+.jb-reset { background: none; border: none; color: var(--bad); cursor: pointer; text-decoration: underline; margin-right: auto; }
+.jb-modal .modal-actions { margin-top: 1rem; }
+.jb-modal .modal-actions button.primary { padding: .45rem 1rem; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+
+.jb-toasts { position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%); display: flex; flex-direction: column; gap: .4rem; z-index: 60; pointer-events: none; }
+.jb-toast { background: var(--ink); color: var(--panel); padding: .5rem .9rem; border-radius: 999px; font-weight: 600; box-shadow: 0 6px 18px rgba(0,0,0,.25); animation: toast 3.2s ease-in-out forwards; white-space: nowrap; }
+@keyframes toast { 0% { transform: translateY(1rem) scale(.9); opacity: 0; } 8% { transform: none; opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(-.4rem); } }
+
+@media (max-width: 40rem) {
+  .jb { padding: .75rem .75rem 1.5rem; }
+  .jb-line { gap: .75rem .26rem; font-size: 1.15rem; }
+  .tile { padding: .6em .24em .1em; }
+  .jb-controls label { width: 100%; }
+  .jb-controls select { flex: 1; min-width: 0; }
+  .jb-buttons button { flex: 1 1 auto; }
+  .jb-toast { white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tail.leach, .jb-line.rolling .tile, .jb-line.shake, .jb-line.won .tile, .flyaway, .jb-swooshes path.draw, .jb-toast { animation-duration: .01s; }
+  .tile.flip, .tile.ghost.landing { transition: none; }
+}

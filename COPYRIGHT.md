@@ -25,6 +25,8 @@ Licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (see
   natural English renderings and their groups. The Latin phrases on them are short quotations (a few
   words each) from the textbook the class reads (Via Latina IX–XII), used for teaching; that book's
   own text is not in this repository.
+- The hexameter jumbles' word tiles, `data/jumbles.json`: how each line is cut into tiles, the
+  grammatical roles given to its words, and their scansion.
 - HTML pages and the project's Markdown documentation (e.g. `README.md` and this file).
 
 In plain terms: others may share and adapt this material, but must credit it, may not use it

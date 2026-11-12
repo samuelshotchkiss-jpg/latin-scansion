@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f5d8a">
+  <title>Hexameter Jumbles · Latin Scansion</title>
+  <!-- ?v= must change whenever styles.css, jumbles.css, jumble-core.js, jumbles.js or rhythm.js change
+       (see index.html). -->
+  <link rel="stylesheet" href="styles.css?v=2026-11-12">
+  <link rel="stylesheet" href="jumbles.css?v=2026-11-12">
+</head>
+<body>
+  <header class="top">
+    <h1><span class="wide">Latin </span>Scansion</h1>
+    <nav class="modes" aria-label="Sections">
+      <a class="mode" href="index.html"><span class="wide">Scan lines</span><span class="narrow">Scan</span></a>
+      <a class="mode active" href="jumbles.html" aria-current="page">Jumbles</a>
+      <a class="mode" href="vowels.html">Vowels</a>
+      <a class="mode" href="devices.html">Devices</a>
+      <a class="mode" href="quiz.html"><span class="wide">Practice quiz</span><span class="narrow">Quiz</span></a>
+      <a class="mode" href="live.html"><span class="wide">Play live</span><span class="narrow">Live</span></a>
+    </nav>
+  </header>
+
+  <main class="jb">
+    <div class="jb-head">
+      <h2 class="jb-title">Hexameter jumbles</h2>
+      <button type="button" id="jb-stats" class="jb-statsbtn">★ My jumbles <span id="jb-points" class="pill"></span></button>
+    </div>
+    <p class="jb-intro">The poet's words, shuffled until the line no longer scans. Drag them back into a
+      hexameter. Words never cross punctuation.</p>
+    <p id="jb-nostore" class="no-storage" hidden><b>This browser is not saving your jumbles.</b> It is
+      blocking website data, usually because of private browsing. You can still play.</p>
+
+    <div class="jb-controls">
+      <div class="jb-seg" role="radiogroup" aria-label="How the line starts">
+        <button type="button" class="jb-opt" data-mode="scanned" role="radio">Scanned</button>
+        <button type="button" class="jb-opt" data-mode="blind" role="radio">Unscanned</button>
+      </div>
+      <label>Lines
+        <select id="jb-level">
+          <option value="plain">No elisions in the answer</option>
+          <option value="elision">At least one elision</option>
+          <option value="mixed">Mixed</option>
+        </select>
+      </label>
+      <label>Passage
+        <select id="jb-passage"><option value="">All passages</option></select>
+      </label>
+      <label class="toggle" title="A drumroll when you lock in, and the line's rhythm when you get it"><input type="checkbox" id="jb-drums"> 🥁 Drums</label>
+    </div>
+
+    <section id="jb-card" class="jb-card">
+      <p class="jb-where"><span id="jb-cite" class="citation"></span> <span id="jb-passname"></span>
+        <span id="jb-solved" class="solved-flag" hidden>solved</span></p>
+      <div id="jb-line" class="jb-line" lang="la" aria-label="The jumbled line: drag the words, or focus one and use the arrow keys"></div>
+      <p id="jb-hint" class="jb-hint"></p>
+      <div class="jb-buttons">
+        <button type="button" id="jb-lock" class="primary jb-lock">🔒 Lock in</button>
+        <button type="button" id="jb-reshuffle">Shuffle again</button>
+        <button type="button" id="jb-show">Show the answer</button>
+        <button type="button" id="jb-next">Next line →</button>
+      </div>
+      <div id="jb-verdict" class="jb-verdict" aria-live="polite" hidden></div>
+    </section>
+    <p id="jb-error" class="vw-error" hidden></p>
+  </main>
+
+  <dialog id="jb-modal" class="jb-modal">
+    <div id="jb-modal-body"></div>
+    <div class="modal-actions">
+      <button type="button" id="jb-reset" class="jb-reset">Reset my jumbles</button>
+      <button type="button" id="jb-close" class="primary">Close</button>
+    </div>
+  </dialog>
+  <div id="jb-toasts" class="jb-toasts" aria-live="polite"></div>
+
+  <footer class="foot">
+    Texts: Ovid and Vergil (public domain) · Word tiles: CC BY-NC-SA 4.0 · Code: AGPL-3.0
+    <br>Your jumbles points, badges and the lines you have solved are kept in this browser only
+    (localStorage, under its own name: the Scan page's progress is separate). Nothing is sent anywhere.
+  </footer>
+
+  <script src="rhythm.js?v=2026-11-12"></script>
+  <script src="jumble-core.js?v=2026-11-12"></script>
+  <script src="jumbles.js?v=2026-11-12"></script>
+</body>
+</html>
