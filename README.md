@@ -67,6 +67,26 @@ same place lets it go, as Next always has.
 All of this is kept in the browser's local storage and never sent anywhere; a notice says so on the
 first visit.
 
+## Vowels
+
+A page of drills on where vowels meet, **Vowels** (`vowels.html`), for the two things students most
+often get wrong there (the teacher, 2026-11-12: half a class elided *Thisbē* before *iuvenum*):
+
+* **i: vowel or consonant?** Every *i* before a vowel. A consonant at the start of a word (*iam*),
+  between vowels, where it counts twice (*Troia* = *Troj-ja*), and after a prefix before *u*, *a* or
+  *-ec-* (*coniūnx*); a vowel after a consonant, and above all in word-final *-ia*, *-io*, *-ie*
+  (*omnia*), and in the exceptions: the *i* of *eō*, "go" (*abiit*, *coiēre*), and the names that open
+  with a vowel *i* (*Iāsōn*, *Iūlus*). An *i* between consonants is plain, and left out.
+* **Diphthong or not?** Every two vowels side by side inside a word that stay apart (*de-us*,
+  *fu-it*, *om-ni-a*), against the diphthongs (*ae*, *au*, *oe*, and the few *ei*, *eu*, *ui*).
+
+Each drill asks its two answers equally often, leaning on word-final *-ia*, the exceptions, and
+look-alike pairs (*de-us*, *fu-it*, *ā-ēr*, *a-it*). After each answer: the reason, and the word in
+syllables. The answers are the scanner's: [`data/vowels.json`](data/vowels.json) is built from
+`data/lines.json` by `tools/make_vowel_drills.py` (**run it again whenever `lines.json` changes**),
+and `tests/vowels.test.js` checks every answer against the key. Like the Devices page, it stores
+nothing. The tutorial's "Two vowels side by side" lesson links to both drills.
+
 ## Literary devices
 
 A second page, **Devices** (`devices.html`), drills the literary devices of the course's
@@ -87,8 +107,11 @@ Literary Devices Quiz, laid out like the printed one. **Part I** is the triple m
 examples (the number can be changed), their definitions shuffled beside them, and a word bank of
 every device the class has learned; the student picks each example's definition letter, then each
 definition's name. **Check Part I** marks every answer right, wrong or blank. **Part II** is a short
-passage to scan, and each line has a link that opens it in the scanner (`index.html?line=…`, the
-same as *Go to*). **Show the answer key** gives the letters, the names, the English of each
+passage to scan: tap each vowel to mark it (long, short, elided), or open the line in the scanner
+(`index.html?line=…`, the same as *Go to*). **Score my quiz** grades both parts as the teacher's
+scorer grades the paper quiz (`quiz-score.js`, a port of the toolkit's `meter_grade.py`, checked by
+`tests/quiz_score.test.js`): Part I's percentage, Part II's meter score with what was missed, and the
+two averaged, out of 5. **Show the answer key** gives the letters, the names, the English of each
 example, and the feet and elisions of the passage. **Print** gives the paper version: Part I on one
 page, Part II on the next, and the key on its own page if it is showing.
 

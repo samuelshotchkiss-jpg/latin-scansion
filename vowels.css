@@ -1,0 +1,47 @@
+/* vowels.css -- the Vowels page (vowels.html): two drills, one question at a time. */
+.vw { max-width: 46rem; margin: 0 auto; padding: 1rem 1rem 2rem; }
+.vw-title { margin: .2rem 0 .3rem; }
+.vw-intro { margin: 0 0 1rem; color: var(--muted); }
+
+.vw-switch { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.vw-tab {
+  flex: 1 1 12rem; padding: .55rem .8rem; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); font: inherit; cursor: pointer;
+}
+.vw-tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+.vw-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem 1.2rem; }
+.vw-cite { margin: 0 0 .4rem; display: flex; justify-content: space-between; gap: 1rem;
+  color: var(--muted); font-size: .85rem; }
+.vw-scan { color: var(--accent); font-weight: 600; white-space: nowrap; }
+.vw-line { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif;
+  font-size: clamp(1.15rem, 3.2vw, 1.5rem); line-height: 1.6; margin: .2rem 0 .9rem; }
+.vw-word { font-weight: 700; }
+.vw-line mark { background: color-mix(in srgb, var(--accent) 28%, transparent); color: inherit;
+  border-radius: 3px; padding: 0 .06em; box-shadow: inset 0 -2px 0 var(--accent); }
+.vw-q { margin: 0 0 .7rem; }
+
+.vw-answers { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.vw-answer {
+  padding: .8rem .6rem; border-radius: 10px; border: 1px solid var(--line); background: var(--bg);
+  color: var(--ink); font: inherit; font-weight: 600; cursor: pointer;
+}
+.vw-answer:hover:not(:disabled) { border-color: var(--accent); }
+.vw-answer:disabled { cursor: default; opacity: .75; }
+.vw-answer.ok { opacity: 1; border-color: var(--ok); background: color-mix(in srgb, var(--ok) 18%, var(--panel)); }
+.vw-answer.bad { opacity: 1; border-color: var(--bad); background: color-mix(in srgb, var(--bad) 16%, var(--panel)); }
+
+.vw-feedback { margin-top: .9rem; }
+.vw-verdict { margin: 0 0 .3rem; font-weight: 700; }
+.vw-verdict.ok { color: var(--ok); }
+.vw-verdict.bad { color: var(--bad); }
+.vw-why { margin: 0 0 .3rem; }
+.vw-div { margin: 0 0 .8rem; color: var(--muted); }
+.vw-div b { color: var(--ink); font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.1rem; }
+.vw-tally { text-align: center; color: var(--muted); font-size: .9rem; margin: .8rem 0 0; }
+.vw-error { color: var(--bad); }
+
+@media (max-width: 480px) {
+  .vw-answers { grid-template-columns: 1fr; }
+  .vw-cite { flex-wrap: wrap; }
+}

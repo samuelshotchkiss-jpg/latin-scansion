@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f5d8a">
+  <title>Vowels · Latin Scansion</title>
+  <!-- ?v= must change whenever styles.css, vowels.css or vowels.js change (see index.html). -->
+  <link rel="stylesheet" href="styles.css?v=2026-11-12">
+  <link rel="stylesheet" href="vowels.css?v=2026-11-12">
+</head>
+<body>
+  <header class="top">
+    <h1><span class="wide">Latin </span>Scansion</h1>
+    <nav class="modes" aria-label="Sections">
+      <a class="mode" href="index.html"><span class="wide">Scan lines</span><span class="narrow">Scan</span></a>
+      <a class="mode active" href="vowels.html" aria-current="page">Vowels</a>
+      <a class="mode" href="devices.html">Devices</a>
+      <a class="mode" href="quiz.html"><span class="wide">Practice quiz</span><span class="narrow">Quiz</span></a>
+      <a class="mode" href="live.html"><span class="wide">Play live</span><span class="narrow">Live</span></a>
+    </nav>
+  </header>
+
+  <main class="vw">
+    <h2 class="vw-title">When vowels meet</h2>
+    <p class="vw-intro">Two quick drills, from the lines you scan. Every answer is the one the Scan page marks.</p>
+
+    <div class="vw-switch" role="tablist" aria-label="Drill">
+      <button type="button" class="vw-tab" role="tab" data-drill="i" aria-selected="true">
+        <b>i</b>: vowel or consonant?</button>
+      <button type="button" class="vw-tab" role="tab" data-drill="diphthong" aria-selected="false">
+        Diphthong or not?</button>
+    </div>
+
+    <section id="vw-card" class="vw-card" aria-live="polite">
+      <p class="vw-cite"><span id="vw-cite"></span>
+        <a id="vw-scan" class="vw-scan" target="latin-scansion">Scan this line ↗</a></p>
+      <p id="vw-line" class="vw-line" lang="la"></p>
+      <p id="vw-q" class="vw-q"></p>
+      <div class="vw-answers">
+        <button type="button" id="vw-a1" class="vw-answer"></button>
+        <button type="button" id="vw-a2" class="vw-answer"></button>
+      </div>
+      <div id="vw-feedback" class="vw-feedback" hidden>
+        <p id="vw-verdict" class="vw-verdict"></p>
+        <p id="vw-why" class="vw-why"></p>
+        <p class="vw-div">In syllables: <b id="vw-division" lang="la"></b></p>
+        <button type="button" id="vw-next" class="primary">Next</button>
+      </div>
+    </section>
+    <p id="vw-tally" class="vw-tally"></p>
+    <p id="vw-error" class="vw-error" hidden></p>
+  </main>
+
+  <footer class="foot">
+    Texts: Ovid and Vergil (public domain) · Questions and explanations: CC BY-NC-SA 4.0 · Code: AGPL-3.0
+    <br>Nothing on this page is saved: it keeps no progress and stores nothing in your browser.
+  </footer>
+
+  <script src="vowels.js?v=2026-11-12"></script>
+</body>
+</html>

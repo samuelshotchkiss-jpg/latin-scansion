@@ -493,7 +493,9 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
   .wide { display: none; }
   .narrow { display: inline; }
   .top { padding: .55rem .75rem; gap: .4rem; flex-wrap: nowrap; }
-  .modes { flex-wrap: nowrap; gap: .3rem; }
+  /* five pills (the Vowels page, 2026-11-12) do not fit one row of a 360px phone: they wrap to a
+     second row rather than push the page sideways. The Scan page's three still fit in one. */
+  .modes { flex-wrap: wrap; justify-content: flex-end; gap: .3rem; min-width: 0; }
   .top h1 { font-size: 1rem; white-space: nowrap; }
   .mode { padding: .3rem .6rem; font-size: .85rem; }
   /* no room in a phone's header for a fourth pill: the footer link stands in for it */
