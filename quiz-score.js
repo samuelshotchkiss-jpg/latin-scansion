@@ -5,7 +5,7 @@
 // It works out nothing about the Latin itself: each vowel's key mark, rung, rule and consonantal-i
 // flag come in data/devices.json (quiz.py --app-json), from the same code the teacher's scorer
 // uses. Change the model THERE and port it here; tests/quiz_score.test.js holds cases the Python
-// scorer computed. Model 2026-11-12c.
+// scorer computed. Model 2026-11-12d.
 //
 // A line's marks are a string, one letter per vowel: L long, S short, x not counted (elided),
 // . unmarked. (The paper scorer also takes `+`, a syllable added after a vowel; this page has no
@@ -27,6 +27,7 @@
   const OUT_OF = 5;                                              // the quiz's points (owner, 2026-11-12)
   const INVENTED = "elision where there is none";
   const CI = "consonantal i";
+  const PRICE_RULE = { "the last syllable counts as long": 10 };   // its own rule, its own price
   const HARD = new Set([CI, "mute (stop) + liquid", "elision"]);
   const REPAIR = 0.2, REACH = 4, CAP = 3;
   const HEX = /^(L(SS|L)){5}L[LS]$/;
@@ -87,7 +88,7 @@
     const rows = order.map((rule) => {
       const kk = k.get(rule), nn = n.get(rule) || 1, rung = rg.get(rule) ?? 4;
       let c = SLIP / N * kk;
-      if (nn > 1) c += Math.max(0, (PRICE[rung] ?? 15) - SLIP / N * nn) * ((Math.min(kk, nn) - 1) / (nn - 1)) ** GAMMA;
+      if (nn > 1) c += Math.max(0, (PRICE_RULE[rule] ?? PRICE[rung] ?? 15) - SLIP / N * nn) * ((Math.min(kk, nn) - 1) / (nn - 1)) ** GAMMA;
       return { rule, rung, missed: kk, of: n.has(rule) ? nn : null, cost: c };
     });
     rows.sort((a, b) => b.rung - a.rung);                          // as Python's stable sort by -rung
