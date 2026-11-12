@@ -25,7 +25,14 @@
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
 }
 /* a line to a row; a sentence has several, set apart */
-.jb-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .9rem .38rem; }
+/* A verse too long for the screen wraps with a HANGING INDENT, so its second row reads as the same
+   verse, not a new one (owner, 2026-11-12). The row is padded by --hang, and a zero-width first item
+   pulls the first screen row back by as much (and by one gap): rows after it keep the indent. */
+.jb-row {
+  --cg: .38rem; --hang: 1.1em;
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: .9rem var(--cg); padding-left: var(--hang);
+}
+.jb-row::before { content: ""; flex: 0 0 0; margin-left: calc(-1 * var(--hang)); margin-right: calc(-1 * var(--cg)); }
 .jb-line.multi .jb-row + .jb-row { margin-top: 1.3rem; padding-top: .2rem; border-top: 1px dashed var(--line); }
 .jb-seg-wrap { display: contents; }
 /* a line's share of a clause, emptied: a dashed slot to drop a word back into */
@@ -151,7 +158,7 @@
 @media (max-width: 40rem) {
   .jb { padding: .75rem .75rem 1.5rem; }
   .jb-line { font-size: 1.15rem; }
-  .jb-row { gap: .75rem .26rem; }
+  .jb-row { --cg: .26rem; --hang: .9em; }
   .tile { padding: .6em .24em .1em; }
   .jb-controls label { width: 100%; }
   .jb-controls select { flex: 1; min-width: 0; }
