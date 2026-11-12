@@ -59,7 +59,12 @@
         "Met. 4.155",
         "Met. 8.220",
         "Aen. 1.321"
-      ]
+      ],
+      "practice": {
+        "levels": [
+          9
+        ]
+      }
     },
     {
       "id": "elision",

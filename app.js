@@ -16,7 +16,8 @@
   const SYMBOL = { L: '¯', S: '˘' };
   const WORD = { L: 'long', S: 'short', X: 'elided' };
   const TIE = '<span class="tie-sym"></span>';
-  const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z, letters that count twice', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced'];
+  const KIND_NAMES = ['Long and short only', 'qu', 'h, x, z, letters that count twice', 'Elision', 'Mūta cum liquida', 'Consonants at the start of a word', 'Greek words', 'Advanced', 'Where vowels meet'];
+  const VOWELS_KIND = 9;   // not a level: a line of any level that has a tricky meeting of vowels (inSet)
   const EIGHT_STAGES = ['syllables', 'pattern', 'refinements', 'elision', 'muta', 'clusters', 'greek', 'licences'];
 
   const $ = (id) => document.getElementById(id);
@@ -49,7 +50,8 @@
     fetch('data/lines.json', { cache: 'no-cache' }).then((r) => r.json()),
     fetch('data/tutorial.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => ({ stages: [] })),
     fetch('data/examples.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => []),
-  ]).then(([data, tutorial, worked]) => {
+    fetch('data/vowel_lines.json', { cache: 'no-cache' }).then((r) => r.json()).catch(() => ({ lines: [] })),
+  ]).then(([data, tutorial, worked, vowelLines]) => {
     worked.filter((l) => l.scans).forEach((l) => { examples[l.citation] = l; });
     rows = data.filter((l) => l.passage)
       .map((l, i) => ({ ...l, _at: i }))
@@ -57,6 +59,7 @@
     lines = rows.filter((l) => l.scans);
     rows.forEach((l) => { rowsByCit[l.citation] = l; });
     lines.forEach((l) => { byCitation[l.citation] = l; });
+    vowelLines.lines.forEach((c) => { if (byCitation[c]) byCitation[c].vowels = true; });
     stages = (tutorial.stages || []).map((s) => {
       const missing = s.lines.filter((c) => !byCitation[c]);
       if (missing.length) console.warn(`tutorial stage "${s.id}": no such line(s): ${missing.join(', ')}`);
@@ -84,6 +87,10 @@
       S.levels = [...new Set(S.levels.flatMap((k) => (k < 5 ? [k] : k === 5 ? [5, 6] : [k + 1])))];
       S.kinds = 8;
       delete S.focus;
+    }
+    if (S.kinds === 8) {                              // a ninth kind, Where vowels meet (2026-11-12): a
+      if ([1, 2, 3, 4, 5, 6, 7, 8].every((k) => S.levels.includes(k))) S.levels.push(VOWELS_KIND);
+      S.kinds = 9;                                    // student who had every kind keeps every kind
     }
     // The stage a student is on was kept by NUMBER, until a ninth stage went in fourth (2026-10-26, two
     // vowels side by side). It is kept by id now; a number saved without one counts in the old list.
@@ -150,9 +157,10 @@
   }
 
   // Practice: a passage, and the KINDS of line ticked. A kind is a level, not "up to" one: ticking
-  // only Elision gives just the elision lines.
+  // only Elision gives just the elision lines. The ninth kind is no level: Where vowels meet adds
+  // the lines, of any level, with a consonantal i, word-final -ia, a look-alike pair (data/vowel_lines.json).
   function inSet(l, levels) {
-    return levels.includes(l.level);
+    return levels.includes(l.level) || (levels.includes(VOWELS_KIND) && !!l.vowels);
   }
   function rebuildPool(keepCitation) {
     const passage = $('passage').value;
@@ -166,7 +174,7 @@
     kindBoxes().forEach((cb) => { cb.checked = levels.includes(Number(cb.value)); });
     summarizeKinds();
   }
-  // On a phone the eight checkboxes fold away behind one line that says what is ticked.
+  // On a phone the nine checkboxes fold away behind one line that says what is ticked.
   const kindBoxes = () => [...document.querySelectorAll('#kinds input[value]')];
   function summarizeKinds() {
     const on = kindBoxes().filter((x) => x.checked).map((x) => KIND_NAMES[Number(x.value) - 1]);

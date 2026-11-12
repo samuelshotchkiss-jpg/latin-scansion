@@ -87,6 +87,12 @@ syllables. The answers are the scanner's: [`data/vowels.json`](data/vowels.json)
 and `tests/vowels.test.js` checks every answer against the key. Like the Devices page, it stores
 nothing. The tutorial's "Two vowels side by side" lesson links to both drills.
 
+The lines with a **tricky** example -- a consonantal *i*, the *i* of *eō* or a name, word-final
+*-ia*, a look-alike pair, a rare diphthong -- are Practice's ninth kind, **Where vowels meet**
+([`data/vowel_lines.json`](data/vowel_lines.json), from the same tool), and the lesson's *Practice
+more* link. Not every example: *ae*, *au*, *oe* are in four lines of five. Unlike the other
+kinds it is no level: it adds its lines, whatever their level, to what else is ticked.
+
 ## Literary devices
 
 A second page, **Devices** (`devices.html`), drills the literary devices of the course's
