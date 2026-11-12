@@ -5,7 +5,7 @@
 // It works out nothing about the Latin itself: each vowel's key mark, rung, rule and consonantal-i
 // flag come in data/devices.json (quiz.py --app-json), from the same code the teacher's scorer
 // uses. Change the model THERE and port it here; tests/quiz_score.test.js holds cases the Python
-// scorer computed. Model 2026-11-12b.
+// scorer computed. Model 2026-11-12c.
 //
 // A line's marks are a string, one letter per vowel: L long, S short, x not counted (elided),
 // . unmarked. (The paper scorer also takes `+`, a syllable added after a vowel; this page has no
@@ -36,9 +36,14 @@
   // [severe, mild] for one line: severe breaks the rhythm (a short alone after a long, or three
   // shorts and more); a line with none of those that is still not a hexameter is mild, once.
   function breaks(seq) {
-    const body = seq.slice(0, -1);
     let severe = 0;
-    for (const m of body.matchAll(/S+/g)) if (m[0].length >= 3 || (m[0].length === 1 && m.index > 0)) severe++;
+    for (const m of seq.matchAll(/S+/g)) {
+      const n = m[0].length;
+      // a run that reaches the line's end: the last syllable is free, and the rest is never a short
+      // "alone" (LSS LL LSS LSS LSS ends on a dactyl: five feet, the wrong shape, mild)
+      if (m.index + n === seq.length) { if (n - 1 >= 3) severe++; }
+      else if (n >= 3 || (n === 1 && m.index > 0)) severe++;
+    }
     return [severe, severe || HEX.test(seq) ? 0 : 1];
   }
 
