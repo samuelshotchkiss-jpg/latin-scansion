@@ -106,12 +106,25 @@ About half the lines have more than one right order.
   neighbours flying. The true scansion arrives with the drums.
 * **Lines**: no elision in the answer, at least one, or mixed; and by passage. Advanced lines
   (hiatus, synizesis, hypermetry...) are left out.
+* **Sentences over two to four lines** (the fourth choice): one row per line. Where a clause runs
+  over a line break, its words can move into the other line -- but only when the student moves them:
+  a line may gain or lose words, and a line's share of a clause, emptied, leaves a dashed slot to drop
+  words back into (the arrow keys step a word over the break too). Every line must scan; the grammar is judged
+  over the whole sentence. 183 sentences; longer ones (up to fourteen lines) are left out.
 * **A jumble stays readable** (strict rules): no word crosses punctuation; a conjunction, relative or
-  *-que* word stays first in its clause; a preposition keeps its object after it; *nōn* and *ō* stay
-  before their word. It leans toward a plainer order (an adjective beside its noun, a verb last).
-* **An answer is held to looser rules** -- the poets' own licences: up to two words may slip in front
-  of a conjunction, a preposition may be followed by a word agreeing with its object if the object
-  is next to it (*in nova corpora*, *corpore in novō*), *enim* may come third.
+  *-que* word comes FIRST in its clause -- even where the poet put some of the clause's own words in
+  front of it (*vīdistis sī quam…*, Aen. 1.322: the jumble never does that); a preposition keeps its
+  object after it; *nōn* and *ō* stay before their word. It leans toward a plainer order (an
+  adjective beside its noun, a verb last).
+* **An answer is held to looser rules** -- the poets' own licences, but never against a plainer
+  order (the teacher's ruling, 2026-11-12): up to two words may stand in front of a subordinating
+  word, or as many as the poet put there, and they may equally go after it; a joining word (*et*,
+  *aut*, *-que*) is never later than the poet put it; where *et* joins phrases rather than clauses, a
+  verb or an adverb may cross it, and the rest keeps its order; a preposition's noun may come after
+  an agreeing word or a genitive (*in Caesaris castra*); *nōn* may go before the verb; *enim*
+  second or third, or right after its conjunction. Which words the poets set in front of their own
+  clause's opener was decided place by place, in the toolkit's `export_jumbles.py` (`POSTPONED`,
+  `SEPARATE`); the exporter prints any new place that needs a decision.
 * Points, a first-try streak and twenty badges are kept in the browser under their own key
   (`latinScansion.jumbles.v1`), apart from the Scan page's progress.
 

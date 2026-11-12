@@ -13,6 +13,13 @@
 //              vowel); moving a word sends the marks at the ends of words that changed neighbours
 //              flying. Only the order counts; the true scansion arrives with the drums.
 //
+// SENTENCES (the Lines menu's fourth choice; owner 2026-11-12): two to four lines of one sentence,
+// one row each. Where a clause runs over a line break, its words may move into the other line. A
+// word changes lines only when the student puts it there (owner: words must not jump between lines
+// by themselves), so a line may gain or lose words; a line's share of a clause, emptied, leaves a
+// dashed slot to drop words back into. Every line must scan; the grammar is judged over the whole
+// sentence.
+//
 // Stored apart from the Scan page's progress, under its own key: points, badges, solved lines.
 'use strict';
 
@@ -72,12 +79,17 @@
     { id: 'tour', title: 'Grand tour', desc: 'A line from every passage.', test: (c) => c.passages >= c.allPassages },
     { id: 'quick', title: 'Quick hands', desc: 'A line right within 20 seconds.', test: (c) => c.quick },
     { id: 'comeback', title: 'Never give up', desc: 'Right after three wrong lock-ins or more.', test: (c) => c.comeback },
+    { id: 'sentence', title: 'Over the line', desc: 'Your first sentence of two lines or more.', test: (c) => c.sentences >= 1 },
+    { id: 'sentence10', title: 'Periodic', desc: 'Ten sentences of two lines or more.', test: (c) => c.sentences >= 10 },
+    { id: 'four', title: 'Four-liner', desc: 'A sentence four lines long.', test: (c) => c.maxRows >= 4 },
     { id: 'day20', title: 'Twenty in a day', desc: 'Twenty lines solved in one day.', test: () => (S.days[today()] || 0) >= 20 },
     { id: 'days3', title: 'Three days', desc: 'Jumbles on three different days.', test: () => Object.keys(S.days).length >= 3 },
   ];
   function counts(extra) {
-    const solved = DATA.lines.filter((l) => S.lines[l.c] && (S.lines[l.c].scanned || S.lines[l.c].blind));
+    const solved = allItems().filter((l) => S.lines[l.c] && (S.lines[l.c].scanned || S.lines[l.c].blind));
     return Object.assign({
+      sentences: solved.filter((l) => l.rows).length,
+      maxRows: solved.reduce((m, l) => Math.max(m, l.rows ? l.rows.length : 1), 0),
       elided: solved.filter((l) => l.e > 0).length,
       maxE: solved.reduce((m, l) => Math.max(m, l.e), 0),
       poets: new Set(solved.map((l) => POET(l.c))).size,
@@ -92,6 +104,7 @@
   }
 
   // ---- state -------------------------------------------------------------------------------------
+  const allItems = () => DATA.lines.concat(DATA.sentences || []);
   let DATA = null, pool = [], cur = null, lastCite = '';
   const dead = new Set();                         // lines no strict shuffle can break
   const pref = (k, d) => (S.prefs[k] === undefined ? d : S.prefs[k]);
@@ -195,28 +208,38 @@
     lineEl.replaceChildren();
     const bySeg = new Map();
     order.forEach((w) => { if (!bySeg.has(w.s)) bySeg.set(w.s, []); bySeg.get(w.s).push(w); });
-    let seg = -1;
-    cur.line.t.forEach((t) => {
-      if (typeof t === 'string') {
-        const wl = document.createElement('span');
-        wl.className = 'wall';
-        wl.textContent = t;
-        lineEl.append(wl);
-        return;
-      }
-      if (t.s === seg) return;
-      seg = t.s;
-      const box = document.createElement('span');
-      box.className = 'jb-seg-wrap';
-      box.dataset.seg = seg;
-      const ws = bySeg.get(seg) || [];
-      ws.forEach((w) => {
-        const tile = tileFor(w);
-        if (ws.length < 2) tile.classList.add('fixed');
+    const size = new Map([...bySeg].map(([k, ws]) => [k, ws.length]));
+    // each line (row) in the poet's layout: its walls where they stand, and as many slots of each
+    // segment as the poet put there, filled from the order
+    const rows = J.rowsOf(cur.line);
+    rows.forEach((row) => {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'jb-row';
+      let box = null;
+      row.forEach((t) => {
+        if (typeof t === 'string') {
+          const wl = document.createElement('span');
+          wl.className = 'wall';
+          wl.textContent = t;
+          rowEl.append(wl);
+          box = null;
+          return;
+        }
+        if (!box) {
+          box = document.createElement('span');
+          box.className = 'jb-seg-wrap';
+          box.dataset.seg = t.s;
+          box.dataset.cap = 0;
+          rowEl.append(box);
+        }
+        box.dataset.cap = +box.dataset.cap + 1;
+        const tile = tileFor(bySeg.get(t.s).shift());
+        if (size.get(t.s) < 2) tile.classList.add('fixed');
         box.append(tile);
       });
-      lineEl.append(box);
+      lineEl.append(rowEl);
     });
+    lineEl.classList.toggle('multi', rows.length > 1);
     const ov = document.createElementNS(SVGNS, 'svg');
     ov.setAttribute('class', 'jb-swooshes');
     ov.setAttribute('aria-hidden', 'true');
@@ -225,6 +248,24 @@
   }
 
   const tiles = () => [...lineEl.querySelectorAll('.tile:not(.ghost)')];
+  // a segment (a stretch between punctuation) may be cut by a line break into parts, one per row;
+  // data-cap is how many words the poet put in each part (used only to show the answer)
+  const segOf = (t) => t.parentNode.dataset.seg;
+  const partsOf = (seg) => [...lineEl.querySelectorAll(`.jb-seg-wrap[data-seg="${seg}"]`)];
+  const segTiles = (seg) => partsOf(seg).flatMap((p) => [...p.children]);
+  // put these tiles, in this order, into their segment's parts: each part takes as many as it holds
+  function fill(seg, ts) {
+    let k = 0;
+    partsOf(seg).forEach((p) => { const cap = +p.dataset.cap; ts.slice(k, k + cap).forEach((t) => p.append(t)); k += cap; });
+    markEmpty(seg);
+  }
+  // a part of a segment with no word left in it shows a dashed slot, a place to drop a word back
+  function markEmpty(seg) {
+    const parts = partsOf(seg);
+    parts.forEach((p) => p.classList.toggle('empty', parts.length > 1 && !p.querySelector('.tile')));
+  }
+  // words per line, as they stand now
+  const countsNow = () => [...lineEl.querySelectorAll('.jb-row')].map((r) => r.querySelectorAll('.tile').length);
   const orderNow = () => tiles().map((t) => cur.words[+t.dataset.id]);
   const tileOf = (id) => lineEl.querySelector(`.tile[data-id="${id}"]:not(.ghost)`);
 
@@ -240,7 +281,7 @@
 
   function refresh(animate, swooshesLater) {
     const order = orderNow();
-    const sc = J.scan(order);
+    const sc = J.scanItem(cur.line, order, countsNow());
     cur.scan = sc;
     if (mode === 'scanned' || cur.done) {
       order.forEach((w, i) => {
@@ -337,19 +378,22 @@
     const ov = lineEl.querySelector('.jb-swooshes');
     const order = orderNow(), sy = m.scan.sylls;
     const nuOf = (s) => tileOf(order[s.w].id).querySelector(`.nu[data-k="${s.n}"]`);
-    let k = 0;
-    const st = [];
-    m.feet.forEach((f) => { st.push(k); k += f.length; });
     const line = (x, y1, y2, cls) => {
       const l = document.createElementNS(SVGNS, 'line');
       l.setAttribute('x1', x); l.setAttribute('x2', x); l.setAttribute('y1', y1); l.setAttribute('y2', y2);
       l.setAttribute('class', cls);
       ov.append(l);
     };
-    st.slice(1).forEach((j) => {
-      const A = center(nuOf(sy[j - 1])), B = center(nuOf(sy[j]));
-      if (Math.abs(A.y - B.y) > 8) return;
-      line((A.x + B.x) / 2, B.top - 18, B.top - 4, 'bar');
+    m.rows.forEach((r, ri) => {
+      const rs = sy.filter((s) => s.row === ri);
+      let k = 0;
+      r.feet.forEach((f, fi) => {
+        k += f.length;
+        if (fi === r.feet.length - 1) return;
+        const A = center(nuOf(rs[k - 1])), B = center(nuOf(rs[k]));
+        if (Math.abs(A.y - B.y) > 8) return;
+        line((A.x + B.x) / 2, B.top - 18, B.top - 4, 'bar');
+      });
     });
   }
 
@@ -363,6 +407,14 @@
   // away any copy left behind (seen 2026-11-12: words stuck mid-drag).
   lineEl.addEventListener('pointerdown', (e) => {
     if (drag) endDrag();
+    const slot = e.target.closest('.jb-seg-wrap.empty');
+    if (slot && selected && cur && !cur.done && !cur.busy && segOf(selected) === slot.dataset.seg) {
+      const m = selected;
+      select(null);
+      cur.moves++;
+      moveTile(m, null, false, slot);
+      return;
+    }
     const tile = e.target.closest('.tile');
     if (!tile || !cur || cur.done || cur.busy || e.button > 0) return;
     drag = { tile, id: e.pointerId, x: e.clientX, y: e.clientY, moving: false, nu: e.target.closest('.nu') };
@@ -399,7 +451,7 @@
     if (e && e.type === 'pointercancel' && !d.moving) return;
     if (!d.moving) {                                   // a tap
       // with a word picked up, a tap on another word of its stretch puts it there, vowel or not
-      const moving = selected && selected !== d.tile && selected.parentNode === d.tile.parentNode;
+      const moving = selected && selected !== d.tile && segOf(selected) === segOf(d.tile);
       if (mode === 'blind' && d.nu && !cur.done && !moving) cycleMark(d.nu);
       else if (canMove(d.tile)) tapTile(d.tile);
       return;
@@ -422,26 +474,37 @@
 
   // move `tile` to where the pointer is, among the tiles of its own stretch between punctuation
   function placeAt(tile, x, y) {
-    const box = tile.parentNode;
-    const sibs = [...box.children].filter((t) => t !== tile);
-    if (!sibs.length) return;
+    const seg = segOf(tile);
+    const sibs = segTiles(seg).filter((t) => t !== tile);
+    const slots = partsOf(seg).filter((p) => !p.querySelector('.tile'));
     let best = null, bestD = Infinity;
+    const near = (r) => Math.abs(y - (r.top + r.height / 2)) * 3 + Math.abs(x - (r.left + r.width / 2));
     sibs.forEach((t) => {
-      const r = t.getBoundingClientRect();
-      const cy = r.top + r.height / 2, cx = r.left + r.width / 2;
-      const d = Math.abs(y - cy) * 3 + Math.abs(x - cx);
-      if (d < bestD) { bestD = d; best = { t, after: x > cx }; }
+      const r = t.getBoundingClientRect(), d = near(r);
+      if (d < bestD) { bestD = d; best = { t, after: x > r.left + r.width / 2 }; }
     });
-    const ref = best.after ? best.t.nextSibling : best.t;
-    if (ref === tile || (ref === null && box.lastChild === tile) || tile.nextSibling === ref) return;
-    moveTile(tile, ref);
+    slots.forEach((p) => {
+      const d = near(p.getBoundingClientRect());
+      if (d < bestD) { bestD = d; best = { part: p }; }
+    });
+    if (!best) return;
+    // nothing to do if that is where it is already
+    if (best.part ? tile.parentNode === best.part
+      : (best.after ? best.t.nextElementSibling === tile : best.t.previousElementSibling === tile)) return;
+    if (best.part) moveTile(tile, null, false, best.part);
+    else moveTile(tile, best.t, best.after);
   }
 
-  // FLIP: the other tiles glide to their new places
-  function moveTile(tile, ref) {
+  // put `tile` just before (or after) `target`, a tile of its segment, in target's line -- or at the
+  // end of `part`, an (empty) part of its segment. Nothing else moves line. FLIP: the others glide.
+  function moveTile(tile, target, after, part) {
+    if (tile === target) return;
     const all = tiles();
     const before = new Map(all.map((t) => [t, t.getBoundingClientRect()]));
-    tile.parentNode.insertBefore(tile, ref);
+    const seg = segOf(tile);
+    if (part) part.append(tile);
+    else target.parentNode.insertBefore(tile, after ? target.nextSibling : target);
+    markEmpty(seg);
     if (!reduced) {
       all.forEach((t) => {
         if (t === tile && drag) return;
@@ -471,25 +534,29 @@
   function tapTile(t) {
     if (!selected) { select(t); return; }
     if (selected === t) { select(null); return; }
-    if (selected.parentNode !== t.parentNode) { select(t); return; }
-    const sibs = [...t.parentNode.children];
+    if (segOf(selected) !== segOf(t)) { select(t); return; }
+    const sibs = segTiles(segOf(t));
     const from = sibs.indexOf(selected), to = sibs.indexOf(t);
     const mover = selected;
     select(null);
     cur.moves++;
-    moveTile(mover, from < to ? t.nextSibling : t);
+    moveTile(mover, t, from < to);
   }
 
   lineEl.addEventListener('keydown', (e) => {
     const t = e.target.closest('.tile');
     if (!t || !canMove(t)) return;
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-      const sibs = [...t.parentNode.children], i = sibs.indexOf(t);
-      const j = e.key === 'ArrowLeft' ? i - 1 : i + 1;
-      if (j < 0 || j >= sibs.length) return;
+      const right = e.key === 'ArrowRight';
+      const nb = right ? t.nextElementSibling : t.previousElementSibling;
+      const parts = partsOf(segOf(t)), pi = parts.indexOf(t.parentNode);
+      const over = parts[pi + (right ? 1 : -1)];          // the clause's part in the next/previous line
+      if (!nb && !over) return;
       e.preventDefault();
       cur.moves++;
-      moveTile(t, e.key === 'ArrowLeft' ? sibs[j] : sibs[j].nextSibling);
+      if (nb) moveTile(t, nb, right);
+      else if (right && over.firstElementChild) moveTile(t, over.firstElementChild, false);
+      else moveTile(t, null, false, over);                 // to the end of the line before, or an empty slot
       t.focus();
     }
   });
@@ -509,8 +576,8 @@
   // ---- choosing a line ---------------------------------------------------------------------------
   function filterPool() {
     const lvl = $('jb-level').value, pas = $('jb-passage').value;
-    pool = DATA.lines.filter((l) => !dead.has(l.c) && (!pas || l.p === pas)
-      && (lvl === 'mixed' || (lvl === 'plain' ? l.e === 0 : l.e > 0)));
+    pool = (lvl === 'sentences' ? DATA.sentences || [] : DATA.lines).filter((l) => !dead.has(l.c)
+      && (!pas || l.p === pas) && (lvl === 'mixed' || lvl === 'sentences' || (lvl === 'plain' ? l.e === 0 : l.e > 0)));
   }
   function pick() {
     const fresh = pool.filter((l) => !(S.lines[l.c] && S.lines[l.c][mode]) && l.c !== lastCite);
@@ -541,9 +608,10 @@
     $('jb-lock').disabled = false;
     $('jb-reshuffle').disabled = false;
     $('jb-show').disabled = false;
-    $('jb-hint').textContent = mode === 'blind'
+    $('jb-hint').textContent = (mode === 'blind'
       ? 'Drag the words (or tap one, then where it goes). Tap a vowel to mark it, for your own reference.'
-      : 'Drag the words (or tap one, then where it goes). The marks follow the words.';
+      : 'Drag the words (or tap one, then where it goes). The marks follow the words.')
+      + (line.rows ? ' Where a clause runs over the end of a line, its words can move into the next line.' : '');
     history.replaceState(null, '', `${location.pathname}?line=${encodeURIComponent(line.c)}`);
   }
 
@@ -575,7 +643,7 @@
     select(null);
     cur.busy = true;
     const order = orderNow();
-    const v = J.judge(cur.line, order);
+    const v = J.judge(cur.line, order, countsNow());
     $('jb-lock').disabled = true;
     roll(() => {
       if (v.right) win(order, v);
@@ -593,7 +661,8 @@
       const rec = s.lines[c.line.c] || (s.lines[c.line.c] = {});
       already = !!rec[mode];
       if (!already) {
-        pts = Math.max(Math.round(BASE[mode] / 3), BASE[mode] - 3 * c.wrong);
+        const base = BASE[mode] * J.rowsOf(c.line).length;
+        pts = Math.max(Math.round(base / 3), base - 3 * c.wrong);
         rec[mode] = today();
         s.points += pts;
       }
@@ -605,7 +674,7 @@
       fresh = award({ quick: secs <= 20, comeback: c.wrong >= 3 });
     });
     // the true scansion -- in the unscanned mode it lands with the drums
-    const sc = J.scan(order);
+    const sc = J.scanItem(c.line, order, countsNow());
     c.scan = sc;
     if (mode === 'blind') order.forEach((w) => tileOf(w.id).querySelectorAll('.nu').forEach((nu) => { nu.classList.add('truth'); setMark(nu, '', false); }));
     if (mode === 'blind') {
@@ -657,55 +726,67 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const q = (w) => `<b lang="la">${esc(w.w)}</b>`;
   function lineText(order, poet) {
-    // the words in this order, with the punctuation where it stands; words the student moved off the
-    // poet's place are shaded in the comparison
-    const bySeg = new Map();
-    order.forEach((w) => { if (!bySeg.has(w.s)) bySeg.set(w.s, []); bySeg.get(w.s).push(w); });
-    const out = [];
-    let seg = -1, idx = 0;
-    cur.line.t.forEach((t) => {
-      if (typeof t === 'string') { out.push(esc(t)); return; }
-      if (t.s === seg) return;
-      seg = t.s;
-      (bySeg.get(seg) || []).forEach((w) => {
-        const moved = poet && w.id !== cur.words[idx].id;
-        out.push(' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w)));
-        idx++;
-      });
-    });
-    return out.join('').trim().replace(/ ([,.;:!?])/g, '$1');
+    // the words in this order, with the punctuation where it stands, a line to a row; words the
+    // student moved off the poet's place are shaded in the comparison
+    let idx = 0;
+    return J.rowsOf(cur.line).map((row) => row.map((t) => {
+      if (typeof t === 'string') return esc(t);
+      const w = order[idx], moved = poet && w.id !== cur.words[idx].id;
+      idx++;
+      return ' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w));
+    }).join('').trim().replace(/ ([,.;:!?])/g, '$1')).join('<br>');
   }
+  // the student's lines as they stand on the page, moved words shaded
+  function yourText() {
+    let idx = 0;
+    return [...lineEl.querySelectorAll('.jb-row')].map((row) => [...row.children].map((el) => {
+      if (el.classList.contains('wall')) return esc(el.textContent);
+      if (!el.classList.contains('jb-seg-wrap')) return '';
+      return [...el.querySelectorAll('.tile')].map((t) => {
+        const w = cur.words[+t.dataset.id], moved = w.id !== cur.words[idx].id;
+        idx++;
+        return ' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w));
+      }).join('');
+    }).join('').trim().replace(/ ([,.;:!?])/g, '$1')).join('<br>');
+  }
+  const footText = (ft) => ft.map((f) => (f === 'LSS' ? '¯ ˘ ˘' : f === 'LL' ? '¯ ¯' : '¯ ' + (f[1] === 'S' ? '˘' : '¯'))).join(' | ');
   function showWin(order, v, pts, already) {
     const el = $('jb-verdict');
     el.className = 'jb-verdict ok';
     const poet = POET(cur.line.c);
+    const many = v.meter.rows.length > 1;
+    const what = many ? `${v.meter.rows.length} hexameters` : 'A hexameter';
     let html = v.exact
-      ? `<h3>A hexameter — exactly as ${poet} wrote it!</h3>`
-      : `<h3>A hexameter! Not quite ${poet}'s order, but it scans and it reads.</h3>
-         <dl class="jb-compare"><dt>Yours</dt><dd lang="la">${lineText(order, true)}</dd>
+      ? `<h3>${what} — exactly as ${poet} wrote ${many ? 'them' : 'it'}!</h3>`
+      : `<h3>${what}! Not quite ${poet}'s order, but ${many ? 'they scan' : 'it scans'} and ${many ? 'read' : 'reads'}.</h3>
+         <dl class="jb-compare"><dt>Yours</dt><dd lang="la">${yourText()}</dd>
          <dt>${poet}</dt><dd lang="la">${lineText(cur.words, false)}</dd></dl>`;
-    html += `<p>Feet: ${v.meter.feet.map((f) => (f === 'LSS' ? '¯ ˘ ˘' : f === 'LL' ? '¯ ¯' : '¯ ' + (f[1] === 'S' ? '˘' : '¯'))).join(' | ')}.</p>`;
-    html += already ? `<p>You had solved this line before in this mode: no new points.</p>`
+    html += many
+      ? `<p>${v.meter.rows.map((r, i) => `Line ${i + 1}: ${footText(r.feet)}`).join('<br>')}</p>`
+      : `<p>Feet: ${footText(v.meter.rows[0].feet)}.</p>`;
+    html += already ? `<p>You had solved this ${many ? 'sentence' : 'line'} before in this mode: no new points.</p>`
       : `<p><span class="jb-pts">+${pts} points</span>${cur.wrong ? ` (${cur.wrong} wrong lock-in${cur.wrong > 1 ? 's' : ''} first)` : ' — first try!'}</p>`;
     el.innerHTML = html;
     el.hidden = false;
   }
   const RULES = {
     group: (f) => `${q(f.words[0])} belongs to an earlier clause than ${q(f.words[1])}: keep each clause's words together, in their order.`,
-    opener: (f) => `${q(f.words[0])} begins its clause: at most two words may come in front of it.`,
+    opener: (f) => `${q(f.words[0])} begins what it introduces: ${f.words[0].j ? 'move it nearer the front' : 'at most two words may come in front of it'}.`,
     second: (f) => `${q(f.words[0])} stands second in its clause (or third), never first.`,
     after: (f) => `${q(f.words[0])} goes right after the word it emphasizes: ${q(f.words[1])}.`,
     prep: (f) => `${q(f.words[0])} needs its noun, ${q(f.words[1])}, right after it — or a word agreeing with that noun, with the noun close by.`,
-    neg: (f) => `${q(f.words[0])} comes before the word it goes with: ${q(f.words[1])}.`,
+    neg: (f) => `${q(f.words[0])} comes before the word it goes with, ${q(f.words[1])} — or before the verb.`,
+    phrase: (f) => `${q(f.words[0])} belongs before ${q(f.words[1])}: what <i>et</i>, <i>nec</i> or <i>-que</i> join stays in its order.`,
     voc: (f) => `${q(f.words[0])} comes before the person addressed: ${q(f.words[1])}.`,
+    indef: (f) => `${q(f.words[0])} here means "any": it comes after ${q(f.words[1])}.`,
   };
-  function brokenFoot(pattern) {
+  function brokenFoot(pattern, spondaicFifth) {
     let i = 0;
     for (let f = 0; f < 6; f++) {
       if (pattern[i] !== 'L') return f + 1;
       if (f === 5) return pattern.length === i + 2 ? 0 : 6;
       if (pattern[i + 1] === 'S' && pattern[i + 2] === 'S') i += 3;
-      else if (pattern[i + 1] === 'L' && (f < 4 || cur.line.f5 === 'LL')) i += 2;
+      else if (pattern[i + 1] === 'L' && (f < 4 || spondaicFifth)) i += 2;
       else return f + 1;
     }
     return 6;
@@ -714,11 +795,16 @@
     const el = $('jb-verdict');
     el.className = 'jb-verdict bad';
     let html;
-    if (!v.meter.feet) {
-      const f = brokenFoot(v.meter.scan.pattern);
+    if (!v.meter.ok) {
+      const rows = v.meter.rows, many = rows.length > 1;
+      const r = rows.findIndex((x) => !x.feet);
+      const f5 = Array.isArray(cur.line.f5) ? cur.line.f5[r] : cur.line.f5;
+      const f = brokenFoot(rows[r].pattern, f5 === 'LL');
+      const where = `${['first', 'second', 'third', 'fourth', 'fifth', 'sixth'][f - 1] || 'last'} foot${f === 5 ? ' (the fifth foot is almost always ¯ ˘ ˘)' : ''}`;
       html = mode === 'scanned'
-        ? `<h3>Not a hexameter yet.</h3><p>It goes wrong in the ${['first', 'second', 'third', 'fourth', 'fifth', 'sixth'][f - 1] || 'last'} foot${f === 5 ? ' (the fifth foot is almost always ¯ ˘ ˘)' : ''}.</p>`
-        : `<h3>That order doesn't scan.</h3><p>Try marking a few syllables: the last two feet, ¯ ˘ ˘ | ¯ ¯, are a good place to start.</p>`;
+        ? (many ? `<h3>Line ${r + 1} is not a hexameter yet.</h3><p>It goes wrong in the ${where}.</p>`
+          : `<h3>Not a hexameter yet.</h3><p>It goes wrong in the ${where}.</p>`)
+        : `<h3>${many ? 'Not every line scans yet.' : "That order doesn't scan."}</h3><p>Try marking a few syllables: the last two feet, ¯ ˘ ˘ | ¯ ¯, are a good place to start.</p>`;
     } else {
       html = `<h3>It scans! But the Latin doesn't read that way.</h3><p>${RULES[v.faults[0].rule](v.faults[0])}</p>`;
     }
@@ -739,7 +825,7 @@
     update((s) => { s.t.shown++; bump(s, false); });
     const all = tiles();
     const before = new Map(all.map((t) => [t, t.getBoundingClientRect()]));
-    c.words.forEach((w) => { const t = tileOf(w.id); t.parentNode.append(t); });
+    [...new Set(c.words.map((w) => w.s))].forEach((sg) => fill(sg, c.words.filter((w) => w.s === sg).map((w) => tileOf(w.id))));
     if (!reduced) all.forEach((t) => {
       const a = before.get(t), b = t.getBoundingClientRect();
       t.classList.remove('flip');
@@ -747,7 +833,7 @@
       requestAnimationFrame(() => { t.classList.add('flip'); t.style.transform = ''; });
     });
     setTimeout(() => {
-      const sc = J.scan(c.words);
+      const sc = J.scanItem(c.line, c.words);
       if (mode === 'blind') all.forEach((t) => t.querySelectorAll('.nu').forEach((nu) => { nu.classList.add('truth'); setMark(nu, '', false); }));
       refresh(true);
       drawBars(J.meter(c.line, c.words));
@@ -756,7 +842,7 @@
     lineEl.classList.add('locked');
     const el = $('jb-verdict');
     el.className = 'jb-verdict';
-    el.innerHTML = `<h3>${POET(c.line.c)}'s line</h3><p lang="la">${lineText(c.words, false)}</p><p>No points this time; the next one's yours.</p>`;
+    el.innerHTML = `<h3>${POET(c.line.c)}'s ${c.line.rows ? 'lines' : 'line'}</h3><p lang="la">${lineText(c.words, false)}</p><p>No points this time; the next one's yours.</p>`;
     el.hidden = false;
     $('jb-lock').disabled = true;
     $('jb-reshuffle').disabled = true;
@@ -834,7 +920,7 @@
     resizeT = setTimeout(() => {
       if (!cur || !cur.scan) return;
       if (mode === 'scanned' || cur.done) drawSwooshes(orderNow(), cur.scan, false);
-      if (cur.done) drawBars(J.meter(cur.line, orderNow()));
+      if (cur.done) drawBars(J.meter(cur.line, orderNow(), countsNow()));
     }, 120);
   });
 
@@ -853,7 +939,9 @@
       paintPoints();
       filterPool();
       const asked = new URLSearchParams(location.search).get('line');
-      const line = asked && d.lines.find((l) => l.c === asked);
+      const line = asked && d.lines.concat(d.sentences || []).find((l) => l.c === asked);
+      // a link to a sentence opens the sentences; a link to a line leaves the menu as it was
+      if (line && line.rows && $('jb-level').value !== 'sentences') { $('jb-level').value = 'sentences'; filterPool(); }
       start(line || pick());
     })
     .catch((err) => {

@@ -19,12 +19,21 @@
 
 /* ---- the line: tiles and walls --------------------------------------------------------------------- */
 .jb-line {
-  position: relative; display: flex; flex-wrap: wrap; align-items: flex-end; gap: .9rem .38rem;
+  position: relative;
   margin: .8rem 0 .4rem; padding: .3rem .1rem 1.1rem; min-height: 4rem;
   font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.2rem, 3.3vw, 1.85rem);
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
 }
+/* a line to a row; a sentence has several, set apart */
+.jb-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .9rem .38rem; }
+.jb-line.multi .jb-row + .jb-row { margin-top: 1.3rem; padding-top: .2rem; border-top: 1px dashed var(--line); }
 .jb-seg-wrap { display: contents; }
+/* a line's share of a clause, emptied: a dashed slot to drop a word back into */
+.jb-seg-wrap.empty {
+  display: inline-block; width: 2.4em; height: 1.75em; align-self: flex-end;
+  border: 1.5px dashed var(--line); border-radius: 9px; cursor: pointer;
+}
+.jb-seg-wrap.empty:hover { border-color: var(--accent); }
 .tile {
   position: relative; display: inline-block; padding: .62em .32em .12em; line-height: 1.15;
   border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink);
@@ -141,7 +150,8 @@
 
 @media (max-width: 40rem) {
   .jb { padding: .75rem .75rem 1.5rem; }
-  .jb-line { gap: .75rem .26rem; font-size: 1.15rem; }
+  .jb-line { font-size: 1.15rem; }
+  .jb-row { gap: .75rem .26rem; }
   .tile { padding: .6em .24em .1em; }
   .jb-controls label { width: 100%; }
   .jb-controls select { flex: 1; min-width: 0; }
