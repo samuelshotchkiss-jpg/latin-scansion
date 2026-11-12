@@ -94,9 +94,13 @@
              severe, mild, breaks: severe + mild, breakCost, syllables: N };
   }
 
-  // The gradebook: each part's level by the department's table, averaged, and that share of 5 points.
-  const gradebook = (lv1, lv2) => (PERCENT[lv1] + PERCENT[lv2]) / 2;
-  const points = (lv1, lv2) => OUT_OF * gradebook(lv1, lv2) / 100;
+  // The quiz's percentage: the two parts' ACTUAL percentages averaged, not their levels (owner,
+  // 2026-11-12), each at least the department's floor (any work 65%, a blank part 50%). As
+  // meter_grade.final. Times 5, the points.
+  const FLOOR = 65, NO_WORK = 50;
+  const final = (part1Pct, meter, part2Blank) =>
+    (Math.max(FLOOR, part1Pct) + (part2Blank ? NO_WORK : Math.max(FLOOR, meter))) / 2;
+  const points = (pct) => OUT_OF * pct / 100;
 
-  return { score, breaks, level, gradebook, points, PERCENT, OUT_OF };
+  return { score, breaks, level, final, points, PERCENT, OUT_OF };
 });

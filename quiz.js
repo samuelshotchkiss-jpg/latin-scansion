@@ -213,6 +213,7 @@
       });
     });
     const blank = marks.join("").split(".").length - 1;
+    const fin = QS.final(pct1, r.score, marks.every((m) => /^\.*$/.test(m)));
     const n = (x) => (Math.round(x * 10) / 10).toFixed(1);
     out.replaceChildren(
       el("div", { className: "qz-result-head", text: "How the real quiz would grade this" }),
@@ -224,8 +225,8 @@
     if (r.breaks) why.push(`lines that do not fit the meter (−${n(r.breakCost)})`);
     if (why.length) out.append(el("ul", { className: "qz-why" }, ...why.map((w) => el("li", { text: w }))));
     out.append(el("div", { className: "qz-total" }, el("b", { text: "Overall: " }),
-      `${QS.gradebook(lv1, r.level)}% = ${QS.points(lv1, r.level).toFixed(2)} of ${QS.OUT_OF} points`,
-      el("span", { className: "note", text: " (each part's level, as the department averages them)" })));
+      `${n(fin)}% = ${QS.points(fin).toFixed(2)} of ${QS.OUT_OF} points`,
+      el("span", { className: "note", text: " (the two parts' percentages, averaged)" })));
     const notes = [];
     const blank1 = picks.filter((p) => !p.querySelector("select").value).length;
     if (blank1) notes.push(`${blank1} of Part I's ${picks.length} answers ${blank1 === 1 ? "is" : "are"} blank.`);

@@ -30,7 +30,10 @@ test("a perfect passage is 100 and a 4; levels at the department's midpoints", (
   assert.strictEqual(r.score, 100);
   assert.strictEqual(r.level, 4);
   assert.deepStrictEqual([95, 94.9, 87.5, 80, 79.9, 70, 69.9].map(QS.level), [4, 3.5, 3.5, 3, 2, 2, 1]);
-  assert.strictEqual(QS.gradebook(3.5, 4), 95);
+  assert.strictEqual(QS.final(90, 97.5), 93.75);          // the actual percentages, averaged
+  assert.strictEqual(QS.final(40, 97.5), 81.25);          // ... each at least 65
+  assert.strictEqual(QS.final(100, 0, true), 75);         // a blank Part II is 50
+  assert.strictEqual(QS.points(93.75), 4.6875);
 });
 
 test("every app vowel has a rung, a rule and a place in its line", () => {
