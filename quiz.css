@@ -67,6 +67,32 @@ main.qz { max-width: 70rem; }
 .qz-line .qz-la { font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.15rem, 2.6vw, 1.55rem); }
 .qz-open { color: var(--accent); font-weight: 600; font-size: .85rem; white-space: nowrap; }
 
+/* Marking on screen: every vowel a button, its mark drawn above it. The hit area is wider than the
+   letter (::after), so a finger finds it on a phone. */
+.qz-v {
+  font: inherit; line-height: 1.15; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+  position: relative; border-radius: 3px;
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.qz-v::before {
+  content: attr(data-show); position: absolute; left: 50%; top: -.08em; transform: translateX(-50%);
+  font-size: .95em; line-height: 1; color: var(--accent); font-weight: 700; pointer-events: none;
+}
+.qz-v::after { content: ""; position: absolute; inset: -.5em -.2em -.2em; }
+.qz-w { white-space: nowrap; }
+.qz-line .qz-la { line-height: 2; }                 /* a wrapped line keeps room for its marks */
+.qz-v:hover, .qz-v:focus-visible { background: color-mix(in srgb, var(--accent) 16%, transparent); outline: none; }
+.qz-v.bad { background: color-mix(in srgb, var(--bad) 22%, transparent); box-shadow: inset 0 -2px 0 var(--bad); }
+.qz-v.bad::before { color: var(--bad); }
+.qz-note {
+  margin: 0 0 .6rem; padding: .45rem .7rem; font-size: .88rem; line-height: 1.45;
+  background: color-mix(in srgb, var(--accent) 8%, var(--panel)); border-left: 3px solid var(--accent); border-radius: 4px;
+}
+.qz-result { margin: .6rem auto 0; text-align: left; max-width: 34rem; }
+.qz-result-head { font-weight: 700; margin-bottom: .2rem; }
+.qz-why { margin: .25rem 0 .35rem 1.2rem; padding: 0; font-size: .9rem; }
+.qz-total { margin-top: .2rem; }
+
 /* the key */
 .qz-key { border-color: var(--accent); }
 .qz-keytable { width: 100%; border-collapse: collapse; font-size: .95rem; }
@@ -124,6 +150,9 @@ main.qz { max-width: 70rem; }
   .qz-part2 { break-before: page; }
   .qz-line { border-bottom: none; padding-top: 2.4rem; grid-template-columns: 2.2rem minmax(0, 1fr); }
   .qz-line .qz-la { font-size: 16pt; }
+  .qz-v { box-shadow: none; background: none !important; }
+  .qz-v::before { color: #000 !important; }
+  .qz-note { background: none; border-left: 2px solid #000; font-size: 9pt; }
   .qz-key:not([hidden]) { break-before: page; }
   .qz-keytable tr { break-inside: avoid; }
   .qz-keyline { break-inside: avoid; }

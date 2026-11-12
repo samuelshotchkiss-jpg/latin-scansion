@@ -1,0 +1,104 @@
+[
+ {
+  "student": "perfect",
+  "passage": [
+   "Met. 8.183",
+   "Met. 8.184",
+   "Met. 8.185",
+   "Met. 8.186"
+  ],
+  "marks": [
+   "LSSLSSLLLLLSSLL",
+   "LSSLLLSSLLLSSLL",
+   "LSSLSSLLLSSLSSLL",
+   "LSSLLLLLSSLSSLL"
+  ],
+  "score": 100.0,
+  "level": 4.0
+ },
+ {
+  "student": "one slip",
+  "passage": [
+   "Met. 8.183",
+   "Met. 8.184",
+   "Met. 8.185",
+   "Met. 8.186"
+  ],
+  "marks": [
+   "LSSLSSLLLLLSSLL",
+   "LSSLLLSSLLLSSLL",
+   "LSSLSSLLLSSLSSLL",
+   "LSSLLLLLSSLSSSL"
+  ],
+  "score": 98.684211,
+  "level": 4.0
+ },
+ {
+  "student": "scattered slips",
+  "passage": [
+   "Met. 8.183",
+   "Met. 8.184",
+   "Met. 8.185",
+   "Met. 8.186"
+  ],
+  "marks": [
+   "LSSLSSLLLLLSSLx",
+   "LSSL.LLSLLLSSLS",
+   "LSSLSSLLLSSLSSLL",
+   "SSxLLLLLSSLSSLL"
+  ],
+  "score": 95.614035,
+  "level": 4.0
+ },
+ {
+  "student": "never across a word break",
+  "passage": [
+   "Met. 8.183",
+   "Met. 8.184",
+   "Met. 8.185",
+   "Met. 8.186"
+  ],
+  "marks": [
+   "LSSLSSLLLLLSSLL",
+   "LSSSLLSSLLLSSLL",
+   "LSSSSSLLLSSLSSLL",
+   "LSSSLSLLSSLSSLL"
+  ],
+  "score": 73.245614,
+  "level": 2.0
+ },
+ {
+  "student": "never elides",
+  "passage": [
+   "Aen. 6.28",
+   "Aen. 6.29",
+   "Aen. 6.30",
+   "Aen. 6.31"
+  ],
+  "marks": [
+   "LLLLLSSLSSLSSLL",
+   "LSSLSSLLSLLLSSLL",
+   "LSSLLLLLSSLSSLL",
+   "LSSSSLLLSSLSSLSSSLL"
+  ],
+  "score": 83.770492,
+  "level": 3.0
+ },
+ {
+  "student": "careless and unfinished",
+  "passage": [
+   "Met. 8.183",
+   "Met. 8.184",
+   "Met. 8.185",
+   "Met. 8.186"
+  ],
+  "marks": [
+   "SSSL..LLLLL.SLL",
+   "LSSSLLSSLSLSxLL",
+   "LSSLLSLLL.SxSSLS",
+   "LSSLLLLLSSxSSLL"
+  ],
+  "score": 86.263158,
+  "level": 3.0
+ }
+]

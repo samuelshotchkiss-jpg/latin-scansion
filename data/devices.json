@@ -10,57 +10,30 @@
      "cite": "Met. 8.213-214",
      "latin": [
       [
-       [
-        "velut",
-        true
-       ],
-       [
-        " āles, ab altō",
-        false
-       ]
+       ["velut", true],
+       [" āles, ab altō", false]
       ],
       [
-       [
-        "quae teneram prōlem prōdūxit in āera nīdō",
-        false
-       ]
+       ["quae teneram prōlem prōdūxit in āera nīdō", false]
       ]
      ],
      "english": "like a bird who has led her tender young out of a high nest into the air",
-     "lines": [
-      "Met. 8.213",
-      "Met. 8.214"
-     ],
-     "also": [
-      "chiasmus",
-      "hyperbaton"
-     ]
+     "lines": ["Met. 8.213", "Met. 8.214"],
+     "also": ["chiasmus", "hyperbaton"]
     },
     {
      "cite": "Met. 8.191-192",
      "latin": [
       [
-       [
-        "sīc",
-        true
-       ],
-       [
-        " rūstica quondam",
-        false
-       ]
+       ["sīc", true],
+       [" rūstica quondam", false]
       ],
       [
-       [
-        "fistula disparibus paulātim surgit avēnīs",
-        false
-       ]
+       ["fistula disparibus paulātim surgit avēnīs", false]
       ]
      ],
      "english": "just so a shepherd's panpipe rises little by little from reeds of unequal length",
-     "lines": [
-      "Met. 8.191",
-      "Met. 8.192"
-     ],
+     "lines": ["Met. 8.191", "Met. 8.192"],
      "also": []
     }
    ]
@@ -74,121 +47,66 @@
      "cite": "Aen. 6.16",
      "latin": [
       [
-       [
-        "īnsuētum per iter gelidās ",
-        false
-       ],
-       [
-        "ēnāvit",
-        true
-       ],
-       [
-        " ad Arctōs",
-        false
-       ]
+       ["īnsuētum per iter gelidās ", false],
+       ["ēnāvit", true],
+       [" ad Arctōs", false]
       ]
      ],
      "english": "by an unaccustomed road he swam out to the icy Bears",
-     "lines": [
-      "Aen. 6.16"
-     ],
-     "also": [
-      "metonymy"
-     ]
+     "lines": ["Aen. 6.16"],
+     "also": ["metonymy"]
     },
     {
      "cite": "Met. 8.228",
      "latin": [
       [
-       [
-        "rēmigiōque",
-        true
-       ],
-       [
-        " carēns",
-        false
-       ]
+       ["rēmigiōque", true],
+       [" carēns", false]
       ]
      ],
      "english": "and lacking his oarage",
-     "lines": [
-      "Met. 8.228"
-     ],
+     "lines": ["Met. 8.228"],
      "also": []
     },
     {
      "cite": "Aen. 6.19",
      "latin": [
       [
-       [
-        "rēmigium",
-        true
-       ],
-       [
-        " ālārum",
-        false
-       ]
+       ["rēmigium", true],
+       [" ālārum", false]
       ]
      ],
      "english": "the oarage of his wings",
-     "lines": [
-      "Aen. 6.19"
-     ],
+     "lines": ["Aen. 6.19"],
      "also": []
     },
     {
      "cite": "Met. 8.208",
      "latin": [
       [
-       [
-        "mē duce ",
-        false
-       ],
-       [
-        "carpe",
-        true
-       ],
-       [
-        " viam!",
-        false
-       ]
+       ["mē duce ", false],
+       ["carpe", true],
+       [" viam!", false]
       ]
      ],
      "english": "with me as guide, pluck your road!",
-     "lines": [
-      "Met. 8.208"
-     ],
+     "lines": ["Met. 8.208"],
      "also": []
     },
     {
      "cite": "Met. 8.219-220",
      "latin": [
       [
-       [
-        "quīque aethera ",
-        false
-       ],
-       [
-        "carpere",
-        true
-       ],
-       [
-        " possent,",
-        false
-       ]
+       ["quīque aethera ", false],
+       ["carpere", true],
+       [" possent,", false]
       ],
       [
-       [
-        "crēdidit esse deōs.",
-        false
-       ]
+       ["crēdidit esse deōs.", false]
       ]
      ],
      "english": "and he believed they were gods, who could pluck the upper air",
-     "lines": [
-      "Met. 8.219",
-      "Met. 8.220"
-     ],
+     "lines": ["Met. 8.219", "Met. 8.220"],
      "also": []
     }
    ]
@@ -202,60 +120,22 @@
      "cite": "Met. 8.186-187",
      "latin": [
       [
-       [
-        "at ",
-        false
-       ],
-       [
-        "caelum",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "certē",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "patet",
-        true
-       ],
-       [
-        " … omnia ",
-        false
-       ],
-       [
-        "possideat",
-        true
-       ],
-       [
-        ", nōn ",
-        false
-       ],
-       [
-        "possidet",
-        true
-       ],
-       [
-        " āera Mīnōs",
-        false
-       ]
+       ["at ", false],
+       ["caelum", true],
+       [" ", false],
+       ["certē", true],
+       [" ", false],
+       ["patet", true],
+       [" … omnia ", false],
+       ["possideat", true],
+       [", nōn ", false],
+       ["possidet", true],
+       [" āera Mīnōs", false]
       ]
      ],
      "english": "but the sky is surely open … let Minos own everything, he does not own the air",
-     "lines": [
-      "Met. 8.186",
-      "Met. 8.187"
-     ],
-     "also": [
-      "chiasmus"
-     ]
+     "lines": ["Met. 8.186", "Met. 8.187"],
+     "also": ["chiasmus"]
     }
    ]
   },
@@ -268,63 +148,31 @@
      "cite": "Met. 8.196",
      "latin": [
       [
-       [
-        "ignārus",
-        true
-       ],
-       [
-        " sua sē tractāre ",
-        false
-       ],
-       [
-        "perīcla",
-        true
-       ]
+       ["ignārus", true],
+       [" sua sē tractāre ", false],
+       ["perīcla", true]
       ]
      ],
      "english": "not knowing that he was handling his own danger",
-     "lines": [
-      "Met. 8.196"
-     ],
+     "lines": ["Met. 8.196"],
      "also": []
     },
     {
      "cite": "Met. 8.211-212",
      "latin": [
       [
-       [
-        "dedit ōscula nātō",
-        false
-       ]
+       ["dedit ōscula nātō", false]
       ],
       [
-       [
-        "nōn",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "iterum",
-        true
-       ],
-       [
-        " repetenda suō",
-        false
-       ]
+       ["nōn", true],
+       [" ", false],
+       ["iterum", true],
+       [" repetenda suō", false]
       ]
      ],
      "english": "he gave his son kisses that would never be given again",
-     "lines": [
-      "Met. 8.211",
-      "Met. 8.212"
-     ],
-     "also": [
-      "synchysis",
-      "hyperbaton"
-     ]
+     "lines": ["Met. 8.211", "Met. 8.212"],
+     "also": ["synchysis", "hyperbaton"]
     }
    ]
   },
@@ -337,58 +185,28 @@
      "cite": "Met. 8.232",
      "latin": [
       [
-       [
-        "'",
-        false
-       ],
-       [
-        "ubi",
-        true
-       ],
-       [
-        " es? ",
-        false
-       ],
-       [
-        "quā",
-        true
-       ],
-       [
-        " tē regiōne requīram?'",
-        false
-       ]
+       ["'", false],
+       ["ubi", true],
+       [" es? ", false],
+       ["quā", true],
+       [" tē regiōne requīram?'", false]
       ]
      ],
      "english": "'where are you? In what place shall I look for you?'",
-     "lines": [
-      "Met. 8.232"
-     ],
-     "also": [
-      "apostrophe"
-     ]
+     "lines": ["Met. 8.232"],
+     "also": ["apostrophe"]
     },
     {
      "cite": "Met. 1.456",
      "latin": [
       [
-       [
-        "'",
-        false
-       ],
-       [
-        "quid",
-        true
-       ],
-       [
-        "' que 'tibī, lascīve puer, cum fortibus armīs?'",
-        false
-       ]
+       ["'", false],
+       ["quid", true],
+       ["' que 'tibī, lascīve puer, cum fortibus armīs?'", false]
       ]
      ],
      "english": "'And what have you to do with strong weapons, naughty boy?'",
-     "lines": [
-      "Met. 1.456"
-     ],
+     "lines": ["Met. 1.456"],
      "also": []
     }
    ]
@@ -402,28 +220,14 @@
      "cite": "Met. 8.231",
      "latin": [
       [
-       [
-        "at ",
-        false
-       ],
-       [
-        "pater",
-        true
-       ],
-       [
-        " īnfēlīx, nec iam ",
-        false
-       ],
-       [
-        "pater",
-        true
-       ]
+       ["at ", false],
+       ["pater", true],
+       [" īnfēlīx, nec iam ", false],
+       ["pater", true]
       ]
      ],
      "english": "but the unhappy father, now no longer a father",
-     "lines": [
-      "Met. 8.231"
-     ],
+     "lines": ["Met. 8.231"],
      "also": []
     }
    ]
@@ -437,50 +241,28 @@
      "cite": "Met. 8.185-186",
      "latin": [
       [
-       [
-        "'terrās licet' inquit 'et ",
-        false
-       ],
-       [
-        "undās",
-        true
-       ]
+       ["'terrās licet' inquit 'et ", false],
+       ["undās", true]
       ],
       [
-       [
-        "obstruat'",
-        false
-       ]
+       ["obstruat'", false]
       ]
      ],
      "english": "'he may block the lands and the waves,' he says",
-     "lines": [
-      "Met. 8.185",
-      "Met. 8.186"
-     ],
+     "lines": ["Met. 8.185", "Met. 8.186"],
      "also": []
     },
     {
      "cite": "Aen. 6.15",
      "latin": [
       [
-       [
-        "praepetibus ",
-        false
-       ],
-       [
-        "pennīs",
-        true
-       ]
+       ["praepetibus ", false],
+       ["pennīs", true]
       ]
      ],
      "english": "on swift feathers",
-     "lines": [
-      "Aen. 6.15"
-     ],
-     "also": [
-      "alliteration"
-     ]
+     "lines": ["Aen. 6.15"],
+     "also": ["alliteration"]
     }
    ]
   },
@@ -493,76 +275,41 @@
      "cite": "Met. 8.200-201",
      "latin": [
       [
-       [
-        "postquam ",
-        false
-       ],
-       [
-        "manus",
-        true
-       ],
-       [
-        " ultima coeptō",
-        false
-       ]
+       ["postquam ", false],
+       ["manus", true],
+       [" ultima coeptō", false]
       ],
       [
-       [
-        "imposita est",
-        false
-       ]
+       ["imposita est", false]
       ]
      ],
      "english": "after the last hand was laid on the work",
-     "lines": [
-      "Met. 8.200",
-      "Met. 8.201"
-     ],
+     "lines": ["Met. 8.200", "Met. 8.201"],
      "also": []
     },
     {
      "cite": "Aen. 6.26",
      "latin": [
       [
-       [
-        "Veneris",
-        true
-       ],
-       [
-        " monumenta nefandae",
-        false
-       ]
+       ["Veneris", true],
+       [" monumenta nefandae", false]
       ]
      ],
      "english": "the reminders of unspeakable Venus",
-     "lines": [
-      "Aen. 6.26"
-     ],
-     "also": [
-      "ecphrasis"
-     ]
+     "lines": ["Aen. 6.26"],
+     "also": ["ecphrasis"]
     },
     {
      "cite": "Aen. 6.16",
      "latin": [
       [
-       [
-        "īnsuētum per iter gelidās ēnāvit ad ",
-        false
-       ],
-       [
-        "Arctōs",
-        true
-       ]
+       ["īnsuētum per iter gelidās ēnāvit ad ", false],
+       ["Arctōs", true]
       ]
      ],
      "english": "by an unaccustomed road he swam out to the icy Bears",
-     "lines": [
-      "Aen. 6.16"
-     ],
-     "also": [
-      "metaphor"
-     ]
+     "lines": ["Aen. 6.16"],
+     "also": ["metaphor"]
     }
    ]
   },
@@ -575,205 +322,90 @@
      "cite": "Aen. 6.30-31",
      "latin": [
       [
-       [
-        "tū",
-        true
-       ],
-       [
-        " quoque magnam",
-        false
-       ]
+       ["tū", true],
+       [" quoque magnam", false]
       ],
       [
-       [
-        "partem opere in tantō, sineret dolor, ",
-        false
-       ],
-       [
-        "Īcare",
-        true
-       ],
-       [
-        ", habērēs.",
-        false
-       ]
+       ["partem opere in tantō, sineret dolor, ", false],
+       ["Īcare", true],
+       [", habērēs.", false]
       ]
      ],
      "english": "you too, Icarus, would have had a large part in so great a work, had grief allowed",
-     "lines": [
-      "Aen. 6.30",
-      "Aen. 6.31"
-     ],
-     "also": [
-      "ecphrasis"
-     ]
+     "lines": ["Aen. 6.30", "Aen. 6.31"],
+     "also": ["ecphrasis"]
     },
     {
      "cite": "Met. 8.232",
      "latin": [
       [
-       [
-        "'",
-        false
-       ],
-       [
-        "Īcare",
-        true
-       ],
-       [
-        ",' dīxit 'ubi es? quā tē regiōne requīram?'",
-        false
-       ]
+       ["'", false],
+       ["Īcare", true],
+       [",' dīxit 'ubi es? quā tē regiōne requīram?'", false]
       ]
      ],
      "english": "'Icarus,' he said, 'where are you? In what place shall I look for you?'",
-     "lines": [
-      "Met. 8.232"
-     ],
-     "also": [
-      "rhetorical_question"
-     ]
+     "lines": ["Met. 8.232"],
+     "also": ["rhetorical_question"]
     },
     {
      "cite": "Aen. 6.18-19",
      "latin": [
       [
-       [
-        "redditus hīs prīmum terrīs ",
-        false
-       ],
-       [
-        "tibi",
-        true
-       ],
-       [
-        ", ",
-        false
-       ],
-       [
-        "Phoebe",
-        true
-       ],
-       [
-        ", sacrāvit",
-        false
-       ]
+       ["redditus hīs prīmum terrīs ", false],
+       ["tibi", true],
+       [", ", false],
+       ["Phoebe", true],
+       [", sacrāvit", false]
       ],
       [
-       [
-        "rēmigium ālārum",
-        false
-       ]
+       ["rēmigium ālārum", false]
       ]
      ],
      "english": "returned to these lands first, he dedicated to you, Phoebus, the oarage of his wings",
-     "lines": [
-      "Aen. 6.18",
-      "Aen. 6.19"
-     ],
-     "also": [
-      "metaphor"
-     ]
+     "lines": ["Aen. 6.18", "Aen. 6.19"],
+     "also": ["metaphor"]
     },
     {
      "cite": "Met. 4.67-69",
      "latin": [
       [
-       [
-        "id vitium nūllī per saecula longa notātum—",
-        false
-       ]
+       ["id vitium nūllī per saecula longa notātum—", false]
       ],
       [
-       [
-        "quid nōn sentit amor?—prīmī ",
-        false
-       ],
-       [
-        "vīdistis",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "amantēs",
-        true
-       ]
+       ["quid nōn sentit amor?—prīmī ", false],
+       ["vīdistis", true],
+       [" ", false],
+       ["amantēs", true]
       ],
       [
-       [
-        "et vōcis ",
-        false
-       ],
-       [
-        "fēcistis",
-        true
-       ],
-       [
-        " iter",
-        false
-       ]
+       ["et vōcis ", false],
+       ["fēcistis", true],
+       [" iter", false]
       ]
      ],
      "english": "that flaw, noticed by no one through long ages -- what does love not sense? -- you lovers saw first, and you made it a road for your voices",
-     "lines": [
-      "Met. 4.67",
-      "Met. 4.68",
-      "Met. 4.69"
-     ],
-     "also": [
-      "chiasmus",
-      "hyperbaton",
-      "rhetorical_question"
-     ]
+     "lines": ["Met. 4.67", "Met. 4.68", "Met. 4.69"],
+     "also": ["chiasmus", "hyperbaton", "rhetorical_question"]
     },
     {
      "cite": "Met. 1.488-489",
      "latin": [
       [
-       [
-        "sed ",
-        false
-       ],
-       [
-        "tē",
-        true
-       ],
-       [
-        " decor iste quod optās",
-        false
-       ]
+       ["sed ", false],
+       ["tē", true],
+       [" decor iste quod optās", false]
       ],
       [
-       [
-        "esse vetat, vōtōque ",
-        false
-       ],
-       [
-        "tuō",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "tua",
-        true
-       ],
-       [
-        " fōrma repugnat",
-        false
-       ]
+       ["esse vetat, vōtōque ", false],
+       ["tuō", true],
+       [" ", false],
+       ["tua", true],
+       [" fōrma repugnat", false]
       ]
      ],
      "english": "but that beauty of yours forbids you to be what you wish, and your looks fight your prayer",
-     "lines": [
-      "Met. 1.488",
-      "Met. 1.489"
-     ],
+     "lines": ["Met. 1.488", "Met. 1.489"],
      "also": []
     }
    ]
@@ -787,40 +419,20 @@
      "cite": "Aen. 6.20-33",
      "latin": [
       [
-       [
-        "in ",
-        false
-       ],
-       [
-        "foribus",
-        true
-       ],
-       [
-        " lētum Androgeō …",
-        false
-       ]
+       ["in ", false],
+       ["foribus", true],
+       [" lētum Androgeō …", false]
       ],
       [
-       [
-        "bis cōnātus erat cāsūs effingere in aurō,",
-        false
-       ]
+       ["bis cōnātus erat cāsūs effingere in aurō,", false]
       ],
       [
-       [
-        "bis patriae cecidēre manūs.",
-        false
-       ]
+       ["bis patriae cecidēre manūs.", false]
       ]
      ],
      "english": "on the doors, the death of Androgeos … twice he had tried to shape the fall in gold",
-     "lines": [
-      "Aen. 6.20",
-      "Aen. 6.32"
-     ],
-     "also": [
-      "anaphora"
-     ]
+     "lines": ["Aen. 6.20", "Aen. 6.32"],
+     "also": ["anaphora"]
     }
    ]
   },
@@ -833,27 +445,15 @@
      "cite": "Met. 8.183-184",
      "latin": [
       [
-       [
-        "Crētēn",
-        true
-       ],
-       [
-        " longumque perōsus",
-        false
-       ]
+       ["Crētēn", true],
+       [" longumque perōsus", false]
       ],
       [
-       [
-        "exsilium",
-        true
-       ]
+       ["exsilium", true]
       ]
      ],
      "english": "hating Crete and his long exile",
-     "lines": [
-      "Met. 8.183",
-      "Met. 8.184"
-     ],
+     "lines": ["Met. 8.183", "Met. 8.184"],
      "also": []
     }
    ]
@@ -867,60 +467,29 @@
      "cite": "Met. 8.188",
      "latin": [
       [
-       [
-        "dīxit et ",
-        false
-       ],
-       [
-        "ignōtās",
-        true
-       ],
-       [
-        " animum dīmittit in ",
-        false
-       ],
-       [
-        "artēs",
-        true
-       ]
+       ["dīxit et ", false],
+       ["ignōtās", true],
+       [" animum dīmittit in ", false],
+       ["artēs", true]
       ]
      ],
      "english": "he spoke, and sends his mind off into unknown arts",
-     "lines": [
-      "Met. 8.188"
-     ],
+     "lines": ["Met. 8.188"],
      "also": []
     },
     {
      "cite": "Met. 8.209",
      "latin": [
       [
-       [
-        "trādit et ",
-        false
-       ],
-       [
-        "ignōtās",
-        true
-       ],
-       [
-        " umerīs accommodat ",
-        false
-       ],
-       [
-        "ālās",
-        true
-       ],
-       [
-        ".",
-        false
-       ]
+       ["trādit et ", false],
+       ["ignōtās", true],
+       [" umerīs accommodat ", false],
+       ["ālās", true],
+       [".", false]
       ]
      ],
      "english": "he passes on (the rules of flying) and fits the unknown wings to his shoulders",
-     "lines": [
-      "Met. 8.209"
-     ],
+     "lines": ["Met. 8.209"],
      "also": []
     }
    ]
@@ -934,316 +503,121 @@
      "cite": "Met. 8.187",
      "latin": [
       [
-       [
-        "omnia",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "possideat",
-        true
-       ],
-       [
-        ", nōn ",
-        false
-       ],
-       [
-        "possidet",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "āera",
-        true
-       ],
-       [
-        " Mīnōs.",
-        false
-       ]
+       ["omnia", true],
+       [" ", false],
+       ["possideat", true],
+       [", nōn ", false],
+       ["possidet", true],
+       [" ", false],
+       ["āera", true],
+       [" Mīnōs.", false]
       ]
      ],
      "english": "let Minos own everything; he does not own the air",
-     "lines": [
-      "Met. 8.187"
-     ],
-     "also": [
-      "alliteration",
-      "antithesis"
-     ]
+     "lines": ["Met. 8.187"],
+     "also": ["alliteration", "antithesis"]
     },
     {
      "cite": "Met. 4.55-56",
      "latin": [
       [
-       [
-        "Pȳramus et Thisbē, ",
-        false
-       ],
-       [
-        "iuvenum",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "pulcherrimus",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "alter",
-        true
-       ],
-       [
-        ",",
-        false
-       ]
+       ["Pȳramus et Thisbē, ", false],
+       ["iuvenum", true],
+       [" ", false],
+       ["pulcherrimus", true],
+       [" ", false],
+       ["alter", true],
+       [",", false]
       ],
       [
-       [
-        "altera",
-        true
-       ],
-       [
-        ", quās Oriēns habuit, ",
-        false
-       ],
-       [
-        "praelāta",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "puellīs",
-        true
-       ],
-       [
-        ",",
-        false
-       ]
+       ["altera", true],
+       [", quās Oriēns habuit, ", false],
+       ["praelāta", true],
+       [" ", false],
+       ["puellīs", true],
+       [",", false]
       ]
      ],
      "english": "Pyramus and Thisbe, he the most handsome of young men, she preferred over all the girls the East held",
-     "lines": [
-      "Met. 4.55",
-      "Met. 4.56"
-     ],
-     "also": [
-      "synchysis"
-     ]
+     "lines": ["Met. 4.55", "Met. 4.56"],
+     "also": ["synchysis"]
     },
     {
      "cite": "Met. 4.64",
      "latin": [
       [
-       [
-        "quōque ",
-        false
-       ],
-       [
-        "magis",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "tegitur",
-        true
-       ],
-       [
-        ", ",
-        false
-       ],
-       [
-        "tēctus",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "magis",
-        true
-       ],
-       [
-        " aestuat ignis.",
-        false
-       ]
+       ["quōque ", false],
+       ["magis", true],
+       [" ", false],
+       ["tegitur", true],
+       [", ", false],
+       ["tēctus", true],
+       [" ", false],
+       ["magis", true],
+       [" aestuat ignis.", false]
       ]
      ],
      "english": "and the more it is covered, the more the covered fire burns",
-     "lines": [
-      "Met. 4.64"
-     ],
-     "also": [
-      "metaphor"
-     ]
+     "lines": ["Met. 4.64"],
+     "also": ["metaphor"]
     },
     {
      "cite": "Met. 4.71",
      "latin": [
       [
-       [
-        "saepe, ubi cōnstiterant ",
-        false
-       ],
-       [
-        "hinc",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "Thisbē",
-        true
-       ],
-       [
-        ", ",
-        false
-       ],
-       [
-        "Pȳramus",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "illinc",
-        true
-       ],
-       [
-        ",",
-        false
-       ]
+       ["saepe, ubi cōnstiterant ", false],
+       ["hinc", true],
+       [" ", false],
+       ["Thisbē", true],
+       [", ", false],
+       ["Pȳramus", true],
+       [" ", false],
+       ["illinc", true],
+       [",", false]
       ]
      ],
      "english": "often, when they had taken their places, Thisbe on this side, Pyramus on that",
-     "lines": [
-      "Met. 4.71"
-     ],
-     "also": [
-      "antithesis"
-     ]
+     "lines": ["Met. 4.71"],
+     "also": ["antithesis"]
     },
     {
      "cite": "Met. 4.57-58",
      "latin": [
       [
-       [
-        "ubi dīcitur ",
-        false
-       ],
-       [
-        "altam",
-        true
-       ]
+       ["ubi dīcitur ", false],
+       ["altam", true]
       ],
       [
-       [
-        "coctilibus",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "mūrīs",
-        true
-       ],
-       [
-        " cīnxisse Semīramis ",
-        false
-       ],
-       [
-        "urbem",
-        true
-       ],
-       [
-        ".",
-        false
-       ]
+       ["coctilibus", true],
+       [" ", false],
+       ["mūrīs", true],
+       [" cīnxisse Semīramis ", false],
+       ["urbem", true],
+       [".", false]
       ]
      ],
      "english": "where Semiramis is said to have ringed her high city with walls of baked brick",
-     "lines": [
-      "Met. 4.57",
-      "Met. 4.58"
-     ],
-     "also": [
-      "hyperbaton"
-     ]
+     "lines": ["Met. 4.57", "Met. 4.58"],
+     "also": ["hyperbaton"]
     },
     {
      "cite": "Met. 1.474",
      "latin": [
       [
-       [
-        "prōtinus ",
-        false
-       ],
-       [
-        "alter",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "amat",
-        true
-       ],
-       [
-        ", ",
-        false
-       ],
-       [
-        "fugit",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "altera",
-        true
-       ],
-       [
-        " nōmen amantis",
-        false
-       ]
+       ["prōtinus ", false],
+       ["alter", true],
+       [" ", false],
+       ["amat", true],
+       [", ", false],
+       ["fugit", true],
+       [" ", false],
+       ["altera", true],
+       [" nōmen amantis", false]
       ]
      ],
      "english": "at once the one loves; the other flees the very name of a lover",
-     "lines": [
-      "Met. 1.474"
-     ],
-     "also": [
-      "antithesis"
-     ]
+     "lines": ["Met. 1.474"],
+     "also": ["antithesis"]
     }
    ]
   },
@@ -1256,255 +630,98 @@
      "cite": "Met. 8.229-230",
      "latin": [
       [
-       [
-        "ōraque",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "caeruleā",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "patrium",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "clāmantia",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "nōmen",
-        true
-       ]
+       ["ōraque", true],
+       [" ", false],
+       ["caeruleā", true],
+       [" ", false],
+       ["patrium", true],
+       [" ", false],
+       ["clāmantia", true],
+       [" ", false],
+       ["nōmen", true]
       ],
       [
-       [
-        "excipiuntur ",
-        false
-       ],
-       [
-        "aquā",
-        true
-       ]
+       ["excipiuntur ", false],
+       ["aquā", true]
       ]
      ],
      "english": "and his mouth, shouting his father's name, is taken in by the blue water",
-     "lines": [
-      "Met. 8.229",
-      "Met. 8.230"
-     ],
-     "also": [
-      "onomatopoeia",
-      "synecdoche",
-      "chiasmus",
-      "hyperbaton"
-     ]
+     "lines": ["Met. 8.229", "Met. 8.230"],
+     "also": ["onomatopoeia", "synecdoche", "chiasmus", "hyperbaton"]
     },
     {
      "cite": "Met. 15.786",
      "latin": [
       [
-       [
-        "lūrida",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "sollicitīs",
-        true
-       ],
-       [
-        " praebēbat ",
-        false
-       ],
-       [
-        "lūmina",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "terrīs",
-        true
-       ]
+       ["lūrida", true],
+       [" ", false],
+       ["sollicitīs", true],
+       [" praebēbat ", false],
+       ["lūmina", true],
+       [" ", false],
+       ["terrīs", true]
       ]
      ],
      "english": "(the sun's sad face) kept offering ghastly light to the troubled lands",
-     "lines": [
-      "Met. 15.786"
-     ],
-     "also": [
-      "alliteration",
-      "hyperbaton"
-     ]
+     "lines": ["Met. 15.786"],
+     "also": ["alliteration", "hyperbaton"]
     },
     {
      "cite": "Met. 4.66",
      "latin": [
       [
-       [
-        "pariēs",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "domuī",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "commūnis",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "utrīque",
-        true
-       ],
-       [
-        ".",
-        false
-       ]
+       ["pariēs", true],
+       [" ", false],
+       ["domuī", true],
+       [" ", false],
+       ["commūnis", true],
+       [" ", false],
+       ["utrīque", true],
+       [".", false]
       ]
      ],
      "english": "the wall shared by both houses",
-     "lines": [
-      "Met. 4.66"
-     ],
-     "also": [
-      "hyperbaton"
-     ]
+     "lines": ["Met. 4.66"],
+     "also": ["hyperbaton"]
     },
     {
      "cite": "Met. 4.69-70",
      "latin": [
       [
-       [
-        "tūtaeque",
-        true
-       ],
-       [
-        " per illud",
-        false
-       ]
+       ["tūtaeque", true],
+       [" per illud", false]
       ],
       [
-       [
-        "murmure",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "blanditiae",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "minimō",
-        true
-       ],
-       [
-        " trānsīre solēbant.",
-        false
-       ]
+       ["murmure", true],
+       [" ", false],
+       ["blanditiae", true],
+       [" ", false],
+       ["minimō", true],
+       [" trānsīre solēbant.", false]
       ]
      ],
      "english": "and through it their sweet talk used to cross safely, in the smallest whisper",
-     "lines": [
-      "Met. 4.69",
-      "Met. 4.70"
-     ],
-     "also": [
-      "onomatopoeia",
-      "alliteration",
-      "hyperbaton"
-     ]
+     "lines": ["Met. 4.69", "Met. 4.70"],
+     "also": ["onomatopoeia", "alliteration", "hyperbaton"]
     },
     {
      "cite": "Met. 4.77",
      "latin": [
       [
-       [
-        "quod ",
-        false
-       ],
-       [
-        "datus",
-        true
-       ],
-       [
-        " est verbīs ad ",
-        false
-       ],
-       [
-        "amīcās",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "trānsitus",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "aurīs",
-        true
-       ],
-       [
-        ".",
-        false
-       ]
+       ["quod ", false],
+       ["datus", true],
+       [" est verbīs ad ", false],
+       ["amīcās", true],
+       [" ", false],
+       ["trānsitus", true],
+       [" ", false],
+       ["aurīs", true],
+       [".", false]
       ]
      ],
      "english": "that a way across has been given to our words, to friendly ears",
-     "lines": [
-      "Met. 4.77"
-     ],
-     "also": [
-      "hyperbaton"
-     ]
+     "lines": ["Met. 4.77"],
+     "also": ["hyperbaton"]
     }
    ]
   },
@@ -1517,64 +734,30 @@
      "cite": "Met. 8.230",
      "latin": [
       [
-       [
-        "excipiuntur aquā, quae ",
-        false
-       ],
-       [
-        "nōmen",
-        true
-       ],
-       [
-        " trāxit ab ",
-        false
-       ],
-       [
-        "illō",
-        true
-       ],
-       [
-        ".",
-        false
-       ]
+       ["excipiuntur aquā, quae ", false],
+       ["nōmen", true],
+       [" trāxit ab ", false],
+       ["illō", true],
+       [".", false]
       ]
      ],
      "english": "is taken in by the water, which took its name from him",
-     "lines": [
-      "Met. 8.230"
-     ],
+     "lines": ["Met. 8.230"],
      "also": []
     },
     {
      "cite": "Met. 8.235",
      "latin": [
       [
-       [
-        "condidit, et ",
-        false
-       ],
-       [
-        "tellūs",
-        true
-       ],
-       [
-        " ā ",
-        false
-       ],
-       [
-        "nōmine",
-        true
-       ],
-       [
-        " dicta sepultī.",
-        false
-       ]
+       ["condidit, et ", false],
+       ["tellūs", true],
+       [" ā ", false],
+       ["nōmine", true],
+       [" dicta sepultī.", false]
       ]
      ],
      "english": "he buried him, and the land is called by the name of the boy buried there",
-     "lines": [
-      "Met. 8.235"
-     ],
+     "lines": ["Met. 8.235"],
      "also": []
     }
    ]
@@ -1588,80 +771,28 @@
      "cite": "Met. 8.211 / Aen. 6.33",
      "latin": [
       [
-       [
-        "Met. 8.211   ",
-        false
-       ],
-       [
-        "et ",
-        false
-       ],
-       [
-        "patriae",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "tremuēre",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "manūs",
-        true
-       ]
+       ["Met. 8.211   ", false],
+       ["et ", false],
+       ["patriae", true],
+       [" ", false],
+       ["tremuēre", true],
+       [" ", false],
+       ["manūs", true]
       ],
       [
-       [
-        "Aen. 6.33   ",
-        false
-       ],
-       [
-        "bis ",
-        false
-       ],
-       [
-        "patriae",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "cecidēre",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "manūs",
-        true
-       ],
-       [
-        ".",
-        false
-       ]
+       ["Aen. 6.33   ", false],
+       ["bis ", false],
+       ["patriae", true],
+       [" ", false],
+       ["cecidēre", true],
+       [" ", false],
+       ["manūs", true],
+       [".", false]
       ]
      ],
      "english": "Ovid: and the father's hands trembled / Vergil: twice the father's hands fell",
-     "lines": [
-      "Aen. 6.33",
-      "Met. 8.211"
-     ],
-     "also": [
-      "onomatopoeia",
-      "hyperbaton",
-      "ecphrasis"
-     ]
+     "lines": ["Aen. 6.33", "Met. 8.211"],
+     "also": ["onomatopoeia", "hyperbaton", "ecphrasis"]
     }
    ]
   },
@@ -1674,62 +805,29 @@
      "cite": "Met. 4.70",
      "latin": [
       [
-       [
-        "murmure",
-        true
-       ],
-       [
-        " blanditiae ",
-        false
-       ],
-       [
-        "minimō",
-        true
-       ],
-       [
-        " trānsīre solēbant.",
-        false
-       ]
+       ["murmure", true],
+       [" blanditiae ", false],
+       ["minimō", true],
+       [" trānsīre solēbant.", false]
       ]
      ],
      "english": "their sweet talk used to cross in the smallest whisper",
-     "lines": [
-      "Met. 4.70"
-     ],
-     "also": [
-      "alliteration",
-      "hyperbaton"
-     ]
+     "lines": ["Met. 4.70"],
+     "also": ["alliteration", "hyperbaton"]
     },
     {
      "cite": "Met. 4.123",
      "latin": [
       [
-       [
-        "scinditur",
-        true
-       ],
-       [
-        " et tenuī ",
-        false
-       ],
-       [
-        "strīdente",
-        true
-       ],
-       [
-        " forāmine longās",
-        false
-       ]
+       ["scinditur", true],
+       [" et tenuī ", false],
+       ["strīdente", true],
+       [" forāmine longās", false]
       ]
      ],
      "english": "(the pipe) splits, and through a narrow hissing hole (shoots out) long (jets)",
-     "lines": [
-      "Met. 4.123"
-     ],
-     "also": [
-      "simile"
-     ]
+     "lines": ["Met. 4.123"],
+     "also": ["simile"]
     }
    ]
   },
@@ -1742,36 +840,16 @@
      "cite": "Met. 4.73",
      "latin": [
       [
-       [
-        "\"",
-        false
-       ],
-       [
-        "invide",
-        true
-       ],
-       [
-        "\" dīcēbant \"pariēs, quid amantibus ",
-        false
-       ],
-       [
-        "obstās",
-        true
-       ],
-       [
-        "?",
-        false
-       ]
+       ["\"", false],
+       ["invide", true],
+       ["\" dīcēbant \"pariēs, quid amantibus ", false],
+       ["obstās", true],
+       ["?", false]
       ]
      ],
      "english": "'jealous wall,' they said, 'why do you stand in the lovers' way?'",
-     "lines": [
-      "Met. 4.73"
-     ],
-     "also": [
-      "apostrophe",
-      "rhetorical_question"
-     ]
+     "lines": ["Met. 4.73"],
+     "also": ["apostrophe", "rhetorical_question"]
     }
    ]
   },
@@ -1784,62 +862,29 @@
      "cite": "Met. 4.76",
      "latin": [
       [
-       [
-        "nec",
-        true
-       ],
-       [
-        " sumus ",
-        false
-       ],
-       [
-        "ingrātī",
-        true
-       ],
-       [
-        ": tibi nōs dēbēre fatēmur,",
-        false
-       ]
+       ["nec", true],
+       [" sumus ", false],
+       ["ingrātī", true],
+       [": tibi nōs dēbēre fatēmur,", false]
       ]
      ],
      "english": "and we are not ungrateful: we admit that we owe it to you",
-     "lines": [
-      "Met. 4.76"
-     ],
-     "also": [
-      "personification",
-      "apostrophe"
-     ]
+     "lines": ["Met. 4.76"],
+     "also": ["personification", "apostrophe"]
     },
     {
      "cite": "Met. 4.122",
      "latin": [
       [
-       [
-        "nōn",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "aliter",
-        true
-       ],
-       [
-        " quam cum vitiātō fistula plumbō",
-        false
-       ]
+       ["nōn", true],
+       [" ", false],
+       ["aliter", true],
+       [" quam cum vitiātō fistula plumbō", false]
       ]
      ],
      "english": "not otherwise than when a pipe, where the lead is flawed …",
-     "lines": [
-      "Met. 4.122"
-     ],
-     "also": [
-      "simile"
-     ]
+     "lines": ["Met. 4.122"],
+     "also": ["simile"]
     }
    ]
   },
@@ -1852,234 +897,97 @@
      "cite": "Met. 4.91-92",
      "latin": [
       [
-       [
-        "et ",
-        false
-       ],
-       [
-        "lūx",
-        true
-       ],
-       [
-        ", tardē discēdere vīsa,",
-        false
-       ]
+       ["et ", false],
+       ["lūx", true],
+       [", tardē discēdere vīsa,", false]
       ],
       [
-       [
-        "praecipitātur",
-        true
-       ],
-       [
-        " aquīs, et aquīs ",
-        false
-       ],
-       [
-        "nox",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "exit",
-        true
-       ],
-       [
-        " ab īsdem.",
-        false
-       ]
+       ["praecipitātur", true],
+       [" aquīs, et aquīs ", false],
+       ["nox", true],
+       [" ", false],
+       ["exit", true],
+       [" ab īsdem.", false]
       ]
      ],
      "english": "and the daylight, which seemed slow to leave, plunges into the waters, and from those same waters night comes out",
-     "lines": [
-      "Met. 4.91",
-      "Met. 4.92"
-     ],
-     "also": [
-      "chiasmus"
-     ]
+     "lines": ["Met. 4.91", "Met. 4.92"],
+     "also": ["chiasmus"]
     },
     {
      "cite": "Met. 4.158-159",
      "latin": [
       [
-       [
-        "at tū quae rāmīs arbor miserābile corpus",
-        false
-       ]
+       ["at tū quae rāmīs arbor miserābile corpus", false]
       ],
       [
-       [
-        "nunc",
-        true
-       ],
-       [
-        " tegis ",
-        false
-       ],
-       [
-        "ūnīus",
-        true
-       ],
-       [
-        ", ",
-        false
-       ],
-       [
-        "mox",
-        true
-       ],
-       [
-        " es tēctūra ",
-        false
-       ],
-       [
-        "duōrum",
-        true
-       ],
-       [
-        ",",
-        false
-       ]
+       ["nunc", true],
+       [" tegis ", false],
+       ["ūnīus", true],
+       [", ", false],
+       ["mox", true],
+       [" es tēctūra ", false],
+       ["duōrum", true],
+       [",", false]
       ]
      ],
      "english": "but you, tree, who with your branches now cover the pitiable body of one, and soon will cover two",
-     "lines": [
-      "Met. 4.158",
-      "Met. 4.159"
-     ],
-     "also": [
-      "apostrophe"
-     ]
+     "lines": ["Met. 4.158", "Met. 4.159"],
+     "also": ["apostrophe"]
     },
     {
      "cite": "Met. 8.185-186",
      "latin": [
       [
-       [
-        "'",
-        false
-       ],
-       [
-        "terrās",
-        true
-       ],
-       [
-        " licet' inquit 'et ",
-        false
-       ],
-       [
-        "undās",
-        true
-       ]
+       ["'", false],
+       ["terrās", true],
+       [" licet' inquit 'et ", false],
+       ["undās", true]
       ],
       [
-       [
-        "obstruat: at ",
-        false
-       ],
-       [
-        "caelum",
-        true
-       ],
-       [
-        " certē patet'",
-        false
-       ]
+       ["obstruat: at ", false],
+       ["caelum", true],
+       [" certē patet'", false]
       ]
      ],
      "english": "'he may block the lands and the waves,' he says, 'but the sky, surely, is open'",
-     "lines": [
-      "Met. 8.185",
-      "Met. 8.186"
-     ],
-     "also": [
-      "synecdoche",
-      "alliteration"
-     ]
+     "lines": ["Met. 8.185", "Met. 8.186"],
+     "also": ["synecdoche", "alliteration"]
     },
     {
      "cite": "Met. 8.204-205",
      "latin": [
       [
-       [
-        "nē, sī ",
-        false
-       ],
-       [
-        "dēmissior",
-        true
-       ],
-       [
-        " ībis,",
-        false
-       ]
+       ["nē, sī ", false],
+       ["dēmissior", true],
+       [" ībis,", false]
       ],
       [
-       [
-        "unda",
-        true
-       ],
-       [
-        " gravet pennās, sī ",
-        false
-       ],
-       [
-        "celsior",
-        true
-       ],
-       [
-        ", ",
-        false
-       ],
-       [
-        "ignis",
-        true
-       ],
-       [
-        " adūrat:",
-        false
-       ]
+       ["unda", true],
+       [" gravet pennās, sī ", false],
+       ["celsior", true],
+       [", ", false],
+       ["ignis", true],
+       [" adūrat:", false]
       ]
      ],
      "english": "so that, if you fly lower, the water does not weigh down your feathers; if higher, the fire does not scorch them",
-     "lines": [
-      "Met. 8.204",
-      "Met. 8.205"
-     ],
+     "lines": ["Met. 8.204", "Met. 8.205"],
      "also": []
     },
     {
      "cite": "Met. 1.469",
      "latin": [
       [
-       [
-        "fugat",
-        true
-       ],
-       [
-        " hoc, ",
-        false
-       ],
-       [
-        "facit",
-        true
-       ],
-       [
-        " illud amōrem;",
-        false
-       ]
+       ["fugat", true],
+       [" hoc, ", false],
+       ["facit", true],
+       [" illud amōrem;", false]
       ]
      ],
      "english": "this one puts love to flight, that one makes it",
-     "lines": [
-      "Met. 1.469"
-     ],
-     "also": [
-      "alliteration"
-     ]
+     "lines": ["Met. 1.469"],
+     "also": ["alliteration"]
     }
    ]
   },
@@ -2092,97 +1000,44 @@
      "cite": "Met. 4.100",
      "latin": [
       [
-       [
-        "vīdit et obscūrum ",
-        false
-       ],
-       [
-        "timidō",
-        true
-       ],
-       [
-        " ",
-        false
-       ],
-       [
-        "pede",
-        true
-       ],
-       [
-        " fūgit in antrum,",
-        false
-       ]
+       ["vīdit et obscūrum ", false],
+       ["timidō", true],
+       [" ", false],
+       ["pede", true],
+       [" fūgit in antrum,", false]
       ]
      ],
      "english": "she saw (the lioness) and fled on frightened foot into a dark cave",
-     "lines": [
-      "Met. 4.100"
-     ],
-     "also": [
-      "chiasmus",
-      "hyperbaton"
-     ]
+     "lines": ["Met. 4.100"],
+     "also": ["chiasmus", "hyperbaton"]
     },
     {
      "cite": "Aen. 6.30",
      "latin": [
       [
-       [
-        "caeca",
-        true
-       ],
-       [
-        " regēns fīlō ",
-        false
-       ],
-       [
-        "vestīgia",
-        true
-       ],
-       [
-        ".",
-        false
-       ]
+       ["caeca", true],
+       [" regēns fīlō ", false],
+       ["vestīgia", true],
+       [".", false]
       ]
      ],
      "english": "guiding blind footsteps with a thread",
-     "lines": [
-      "Aen. 6.30"
-     ],
-     "also": [
-      "hyperbaton",
-      "ecphrasis"
-     ]
+     "lines": ["Aen. 6.30"],
+     "also": ["hyperbaton", "ecphrasis"]
     },
     {
      "cite": "Met. 8.223",
      "latin": [
       [
-       [
-        "cum puer ",
-        false
-       ],
-       [
-        "audācī",
-        true
-       ],
-       [
-        " coepit gaudēre ",
-        false
-       ],
-       [
-        "volātū",
-        true
-       ]
+       ["cum puer ", false],
+       ["audācī", true],
+       [" coepit gaudēre ", false],
+       ["volātū", true]
       ]
      ],
      "english": "when the boy began to delight in daring flight",
-     "lines": [
-      "Met. 8.223"
-     ],
-     "also": [
-      "hyperbaton"
-     ]
+     "lines": ["Met. 8.223"],
+     "also": ["hyperbaton"]
     }
    ]
   },
@@ -2195,195 +1050,91 @@
      "cite": "Met. 4.117",
      "latin": [
       [
-       [
-        "utque ",
-        false
-       ],
-       [
-        "dedit",
-        true
-       ],
-       [
-        " nōtae lacrimās, ",
-        false
-       ],
-       [
-        "dedit",
-        true
-       ],
-       [
-        " ōscula vestī,",
-        false
-       ]
+       ["utque ", false],
+       ["dedit", true],
+       [" nōtae lacrimās, ", false],
+       ["dedit", true],
+       [" ōscula vestī,", false]
       ]
      ],
      "english": "and when he had given tears to the cloak he knew, he gave it kisses",
-     "lines": [
-      "Met. 4.117"
-     ],
-     "also": [
-      "chiasmus"
-     ]
+     "lines": ["Met. 4.117"],
+     "also": ["chiasmus"]
     },
     {
      "cite": "Met. 4.156",
      "latin": [
       [
-       [
-        "ut, ",
-        false
-       ],
-       [
-        "quōs",
-        true
-       ],
-       [
-        " certus amor, ",
-        false
-       ],
-       [
-        "quōs",
-        true
-       ],
-       [
-        " hōra novissima iūnxit,",
-        false
-       ]
+       ["ut, ", false],
+       ["quōs", true],
+       [" certus amor, ", false],
+       ["quōs", true],
+       [" hōra novissima iūnxit,", false]
       ]
      ],
      "english": "(let them be buried together) whom sure love, whom their last hour joined",
-     "lines": [
-      "Met. 4.156"
-     ],
+     "lines": ["Met. 4.156"],
      "also": []
     },
     {
      "cite": "Met. 4.164",
      "latin": [
       [
-       [
-        "vōta tamen ",
-        false
-       ],
-       [
-        "tetigēre",
-        true
-       ],
-       [
-        " deōs, ",
-        false
-       ],
-       [
-        "tetigēre",
-        true
-       ],
-       [
-        " parentēs;",
-        false
-       ]
+       ["vōta tamen ", false],
+       ["tetigēre", true],
+       [" deōs, ", false],
+       ["tetigēre", true],
+       [" parentēs;", false]
       ]
      ],
      "english": "but her prayers touched the gods, touched her parents",
-     "lines": [
-      "Met. 4.164"
-     ],
+     "lines": ["Met. 4.164"],
      "also": []
     },
     {
      "cite": "Met. 8.231-233",
      "latin": [
       [
-       [
-        "'",
-        false
-       ],
-       [
-        "Īcare",
-        true
-       ],
-       [
-        ",' dīxit, 'Īcare,' dīxit … 'Īcare' dīcēbat",
-        false
-       ]
+       ["'", false],
+       ["Īcare", true],
+       [",' dīxit, 'Īcare,' dīxit … 'Īcare' dīcēbat", false]
       ]
      ],
      "english": "'Icarus,' he said, 'Icarus,' he said ... 'Icarus,' he kept saying",
-     "lines": [
-      "Met. 8.231",
-      "Met. 8.232",
-      "Met. 8.233"
-     ],
-     "also": [
-      "apostrophe"
-     ]
+     "lines": ["Met. 8.231", "Met. 8.232", "Met. 8.233"],
+     "also": ["apostrophe"]
     },
     {
      "cite": "Aen. 6.24-27",
      "latin": [
       [
-       [
-        "hīc",
-        true
-       ],
-       [
-        " crūdēlis amor taurī …",
-        false
-       ]
+       ["hīc", true],
+       [" crūdēlis amor taurī …", false]
       ],
       [
-       [
-        "hīc",
-        true
-       ],
-       [
-        " labor ille domūs et inextrīcābilis error;",
-        false
-       ]
+       ["hīc", true],
+       [" labor ille domūs et inextrīcābilis error;", false]
       ]
      ],
      "english": "here the cruel love for the bull ... here that labour of the house, the maze that cannot be untangled",
-     "lines": [
-      "Aen. 6.24",
-      "Aen. 6.25",
-      "Aen. 6.26",
-      "Aen. 6.27"
-     ],
-     "also": [
-      "ecphrasis"
-     ]
+     "lines": ["Aen. 6.24", "Aen. 6.25", "Aen. 6.26", "Aen. 6.27"],
+     "also": ["ecphrasis"]
     },
     {
      "cite": "Aen. 6.32-33",
      "latin": [
       [
-       [
-        "bis",
-        true
-       ],
-       [
-        " cōnātus erat cāsūs effingere in aurō,",
-        false
-       ]
+       ["bis", true],
+       [" cōnātus erat cāsūs effingere in aurō,", false]
       ],
       [
-       [
-        "bis",
-        true
-       ],
-       [
-        " patriae cecidēre manūs.",
-        false
-       ]
+       ["bis", true],
+       [" patriae cecidēre manūs.", false]
       ]
      ],
      "english": "twice he had tried to shape the fall in gold, twice the father's hands fell",
-     "lines": [
-      "Aen. 6.32",
-      "Aen. 6.33"
-     ],
-     "also": [
-      "ecphrasis"
-     ]
+     "lines": ["Aen. 6.32", "Aen. 6.33"],
+     "also": ["ecphrasis"]
     }
    ]
   },
@@ -2396,31 +1147,16 @@
      "cite": "Met. 4.140-141",
      "latin": [
       [
-       [
-        "vulnera ",
-        false
-       ],
-       [
-        "supplēvit",
-        true
-       ],
-       [
-        " lacrimīs flētumque cruōrī",
-        false
-       ]
+       ["vulnera ", false],
+       ["supplēvit", true],
+       [" lacrimīs flētumque cruōrī", false]
       ],
       [
-       [
-        "miscuit",
-        false
-       ]
+       ["miscuit", false]
       ]
      ],
      "english": "she filled up his wounds with tears, and mixed her weeping with his blood",
-     "lines": [
-      "Met. 4.140",
-      "Met. 4.141"
-     ],
+     "lines": ["Met. 4.140", "Met. 4.141"],
      "also": []
     }
    ]
@@ -2428,945 +1164,2979 @@
  ],
  "scansion": {
   "passages": [
-   [
-    "Met. 8.183",
-    "Met. 8.184",
-    "Met. 8.185",
-    "Met. 8.186"
-   ],
-   [
-    "Met. 8.188",
-    "Met. 8.189",
-    "Met. 8.190",
-    "Met. 8.191",
-    "Met. 8.192"
-   ],
-   [
-    "Met. 8.227",
-    "Met. 8.228",
-    "Met. 8.229",
-    "Met. 8.230"
-   ],
-   [
-    "Met. 8.231",
-    "Met. 8.232",
-    "Met. 8.233",
-    "Met. 8.234",
-    "Met. 8.235"
-   ],
-   [
-    "Met. 8.233",
-    "Met. 8.234",
-    "Met. 8.235"
-   ],
-   [
-    "Aen. 6.28",
-    "Aen. 6.29",
-    "Aen. 6.30",
-    "Aen. 6.31"
-   ],
-   [
-    "Met. 4.55",
-    "Met. 4.56",
-    "Met. 4.57",
-    "Met. 4.58"
-   ],
-   [
-    "Met. 4.59",
-    "Met. 4.60",
-    "Met. 4.61",
-    "Met. 4.62"
-   ],
-   [
-    "Met. 4.63",
-    "Met. 4.64",
-    "Met. 4.65",
-    "Met. 4.66"
-   ],
-   [
-    "Met. 4.67",
-    "Met. 4.68",
-    "Met. 4.69",
-    "Met. 4.70"
-   ],
-   [
-    "Met. 4.71",
-    "Met. 4.72",
-    "Met. 4.73"
-   ],
-   [
-    "Met. 4.71",
-    "Met. 4.72",
-    "Met. 4.73",
-    "Met. 4.74",
-    "Met. 4.75"
-   ],
-   [
-    "Met. 4.74",
-    "Met. 4.75",
-    "Met. 4.76",
-    "Met. 4.77"
-   ],
-   [
-    "Met. 4.76",
-    "Met. 4.77",
-    "Met. 4.78",
-    "Met. 4.79",
-    "Met. 4.80"
-   ],
-   [
-    "Met. 4.78",
-    "Met. 4.79",
-    "Met. 4.80"
-   ],
-   [
-    "Met. 4.78",
-    "Met. 4.79",
-    "Met. 4.80",
-    "Met. 4.81",
-    "Met. 4.82"
-   ],
-   [
-    "Met. 4.91",
-    "Met. 4.92",
-    "Met. 4.93",
-    "Met. 4.94",
-    "Met. 4.95"
-   ],
-   [
-    "Met. 4.93",
-    "Met. 4.94",
-    "Met. 4.95"
-   ],
-   [
-    "Met. 4.96",
-    "Met. 4.97",
-    "Met. 4.98"
-   ],
-   [
-    "Met. 4.99",
-    "Met. 4.100",
-    "Met. 4.101"
-   ],
-   [
-    "Met. 4.102",
-    "Met. 4.103",
-    "Met. 4.104"
-   ],
-   [
-    "Met. 4.105",
-    "Met. 4.106",
-    "Met. 4.107",
-    "Met. 4.108",
-    "Met. 4.109"
-   ],
-   [
-    "Met. 4.110",
-    "Met. 4.111",
-    "Met. 4.112",
-    "Met. 4.113",
-    "Met. 4.114"
-   ],
-   [
-    "Met. 4.115",
-    "Met. 4.116",
-    "Met. 4.117",
-    "Met. 4.118"
-   ],
-   [
-    "Met. 4.125",
-    "Met. 4.126",
-    "Met. 4.127"
-   ],
-   [
-    "Met. 4.128",
-    "Met. 4.129",
-    "Met. 4.130"
-   ],
-   [
-    "Met. 4.128",
-    "Met. 4.129",
-    "Met. 4.130",
-    "Met. 4.131",
-    "Met. 4.132"
-   ],
-   [
-    "Met. 4.133",
-    "Met. 4.134",
-    "Met. 4.135",
-    "Met. 4.136"
-   ],
-   [
-    "Met. 4.143",
-    "Met. 4.144",
-    "Met. 4.145",
-    "Met. 4.146"
-   ],
-   [
-    "Met. 4.147",
-    "Met. 4.148",
-    "Met. 4.149",
-    "Met. 4.150"
-   ],
-   [
-    "Met. 4.151",
-    "Met. 4.152",
-    "Met. 4.153"
-   ],
-   [
-    "Met. 4.154",
-    "Met. 4.155",
-    "Met. 4.156",
-    "Met. 4.157"
-   ],
-   [
-    "Met. 4.158",
-    "Met. 4.159",
-    "Met. 4.160",
-    "Met. 4.161"
-   ],
-   [
-    "Met. 4.162",
-    "Met. 4.163",
-    "Met. 4.164"
-   ],
-   [
-    "Met. 4.162",
-    "Met. 4.163",
-    "Met. 4.164",
-    "Met. 4.165",
-    "Met. 4.166"
-   ],
-   [
-    "Met. 4.164",
-    "Met. 4.165",
-    "Met. 4.166"
-   ],
-   [
-    "Met. 1.457",
-    "Met. 1.458",
-    "Met. 1.459",
-    "Met. 1.460"
-   ],
-   [
-    "Met. 1.461",
-    "Met. 1.462",
-    "Met. 1.463",
-    "Met. 1.464",
-    "Met. 1.465"
-   ],
-   [
-    "Met. 1.463",
-    "Met. 1.464",
-    "Met. 1.465"
-   ],
-   [
-    "Met. 1.474",
-    "Met. 1.475",
-    "Met. 1.476"
-   ],
-   [
-    "Met. 1.483",
-    "Met. 1.484",
-    "Met. 1.485",
-    "Met. 1.486",
-    "Met. 1.487"
-   ]
+   ["Met. 8.183", "Met. 8.184", "Met. 8.185", "Met. 8.186"],
+   ["Met. 8.188", "Met. 8.189", "Met. 8.190", "Met. 8.191", "Met. 8.192"],
+   ["Met. 8.227", "Met. 8.228", "Met. 8.229", "Met. 8.230"],
+   ["Met. 8.231", "Met. 8.232", "Met. 8.233", "Met. 8.234", "Met. 8.235"],
+   ["Met. 8.233", "Met. 8.234", "Met. 8.235"],
+   ["Aen. 6.28", "Aen. 6.29", "Aen. 6.30", "Aen. 6.31"],
+   ["Met. 4.55", "Met. 4.56", "Met. 4.57", "Met. 4.58"],
+   ["Met. 4.59", "Met. 4.60", "Met. 4.61", "Met. 4.62"],
+   ["Met. 4.63", "Met. 4.64", "Met. 4.65", "Met. 4.66"],
+   ["Met. 4.67", "Met. 4.68", "Met. 4.69", "Met. 4.70"],
+   ["Met. 4.71", "Met. 4.72", "Met. 4.73"],
+   ["Met. 4.71", "Met. 4.72", "Met. 4.73", "Met. 4.74", "Met. 4.75"],
+   ["Met. 4.74", "Met. 4.75", "Met. 4.76", "Met. 4.77"],
+   ["Met. 4.76", "Met. 4.77", "Met. 4.78", "Met. 4.79", "Met. 4.80"],
+   ["Met. 4.78", "Met. 4.79", "Met. 4.80"],
+   ["Met. 4.78", "Met. 4.79", "Met. 4.80", "Met. 4.81", "Met. 4.82"],
+   ["Met. 4.91", "Met. 4.92", "Met. 4.93", "Met. 4.94", "Met. 4.95"],
+   ["Met. 4.93", "Met. 4.94", "Met. 4.95"],
+   ["Met. 4.96", "Met. 4.97", "Met. 4.98"],
+   ["Met. 4.99", "Met. 4.100", "Met. 4.101"],
+   ["Met. 4.102", "Met. 4.103", "Met. 4.104"],
+   ["Met. 4.105", "Met. 4.106", "Met. 4.107", "Met. 4.108", "Met. 4.109"],
+   ["Met. 4.110", "Met. 4.111", "Met. 4.112", "Met. 4.113", "Met. 4.114"],
+   ["Met. 4.115", "Met. 4.116", "Met. 4.117", "Met. 4.118"],
+   ["Met. 4.125", "Met. 4.126", "Met. 4.127"],
+   ["Met. 4.128", "Met. 4.129", "Met. 4.130"],
+   ["Met. 4.128", "Met. 4.129", "Met. 4.130", "Met. 4.131", "Met. 4.132"],
+   ["Met. 4.133", "Met. 4.134", "Met. 4.135", "Met. 4.136"],
+   ["Met. 4.143", "Met. 4.144", "Met. 4.145", "Met. 4.146"],
+   ["Met. 4.147", "Met. 4.148", "Met. 4.149", "Met. 4.150"],
+   ["Met. 4.151", "Met. 4.152", "Met. 4.153"],
+   ["Met. 4.154", "Met. 4.155", "Met. 4.156", "Met. 4.157"],
+   ["Met. 4.158", "Met. 4.159", "Met. 4.160", "Met. 4.161"],
+   ["Met. 4.162", "Met. 4.163", "Met. 4.164"],
+   ["Met. 4.162", "Met. 4.163", "Met. 4.164", "Met. 4.165", "Met. 4.166"],
+   ["Met. 4.164", "Met. 4.165", "Met. 4.166"],
+   ["Met. 1.457", "Met. 1.458", "Met. 1.459", "Met. 1.460"],
+   ["Met. 1.461", "Met. 1.462", "Met. 1.463", "Met. 1.464", "Met. 1.465"],
+   ["Met. 1.463", "Met. 1.464", "Met. 1.465"],
+   ["Met. 1.474", "Met. 1.475", "Met. 1.476"],
+   ["Met. 1.483", "Met. 1.484", "Met. 1.485", "Met. 1.486", "Met. 1.487"]
   ],
   "lines": {
    "Met. 8.183": {
     "text": "Daedalus intereā Crētēn longumque perōsus",
+    "slots": [
+     [1, 3, "L", 1, 0],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [15, 16, "L", 1, 3],
+     [19, 20, "L", 1, 3],
+     [21, 22, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [28, 29, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.184": {
     "text": "exsilium tāctusque locī nātālis amōre",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [6, 7, "L", 1, 5],
+     [10, 11, "L", 1, 3],
+     [13, 14, "L", 1, 2],
+     [17, 18, "S", 1, 1],
+     [20, 21, "S", 1, 1],
+     [22, 23, "L", 1, 3],
+     [25, 26, "L", 1, 3],
+     [27, 28, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [34, 35, "L", 1, 3],
+     [36, 37, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.185": {
     "text": "clausus erat pelagō. terrās licet inquit et undās",
+    "slots": [
+     [2, 4, "L", 1, 0],
+     [5, 6, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [14, 15, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [18, 19, "L", 1, 3],
+     [22, 23, "L", 1, 2],
+     [25, 26, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [38, 39, "S", 1, 1],
+     [41, 42, "S", 1, 1],
+     [44, 45, "L", 1, 2],
+     [47, 48, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.186": {
     "text": "obstruat: at caelum certē patet; ībimus illāc:",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [5, 6, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [14, 16, "L", 1, 0],
+     [17, 18, "L", 1, 5],
+     [21, 22, "L", 1, 2],
+     [24, 25, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [40, 41, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.188": {
     "text": "dīxit et ignōtās animum dīmittit in artēs",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [17, 18, "S", 1, 1],
+     [19, 20, "S", 1, 1],
+     [21, 22, "L", 1, 5],
+     [25, 26, "L", 1, 3],
+     [27, 28, "L", 1, 2],
+     [30, 31, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [36, 37, "L", 1, 2],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.189": {
     "text": "nātūramque novat. nam pōnit in ōrdine pennās",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "L", 1, 3],
+     [5, 6, "L", 1, 2],
+     [9, 10, "S", 1, 1],
+     [12, 13, "S", 1, 1],
+     [14, 15, "L", 1, 5],
+     [19, 20, "L", 1, 5],
+     [23, 24, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [28, 29, "S", 1, 1],
+     [31, 32, "L", 1, 3],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.190": {
     "text": "ā minimā coeptās, longam breviōre sequentī,",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [10, 12, "L", 1, 0],
+     [14, 15, "L", 1, 3],
+     [19, 20, "L", 1, 2],
+     [22, 23, "L", 1, 5],
+     [27, 28, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [30, 31, "L", 1, 3],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 2, 6],
+     [38, 39, "L", 1, 2],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.191": {
     "text": "ut clīvō crēvisse putēs: sīc rūstica quondam",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [5, 6, "L", 1, 3],
+     [7, 8, "L", 1, 3],
+     [11, 12, "L", 1, 3],
+     [13, 14, "L", 1, 2],
+     [16, 17, "S", 1, 1],
+     [19, 20, "S", 1, 1],
+     [21, 22, "L", 1, 3],
+     [26, 27, "L", 1, 3],
+     [30, 31, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [35, 36, "S", 2, 6],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.192": {
     "text": "fistula disparibus paulātim surgit avēnīs;",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [16, 17, "L", 1, 5],
+     [20, 22, "L", 1, 0],
+     [23, 24, "L", 1, 3],
+     [25, 26, "L", 1, 5],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.227": {
     "text": "tābuerant cērae: nūdōs quatit ille lacertōs,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [4, 5, "S", 1, 1],
+     [6, 7, "L", 1, 5],
+     [11, 12, "L", 1, 3],
+     [13, 15, "L", 1, 0],
+     [18, 19, "L", 1, 3],
+     [20, 21, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [30, 31, "L", 1, 2],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 2],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.228": {
     "text": "rēmigiōque carēns nōn ūllās percipit aurās,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [6, 7, "L", 1, 3],
+     [9, 10, "S", 1, 1],
+     [12, 13, "S", 1, 1],
+     [14, 15, "L", 1, 3],
+     [19, 20, "L", 1, 3],
+     [22, 23, "L", 1, 3],
+     [25, 26, "L", 1, 3],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [37, 39, "L", 1, 0],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.229": {
     "text": "ōraque caeruleā patrium clāmantia nōmen",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [2, 3, "S", 2, 6],
+     [5, 6, "S", 1, 1],
+     [8, 10, "L", 1, 0],
+     [11, 12, "S", 1, 1],
+     [13, 14, "S", 1, 1],
+     [14, 15, "L", 1, 3],
+     [17, 18, "S", 5, 7],
+     [20, 21, "S", 1, 1],
+     [21, 22, "L", 1, 5],
+     [26, 27, "L", 1, 3],
+     [28, 29, "L", 1, 2],
+     [31, 32, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.230": {
     "text": "excipiuntur aquā, quae nōmen trāxit ab illō.",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [6, 7, "L", 1, 2],
+     [9, 10, "S", 1, 1],
+     [12, 13, "S", 2, 6],
+     [15, 16, "L", 1, 3],
+     [20, 22, "L", 1, 0],
+     [24, 25, "L", 1, 3],
+     [26, 27, "L", 1, 5],
+     [31, 32, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.231": {
     "text": "at pater īnfēlīx, nec iam pater, Īcare, dīxit,",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [12, 13, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [19, 20, "L", 1, 5],
+     [23, 24, "L", 1, 5],
+     [27, 28, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.232": {
     "text": "Īcare, dīxit ubi es? quā tē regiōne requīram?",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [2, 3, "S", 1, 1],
+     [4, 5, "S", 1, 1],
+     [8, 9, "L", 1, 3],
+     [10, 11, "S", 1, 1],
+     [13, 14, "S", 1, 1],
+     [15, 16, "L", 1, 5],
+     [17, 18, "x", 4, 8],
+     [23, 24, "L", 1, 3],
+     [26, 27, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [32, 33, "L", 1, 3],
+     [34, 35, "S", 1, 1],
+     [37, 38, "S", 2, 6],
+     [40, 41, "L", 1, 3],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "ubi (e)s"
-    ]
+    "elisions": ["ubi (e)s"]
    },
    "Met. 8.233": {
     "text": "Īcare dīcēbat: pennās aspexit in undīs",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [2, 3, "S", 1, 1],
+     [4, 5, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [9, 10, "L", 1, 3],
+     [11, 12, "L", 1, 5],
+     [16, 17, "L", 1, 2],
+     [19, 20, "L", 1, 3],
+     [22, 23, "L", 1, 2],
+     [25, 26, "L", 3, 9],
+     [27, 28, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [33, 34, "L", 1, 2],
+     [36, 37, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.234": {
     "text": "dēvōvitque suās artēs corpusque sepulcrō",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "L", 1, 3],
+     [5, 6, "L", 1, 2],
+     [9, 10, "S", 1, 1],
+     [12, 13, "S", 1, 1],
+     [13, 14, "L", 1, 3],
+     [16, 17, "L", 1, 2],
+     [19, 20, "L", 1, 3],
+     [23, 24, "L", 1, 2],
+     [26, 27, "L", 1, 2],
+     [30, 31, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [35, 36, "L", 1, 2],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 8.235": {
     "text": "condidit, et tellūs ā nōmine dicta sepultī.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [14, 15, "L", 1, 2],
+     [17, 18, "L", 1, 3],
+     [20, 21, "L", 1, 3],
+     [23, 24, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [30, 31, "L", 1, 2],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 2],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Aen. 6.28": {
     "text": "magnum rēgīnae sed enim miserātus amōrem",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "L", 1, 5],
+     [8, 9, "L", 1, 3],
+     [10, 11, "L", 1, 3],
+     [12, 14, "L", 1, 0],
+     [16, 17, "S", 1, 1],
+     [19, 20, "S", 1, 1],
+     [21, 22, "L", 1, 5],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [29, 30, "L", 1, 3],
+     [31, 32, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [36, 37, "L", 1, 3],
+     [38, 39, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Aen. 6.29": {
     "text": "Daedalus ipse dolōs tēctī ambāgēsque resolvit,",
+    "slots": [
+     [1, 3, "L", 1, 0],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 3],
+     [21, 22, "L", 1, 3],
+     [24, 25, "x", 4, 8],
+     [26, 27, "L", 1, 2],
+     [29, 30, "L", 1, 3],
+     [31, 32, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [40, 41, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "tēct(ī) ambāgēsque"
-    ]
+    "elisions": ["tēct(ī) ambāgēsque"]
    },
    "Aen. 6.30": {
     "text": "caeca regēns fīlō vestīgia. tū quoque magnam",
+    "slots": [
+     [1, 3, "L", 1, 0],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [16, 17, "L", 1, 3],
+     [19, 20, "L", 1, 2],
+     [22, 23, "L", 1, 3],
+     [24, 25, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [29, 30, "L", 1, 3],
+     [33, 34, "S", 2, 6],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Aen. 6.31": {
     "text": "partem opere in tantō, sineret dolor, Īcare, habērēs.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "x", 4, 8],
+     [7, 8, "S", 1, 1],
+     [9, 10, "S", 1, 1],
+     [11, 12, "x", 4, 8],
+     [13, 14, "L", 1, 5],
+     [17, 18, "L", 1, 2],
+     [20, 21, "L", 1, 3],
+     [24, 25, "S", 1, 1],
+     [26, 27, "S", 1, 1],
+     [28, 29, "L", 1, 5],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [40, 41, "S", 1, 1],
+     [42, 43, "x", 4, 8],
+     [46, 47, "S", 1, 1],
+     [48, 49, "L", 1, 3],
+     [50, 51, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "part(em) opere",
-     "oper(e) in",
-     "Īcar(e), habērēs"
-    ]
+    "elisions": ["part(em) opere", "oper(e) in", "Īcar(e), habērēs"]
    },
    "Met. 4.55": {
     "text": "Pȳramus et Thisbē, iuvenum pulcherrimus alter,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [13, 14, "L", 1, 2],
+     [16, 17, "L", 1, 3],
+     [20, 21, "S", 1, 1],
+     [22, 23, "S", 1, 1],
+     [24, 25, "L", 1, 5],
+     [28, 29, "L", 1, 2],
+     [32, 33, "L", 1, 2],
+     [35, 36, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [40, 41, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.56": {
     "text": "altera, quās Oriēns habuit, praelāta puellīs,",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 2, 6],
+     [10, 11, "L", 1, 3],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [16, 17, "L", 1, 3],
+     [21, 22, "S", 1, 1],
+     [23, 24, "S", 1, 1],
+     [24, 25, "L", 1, 5],
+     [30, 32, "L", 1, 0],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.57": {
     "text": "contiguās tenuēre domōs, ubi dīcitur altam",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [11, 12, "S", 1, 1],
+     [13, 14, "S", 1, 1],
+     [14, 15, "L", 1, 3],
+     [16, 17, "S", 1, 1],
+     [19, 20, "S", 1, 1],
+     [21, 22, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [30, 31, "L", 1, 3],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [37, 38, "L", 1, 2],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.58": {
     "text": "coctilibus mūrīs cīnxisse Semīramis urbem.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [12, 13, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [18, 19, "L", 1, 3],
+     [21, 22, "L", 1, 2],
+     [24, 25, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [29, 30, "L", 1, 3],
+     [31, 32, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [36, 37, "L", 1, 2],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.59": {
     "text": "nōtitiam prīmōsque gradūs vīcīnia fēcit,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [6, 7, "L", 1, 5],
+     [11, 12, "L", 1, 3],
+     [13, 14, "L", 1, 3],
+     [17, 18, "S", 6, 7],
+     [21, 22, "S", 1, 1],
+     [23, 24, "L", 1, 3],
+     [27, 28, "L", 1, 3],
+     [29, 30, "L", 1, 3],
+     [31, 32, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.60": {
     "text": "tempore crēvit amor; taedae quoque iūre coīssent,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 6, 7],
+     [10, 11, "L", 1, 3],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 5],
+     [22, 24, "L", 1, 0],
+     [25, 27, "L", 1, 0],
+     [30, 31, "S", 2, 6],
+     [33, 34, "S", 1, 1],
+     [36, 37, "L", 1, 3],
+     [38, 39, "S", 1, 1],
+     [41, 42, "S", 1, 1],
+     [42, 43, "L", 1, 3],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.61": {
     "text": "sed vetuēre patrēs: quod nōn potuēre vetāre,",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [8, 9, "L", 1, 3],
+     [10, 11, "S", 1, 1],
+     [13, 14, "S", 5, 7],
+     [16, 17, "L", 1, 3],
+     [22, 23, "L", 1, 5],
+     [26, 27, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [40, 41, "L", 1, 3],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.62": {
     "text": "ex aequō captīs ārdēbant mentibus ambō.",
+    "slots": [
+     [0, 1, "L", 3, 9],
+     [3, 5, "L", 1, 0],
+     [7, 8, "L", 1, 3],
+     [10, 11, "L", 1, 2],
+     [13, 14, "L", 1, 3],
+     [16, 17, "L", 1, 3],
+     [19, 20, "L", 1, 3],
+     [21, 22, "L", 1, 5],
+     [26, 27, "L", 1, 2],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.63": {
     "text": "cōnscius omnis abest; nūtū signīsque loquuntur,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [5, 6, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 5],
+     [23, 24, "L", 1, 3],
+     [25, 26, "L", 1, 3],
+     [28, 29, "L", 1, 2],
+     [31, 32, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [38, 39, "S", 2, 6],
+     [41, 42, "L", 1, 2],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.64": {
     "text": "quōque magis tegitur, tēctus magis aestuat ignis.",
+    "slots": [
+     [2, 3, "L", 1, 3],
+     [5, 6, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [14, 15, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [18, 19, "L", 1, 5],
+     [23, 24, "L", 1, 3],
+     [26, 27, "L", 1, 5],
+     [30, 31, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [35, 37, "L", 1, 0],
+     [39, 40, "S", 1, 1],
+     [40, 41, "S", 1, 1],
+     [43, 44, "L", 1, 2],
+     [46, 47, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.65": {
     "text": "fissus erat tenuī rīmā, quam dūxerat ōlim,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 5],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [16, 17, "L", 1, 3],
+     [19, 20, "L", 1, 3],
+     [21, 22, "L", 1, 3],
+     [26, 27, "L", 1, 5],
+     [30, 31, "L", 1, 3],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.66": {
     "text": "cum fieret, pariēs domuī commūnis utrīque.",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [16, 17, "L", 1, 3],
+     [20, 21, "S", 1, 1],
+     [22, 23, "S", 1, 1],
+     [23, 24, "L", 1, 3],
+     [26, 27, "L", 1, 2],
+     [29, 30, "L", 1, 3],
+     [31, 32, "S", 1, 1],
+     [34, 35, "S", 5, 7],
+     [37, 38, "L", 1, 3],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.67": {
     "text": "id vitium nūllī per saecula longa notātum—",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [7, 8, "L", 1, 5],
+     [11, 12, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [17, 18, "L", 1, 5],
+     [21, 23, "L", 1, 0],
+     [24, 25, "S", 1, 1],
+     [26, 27, "S", 1, 1],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.68": {
     "text": "quid nōn sentit amor?—prīmī vīdistis amantēs",
+    "slots": [
+     [2, 3, "L", 1, 5],
+     [6, 7, "L", 1, 3],
+     [10, 11, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [18, 19, "L", 1, 2],
+     [24, 25, "L", 1, 3],
+     [26, 27, "L", 1, 3],
+     [29, 30, "L", 1, 3],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.69": {
     "text": "et vōcis fēcistis iter, tūtaeque per illud",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [4, 5, "L", 1, 3],
+     [6, 7, "L", 1, 5],
+     [10, 11, "L", 1, 3],
+     [12, 13, "L", 1, 2],
+     [15, 16, "S", 1, 1],
+     [18, 19, "S", 1, 1],
+     [20, 21, "L", 1, 5],
+     [25, 26, "L", 1, 3],
+     [27, 29, "L", 1, 0],
+     [31, 32, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [37, 38, "L", 1, 2],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.70": {
     "text": "murmure blanditiae minimō trānsīre solēbant.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 6, 7],
+     [10, 11, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [16, 18, "L", 1, 0],
+     [20, 21, "S", 1, 1],
+     [22, 23, "S", 1, 1],
+     [24, 25, "L", 1, 3],
+     [28, 29, "L", 1, 3],
+     [31, 32, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.71": {
     "text": "saepe, ubi cōnstiterant hinc Thisbē, Pȳramus illinc,",
+    "slots": [
+     [1, 3, "L", 1, 0],
+     [4, 5, "x", 4, 8],
+     [7, 8, "S", 1, 1],
+     [9, 10, "S", 1, 1],
+     [12, 13, "L", 1, 3],
+     [16, 17, "S", 1, 1],
+     [18, 19, "S", 1, 1],
+     [20, 21, "L", 1, 5],
+     [25, 26, "L", 1, 5],
+     [31, 32, "L", 1, 2],
+     [34, 35, "L", 1, 3],
+     [38, 39, "L", 1, 3],
+     [40, 41, "S", 1, 1],
+     [42, 43, "S", 1, 1],
+     [45, 46, "L", 1, 2],
+     [48, 49, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "saep(e), ubi"
-    ]
+    "elisions": ["saep(e), ubi"]
    },
    "Met. 4.72": {
     "text": "inque vicēs fuerat captātus anhēlitus ōris,",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [13, 14, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [16, 17, "L", 1, 5],
+     [20, 21, "L", 1, 2],
+     [23, 24, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [28, 29, "S", 1, 1],
+     [31, 32, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.73": {
     "text": "invide dīcēbant pariēs, quid amantibus obstās?",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [8, 9, "L", 1, 3],
+     [10, 11, "L", 1, 3],
+     [12, 13, "L", 1, 5],
+     [17, 18, "S", 1, 1],
+     [19, 20, "S", 1, 1],
+     [20, 21, "L", 1, 3],
+     [26, 27, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.74": {
     "text": "quantum erat, ut sinerēs tōtō nōs corpore iungī",
+    "slots": [
+     [2, 3, "L", 1, 2],
+     [5, 6, "x", 4, 8],
+     [8, 9, "S", 1, 1],
+     [10, 11, "S", 1, 1],
+     [14, 15, "L", 1, 5],
+     [18, 19, "S", 1, 1],
+     [20, 21, "S", 1, 1],
+     [22, 23, "L", 1, 3],
+     [26, 27, "L", 1, 3],
+     [28, 29, "L", 1, 3],
+     [31, 32, "L", 1, 3],
+     [35, 36, "L", 1, 2],
+     [38, 39, "S", 1, 1],
+     [40, 41, "S", 1, 1],
+     [43, 44, "L", 1, 2],
+     [46, 47, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "quant(um) erat"
-    ]
+    "elisions": ["quant(um) erat"]
    },
    "Met. 4.75": {
     "text": "aut, hoc sī nimium est, vel ad ōscula danda patērēs?",
+    "slots": [
+     [0, 2, "L", 1, 0],
+     [6, 7, "L", 1, 5],
+     [10, 11, "L", 1, 3],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [16, 17, "L", 1, 5],
+     [19, 20, "x", 4, 8],
+     [25, 26, "S", 1, 1],
+     [28, 29, "S", 1, 1],
+     [31, 32, "L", 1, 3],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "S", 1, 1],
+     [45, 46, "S", 1, 1],
+     [47, 48, "L", 1, 3],
+     [49, 50, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "nimium (e)st"
-    ]
+    "elisions": ["nimium (e)st"]
    },
    "Met. 4.76": {
     "text": "nec sumus ingrātī: tibi nōs dēbēre fatēmur,",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 2],
+     [14, 15, "L", 1, 3],
+     [16, 17, "L", 1, 3],
+     [20, 21, "S", 1, 1],
+     [22, 23, "S", 1, 1],
+     [25, 26, "L", 1, 3],
+     [29, 30, "L", 1, 3],
+     [31, 32, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.77": {
     "text": "quod datus est verbīs ad amīcās trānsitus aurīs.",
+    "slots": [
+     [2, 3, "L", 1, 5],
+     [6, 7, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [11, 12, "L", 1, 5],
+     [16, 17, "L", 1, 2],
+     [19, 20, "L", 1, 3],
+     [22, 23, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [27, 28, "L", 1, 3],
+     [29, 30, "L", 1, 3],
+     [34, 35, "L", 1, 3],
+     [37, 38, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [42, 44, "L", 1, 0],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.78": {
     "text": "tālia dīversā nēquīquam sēde locūtī",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [4, 5, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [9, 10, "L", 1, 2],
+     [12, 13, "L", 1, 3],
+     [15, 16, "L", 1, 3],
+     [18, 19, "L", 1, 3],
+     [21, 22, "L", 1, 5],
+     [25, 26, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [32, 33, "L", 1, 3],
+     [34, 35, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.79": {
     "text": "sub noctem dīxēre valē partīque dedēre",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "L", 1, 2],
+     [8, 9, "L", 1, 5],
+     [12, 13, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [16, 17, "S", 1, 1],
+     [19, 20, "S", 1, 1],
+     [21, 22, "L", 1, 3],
+     [24, 25, "L", 1, 2],
+     [27, 28, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.80": {
     "text": "ōscula quisque suae nōn pervenientia contrā.",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 2, 6],
+     [9, 10, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [17, 19, "L", 1, 0],
+     [21, 22, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [28, 29, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [38, 39, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.81": {
     "text": "postera nocturnōs Aurōra remōverat ignēs,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "L", 1, 2],
+     [15, 16, "L", 1, 3],
+     [18, 20, "L", 1, 0],
+     [21, 22, "L", 1, 3],
+     [23, 24, "S", 1, 1],
+     [26, 27, "S", 1, 1],
+     [28, 29, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [35, 36, "L", 1, 2],
+     [38, 39, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.82": {
     "text": "sōlque pruīnōsās radiīs siccāverat herbās:",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [5, 6, "S", 6, 7],
+     [9, 10, "S", 1, 1],
+     [10, 11, "L", 1, 3],
+     [12, 13, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [18, 19, "S", 1, 1],
+     [20, 21, "S", 1, 1],
+     [21, 22, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [28, 29, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [36, 37, "L", 1, 2],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.91": {
     "text": "pacta placent; et lūx, tardē discēdere vīsa,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 6, 7],
+     [8, 9, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [15, 16, "L", 1, 5],
+     [19, 20, "L", 1, 3],
+     [24, 25, "L", 1, 2],
+     [27, 28, "L", 1, 3],
+     [30, 31, "L", 1, 2],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [40, 41, "L", 1, 3],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.92": {
     "text": "praecipitātur aquīs, et aquīs nox exit ab īsdem.",
+    "slots": [
+     [2, 4, "L", 1, 0],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [11, 12, "S", 1, 1],
+     [14, 15, "S", 2, 6],
+     [17, 18, "L", 1, 3],
+     [21, 22, "S", 1, 1],
+     [24, 25, "S", 2, 6],
+     [27, 28, "L", 1, 3],
+     [31, 32, "L", 3, 9],
+     [34, 35, "L", 3, 9],
+     [36, 37, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [42, 43, "L", 1, 3],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.93": {
     "text": "Callida per tenebrās versātō cardine Thisbē",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 5],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 5, 7],
+     [18, 19, "L", 1, 3],
+     [22, 23, "L", 1, 2],
+     [25, 26, "L", 1, 3],
+     [27, 28, "L", 1, 3],
+     [30, 31, "L", 1, 2],
+     [33, 34, "S", 1, 1],
+     [35, 36, "S", 3, 10],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.94": {
     "text": "ēgreditur fallitque suōs adopertaque vultum",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [7, 8, "L", 1, 5],
+     [11, 12, "L", 1, 2],
+     [14, 15, "L", 1, 2],
+     [18, 19, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [22, 23, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 2, 6],
+     [35, 36, "S", 1, 1],
+     [38, 39, "L", 1, 2],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.95": {
     "text": "pervenit ad tumulum dictāque sub arbore sēdit.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 5],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 5],
+     [21, 22, "L", 1, 2],
+     [24, 25, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [33, 34, "L", 1, 2],
+     [36, 37, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.96": {
     "text": "audācem faciēbat amor. venit ecce recentī",
+    "slots": [
+     [0, 2, "L", 1, 0],
+     [3, 4, "L", 1, 3],
+     [5, 6, "L", 1, 5],
+     [9, 10, "S", 1, 1],
+     [11, 12, "S", 1, 1],
+     [12, 13, "L", 1, 3],
+     [14, 15, "S", 1, 1],
+     [17, 18, "S", 1, 1],
+     [19, 20, "L", 1, 5],
+     [24, 25, "S", 1, 1],
+     [26, 27, "S", 1, 1],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [37, 38, "L", 1, 2],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.97": {
     "text": "caede leaena boum spūmantīs oblita rictūs",
+    "slots": [
+     [1, 3, "L", 1, 0],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [8, 10, "L", 1, 0],
+     [11, 12, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [15, 16, "L", 1, 5],
+     [20, 21, "L", 1, 3],
+     [22, 23, "L", 1, 2],
+     [25, 26, "L", 1, 3],
+     [28, 29, "L", 5, 7],
+     [31, 32, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [36, 37, "L", 1, 2],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.98": {
     "text": "dēpositūra sitim vīcīnī fontis in undā;",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [9, 10, "S", 1, 1],
+     [12, 13, "S", 1, 1],
+     [14, 15, "L", 1, 5],
+     [18, 19, "L", 1, 3],
+     [20, 21, "L", 1, 3],
+     [22, 23, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [28, 29, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.99": {
     "text": "quam procul ad lūnae radiōs Babylōnia Thisbē",
+    "slots": [
+     [2, 3, "L", 1, 5],
+     [7, 8, "S", 1, 1],
+     [9, 10, "S", 1, 1],
+     [12, 13, "L", 1, 5],
+     [16, 17, "L", 1, 3],
+     [18, 20, "L", 1, 0],
+     [22, 23, "S", 1, 1],
+     [24, 25, "S", 1, 1],
+     [25, 26, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [36, 37, "S", 3, 10],
+     [40, 41, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.100": {
     "text": "vīdit et obscūrum timidō pede fūgit in antrum,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [13, 14, "L", 1, 3],
+     [15, 16, "L", 1, 5],
+     [19, 20, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [23, 24, "L", 1, 3],
+     [26, 27, "S", 1, 1],
+     [28, 29, "S", 1, 1],
+     [31, 32, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.101": {
     "text": "dumque fugit, tergō vēlāmina lāpsa relīquit.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [5, 6, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [15, 16, "L", 1, 2],
+     [18, 19, "L", 1, 3],
+     [21, 22, "L", 1, 3],
+     [23, 24, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [30, 31, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.102": {
     "text": "ut lea saeva sitim multā compescuit undā,",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [4, 5, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [8, 10, "L", 1, 0],
+     [11, 12, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [16, 17, "L", 1, 5],
+     [20, 21, "L", 1, 2],
+     [23, 24, "L", 1, 3],
+     [26, 27, "L", 1, 2],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [36, 37, "L", 1, 2],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.103": {
     "text": "dum redit in silvās, inventōs forte sine ipsā",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [14, 15, "L", 1, 2],
+     [17, 18, "L", 1, 3],
+     [21, 22, "L", 1, 2],
+     [24, 25, "L", 1, 2],
+     [27, 28, "L", 1, 3],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [39, 40, "x", 4, 8],
+     [41, 42, "L", 1, 2],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "sin(e) ipsā"
-    ]
+    "elisions": ["sin(e) ipsā"]
    },
    "Met. 4.104": {
     "text": "ōre cruentātō tenuēs laniāvit amictūs.",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [2, 3, "S", 6, 7],
+     [6, 7, "S", 1, 1],
+     [7, 8, "L", 1, 2],
+     [10, 11, "L", 1, 3],
+     [12, 13, "L", 1, 3],
+     [15, 16, "S", 1, 1],
+     [17, 18, "S", 1, 1],
+     [18, 19, "L", 1, 3],
+     [22, 23, "S", 1, 1],
+     [24, 25, "S", 1, 1],
+     [25, 26, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [32, 33, "L", 1, 2],
+     [35, 36, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.105": {
     "text": "sērius ēgressus vestīgia vīdit in altō",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [4, 5, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [10, 11, "L", 1, 2],
+     [13, 14, "L", 1, 5],
+     [17, 18, "L", 1, 2],
+     [20, 21, "L", 1, 3],
+     [22, 23, "S", 1, 1],
+     [23, 24, "S", 1, 1],
+     [26, 27, "L", 1, 3],
+     [28, 29, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.106": {
     "text": "pulvere certa ferae tōtōque expalluit ōre",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 19, "L", 1, 0],
+     [21, 22, "L", 1, 3],
+     [23, 24, "L", 1, 3],
+     [26, 27, "x", 4, 8],
+     [28, 29, "L", 1, 2],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "tōtōqu(e) expalluit"
-    ]
+    "elisions": ["tōtōqu(e) expalluit"]
    },
    "Met. 4.107": {
     "text": "Pȳramus; ut vērō vestem quoque sanguine tīnctam",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [9, 10, "L", 1, 5],
+     [13, 14, "L", 1, 3],
+     [15, 16, "L", 1, 3],
+     [18, 19, "L", 1, 2],
+     [21, 22, "L", 1, 5],
+     [26, 27, "S", 2, 6],
+     [29, 30, "S", 1, 1],
+     [32, 33, "L", 1, 2],
+     [36, 37, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.108": {
     "text": "repperit, ūna duōs inquit nox perdet amantēs,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [10, 11, "L", 1, 3],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [16, 17, "L", 1, 3],
+     [19, 20, "L", 1, 2],
+     [23, 24, "L", 1, 5],
+     [27, 28, "L", 1, 5],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.109": {
     "text": "ē quibus illa fuit longā dignissima vītā;",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [16, 17, "L", 1, 5],
+     [20, 21, "L", 1, 2],
+     [23, 24, "L", 1, 3],
+     [26, 27, "L", 1, 2],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.110": {
     "text": "nostra nocēns anima est. ego tē, miseranda, perēmī,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [5, 6, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [10, 11, "L", 1, 3],
+     [14, 15, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [18, 19, "L", 1, 5],
+     [20, 21, "x", 4, 8],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [30, 31, "L", 1, 3],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 2],
+     [41, 42, "S", 1, 1],
+     [45, 46, "S", 1, 1],
+     [47, 48, "L", 1, 3],
+     [49, 50, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "anima (e)st"
-    ]
+    "elisions": ["anima (e)st"]
    },
    "Met. 4.111": {
     "text": "in loca plēna metūs quī iussī nocte venīrēs",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 6, 7],
+     [10, 11, "L", 1, 3],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 3],
+     [22, 23, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [28, 29, "L", 1, 3],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [39, 40, "L", 1, 3],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.112": {
     "text": "nec prior hūc vēnī. nostrum dīvellite corpus",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [6, 7, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [11, 12, "L", 1, 3],
+     [15, 16, "L", 1, 3],
+     [17, 18, "L", 1, 3],
+     [21, 22, "L", 1, 2],
+     [25, 26, "L", 1, 5],
+     [29, 30, "L", 1, 3],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.113": {
     "text": "et scelerāta ferō cōnsūmite vīscera morsū,",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [11, 12, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [16, 17, "L", 1, 3],
+     [19, 20, "L", 1, 3],
+     [22, 23, "L", 1, 3],
+     [24, 25, "S", 1, 1],
+     [26, 27, "S", 1, 1],
+     [29, 30, "L", 1, 3],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [37, 38, "L", 1, 2],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.114": {
     "text": "ō quīcumque sub hāc habitātis rūpe leōnēs!",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [4, 5, "L", 1, 3],
+     [6, 7, "L", 1, 2],
+     [10, 11, "S", 1, 1],
+     [13, 14, "S", 1, 1],
+     [17, 18, "L", 1, 3],
+     [21, 22, "S", 1, 1],
+     [23, 24, "S", 1, 1],
+     [25, 26, "L", 1, 3],
+     [27, 28, "L", 1, 5],
+     [31, 32, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.115": {
     "text": "sed timidī est optāre necem. vēlāmina Thisbēs",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [11, 12, "x", 4, 8],
+     [15, 16, "L", 1, 2],
+     [18, 19, "L", 1, 3],
+     [20, 21, "S", 1, 1],
+     [23, 24, "S", 1, 1],
+     [25, 26, "L", 1, 5],
+     [30, 31, "L", 1, 3],
+     [32, 33, "L", 1, 3],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 3, 10],
+     [40, 41, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "timidī (e)st"
-    ]
+    "elisions": ["timidī (e)st"]
    },
    "Met. 4.116": {
     "text": "tollit et ad pāctae sēcum fert arboris umbram,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [14, 15, "L", 1, 3],
+     [17, 19, "L", 1, 0],
+     [21, 22, "L", 1, 3],
+     [23, 24, "L", 1, 5],
+     [27, 28, "L", 1, 5],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.117": {
     "text": "utque dedit nōtae lacrimās, dedit ōscula vestī,",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 5],
+     [13, 14, "L", 1, 3],
+     [15, 17, "L", 1, 0],
+     [19, 20, "S", 5, 7],
+     [22, 23, "S", 1, 1],
+     [24, 25, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 3],
+     [37, 38, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [42, 43, "L", 1, 2],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.118": {
     "text": "accipe nunc inquit nostrī quoque sanguinis haustūs!",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [12, 13, "L", 1, 2],
+     [16, 17, "L", 1, 5],
+     [20, 21, "L", 1, 2],
+     [24, 25, "L", 1, 3],
+     [28, 29, "S", 2, 6],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [38, 39, "S", 1, 1],
+     [40, 41, "S", 1, 1],
+     [44, 46, "L", 1, 0],
+     [48, 49, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.125": {
     "text": "arboreī fētūs aspergine caedis in ātram",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [6, 7, "L", 1, 3],
+     [9, 10, "L", 1, 3],
+     [11, 12, "L", 1, 3],
+     [14, 15, "L", 1, 2],
+     [17, 18, "L", 1, 2],
+     [20, 21, "S", 1, 1],
+     [22, 23, "S", 1, 1],
+     [25, 27, "L", 1, 0],
+     [28, 29, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.126": {
     "text": "vertuntur faciem, madefactaque sanguine rādīx",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "L", 1, 2],
+     [7, 8, "L", 1, 5],
+     [11, 12, "S", 1, 1],
+     [13, 14, "S", 1, 1],
+     [14, 15, "L", 1, 5],
+     [19, 20, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [23, 24, "L", 1, 2],
+     [26, 27, "S", 2, 6],
+     [29, 30, "S", 1, 1],
+     [32, 33, "L", 1, 2],
+     [36, 37, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.127": {
     "text": "purpureō tinguit pendentia mōra colōre.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [10, 11, "L", 1, 2],
+     [14, 15, "L", 1, 5],
+     [18, 19, "L", 1, 2],
+     [21, 22, "L", 1, 2],
+     [24, 25, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [28, 29, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.128": {
     "text": "Ecce metū nōndum positō, nē fallat amantem,",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 3],
+     [11, 12, "L", 1, 3],
+     [14, 15, "L", 1, 5],
+     [18, 19, "S", 1, 1],
+     [20, 21, "S", 1, 1],
+     [22, 23, "L", 1, 3],
+     [26, 27, "L", 1, 3],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [37, 38, "L", 1, 2],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.129": {
     "text": "illa redit iuvenemque oculīs animōque requīrit,",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [12, 13, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [16, 17, "L", 1, 2],
+     [20, 21, "x", 4, 8],
+     [22, 23, "S", 1, 1],
+     [24, 25, "S", 1, 1],
+     [26, 27, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [33, 34, "L", 1, 3],
+     [36, 37, "S", 1, 1],
+     [39, 40, "S", 2, 6],
+     [42, 43, "L", 1, 3],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "iuvenemqu(e) oculīs"
-    ]
+    "elisions": ["iuvenemqu(e) oculīs"]
    },
    "Met. 4.130": {
     "text": "quantaque vītārit nārrāre perīcula gestit;",
+    "slots": [
+     [2, 3, "L", 1, 2],
+     [5, 6, "S", 2, 6],
+     [8, 9, "S", 1, 1],
+     [11, 12, "L", 1, 3],
+     [13, 14, "L", 1, 3],
+     [15, 16, "L", 1, 5],
+     [19, 20, "L", 1, 3],
+     [22, 23, "L", 1, 3],
+     [24, 25, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [29, 30, "L", 1, 3],
+     [31, 32, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [36, 37, "L", 1, 2],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.131": {
     "text": "utque locum et vīsā cognōscit in arbore fōrmam,",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "x", 4, 8],
+     [12, 13, "L", 1, 5],
+     [16, 17, "L", 1, 3],
+     [18, 19, "L", 1, 3],
+     [21, 22, "L", 1, 2],
+     [24, 25, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [33, 34, "L", 1, 2],
+     [36, 37, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "loc(um) et"
-    ]
+    "elisions": ["loc(um) et"]
    },
    "Met. 4.132": {
     "text": "sīc facit incertam pōmī color: haeret, an haec sit.",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 2],
+     [13, 14, "L", 1, 2],
+     [16, 17, "L", 1, 5],
+     [20, 21, "L", 1, 3],
+     [22, 23, "L", 1, 3],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [32, 34, "L", 1, 0],
+     [35, 36, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [43, 45, "L", 1, 0],
+     [48, 49, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.133": {
     "text": "dum dubitat, tremebunda videt pulsāre cruentum",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 5],
+     [15, 16, "S", 1, 1],
+     [17, 18, "S", 1, 1],
+     [19, 20, "L", 1, 2],
+     [22, 23, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [27, 28, "L", 1, 5],
+     [31, 32, "L", 1, 2],
+     [34, 35, "L", 1, 3],
+     [36, 37, "S", 6, 7],
+     [40, 41, "S", 1, 1],
+     [41, 42, "L", 1, 2],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.134": {
     "text": "membra solum, retrōque pedem tulit, ōraque buxō",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [5, 6, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [15, 16, "L", 5, 7],
+     [18, 19, "L", 1, 3],
+     [21, 22, "S", 1, 1],
+     [24, 25, "S", 1, 1],
+     [26, 27, "L", 1, 5],
+     [30, 31, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [36, 37, "L", 1, 3],
+     [38, 39, "S", 2, 6],
+     [41, 42, "S", 1, 1],
+     [44, 45, "L", 3, 9],
+     [46, 47, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.135": {
     "text": "pallidiōra gerēns exhorruit aequoris īnstar,",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [7, 8, "L", 1, 3],
+     [9, 10, "S", 1, 1],
+     [12, 13, "S", 1, 1],
+     [14, 15, "L", 1, 3],
+     [18, 19, "L", 3, 9],
+     [21, 22, "L", 1, 2],
+     [24, 25, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [28, 30, "L", 1, 0],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.136": {
     "text": "quod tremit, exiguā cum summum stringitur aurā.",
+    "slots": [
+     [2, 3, "L", 1, 5],
+     [7, 8, "S", 1, 1],
+     [9, 10, "S", 1, 1],
+     [13, 14, "L", 3, 9],
+     [15, 16, "S", 1, 1],
+     [17, 18, "S", 1, 1],
+     [18, 19, "L", 1, 3],
+     [21, 22, "L", 1, 5],
+     [25, 26, "L", 1, 2],
+     [28, 29, "L", 1, 5],
+     [34, 35, "L", 1, 2],
+     [37, 38, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [42, 44, "L", 1, 0],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.143": {
     "text": "Pȳrame, respondē! tua tē cārissima Thisbē",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "L", 1, 2],
+     [15, 16, "L", 1, 3],
+     [19, 20, "S", 1, 1],
+     [20, 21, "S", 1, 1],
+     [23, 24, "L", 1, 3],
+     [26, 27, "L", 1, 3],
+     [28, 29, "L", 1, 2],
+     [31, 32, "S", 1, 1],
+     [33, 34, "S", 3, 10],
+     [37, 38, "L", 1, 2],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.144": {
     "text": "nōminat; exaudī vultūsque attolle iacentēs!",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [9, 10, "L", 3, 9],
+     [11, 13, "L", 1, 0],
+     [14, 15, "L", 1, 3],
+     [17, 18, "L", 1, 2],
+     [20, 21, "L", 1, 3],
+     [24, 25, "x", 4, 8],
+     [26, 27, "L", 1, 2],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [37, 38, "L", 1, 2],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "vultūsqu(e) attolle"
-    ]
+    "elisions": ["vultūsqu(e) attolle"]
    },
    "Met. 4.145": {
     "text": "ad nōmen Thisbēs oculōs ā morte gravātōs",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [4, 5, "L", 1, 3],
+     [6, 7, "L", 1, 5],
+     [11, 12, "L", 1, 2],
+     [14, 15, "L", 1, 3],
+     [17, 18, "S", 1, 1],
+     [19, 20, "S", 1, 1],
+     [21, 22, "L", 1, 3],
+     [24, 25, "L", 1, 3],
+     [27, 28, "L", 1, 2],
+     [30, 31, "S", 6, 7],
+     [34, 35, "S", 1, 1],
+     [36, 37, "L", 1, 3],
+     [38, 39, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.146": {
     "text": "Pȳramus ērēxit vīsāque recondidit illā.",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [8, 9, "L", 1, 3],
+     [10, 11, "L", 1, 3],
+     [12, 13, "L", 1, 5],
+     [16, 17, "L", 1, 3],
+     [18, 19, "L", 1, 3],
+     [21, 22, "S", 1, 1],
+     [24, 25, "S", 1, 1],
+     [26, 27, "L", 1, 2],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.147": {
     "text": "Quae postquam vestemque suam cognōvit et ēnse",
+    "slots": [
+     [2, 4, "L", 1, 0],
+     [6, 7, "L", 1, 2],
+     [11, 12, "L", 1, 5],
+     [15, 16, "L", 1, 2],
+     [18, 19, "L", 1, 2],
+     [22, 23, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [26, 27, "L", 1, 5],
+     [30, 31, "L", 1, 2],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.148": {
     "text": "vīdit ebur vacuum, tua tē manus inquit amorque",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [12, 13, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [15, 16, "L", 1, 5],
+     [20, 21, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [24, 25, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [32, 33, "L", 1, 2],
+     [36, 37, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [41, 42, "L", 1, 2],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.149": {
     "text": "perdidit, īnfēlīx! est et mihi fortis in ūnum",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [10, 11, "L", 1, 3],
+     [13, 14, "L", 1, 3],
+     [15, 16, "L", 1, 3],
+     [19, 20, "L", 1, 5],
+     [23, 24, "L", 1, 5],
+     [27, 28, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [32, 33, "L", 1, 2],
+     [35, 36, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.150": {
     "text": "hoc manus, est et amor: dabit hic in vulnera vīrēs.",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [11, 12, "L", 1, 5],
+     [15, 16, "S", 1, 1],
+     [18, 19, "S", 1, 1],
+     [20, 21, "L", 1, 5],
+     [25, 26, "S", 1, 1],
+     [27, 28, "S", 1, 1],
+     [31, 32, "L", 1, 5],
+     [34, 35, "L", 1, 5],
+     [38, 39, "L", 1, 2],
+     [41, 42, "S", 1, 1],
+     [43, 44, "S", 1, 1],
+     [46, 47, "L", 1, 3],
+     [48, 49, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.151": {
     "text": "persequar exstīnctum lētīque miserrima dīcar",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 2, 6],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 2],
+     [14, 15, "L", 1, 3],
+     [18, 19, "L", 1, 5],
+     [22, 23, "L", 1, 3],
+     [24, 25, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [32, 33, "L", 1, 2],
+     [35, 36, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [40, 41, "L", 1, 3],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.152": {
     "text": "causa comesque tuī: quīque ā mē morte revellī",
+    "slots": [
+     [1, 3, "L", 1, 0],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [17, 18, "L", 1, 3],
+     [22, 23, "L", 1, 3],
+     [25, 26, "x", 4, 8],
+     [27, 28, "L", 1, 3],
+     [30, 31, "L", 1, 3],
+     [33, 34, "L", 1, 2],
+     [36, 37, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [41, 42, "L", 1, 2],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "quīqu(e) ā"
-    ]
+    "elisions": ["quīqu(e) ā"]
    },
    "Met. 4.153": {
     "text": "heu sōlā poterās, poteris nec morte revellī.",
+    "slots": [
+     [1, 3, "L", 1, 0],
+     [5, 6, "L", 1, 3],
+     [7, 8, "L", 1, 3],
+     [10, 11, "S", 1, 1],
+     [12, 13, "S", 1, 1],
+     [14, 15, "L", 1, 3],
+     [19, 20, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [23, 24, "L", 1, 5],
+     [27, 28, "L", 1, 5],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.154": {
     "text": "hoc tamen ambōrum verbīs estōte rogātī,",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 2],
+     [13, 14, "L", 1, 3],
+     [15, 16, "L", 1, 5],
+     [19, 20, "L", 1, 2],
+     [22, 23, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [28, 29, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.155": {
     "text": "ō multum miserī meus illīusque parentēs,",
+    "slots": [
+     [0, 1, "L", 1, 3],
+     [3, 4, "L", 1, 2],
+     [6, 7, "L", 1, 5],
+     [10, 11, "S", 1, 1],
+     [12, 13, "S", 1, 1],
+     [14, 15, "L", 1, 3],
+     [17, 18, "S", 1, 1],
+     [18, 19, "S", 1, 1],
+     [21, 22, "L", 1, 2],
+     [24, 25, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [29, 30, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.156": {
     "text": "ut, quōs certus amor, quōs hōra novissima iūnxit,",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [6, 7, "L", 1, 3],
+     [10, 11, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [18, 19, "L", 1, 5],
+     [24, 25, "L", 1, 3],
+     [28, 29, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [35, 36, "L", 1, 2],
+     [38, 39, "S", 1, 1],
+     [40, 41, "S", 1, 1],
+     [43, 44, "L", 1, 3],
+     [46, 47, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.157": {
     "text": "compōnī tumulō nōn invideātis eōdem;",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "L", 1, 3],
+     [6, 7, "L", 1, 3],
+     [9, 10, "S", 1, 1],
+     [11, 12, "S", 1, 1],
+     [13, 14, "L", 1, 3],
+     [16, 17, "L", 1, 3],
+     [19, 20, "L", 1, 2],
+     [22, 23, "S", 1, 1],
+     [24, 25, "S", 1, 1],
+     [25, 26, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [31, 32, "L", 1, 3],
+     [33, 34, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.158": {
     "text": "at tū quae rāmīs arbor miserābile corpus",
+    "slots": [
+     [0, 1, "L", 1, 5],
+     [4, 5, "L", 1, 3],
+     [8, 10, "L", 1, 0],
+     [12, 13, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [17, 18, "L", 1, 2],
+     [20, 21, "L", 1, 5],
+     [24, 25, "S", 1, 1],
+     [26, 27, "S", 1, 1],
+     [28, 29, "L", 1, 3],
+     [30, 31, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [35, 36, "L", 1, 2],
+     [38, 39, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.159": {
     "text": "nunc tegis ūnīus, mox es tēctūra duōrum,",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [6, 7, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [11, 12, "L", 1, 3],
+     [13, 14, "L", 1, 3],
+     [14, 15, "L", 1, 5],
+     [19, 20, "L", 3, 9],
+     [22, 23, "L", 1, 5],
+     [26, 27, "L", 1, 3],
+     [29, 30, "L", 1, 3],
+     [31, 32, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.160": {
     "text": "signa tenē caedis pullōsque et lūctibus aptōs",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [12, 14, "L", 1, 0],
+     [15, 16, "L", 1, 5],
+     [19, 20, "L", 1, 2],
+     [22, 23, "L", 1, 3],
+     [26, 27, "x", 4, 8],
+     [28, 29, "L", 1, 5],
+     [32, 33, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [40, 41, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "pullōsqu(e) et"
-    ]
+    "elisions": ["pullōsqu(e) et"]
    },
    "Met. 4.161": {
     "text": "semper habē fētūs, geminī monumenta cruōris.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [10, 11, "L", 1, 3],
+     [13, 14, "L", 1, 3],
+     [15, 16, "L", 1, 3],
+     [20, 21, "S", 1, 1],
+     [22, 23, "S", 1, 1],
+     [24, 25, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 6, 7],
+     [38, 39, "S", 1, 1],
+     [39, 40, "L", 1, 3],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.162": {
     "text": "dīxit et aptātō pectus mucrōne sub īmum",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "L", 1, 3],
+     [14, 15, "L", 1, 3],
+     [17, 18, "L", 1, 2],
+     [20, 21, "L", 1, 5],
+     [24, 25, "L", 5, 7],
+     [27, 28, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.163": {
     "text": "incubuit ferrō, quod adhūc ā caede tepēbat.",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [6, 7, "L", 1, 5],
+     [10, 11, "L", 1, 2],
+     [13, 14, "L", 1, 3],
+     [18, 19, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [24, 25, "L", 1, 3],
+     [27, 28, "L", 1, 3],
+     [30, 32, "L", 1, 0],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.164": {
     "text": "vōta tamen tetigēre deōs, tetigēre parentēs;",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [12, 13, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [16, 17, "L", 1, 3],
+     [18, 19, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [22, 23, "L", 1, 3],
+     [27, 28, "S", 1, 1],
+     [29, 30, "S", 1, 1],
+     [31, 32, "L", 1, 3],
+     [33, 34, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [38, 39, "L", 1, 2],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 4.165": {
     "text": "nam color in pōmō est, ubi permātūruit, āter,",
+    "slots": [
+     [1, 2, "L", 1, 5],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 5],
+     [14, 15, "L", 1, 3],
+     [16, 17, "L", 1, 3],
+     [18, 19, "x", 4, 8],
+     [23, 24, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [28, 29, "L", 1, 2],
+     [31, 32, "L", 1, 3],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [40, 41, "L", 1, 3],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "pōmō (e)st"
-    ]
+    "elisions": ["pōmō (e)st"]
    },
    "Met. 4.166": {
     "text": "quodque rogīs superest, ūnā requiēscit in urnā.",
+    "slots": [
+     [2, 3, "L", 1, 2],
+     [6, 7, "S", 1, 1],
+     [9, 10, "S", 1, 1],
+     [11, 12, "L", 1, 3],
+     [15, 16, "S", 1, 1],
+     [17, 18, "S", 1, 1],
+     [19, 20, "L", 1, 5],
+     [24, 25, "L", 1, 3],
+     [26, 27, "L", 1, 3],
+     [29, 30, "S", 2, 6],
+     [32, 33, "S", 1, 1],
+     [33, 34, "L", 1, 3],
+     [36, 37, "S", 1, 1],
+     [39, 40, "S", 1, 1],
+     [42, 43, "L", 1, 2],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.457": {
     "text": "dīxerat: ista decent umerōs gestāmina nostrōs,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 5],
+     [21, 22, "S", 1, 1],
+     [23, 24, "S", 1, 1],
+     [25, 26, "L", 1, 3],
+     [29, 30, "L", 1, 2],
+     [32, 33, "L", 1, 3],
+     [34, 35, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.458": {
     "text": "quī dare certa ferae, dare vulnera possumus hostī,",
+    "slots": [
+     [2, 3, "L", 1, 3],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [16, 17, "S", 1, 1],
+     [18, 20, "L", 1, 0],
+     [23, 24, "S", 1, 1],
+     [25, 26, "S", 1, 1],
+     [28, 29, "L", 1, 2],
+     [31, 32, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [36, 37, "L", 1, 2],
+     [39, 40, "S", 1, 1],
+     [41, 42, "S", 1, 1],
+     [45, 46, "L", 1, 2],
+     [48, 49, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.459": {
     "text": "quī modo pestiferō tot iūgera ventre prementem",
+    "slots": [
+     [2, 3, "L", 1, 3],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 3],
+     [20, 21, "L", 1, 5],
+     [24, 25, "L", 1, 3],
+     [26, 27, "S", 1, 1],
+     [28, 29, "S", 1, 1],
+     [31, 32, "L", 1, 2],
+     [35, 36, "S", 6, 7],
+     [39, 40, "S", 1, 1],
+     [41, 42, "L", 1, 2],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.460": {
     "text": "strāvimus innumerīs tumidum Pȳthōna sagittīs.",
+    "slots": [
+     [3, 4, "L", 1, 3],
+     [5, 6, "S", 1, 1],
+     [7, 8, "S", 1, 1],
+     [10, 11, "L", 1, 2],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 3],
+     [21, 22, "S", 1, 1],
+     [23, 24, "S", 1, 1],
+     [25, 26, "L", 1, 5],
+     [29, 30, "L", 1, 3],
+     [32, 33, "L", 1, 3],
+     [34, 35, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [39, 40, "L", 1, 2],
+     [42, 43, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.461": {
     "text": "tū face nescio quōs estō contentus amōrēs",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [13, 14, "S", 2, 6],
+     [17, 18, "L", 1, 3],
+     [20, 21, "L", 1, 2],
+     [23, 24, "L", 1, 3],
+     [26, 27, "L", 1, 2],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [35, 36, "S", 1, 1],
+     [37, 38, "L", 1, 3],
+     [39, 40, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.462": {
     "text": "irrītāre tuā, nec laudēs assere nostrās!",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "L", 1, 3],
+     [5, 6, "L", 1, 3],
+     [7, 8, "S", 1, 1],
+     [10, 11, "S", 1, 1],
+     [11, 12, "L", 1, 3],
+     [15, 16, "L", 1, 5],
+     [19, 21, "L", 1, 0],
+     [22, 23, "L", 1, 3],
+     [25, 26, "L", 1, 2],
+     [28, 29, "S", 1, 1],
+     [30, 31, "S", 1, 1],
+     [33, 34, "L", 1, 2],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.463": {
     "text": "fīlius huic Veneris fīgat tuus omnia, Phoebe,",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [3, 4, "S", 1, 1],
+     [4, 5, "S", 1, 1],
+     [8, 10, "L", 1, 0],
+     [13, 14, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 5],
+     [21, 22, "L", 1, 3],
+     [23, 24, "L", 1, 5],
+     [27, 28, "S", 1, 1],
+     [28, 29, "S", 1, 1],
+     [31, 32, "L", 1, 2],
+     [34, 35, "S", 1, 1],
+     [35, 36, "S", 3, 10],
+     [40, 42, "L", 1, 0],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.464": {
     "text": "tē meus arcus ait; quantōque animālia cēdunt",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [4, 5, "S", 1, 1],
+     [5, 6, "S", 1, 1],
+     [8, 9, "L", 1, 2],
+     [11, 12, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [15, 16, "L", 1, 5],
+     [21, 22, "L", 1, 2],
+     [24, 25, "L", 1, 3],
+     [27, 28, "x", 4, 8],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [36, 37, "S", 1, 1],
+     [39, 40, "L", 1, 3],
+     [41, 42, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "quantōqu(e) animālia"
-    ]
+    "elisions": ["quantōqu(e) animālia"]
    },
    "Met. 1.465": {
     "text": "cūncta deō, tantō minor est tua glōria nostrā.",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [5, 6, "S", 1, 1],
+     [8, 9, "S", 1, 1],
+     [9, 10, "L", 1, 3],
+     [13, 14, "L", 1, 2],
+     [16, 17, "L", 1, 3],
+     [19, 20, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [24, 25, "L", 1, 5],
+     [29, 30, "S", 1, 1],
+     [30, 31, "S", 6, 7],
+     [34, 35, "L", 1, 3],
+     [36, 37, "S", 1, 1],
+     [37, 38, "S", 1, 1],
+     [40, 41, "L", 1, 2],
+     [44, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.474": {
     "text": "prōtinus alter amat, fugit altera nōmen amantis",
+    "slots": [
+     [2, 3, "L", 1, 3],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [15, 16, "S", 1, 1],
+     [17, 18, "L", 1, 5],
+     [22, 23, "S", 1, 1],
+     [24, 25, "S", 1, 1],
+     [27, 28, "L", 1, 2],
+     [30, 31, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "S", 1, 1],
+     [40, 41, "S", 1, 1],
+     [42, 43, "L", 1, 2],
+     [45, 46, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.475": {
     "text": "silvārum latebrīs captīvārumque ferārum",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "L", 1, 3],
+     [6, 7, "L", 1, 5],
+     [10, 11, "S", 1, 1],
+     [12, 13, "S", 5, 7],
+     [15, 16, "L", 1, 3],
+     [19, 20, "L", 1, 2],
+     [22, 23, "L", 1, 3],
+     [24, 25, "L", 1, 3],
+     [26, 27, "L", 1, 2],
+     [30, 31, "S", 1, 1],
+     [33, 34, "S", 1, 1],
+     [35, 36, "L", 1, 3],
+     [37, 38, "L", 0, 4]
+    ],
     "feet": "¯ ¯ | ¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.476": {
     "text": "exuviīs gaudēns innūptaeque aemula Phoebēs:",
+    "slots": [
+     [0, 1, "L", 3, 9],
+     [2, 3, "S", 1, 1],
+     [4, 5, "S", 1, 1],
+     [5, 6, "L", 1, 3],
+     [9, 11, "L", 1, 0],
+     [12, 13, "L", 1, 3],
+     [16, 17, "L", 1, 2],
+     [19, 20, "L", 1, 3],
+     [22, 24, "L", 1, 0],
+     [26, 27, "x", 4, 8],
+     [28, 30, "L", 1, 0],
+     [31, 32, "S", 1, 1],
+     [33, 34, "S", 3, 10],
+     [37, 39, "L", 1, 0],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
-    "elisions": [
-     "innūptaequ(e) aemula"
-    ]
+    "elisions": ["innūptaequ(e) aemula"]
    },
    "Met. 1.483": {
     "text": "illa velut crīmen taedās exōsa iugālēs",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [3, 4, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 5],
+     [13, 14, "L", 1, 3],
+     [15, 16, "L", 1, 5],
+     [19, 21, "L", 1, 0],
+     [22, 23, "L", 1, 3],
+     [25, 26, "L", 3, 9],
+     [27, 28, "L", 1, 3],
+     [29, 30, "S", 1, 1],
+     [32, 33, "S", 1, 1],
+     [34, 35, "L", 1, 3],
+     [36, 37, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.484": {
     "text": "pulchra verēcundō suffūderat ōra rubōre",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [6, 7, "S", 1, 1],
+     [9, 10, "S", 1, 1],
+     [11, 12, "L", 1, 3],
+     [13, 14, "L", 1, 2],
+     [16, 17, "L", 1, 3],
+     [19, 20, "L", 1, 2],
+     [22, 23, "L", 1, 3],
+     [24, 25, "S", 1, 1],
+     [26, 27, "S", 1, 1],
+     [29, 30, "L", 1, 3],
+     [31, 32, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [36, 37, "L", 1, 3],
+     [38, 39, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.485": {
     "text": "inque patris blandīs haerēns cervīce lacertīs",
+    "slots": [
+     [0, 1, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [7, 8, "S", 5, 7],
+     [10, 11, "L", 1, 5],
+     [15, 16, "L", 1, 2],
+     [18, 19, "L", 1, 3],
+     [22, 24, "L", 1, 0],
+     [25, 26, "L", 1, 3],
+     [30, 31, "L", 1, 2],
+     [33, 34, "L", 1, 3],
+     [35, 36, "S", 1, 1],
+     [38, 39, "S", 1, 1],
+     [40, 41, "L", 1, 2],
+     [43, 44, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ¯ | ¯ ¯ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.486": {
     "text": "dā mihi perpetuā, genitor cārissime, dīxit",
+    "slots": [
+     [1, 2, "L", 1, 3],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [9, 10, "L", 1, 2],
+     [12, 13, "S", 1, 1],
+     [14, 15, "S", 1, 1],
+     [15, 16, "L", 1, 3],
+     [19, 20, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [23, 24, "L", 1, 5],
+     [27, 28, "L", 1, 3],
+     [29, 30, "L", 1, 2],
+     [32, 33, "S", 1, 1],
+     [34, 35, "S", 1, 1],
+     [38, 39, "L", 1, 3],
+     [40, 41, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    },
    "Met. 1.487": {
     "text": "virginitāte fruī! dedit hoc pater ante Diānae.",
+    "slots": [
+     [1, 2, "L", 1, 2],
+     [4, 5, "S", 1, 1],
+     [6, 7, "S", 1, 1],
+     [8, 9, "L", 1, 3],
+     [10, 11, "S", 6, 7],
+     [14, 15, "S", 1, 1],
+     [15, 16, "L", 1, 3],
+     [19, 20, "S", 1, 1],
+     [21, 22, "S", 1, 1],
+     [25, 26, "L", 1, 5],
+     [29, 30, "S", 1, 1],
+     [31, 32, "S", 1, 1],
+     [34, 35, "L", 1, 2],
+     [37, 38, "S", 1, 1],
+     [40, 41, "S", 1, 1],
+     [41, 42, "L", 1, 3],
+     [43, 45, "L", 0, 4]
+    ],
     "feet": "¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ˘ ˘ | ¯ ¯",
     "elisions": []
    }
-  }
+  },
+  "rules": ["diphthong", "short vowel", "two consonants in a word", "long vowel (macron)", "last syllable (either)", "two consonants across a word break", "qu", "mute (stop) + liquid", "elision", "x and z", "h"]
  }
 }

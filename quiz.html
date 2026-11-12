@@ -7,7 +7,7 @@
   <title>Practice quiz · Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, quiz.css, quiz-build.js or quiz.js change (see index.html). -->
   <link rel="stylesheet" href="styles.css?v=2026-11-05">
-  <link rel="stylesheet" href="quiz.css?v=2026-11-05">
+  <link rel="stylesheet" href="quiz.css?v=2026-11-12">
 </head>
 <body class="qz-page">
   <header class="top">
@@ -76,10 +76,18 @@
       <section id="qz-part2" class="qz-part qz-part2" aria-labelledby="qz-p2">
         <h3 id="qz-p2">Part II · Scansion</h3>
         <p class="qz-how">Scan these lines: mark every syllable long (¯) or short (˘), and mark each elision with a
-          curve under the gap between the two words.<span class="no-print"> Use paper, or open a line in the
-          scanner to mark it and check it there.</span></p>
+          curve under the gap between the two words.<span class="no-print"> On screen, tap a vowel: once for long,
+          twice for short, three times for elided (○), and once more to clear it.</span></p>
+        <p class="qz-note"><b>How this part is graded.</b> Every syllable counts. One slip costs little; missing the
+          same rule every time costs much more. Mistakes on the basics (long vowels, diphthongs, two consonants) cost
+          more than mistakes on the harder rules (elision, mute (stop) + liquid). A line that does not fit the meter
+          costs extra.</p>
         <p id="qz-scan-cite" class="qz-scan-cite"></p>
         <div id="qz-scan" class="qz-scan"></div>
+        <div class="qz-buttons qz-check-row no-print">
+          <button type="button" id="qz-score" class="primary">Score my quiz</button>
+        </div>
+        <div id="qz-result" class="feedback qz-result no-print" aria-live="polite"></div>
       </section>
     </article>
 
@@ -112,6 +120,7 @@
   </footer>
 
   <script src="quiz-build.js?v=2026-11-05"></script>
-  <script src="quiz.js?v=2026-11-05"></script>
+  <script src="quiz-score.js?v=2026-11-12"></script>
+  <script src="quiz.js?v=2026-11-12"></script>
 </body>
 </html>

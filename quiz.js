@@ -124,23 +124,63 @@
   // ---- Part II --------------------------------------------------------------------------------------
   const text = (s) => ($("qz-plain").checked ? B.plain(s) : s);
 
+  // MARKING ON SCREEN (owner, 2026-11-12: students who practise see how the real quiz would score
+  // them). Every vowel is a button; a tap cycles unmarked -> long -> short -> elided -> unmarked. The
+  // marks live here, not in the page, so switching the macrons off keeps them. Nothing is stored.
+  const SHOW = { "": "", L: "¯", S: "˘", x: "○" };
+  const NEXT = { "": "L", L: "S", S: "x", x: "" };
+  const SAY = { "": "unmarked", L: "long", S: "short", x: "elided" };
+  let marks2 = [];
+
+  function setMark(b, li, vi, m) {
+    marks2[li][vi] = m;
+    b.dataset.show = SHOW[m];
+    b.setAttribute("aria-label", `${b.textContent}: ${SAY[m]}`);
+    b.classList.remove("bad");                                 // a changed mark is no longer judged
+  }
+
+  function lineText(ln, li) {
+    // Each WORD is one unbreakable span: a vowel button is a box of its own, and on a phone the line
+    // broke between boxes, in the middle of a word (vīdisti|s).
+    const t = text(ln.text), la = el("span", { className: "qz-la", lang: "la" });
+    let word = el("span", { className: "qz-w" });
+    const put = (s) => {
+      for (const [i, part] of s.split(" ").entries()) {
+        if (i) { la.append(word, " "); word = el("span", { className: "qz-w" }); }
+        if (part) word.append(part);
+      }
+    };
+    let at = 0;
+    ln.slots.forEach(([s, e], vi) => {
+      put(t.slice(at, s));
+      const b = el("button", { type: "button", className: "qz-v" }, t.slice(s, e));
+      setMark(b, li, vi, marks2[li][vi]);
+      b.addEventListener("click", () => setMark(b, li, vi, NEXT[marks2[li][vi]]));
+      word.append(b);
+      at = e;
+    });
+    put(t.slice(at));
+    la.append(word);
+    return la;
+  }
+
   function drawPart2() {
     const S = Q.scansion;
     $("qz-part2").hidden = !S;
     $("qz-key2-wrap").hidden = !S;
     if (!S) return;
+    if (marks2.length !== S.lines.length) marks2 = S.lines.map((ln) => ln.slots.map(() => ""));
     $("qz-scan-cite").textContent = S.cite;
     const box = $("qz-scan");
     box.replaceChildren();
-    for (const ln of S.lines) {
+    S.lines.forEach((ln, li) => {
       // "Scan it" opens the line in the scanner (index.html?line=), in ONE other tab however many are
       // opened, so this quiz and its answers stay put.
       const open = el("a", { className: "qz-open no-print", href: `index.html?line=${encodeURIComponent(ln.cite)}`,
                              target: "latin-scansion", text: "Scan it in the app ↗" });
       box.append(el("div", { className: "qz-line" },
-        el("span", { className: "qz-ln", text: String(ln.n) }),
-        el("span", { className: "qz-la", lang: "la", text: text(ln.text) }), open));
-    }
+        el("span", { className: "qz-ln", text: String(ln.n) }), lineText(ln, li), open));
+    });
     $("qz-key2-how").textContent = `${S.cite}: the feet, and every elision.`;
     const key = $("qz-key2");
     key.replaceChildren();
@@ -153,6 +193,44 @@
           ? el("div", { className: "qz-elis", text: `elision (lost sound in brackets): ${ln.elisions.map(text).join(", ")}` })
           : null));
     }
+  }
+
+  // ---- the score, as the real quiz would give it (quiz-score.js) -------------------------------------
+  function scoreQuiz() {
+    const QS = window.QuizScore, out = $("qz-result");
+    const picks = [...document.querySelectorAll("#qz-sheet .qz-pick")];
+    const right1 = picks.filter((p) => p.querySelector("select").value === p.dataset.answer).length;
+    const pct1 = 100 * right1 / picks.length, lv1 = QS.level(pct1);
+    const S = Q.scansion, rules = DATA.scansion.rules;
+    const lines = S.lines.map((ln) => ln.slots.map(([, , key, rung, r]) => ({ key, rung, rule: rules[r] })));
+    const marks = marks2.map((m) => m.map((c) => c || ".").join(""));
+    const r = QS.score(lines, marks);
+    // the wrong vowels, in red, to look at again
+    document.querySelectorAll("#qz-scan .qz-line").forEach((row, li) => {
+      row.querySelectorAll(".qz-v").forEach((b, vi) => {
+        const x = lines[li][vi];
+        b.classList.toggle("bad", !!x.rung && marks[li][vi] !== x.key);
+      });
+    });
+    const blank = marks.join("").split(".").length - 1;
+    const n = (x) => (Math.round(x * 10) / 10).toFixed(1);
+    out.replaceChildren(
+      el("div", { className: "qz-result-head", text: "How the real quiz would grade this" }),
+      el("div", {}, el("b", { text: "Part I: " }),
+         `${right1} of ${picks.length} right (${Math.round(pct1)}%) → level ${lv1}`),
+      el("div", {}, el("b", { text: "Part II: " }), `meter score ${n(r.score)} → level ${r.level}`));
+    const why = r.rows.map((row) => `${row.rule}: ${row.missed}${row.of ? ` of ${row.of}` : ""} missed (−${n(row.cost)})`);
+    if (r.breaks) why.push(`lines that do not fit the meter (−${n(r.breakCost)})`);
+    if (why.length) out.append(el("ul", { className: "qz-why" }, ...why.map((w) => el("li", { text: w }))));
+    out.append(el("div", { className: "qz-total" }, el("b", { text: "Overall: " }),
+      `${QS.gradebook(lv1, r.level)}%`, el("span", { className: "note", text: " (each part's level, as the department averages them)" })));
+    const notes = [];
+    const blank1 = picks.filter((p) => !p.querySelector("select").value).length;
+    if (blank1) notes.push(`${blank1} of Part I's ${picks.length} answers ${blank1 === 1 ? "is" : "are"} blank.`);
+    if (blank) notes.push(blank === 1 ? "1 vowel is unmarked and counts as wrong."
+                                      : `${blank} vowels are unmarked and count as wrong.`);
+    if (r.rows.length) notes.push("Wrong vowels are shaded red: change them and score again, or open the answer key.");
+    if (notes.length) out.append(el("div", { className: "note", text: notes.join(" ") }));
   }
 
   // ---- the key --------------------------------------------------------------------------------------
@@ -187,6 +265,8 @@
     $("qz-no").textContent = `Practice quiz no. ${no}`;
     $("qz-key-no").textContent = `Practice quiz no. ${no}`;
     $("qz-feedback").replaceChildren();
+    $("qz-result").replaceChildren();
+    marks2 = [];                                         // a new quiz starts unmarked
     drawPart1();
     drawPart2();
     drawKey();
@@ -203,6 +283,7 @@
   $("qz-n").addEventListener("change", () => { no = B.freshNumber(); deal(); });
   $("qz-plain").addEventListener("change", () => { writeAddress(); drawPart2(); });
   $("qz-check").addEventListener("click", check);
+  $("qz-score").addEventListener("click", scoreQuiz);
   $("qz-key-toggle").addEventListener("click", () => showKey($("qz-key").hidden));
   $("qz-print").addEventListener("click", () => window.print());
 
