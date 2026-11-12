@@ -47,7 +47,7 @@
    "LSSLSSLLLSSLSSLL",
    "SSxLLLLLSSLSSLL"
   ],
-  "score": 95.614035,
+  "score": 96.315789,
   "level": 4.0
  },
  {
@@ -64,7 +64,7 @@
    "LSSSSSLLLSSLSSLL",
    "LSSSLSLLSSLSSLL"
   ],
-  "score": 73.245614,
+  "score": 72.192982,
   "level": 2.0
  },
  {
@@ -81,7 +81,7 @@
    "LSSLLLLLSSLSSLL",
    "LSSSSLLLSSLSSLSSSLL"
   ],
-  "score": 83.770492,
+  "score": 83.032787,
   "level": 3.0
  },
  {
@@ -98,7 +98,24 @@
    "LSSLLSLLL.SxSSLS",
    "LSSLLLLLSSxSSLL"
   ],
-  "score": 86.263158,
+  "score": 87.053333,
   "level": 3.0
+ },
+ {
+  "student": "Thisbē elided, iuvenum repaired",
+  "passage": [
+   "Met. 4.55",
+   "Met. 4.56",
+   "Met. 4.57",
+   "Met. 4.58"
+  ],
+  "marks": [
+   "LSSLLxLLLLLSSLL",
+   "LSSLSSLSSLLLSSLL",
+   "LSSLSSLSSLSSLSSLL",
+   "LSSLLLLLSSLSSLL"
+  ],
+  "score": 99.169492,
+  "level": 4.0
  }
 ]

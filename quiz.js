@@ -202,7 +202,7 @@
     const right1 = picks.filter((p) => p.querySelector("select").value === p.dataset.answer).length;
     const pct1 = 100 * right1 / picks.length, lv1 = QS.level(pct1);
     const S = Q.scansion, rules = DATA.scansion.rules;
-    const lines = S.lines.map((ln) => ln.slots.map(([, , key, rung, r]) => ({ key, rung, rule: rules[r] })));
+    const lines = S.lines.map((ln) => ln.slots.map(([, , key, rung, r, ci]) => ({ key, rung, rule: rules[r], ci })));
     const marks = marks2.map((m) => m.map((c) => c || ".").join(""));
     const r = QS.score(lines, marks);
     // the wrong vowels, in red, to look at again
@@ -220,10 +220,12 @@
          `${right1} of ${picks.length} right (${Math.round(pct1)}%) → level ${lv1}`),
       el("div", {}, el("b", { text: "Part II: " }), `meter score ${n(r.score)} → level ${r.level}`));
     const why = r.rows.map((row) => `${row.rule}: ${row.missed}${row.of ? ` of ${row.of}` : ""} missed (−${n(row.cost)})`);
+    if (r.repairs) why.push(`${r.repairs} change${r.repairs === 1 ? "" : "s"} beside a harder mistake, counted lightly (−${n(r.repairCost)})`);
     if (r.breaks) why.push(`lines that do not fit the meter (−${n(r.breakCost)})`);
     if (why.length) out.append(el("ul", { className: "qz-why" }, ...why.map((w) => el("li", { text: w }))));
     out.append(el("div", { className: "qz-total" }, el("b", { text: "Overall: " }),
-      `${QS.gradebook(lv1, r.level)}%`, el("span", { className: "note", text: " (each part's level, as the department averages them)" })));
+      `${QS.gradebook(lv1, r.level)}% = ${QS.points(lv1, r.level).toFixed(2)} of ${QS.OUT_OF} points`,
+      el("span", { className: "note", text: " (each part's level, as the department averages them)" })));
     const notes = [];
     const blank1 = picks.filter((p) => !p.querySelector("select").value).length;
     if (blank1) notes.push(`${blank1} of Part I's ${picks.length} answers ${blank1 === 1 ? "is" : "are"} blank.`);

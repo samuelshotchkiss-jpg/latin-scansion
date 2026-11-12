@@ -12,9 +12,9 @@ const QS = require("../quiz-score.js");
 
 const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "data", "devices.json"), "utf8")).scansion;
 const CASES = JSON.parse(fs.readFileSync(path.join(__dirname, "quiz_score_cases.json"), "utf8"));
-const linesOf = (p) => p.map((c) => DATA.lines[c].slots.map(([, , key, rung, r]) => ({ key, rung, rule: DATA.rules[r] })));
+const linesOf = (p) => p.map((c) => DATA.lines[c].slots.map(([, , key, rung, r, ci]) => ({ key, rung, rule: DATA.rules[r], ci })));
 
-test("the same score as the teacher's scorer", () => {
+test("the same score as the teacher's scorer (incl. Thisbē elided, iuvenum repaired)", () => {
   assert.ok(CASES.length >= 5);
   for (const c of CASES) {
     const r = QS.score(linesOf(c.passage), c.marks);
@@ -35,9 +35,9 @@ test("a perfect passage is 100 and a 4; levels at the department's midpoints", (
 
 test("every app vowel has a rung, a rule and a place in its line", () => {
   for (const [cite, ln] of Object.entries(DATA.lines)) {
-    for (const [s, e, key, rung, r] of ln.slots) {
+    for (const [s, e, key, rung, r, ci] of ln.slots) {
       assert.ok(e > s && /[aeiouyāēīōūȳ]/i.test(ln.text.slice(s, e).normalize("NFC")), `${cite} ${s}`);
-      assert.ok("LSx".includes(key) && rung >= 0 && DATA.rules[r], `${cite} ${s}`);
+      assert.ok("LSx".includes(key) && rung >= 0 && DATA.rules[r] && [undefined, "x", "S"].includes(ci), `${cite} ${s}`);
     }
   }
 });
