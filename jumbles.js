@@ -434,7 +434,7 @@
   // pick it up -- a short buzz says so, where the device can buzz -- so that a swipe across the words
   // still scrolls the page (owner, 2026-11-16: scrolling kept moving words). A word carried to the top
   // or bottom edge of the screen scrolls the page.
-  const HOLD_MS = 260, SLOP = 10, EDGE = 70;
+  const HOLD_MS = 180, SLOP = 10, EDGE = 70;     // owner 2026-11-16: 260 ms felt sluggish
   lineEl.addEventListener('pointerdown', (e) => {
     if (drag) endDrag();
     const slot = e.target.closest('.jb-seg-wrap.empty');
@@ -462,7 +462,7 @@
   // place. Under a FINGER the word would be hidden, and most students' iPhones cannot buzz (owner,
   // 2026-11-16): so the copy pops up ABOVE the fingertip, enlarged and glowing, a ring pulses out from
   // the finger, and the drums (if on) give a soft click. It rides above the finger while carried,
-  // and goes where it is SEEN, not where the finger is (aim).
+  // but goes where the FINGER is (owner, 2026-11-16: aim).
   function lift(d, buzz) {
     d.moving = true;
     select(null);
@@ -485,7 +485,7 @@
       g.classList.add('popping');                 // glides up above the finger, then follows it
       void g.offsetWidth;                         // lay it out where the word was, then rise from there
       g.style.top = d.cy - d.dy - d.raise + 'px';
-      setTimeout(() => g.classList.remove('popping'), 160);
+      setTimeout(() => g.classList.remove('popping'), 110);
       const ring = document.createElement('div');
       ring.className = 'pickup-ring';
       Object.assign(ring.style, { left: d.cx + 'px', top: d.cy + 'px' });
@@ -517,8 +517,8 @@
     drag.ghost.style.top = drag.cy - drag.dy - drag.raise + 'px';
     placeAt(drag.tile, ...aim(drag));
   });
-  // where the word being carried is seen: above the finger by `raise`
-  const aim = (d) => [d.cx, d.cy - (d.raise || 0)];
+  // where the word being carried goes: under the finger (it is DRAWN above it, by `raise`)
+  const aim = (d) => [d.cx, d.cy];
   // a finger carrying a word must not scroll the page under it
   document.addEventListener('touchmove', (e) => { if (drag && drag.moving) e.preventDefault(); }, { passive: false });
   lineEl.addEventListener('contextmenu', (e) => { if (e.target.closest('.tile')) e.preventDefault(); });
@@ -531,7 +531,7 @@
       const h = window.innerHeight;
       const v = d.cy < EDGE ? -(EDGE - d.cy) : d.cy > h - EDGE ? d.cy - (h - EDGE) : 0;
       if (v) {
-        window.scrollBy(0, Math.round(v / 4));
+        window.scrollBy(0, Math.round(v / 3));
         placeAt(d.tile, ...aim(d));
       }
     }, 16);
@@ -557,7 +557,7 @@
     d.ghost.classList.add('landing');
     d.ghost.style.left = r.left + 'px';
     d.ghost.style.top = r.top + 'px';
-    setTimeout(() => { d.ghost.remove(); d.tile.classList.remove('placeholder'); }, reduced ? 0 : 140);
+    setTimeout(() => { d.ghost.remove(); d.tile.classList.remove('placeholder'); }, reduced ? 0 : 100);
   }
   window.addEventListener('pointerup', endDrag);
   window.addEventListener('pointercancel', endDrag);
@@ -576,11 +576,11 @@
     // end AND for the pointer to move on (in the page, so a scroll under a still finger counts).
     const now = performance.now(), px = x + window.scrollX, py = y + window.scrollY;
     if (drag && drag.lastMove) {
-      if (Math.hypot(px - drag.lx, py - drag.ly) < 14) return;          // the pointer has not moved on
-      if (now - drag.lastMove < 190) {                                 // still gliding: look again after
+      if (Math.hypot(px - drag.lx, py - drag.ly) < 10) return;          // the pointer has not moved on
+      if (now - drag.lastMove < 130) {                                 // still gliding: look again after
         const d = drag;
         clearTimeout(d.later);
-        d.later = setTimeout(() => { if (drag === d) placeAt(d.tile, ...aim(d)); }, 195 - (now - d.lastMove));
+        d.later = setTimeout(() => { if (drag === d) placeAt(d.tile, ...aim(d)); }, 135 - (now - d.lastMove));
         return;
       }
     }
@@ -632,7 +632,7 @@
     refresh(true, !reduced);
     setTimeout(() => {
       if (cur && cur.scan && (mode === 'scanned' || cur.done)) drawSwooshes(orderNow(), cur.scan, true);
-    }, reduced ? 0 : 190);
+    }, reduced ? 0 : 130);
     hideVerdictIfWrong();
   }
 

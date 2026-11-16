@@ -78,14 +78,14 @@
 .tile.fixed { cursor: default; border-style: dashed; }
 /* the word's place while it is carried: an outline, so the student sees where it came from */
 .tile.placeholder { opacity: .45; border-style: dashed; border-color: var(--accent); background: transparent; color: var(--muted); }
-/* a finger resting on a word: a bar fills along it over the hold (jumbles.js HOLD_MS, 260 ms) */
+/* a finger resting on a word: a bar fills along it over the hold (jumbles.js HOLD_MS, 180 ms) */
 .tile.holding { border-color: var(--accent); }
 .tile.holding::after {
   content: ""; position: absolute; left: 6%; bottom: 2px; height: 3px; width: 88%; border-radius: 2px;
-  background: var(--accent); transform-origin: left; animation: hold .26s linear both;
+  background: var(--accent); transform-origin: left; animation: hold .18s linear both;
 }
 @keyframes hold { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-.tile.flip { transition: transform .18s ease-out; }
+.tile.flip { transition: transform .12s ease-out; }
 .jb-line.locked .tile { cursor: default; }
 .jb-line.locked .tile:hover { border-color: var(--line); }
 .tile.ghost {
@@ -94,12 +94,12 @@
   transition: none;
 }
 /* picked up by a finger: it pops up above the fingertip, bigger and glowing */
-.tile.ghost.popping { transition: top .14s ease-out; }
+.tile.ghost.popping { transition: top .1s ease-out; }
 @media (pointer: coarse) {
   .tile.ghost {
     transform: scale(1.18) rotate(-2deg); background: var(--panel); border-width: 2px;
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent), 0 12px 28px rgba(0, 0, 0, .3);
-    animation: pop-up .22s cubic-bezier(.2, 1.6, .4, 1) both;
+    animation: pop-up .16s cubic-bezier(.2, 1.6, .4, 1) both;
   }
 }
 @keyframes pop-up { from { transform: scale(1) rotate(0); } to { transform: scale(1.18) rotate(-2deg); } }
@@ -109,7 +109,7 @@
   border: 3px solid var(--accent); pointer-events: none; animation: ring .4s ease-out forwards;
 }
 @keyframes ring { from { transform: scale(.3); opacity: .9; } to { transform: scale(1.5); opacity: 0; } }
-.tile.ghost.landing { transition: left .14s ease-out, top .14s ease-out, transform .14s ease-out; transform: none; }
+.tile.ghost.landing { transition: left .1s ease-out, top .1s ease-out, transform .1s ease-out; transform: none; }
 .wall { color: var(--muted); padding: 0 .02em .12em; align-self: flex-end; line-height: 1.15; }
 
 /* a nucleus and its mark */
