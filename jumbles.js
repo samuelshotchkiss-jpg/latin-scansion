@@ -451,16 +451,24 @@
       touch: e.pointerType === 'touch', nu: e.target.closest('.nu') };
     if (drag.touch) {
       const d = drag;
+      // while the finger rests, a bar fills along the word: keep holding
+      if (canMove(tile)) tile.classList.add('holding');
       d.timer = setTimeout(() => { if (drag === d && canMove(d.tile)) lift(d, true); }, HOLD_MS);
     } else {
       try { tile.setPointerCapture(e.pointerId); } catch (err) { /* a synthetic pointer: no capture */ }
     }
   });
-  // pick the word up: a copy follows the pointer, the word itself stays faint in its place
+  // Pick the word up: a copy follows the pointer, the word itself stays as a dashed outline in its
+  // place. Under a FINGER the word would be hidden, and most students' iPhones cannot buzz (owner,
+  // 2026-11-16): so the copy pops up ABOVE the fingertip, enlarged and glowing, a ring pulses out from
+  // the finger, and the drums (if on) give a soft click. It rides above the finger while carried,
+  // and goes where it is SEEN, not where the finger is (aim).
   function lift(d, buzz) {
     d.moving = true;
     select(null);
+    d.tile.classList.remove('holding');
     const r = d.tile.getBoundingClientRect();
+    d.raise = d.touch ? Math.round(r.height * 1.5 + 14) : 0;   // clear of a fingertip, not just its point
     const g = d.tile.cloneNode(true);
     g.classList.add('ghost');
     g.removeAttribute('tabindex');
@@ -473,6 +481,19 @@
     d.dy = d.cy - r.top;
     d.tile.classList.add('placeholder');
     cur.moves++;
+    if (d.touch) {
+      g.classList.add('popping');                 // glides up above the finger, then follows it
+      void g.offsetWidth;                         // lay it out where the word was, then rise from there
+      g.style.top = d.cy - d.dy - d.raise + 'px';
+      setTimeout(() => g.classList.remove('popping'), 160);
+      const ring = document.createElement('div');
+      ring.className = 'pickup-ring';
+      Object.assign(ring.style, { left: d.cx + 'px', top: d.cy + 'px' });
+      document.body.append(ring);
+      ring.addEventListener('animationend', () => ring.remove());
+      setTimeout(() => ring.remove(), 600);
+      if (drums() && window.Rhythm) Rhythm.play(['S'], null, null, null, { beat: 0.04 });
+    }
     // (a browser buzzes only once the page has been tapped: the first pick-up may be silent)
     const tapped = !navigator.userActivation || navigator.userActivation.hasBeenActive;
     if (buzz && tapped && navigator.vibrate) { try { navigator.vibrate(15); } catch (err) { /* no buzz here */ } }
@@ -486,16 +507,18 @@
       const far = Math.hypot(e.clientX - drag.x, e.clientY - drag.y);
       if (drag.touch) {
         // the finger moved before the word was picked up: a scroll, the browser's to handle
-        if (far > SLOP) { clearTimeout(drag.timer); drag = null; }
+        if (far > SLOP) { clearTimeout(drag.timer); drag.tile.classList.remove('holding'); drag = null; }
         return;
       }
       if (far < 6 || !canMove(drag.tile)) return;
       lift(drag, false);
     }
     drag.ghost.style.left = drag.cx - drag.dx + 'px';
-    drag.ghost.style.top = drag.cy - drag.dy + 'px';
-    placeAt(drag.tile, drag.cx, drag.cy);
+    drag.ghost.style.top = drag.cy - drag.dy - drag.raise + 'px';
+    placeAt(drag.tile, ...aim(drag));
   });
+  // where the word being carried is seen: above the finger by `raise`
+  const aim = (d) => [d.cx, d.cy - (d.raise || 0)];
   // a finger carrying a word must not scroll the page under it
   document.addEventListener('touchmove', (e) => { if (drag && drag.moving) e.preventDefault(); }, { passive: false });
   lineEl.addEventListener('contextmenu', (e) => { if (e.target.closest('.tile')) e.preventDefault(); });
@@ -509,7 +532,7 @@
       const v = d.cy < EDGE ? -(EDGE - d.cy) : d.cy > h - EDGE ? d.cy - (h - EDGE) : 0;
       if (v) {
         window.scrollBy(0, Math.round(v / 4));
-        placeAt(d.tile, d.cx, d.cy);
+        placeAt(d.tile, ...aim(d));
       }
     }, 16);
   }
@@ -518,9 +541,10 @@
     const d = drag;
     drag = null;
     clearTimeout(d.timer);
+    d.tile.classList.remove('holding');
     clearInterval(d.edge);
     clearTimeout(d.later);
-    if (d.moving && !(e && e.type === 'pointercancel')) placeAt(d.tile, d.cx, d.cy);   // settle where it was let go
+    if (d.moving && !(e && e.type === 'pointercancel')) placeAt(d.tile, ...aim(d));   // settle where it was let go
     if (e && e.type === 'pointercancel' && !d.moving) return;
     if (!d.moving) {                                   // a tap
       // with a word picked up, a tap on another word of its stretch puts it there, vowel or not
@@ -556,7 +580,7 @@
       if (now - drag.lastMove < 190) {                                 // still gliding: look again after
         const d = drag;
         clearTimeout(d.later);
-        d.later = setTimeout(() => { if (drag === d) placeAt(d.tile, d.cx, d.cy); }, 195 - (now - d.lastMove));
+        d.later = setTimeout(() => { if (drag === d) placeAt(d.tile, ...aim(d)); }, 195 - (now - d.lastMove));
         return;
       }
     }
@@ -755,7 +779,7 @@
       : 'Drag the words (or click one, then where it goes).';
     $('jb-hint').textContent = how + (mode === 'blind'
       ? ' Tap a vowel to mark it, for your own reference.'
-      : ' The marks follow the words; ⏓ can be long or short.')
+      : ' The marks follow the words; a long mark over a short one means either.')
       + (line.rows ? ' Where a clause runs over the end of a line, its words can move into the next line.' : '');
     // a readable address: ?line=Met.+1.535-538
     history.replaceState(null, '', `${location.pathname}?${new URLSearchParams({ line: line.c.replace('\u2013', '-') })}`);
