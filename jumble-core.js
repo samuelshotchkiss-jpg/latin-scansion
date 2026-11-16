@@ -72,9 +72,11 @@
 
   const onsetCount = (w) => (!w ? 0 : w.on === 'v' ? 0 : w.on === '1' ? 1 : 2);
 
-  // Scan words in this order. Returns { marks: [[...per nucleus]...per word], pattern, sylls } where
+  // Scan words in this order. Returns { marks: [[...per nucleus]...per word], amb, pattern, sylls } where
   // marks are 'L' / 'S' / 'X' (gone: elided or prodelided) and sylls lists the active syllables as
-  // { w: position in order, n: nucleus index, why }.
+  // { w: position in order, n: nucleus index, m, a, why }. A mute (stop) + liquid inside a word may go
+  // either way (amb[i][k], s.a): its mark is the poet's choice, and in `pattern` it is 'A' -- feet()
+  // tries the poet's choice first, then the other.
   function scan(order) {
     const n = order.length;
     const marks = order.map((w) => w.m.split('').concat(['?']));
@@ -109,26 +111,38 @@
       marks[s.w][s.n] = 'L';
       why[s.w][s.n] = 'end';
     }
-    sylls.forEach((s) => { s.m = marks[s.w][s.n]; s.why = why[s.w][s.n]; });
-    return { marks, why, sylls, pattern: sylls.map((s) => s.m).join('') };
+    const amb = order.map((w) => w.n.map((_, k) => !!(w.am && w.am.includes(k))));
+    sylls.forEach((s) => { s.m = marks[s.w][s.n]; s.a = amb[s.w][s.n]; s.why = why[s.w][s.n]; });
+    return { marks, amb, why, sylls, pattern: sylls.map((s) => (s.a ? 'A' : s.m)).join('') };
   }
 
-  // The six feet, or null. A spondee in the fifth foot only when the poet's own line has one.
-  function feet(pattern, spondaicFifth) {
-    const out = [];
-    let i = 0;
-    for (let f = 0; f < 6; f++) {
-      if (pattern[i] !== 'L') return null;
-      if (f === 5) {
-        if (i + 2 !== pattern.length) return null;
-        out.push('L' + pattern[i + 1]);
-        return out;
-      }
-      if (pattern[i + 1] === 'S' && pattern[i + 2] === 'S') { out.push('LSS'); i += 3; }
-      else if (pattern[i + 1] === 'L' && (f < 4 || spondaicFifth)) { out.push('LL'); i += 2; }
-      else return null;
+  // The six feet, or null. A spondee in the fifth foot only when the poet's own line has one. An 'A'
+  // in the pattern (a mute + liquid) may be long or short; `prefer` (the same length, L / S) says how
+  // to read it if both readings scan -- the poet's choice, as a rule.
+  function feet(pattern, spondaicFifth, prefer) {
+    if (prefer && pattern.includes('A')) {
+      const mine = pattern.split('').map((c, i) => (c === 'A' ? prefer[i] : c)).join('');
+      const ft = feet(mine, spondaicFifth);
+      if (ft) return ft;
     }
-    return null;
+    const is = (c, want) => c === want || c === 'A';
+    const go = (i, f) => {
+      if (f === 5) {
+        if (i + 2 !== pattern.length || !is(pattern[i], 'L')) return null;
+        return ['L' + (pattern[i + 1] === 'A' ? 'L' : pattern[i + 1])];
+      }
+      if (!is(pattern[i], 'L')) return null;
+      if (is(pattern[i + 1], 'S') && is(pattern[i + 2], 'S')) {
+        const rest = go(i + 3, f + 1);
+        if (rest) return ['LSS'].concat(rest);
+      }
+      if (is(pattern[i + 1], 'L') && (f < 4 || spondaicFifth)) {
+        const rest = go(i + 2, f + 1);
+        if (rest) return ['LL'].concat(rest);
+      }
+      return null;
+    };
+    return go(0, 0);
   }
 
   // Scan each line of an item on its own (a line ends: its last syllable is long, and nothing elides
@@ -143,6 +157,7 @@
       p.sylls.forEach((x) => out.sylls.push(Object.assign({}, x, { w: x.w + off, row: r })));
       off += p.marks.length;
     });
+    out.amb = [].concat(...parts.map((p) => p.amb));
     out.pattern = parts.map((p) => p.pattern).join('/');
     return out;
   }
@@ -152,7 +167,19 @@
   function meter(item, order, counts) {
     const sc = scanItem(item, order, counts), f5 = f5Of(item);
     // a line left with no words is no hexameter
-    const rows = sc.rows.map((p, r) => ({ feet: p.pattern ? feet(p.pattern, f5[r] === 'LL') : null, pattern: p.pattern }));
+    const rows = sc.rows.map((p, r) => ({
+      feet: p.pattern ? feet(p.pattern, f5[r] === 'LL', p.sylls.map((x) => x.m).join('')) : null, pattern: p.pattern,
+    }));
+    // where a line scans, its mute + liquid syllables take the reading that made it scan
+    let k = 0;
+    rows.forEach((r, ri) => {
+      const own = sc.sylls.filter((x) => x.row === ri);
+      if (r.feet) {
+        const read = r.feet.join('');
+        own.forEach((x, j) => { if (x.a) { x.m = read[j]; sc.marks[x.w][x.n] = read[j]; } });
+      }
+      k += own.length;
+    });
     return { scan: sc, rows, ok: rows.every((r) => r.feet) };
   }
 
@@ -364,10 +391,25 @@
     return cands[cands.length - 1].order;
   }
 
+  // Two tiles of one word (alter ... alter, et ... et) look the same, so a student cannot know which is
+  // which: the first of them in the student's order is taken for the first in the poet's, and so on.
+  // (Met. 1.535-538: Ovid's own words were refused when the two alter tiles sat in each other's place.)
+  function paired(words, order) {
+    const queue = new Map();
+    words.forEach((w) => { if (!queue.has(w.w)) queue.set(w.w, []); queue.get(w.w).push(w); });
+    const at = new Map();
+    return order.map((w) => {
+      const k = at.get(w.w) || 0;
+      at.set(w.w, k + 1);
+      return queue.get(w.w)[k];
+    });
+  }
+
   // The verdict on an answer: { right, exact, meter, faults }. `counts`: words per line, as the
   // student left them (the poet's, if not given). Exact = the poet's words in the poet's lines.
   function judge(item, order, counts) {
     const words = wordsOf(item);
+    order = paired(words, order);
     const m = meter(item, order, counts);
     const faults = looseFaults(words, order);
     const poetCounts = rowCounts(item);
@@ -390,5 +432,5 @@
   }
 
   return { rowsOf, rowCounts, wordsOf, splitRows, scan, scanItem, feet, meter, looseFaults, chunks, jumble,
-    judge, seeded, sameOrder };
+    judge, paired, seeded, sameOrder };
 });

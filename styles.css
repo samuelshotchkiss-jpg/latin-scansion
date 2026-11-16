@@ -489,7 +489,22 @@ kbd { font: .8rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; padding
 }
 
 /* ---- phones --------------------------------------------------------------------------------------- */
+/* ---- the ☰ menu of pages (nav.js): on a narrow screen it replaces the header's link pills ---------- */
+.navmenu { display: none; position: relative; }
+.navmenu-btn { font-size: 1.1rem; line-height: 1; padding: .3rem .7rem; }
+.navmenu-list {
+  position: absolute; right: 0; top: calc(100% + .35rem); z-index: 70; min-width: 13rem;
+  display: flex; flex-direction: column; padding: .35rem; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--panel); box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+}
+.navmenu-list[hidden] { display: none; }
+.navmenu-list a { padding: .6rem .8rem; border-radius: 8px; color: var(--ink); text-decoration: none; }
+.navmenu-list a:hover { background: var(--target); }
+.navmenu-list a[aria-current="page"] { font-weight: 700; color: var(--accent); }
+
 @media (max-width: 40rem) {
+  .top a.mode { display: none; }        /* links to the other pages: in the ☰ menu instead */
+  .navmenu { display: block; }
   .wide { display: none; }
   .narrow { display: inline; }
   .top { padding: .55rem .75rem; gap: .4rem; flex-wrap: nowrap; }

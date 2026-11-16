@@ -125,6 +125,13 @@ About half the lines have more than one right order.
   second or third, or right after its conjunction. Which words the poets set in front of their own
   clause's opener was decided place by place, in the toolkit's `export_jumbles.py` (`POSTPONED`,
   `SEPARATE`); the exporter prints any new place that needs a decision.
+* **On a device** a finger must rest on a word a moment to pick it up (a short buzz, where the device
+  can), so that a swipe across the words still scrolls the page; a word carried to the top or bottom
+  edge scrolls it. The text shrinks a little where a verse would otherwise take three rows: one or
+  two, never more. A mute (stop) + liquid inside a word, which may be long or short, shows ⏓ until
+  the line is solved, and an answer may read it either way.
+* **Finding a line**: Go to takes a citation as it comes (*Aen. 1.322*, *met 1.535-538*, *1.322*), and
+  ‹ › step through the text; the address carries it too (`jumbles.html?line=Met.+1.535-538`).
 * Points, a first-try streak and twenty badges are kept in the browser under their own key
   (`latinScansion.jumbles.v1`), apart from the Scan page's progress.
 

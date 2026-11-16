@@ -215,3 +215,40 @@ test("a sentence's lines may change length: the poet's words in other lines are 
     assert.ok(J.judge(S, w, n).exact, S.c);
   }
 });
+
+// ---- 2026-11-16: two answers wrongly refused ---------------------------------------------------
+test("two tiles of one word may change places: Ovid's words are Ovid's words (Met. 1.535-538, alter ... alter)", () => {
+  const S = find("Met. 1.535–538"), w = J.wordsOf(S);
+  for (const word of ["alter", "et"]) {
+    const o = w.slice(), i = o.findIndex((x) => x.w === word), j = o.findIndex((x, k) => x.w === word && k > i);
+    [o[i], o[j]] = [o[j], o[i]];
+    const v = J.judge(S, o);
+    assert.ok(v.right && v.exact, `${word}: ${JSON.stringify(v.faults.map((f) => f.rule))}`);
+  }
+  // and so for every line and sentence with a repeated word
+  for (const L of D.lines.concat(D.sentences)) {
+    const w = J.wordsOf(L), o = w.slice().reverse();
+    const back = J.paired(w, o.slice().reverse());
+    assert.deepStrictEqual(back.map((x) => x.id), w.map((x) => x.id), L.c);
+  }
+});
+
+test("a mute (stop) + liquid inside a word may be long or short (Aen. 1.317 Hebrum)", () => {
+  const L = find("Aen. 1.317"), w = J.wordsOf(L);
+  const heb = w.find((x) => x.w === "Hebrum");
+  assert.deepStrictEqual(heb.am, [0], "He- is either");
+  // the pattern carries an A there; feet() reads it either way
+  assert.ok(J.scan(w).pattern.includes("A"));
+  // an A reads as whichever the feet need: short in a dactyl, long in a spondee
+  assert.deepStrictEqual(J.feet("LASLSSLSSLSSLSSLL", false), ["LSS", "LSS", "LSS", "LSS", "LSS", "LL"]);
+  assert.deepStrictEqual(J.feet("LALLLLLLLSSLL", false), ["LL", "LL", "LL", "LL", "LSS", "LL"]);
+  assert.strictEqual(J.feet("LLLLLLLLSSLL", false), null);           // no foot can begin with a short
+  assert.strictEqual(J.feet("LALLLLLLSSLL", false), null);           // nor with an A read short
+  const m = J.meter(L, w);
+  assert.ok(m.ok);
+  assert.ok(!m.scan.sylls.some((x) => x.m === "A"), "resolved to L or S");
+  // every word with an either-way syllable: the poet's own line still scans, and still rescans as the key
+  let n = 0;
+  for (const X of D.lines) for (const t of X.t) if (typeof t === "object" && t.am) n++;
+  assert.ok(n >= 50, `${n} words`);
+});

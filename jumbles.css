@@ -16,6 +16,20 @@
 
 .jb-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: .8rem 1rem 1rem; }
 .jb-where { margin: 0; color: var(--muted); font-size: .9rem; }
+/* the citation; and Go to, between the line before and the line after in the text */
+.jb-head2 { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem .8rem; }
+.jb-goto { display: flex; align-items: stretch; gap: .25rem; margin: 0; }
+.jb-goto input {
+  width: 10.5rem; min-width: 0; padding: .3rem .5rem; font: inherit; font-size: .9rem;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink);
+}
+.jb-step {
+  min-width: 2.2rem; padding: 0 .4rem; font-size: 1.2rem; line-height: 1; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--panel); color: var(--ink); cursor: pointer;
+}
+.jb-step:hover, .jb-goto input:focus { border-color: var(--accent); }
+.jb-goto-msg { margin: .2rem 0 0; color: var(--bad); font-size: .85rem; }
+.jb-goto-msg:empty { display: none; }
 
 /* ---- the line: tiles and walls --------------------------------------------------------------------- */
 .jb-line {
@@ -44,7 +58,8 @@
 .tile {
   position: relative; display: inline-block; padding: .62em .32em .12em; line-height: 1.15;
   border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink);
-  cursor: grab; touch-action: none; outline-offset: 2px;
+  /* a finger's swipe scrolls the page; a held finger picks the word up (jumbles.js, HOLD_MS) */
+  cursor: grab; touch-action: manipulation; outline-offset: 2px;
   transition: box-shadow .15s, border-color .15s, background-color .2s;
 }
 .tile:hover { border-color: var(--accent); }
@@ -70,6 +85,11 @@
   transform: translateX(-50%); overflow: visible; pointer-events: none;
 }
 .nu .mk path { fill: none; stroke: var(--mark); stroke-width: 2.1; stroke-linecap: round; }
+/* ⏓: a mute (stop) + liquid that may be long or short -- the long mark raised, a short one under it */
+.nu .mk .mk-either { opacity: 0; transition: opacity .2s; }
+.nu .mk.either .mk-either { opacity: 1; }
+.nu .mk path:first-child { transition: transform .2s; }
+.nu .mk.either path:first-child { transform: translate(0, -5px); }
 .jb-line.blind .nu { cursor: pointer; }
 .jb-line.blind .nu::before { content: ""; position: absolute; inset: -.45em -.18em -.1em; }   /* a fingertip */
 .jb-line.blind .nu:hover { background: var(--target); }
@@ -156,11 +176,24 @@
 @keyframes toast { 0% { transform: translateY(1rem) scale(.9); opacity: 0; } 8% { transform: none; opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(-.4rem); } }
 
 @media (max-width: 40rem) {
-  .jb { padding: .75rem .75rem 1.5rem; }
-  .jb-line { font-size: 1.15rem; }
-  .jb-row { --cg: .26rem; --hang: .9em; }
-  .tile { padding: .6em .24em .1em; }
+  /* every pixel of width to the words: a verse should take one or two rows (owner, 2026-11-16);
+     jumbles.js (fitRows) shrinks the text a little further where a verse would still need three */
+  .jb { padding: .6rem .45rem 1.5rem; }
+  .jb-intro { display: none; }
+  .jb-card { padding: .6rem .5rem .8rem; }
+  .jb-line { font-size: 1.15rem; padding-left: 0; padding-right: 0; }
+  .jb-row { --cg: .2rem; --hang: .7em; }
+  .tile { padding: .6em .17em .1em; border-radius: 8px; }
+  .jb-head2 { gap: .35rem; }
+  .jb-goto { width: 100%; }
+  .jb-goto input { flex: 1; width: auto; font-size: 16px; }   /* 16px: iOS zooms into smaller inputs */
+  .jb-title { font-size: 1.2rem; }
+  .jb-head { flex-wrap: nowrap; gap: .5rem; }
+  .jb-statsbtn { padding: .3rem .7rem; font-size: .9rem; white-space: nowrap; }
+  .jb-controls { gap: .45rem .8rem; margin-bottom: .6rem; }
   .jb-controls label { width: 100%; }
+  .jb-controls label.toggle { width: auto; order: -1; }   /* the drums share a row with Scanned / Unscanned */
+  .jb-controls .jb-seg { order: -2; }
   .jb-controls select { flex: 1; min-width: 0; }
   .jb-buttons button { flex: 1 1 auto; }
   .jb-toast { white-space: normal; }

@@ -7,8 +7,8 @@
   <title>Hexameter Jumbles · Latin Scansion</title>
   <!-- ?v= must change whenever styles.css, jumbles.css, jumble-core.js, jumbles.js or rhythm.js change
        (see index.html). -->
-  <link rel="stylesheet" href="styles.css?v=2026-11-12">
-  <link rel="stylesheet" href="jumbles.css?v=2026-11-12c">
+  <link rel="stylesheet" href="styles.css?v=2026-11-16">
+  <link rel="stylesheet" href="jumbles.css?v=2026-11-16">
 </head>
 <body>
   <header class="top">
@@ -53,8 +53,17 @@
     </div>
 
     <section id="jb-card" class="jb-card">
-      <p class="jb-where"><span id="jb-cite" class="citation"></span> <span id="jb-passname"></span>
-        <span id="jb-solved" class="solved-flag" hidden>solved</span></p>
+      <div class="jb-head2">
+        <p class="jb-where"><span id="jb-cite" class="citation"></span> <span id="jb-passname"></span>
+          <span id="jb-solved" class="solved-flag" hidden>solved</span></p>
+        <form id="jb-goto" class="jb-goto" role="search">
+          <button type="button" id="jb-prev" class="jb-step" aria-label="The line before, in the text">‹</button>
+          <input id="jb-goto-q" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+            placeholder="Go to… Aen. 1.322" aria-label="Go to a line, such as Aen. 1.322 or Met. 1.535-538">
+          <button type="button" id="jb-fwd" class="jb-step" aria-label="The line after, in the text">›</button>
+        </form>
+      </div>
+      <p id="jb-goto-msg" class="jb-goto-msg" aria-live="polite"></p>
       <div id="jb-line" class="jb-line" lang="la" aria-label="The jumbled line: drag the words, or focus one and use the arrow keys"></div>
       <p id="jb-hint" class="jb-hint"></p>
       <div class="jb-buttons">
@@ -84,7 +93,8 @@
   </footer>
 
   <script src="rhythm.js?v=2026-11-12"></script>
-  <script src="jumble-core.js?v=2026-11-12b"></script>
-  <script src="jumbles.js?v=2026-11-12b"></script>
+  <script src="jumble-core.js?v=2026-11-16"></script>
+  <script src="jumbles.js?v=2026-11-16"></script>
+  <script src="nav.js?v=2026-11-16"></script>
 </body>
 </html>

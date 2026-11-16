@@ -110,6 +110,7 @@
   const pref = (k, d) => (S.prefs[k] === undefined ? d : S.prefs[k]);
   let mode = pref('mode', 'scanned');
   const lineEl = $('jb-line');
+  const coarse = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);   // a finger, not a mouse
 
   // ---- marks: one quadratic curve. t = 0 a long mark (flat), t = 1 a short (its ends bent up) -----
   const SVGNS = 'http://www.w3.org/2000/svg';
@@ -121,14 +122,22 @@
     s.setAttribute('aria-hidden', 'true');
     const p = document.createElementNS(SVGNS, 'path');
     s.appendChild(p);
+    // the short half of ⏓ (a mute + liquid, long or short), shown under a raised long mark
+    const q = document.createElementNS(SVGNS, 'path');
+    q.setAttribute('d', 'M5 8 Q10 15 15 8');
+    q.setAttribute('class', 'mk-either');
+    s.appendChild(q);
     return s;
   }
-  // state: 'L' 'S' 'X' (elided: no mark) or '' (no mark)
+  // state: 'L' 'S' 'X' (elided: no mark) or '' (no mark), or 'A': long or short (⏓)
   function setMark(nu, state, animate) {
     const svg = nu.querySelector('.mk'), p = svg.firstChild;
+    const either = state === 'A';
+    svg.classList.toggle('either', either);
+    if (either) state = 'L';
     const to = { t: state === 'S' ? 1 : 0, o: state === 'L' || state === 'S' ? 1 : 0 };
     const from = { t: nu._t === undefined ? to.t : nu._t, o: nu._o === undefined ? 0 : nu._o };
-    nu.dataset.m = state;
+    nu.dataset.m = either ? 'A' : state;
     if (from.o === 0) from.t = to.t;                   // a mark arriving arrives in its shape
     cancelAnimationFrame(nu._raf);
     const apply = (t, o, lift) => {
@@ -240,6 +249,7 @@
       lineEl.append(rowEl);
     });
     lineEl.classList.toggle('multi', rows.length > 1);
+    fitRows();
     const ov = document.createElementNS(SVGNS, 'svg');
     ov.setAttribute('class', 'jb-swooshes');
     ov.setAttribute('aria-hidden', 'true');
@@ -247,6 +257,19 @@
     lineEl.classList.toggle('blind', mode === 'blind');
   }
 
+  // A verse should take one or two rows of the screen, never three (owner, 2026-11-16): where one would
+  // wrap twice, the line's text shrinks a step at a time, down to a legible 15px. Measured when a line
+  // is shown and when the screen turns -- never while a word is moving.
+  function fitRows() {
+    lineEl.style.fontSize = '';
+    const base = parseFloat(getComputedStyle(lineEl).fontSize);
+    const worst = () => Math.max(1, ...[...lineEl.querySelectorAll('.jb-row')].map((row) =>
+      new Set([...row.querySelectorAll('.tile')].map((t) => Math.round(t.getBoundingClientRect().top))).size));
+    for (let size = base; worst() > 2 && size > 15; ) {
+      size = Math.max(15, size * 0.94);
+      lineEl.style.fontSize = size + 'px';
+    }
+  }
   const tiles = () => [...lineEl.querySelectorAll('.tile:not(.ghost)')];
   // a segment (a stretch between punctuation) may be cut by a line break into parts, one per row;
   // data-cap is how many words the poet put in each part (used only to show the answer)
@@ -285,9 +308,10 @@
     cur.scan = sc;
     if (mode === 'scanned' || cur.done) {
       order.forEach((w, i) => {
-        paintTile(tileOf(w.id), w, sc.marks[i], animate);
+        const shown = sc.marks[i].map((m, k) => (sc.amb[i][k] && m !== 'X' && !cur.done ? 'A' : m));
+        paintTile(tileOf(w.id), w, shown, animate);
         const g = ghostOf(w.id);
-        if (g) paintTile(g, w, sc.marks[i], animate);
+        if (g) paintTile(g, w, shown, animate);
       });
       drawSwooshes(order, sc, animate, swooshesLater);
     }
@@ -405,6 +429,12 @@
   // can land anywhere: off the line, on a button, outside the window. So moves and releases are heard
   // on the whole window, a new press first finishes any drag still open, and a fresh line sweeps
   // away any copy left behind (seen 2026-11-12: words stuck mid-drag).
+  //
+  // A mouse picks a word up as soon as it moves. A FINGER must rest on a word a moment (HOLD_MS) to
+  // pick it up -- a short buzz says so, where the device can buzz -- so that a swipe across the words
+  // still scrolls the page (owner, 2026-11-16: scrolling kept moving words). A word carried to the top
+  // or bottom edge of the screen scrolls the page.
+  const HOLD_MS = 260, SLOP = 10, EDGE = 70;
   lineEl.addEventListener('pointerdown', (e) => {
     if (drag) endDrag();
     const slot = e.target.closest('.jb-seg-wrap.empty');
@@ -417,37 +447,80 @@
     }
     const tile = e.target.closest('.tile');
     if (!tile || !cur || cur.done || cur.busy || e.button > 0) return;
-    drag = { tile, id: e.pointerId, x: e.clientX, y: e.clientY, moving: false, nu: e.target.closest('.nu') };
-    try { tile.setPointerCapture(e.pointerId); } catch (err) { /* a synthetic pointer: no capture */ }
+    drag = { tile, id: e.pointerId, x: e.clientX, y: e.clientY, cx: e.clientX, cy: e.clientY, moving: false,
+      touch: e.pointerType === 'touch', nu: e.target.closest('.nu') };
+    if (drag.touch) {
+      const d = drag;
+      d.timer = setTimeout(() => { if (drag === d && canMove(d.tile)) lift(d, true); }, HOLD_MS);
+    } else {
+      try { tile.setPointerCapture(e.pointerId); } catch (err) { /* a synthetic pointer: no capture */ }
+    }
   });
+  // pick the word up: a copy follows the pointer, the word itself stays faint in its place
+  function lift(d, buzz) {
+    d.moving = true;
+    select(null);
+    const r = d.tile.getBoundingClientRect();
+    const g = d.tile.cloneNode(true);
+    g.classList.add('ghost');
+    g.removeAttribute('tabindex');
+    const src = d.tile.querySelectorAll('.nu'), dst = g.querySelectorAll('.nu');
+    src.forEach((n, i) => { dst[i]._t = n._t; dst[i]._o = n._o; dst[i].dataset.m = n.dataset.m || ''; });
+    Object.assign(g.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px' });
+    document.body.append(g);
+    d.ghost = g;
+    d.dx = d.cx - r.left;
+    d.dy = d.cy - r.top;
+    d.tile.classList.add('placeholder');
+    cur.moves++;
+    // (a browser buzzes only once the page has been tapped: the first pick-up may be silent)
+    const tapped = !navigator.userActivation || navigator.userActivation.hasBeenActive;
+    if (buzz && tapped && navigator.vibrate) { try { navigator.vibrate(15); } catch (err) { /* no buzz here */ } }
+    edgeScroll(d);
+  }
   window.addEventListener('pointermove', (e) => {
     if (!drag || e.pointerId !== drag.id) return;
+    drag.cx = e.clientX;
+    drag.cy = e.clientY;
     if (!drag.moving) {
-      if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 6 || !canMove(drag.tile)) return;
-      drag.moving = true;
-      select(null);
-      const r = drag.tile.getBoundingClientRect();
-      const g = drag.tile.cloneNode(true);
-      g.classList.add('ghost');
-      g.removeAttribute('tabindex');
-      const src = drag.tile.querySelectorAll('.nu'), dst = g.querySelectorAll('.nu');
-      src.forEach((n, i) => { dst[i]._t = n._t; dst[i]._o = n._o; dst[i].dataset.m = n.dataset.m || ''; });
-      Object.assign(g.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px' });
-      document.body.append(g);
-      drag.ghost = g;
-      drag.dx = e.clientX - r.left;
-      drag.dy = e.clientY - r.top;
-      drag.tile.classList.add('placeholder');
-      cur.moves++;
+      const far = Math.hypot(e.clientX - drag.x, e.clientY - drag.y);
+      if (drag.touch) {
+        // the finger moved before the word was picked up: a scroll, the browser's to handle
+        if (far > SLOP) { clearTimeout(drag.timer); drag = null; }
+        return;
+      }
+      if (far < 6 || !canMove(drag.tile)) return;
+      lift(drag, false);
     }
-    drag.ghost.style.left = e.clientX - drag.dx + 'px';
-    drag.ghost.style.top = e.clientY - drag.dy + 'px';
-    placeAt(drag.tile, e.clientX, e.clientY);
+    drag.ghost.style.left = drag.cx - drag.dx + 'px';
+    drag.ghost.style.top = drag.cy - drag.dy + 'px';
+    placeAt(drag.tile, drag.cx, drag.cy);
   });
+  // a finger carrying a word must not scroll the page under it
+  document.addEventListener('touchmove', (e) => { if (drag && drag.moving) e.preventDefault(); }, { passive: false });
+  lineEl.addEventListener('contextmenu', (e) => { if (e.target.closest('.tile')) e.preventDefault(); });
+  // carried within EDGE px of the top or bottom of the screen, a word scrolls the page, faster nearer
+  // the edge; the word keeps finding its place as the line moves under it
+  // (a timer, not animation frames: those can pause, and the drag would then never scroll)
+  function edgeScroll(d) {
+    d.edge = setInterval(() => {
+      if (drag !== d || !d.moving) { clearInterval(d.edge); return; }
+      const h = window.innerHeight;
+      const v = d.cy < EDGE ? -(EDGE - d.cy) : d.cy > h - EDGE ? d.cy - (h - EDGE) : 0;
+      if (v) {
+        window.scrollBy(0, Math.round(v / 4));
+        placeAt(d.tile, d.cx, d.cy);
+      }
+    }, 16);
+  }
   function endDrag(e) {
     if (!drag || (e && e.pointerId !== undefined && e.pointerId !== drag.id)) return;
     const d = drag;
     drag = null;
+    clearTimeout(d.timer);
+    clearInterval(d.edge);
+    clearTimeout(d.later);
+    if (d.moving && !(e && e.type === 'pointercancel')) placeAt(d.tile, d.cx, d.cy);   // settle where it was let go
     if (e && e.type === 'pointercancel' && !d.moving) return;
     if (!d.moving) {                                   // a tap
       // with a word picked up, a tap on another word of its stretch puts it there, vowel or not
@@ -474,6 +547,19 @@
 
   // move `tile` to where the pointer is, among the tiles of its own stretch between punctuation
   function placeAt(tile, x, y) {
+    // Every move reflows the line, so the words under a still pointer change. Without a pause the word
+    // would hop back and forth across a wrap (owner, 2026-11-16): after a move, wait for the glide to
+    // end AND for the pointer to move on (in the page, so a scroll under a still finger counts).
+    const now = performance.now(), px = x + window.scrollX, py = y + window.scrollY;
+    if (drag && drag.lastMove) {
+      if (Math.hypot(px - drag.lx, py - drag.ly) < 14) return;          // the pointer has not moved on
+      if (now - drag.lastMove < 190) {                                 // still gliding: look again after
+        const d = drag;
+        clearTimeout(d.later);
+        d.later = setTimeout(() => { if (drag === d) placeAt(d.tile, d.cx, d.cy); }, 195 - (now - d.lastMove));
+        return;
+      }
+    }
     const seg = segOf(tile);
     const sibs = segTiles(seg).filter((t) => t !== tile);
     const slots = partsOf(seg).filter((p) => !p.querySelector('.tile'));
@@ -493,6 +579,7 @@
       : (best.after ? best.t.nextElementSibling === tile : best.t.previousElementSibling === tile)) return;
     if (best.part) moveTile(tile, null, false, best.part);
     else moveTile(tile, best.t, best.after);
+    if (drag) { drag.lastMove = now; drag.lx = px; drag.ly = py; }
   }
 
   // put `tile` just before (or after) `target`, a tile of its segment, in target's line -- or at the
@@ -573,6 +660,62 @@
     else { if (w.est) nu.closest('.tail').classList.remove('gone'); setMark(nu, nxt, true); }
   }
 
+  // ---- finding a line ----------------------------------------------------------------------------
+  // "Met. 1.535-538", "met 1.535", "aen 1.322", "1.322" (any work), with any dash: a range finds the
+  // sentence it names; one line finds that line -- or, among the sentences, the sentence holding it.
+  const WORKS = { met: 'Met.', aen: 'Aen.', her: 'Her.' };
+  function findItem(q, wantSentence) {
+    const m = q.toLowerCase().replace(/[\u2012-\u2015]/g, '-').replace(/\s+/g, ' ').trim()
+      .match(/^(?:(met|aen|her)\.? ?)?(\d+) ?\. ?(\d+)(?: ?- ?(\d+))?$/);
+    if (!m) return null;
+    const works = m[1] ? [WORKS[m[1]]] : Object.values(WORKS);
+    for (const work of works) {
+      const cite = (n) => `${work} ${m[2]}.${n}`;
+      const sentence = (DATA.sentences || []).find((x) => x.cs.includes(cite(+m[3])) && (!m[4] || x.cs.includes(cite(+m[4]))));
+      const line = !m[4] && DATA.lines.find((x) => x.c === cite(+m[3]));
+      const hit = m[4] || wantSentence ? sentence || line : line || sentence;
+      if (hit) return hit;
+    }
+    return null;
+  }
+  // show this line or sentence, widening the menus if they would leave it out
+  function goTo(item) {
+    if (item.rows) $('jb-level').value = 'sentences';
+    else if ($('jb-level').value === 'sentences' || ($('jb-level').value === 'plain') !== (item.e === 0)) {
+      $('jb-level').value = 'mixed';
+    }
+    if ($('jb-passage').value && $('jb-passage').value !== item.p) $('jb-passage').value = '';
+    update((s) => { s.prefs.level = $('jb-level').value; s.prefs.passage = $('jb-passage').value; });
+    filterPool();
+    if (window.Rhythm) Rhythm.stop();
+    start(item);
+  }
+  $('jb-goto').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = $('jb-goto-q').value;
+    const item = q.trim() && findItem(q, $('jb-level').value === 'sentences');
+    if (!item) {
+      $('jb-goto-msg').textContent = q.trim() ? `No jumble for “${q.trim()}”: try a citation like Aen. 1.322 or Met. 1.535-538 (advanced lines are left out).` : '';
+      return;
+    }
+    if (!dead.has(item.c) && !J.jumble(item)) dead.add(item.c);
+    if (dead.has(item.c)) { $('jb-goto-msg').textContent = `${item.c} cannot be jumbled: no order of its words both reads and fails to scan.`; return; }
+    $('jb-goto-msg').textContent = '';
+    $('jb-goto-q').value = '';
+    $('jb-goto-q').blur();
+    goTo(item);
+  });
+  // the line before or after this one in the text, among those the menus allow
+  function step(by) {
+    if (!cur || !pool.length) return;
+    const i = pool.indexOf(cur.line);
+    const item = pool[((i < 0 ? 0 : i + by) + pool.length) % pool.length];
+    if (window.Rhythm) Rhythm.stop();
+    start(item);
+  }
+  $('jb-prev').addEventListener('click', () => step(-1));
+  $('jb-fwd').addEventListener('click', () => step(1));
+
   // ---- choosing a line ---------------------------------------------------------------------------
   function filterPool() {
     const lvl = $('jb-level').value, pas = $('jb-passage').value;
@@ -608,11 +751,14 @@
     $('jb-lock').disabled = false;
     $('jb-reshuffle').disabled = false;
     $('jb-show').disabled = false;
-    $('jb-hint').textContent = (mode === 'blind'
-      ? 'Drag the words (or tap one, then where it goes). Tap a vowel to mark it, for your own reference.'
-      : 'Drag the words (or tap one, then where it goes). The marks follow the words.')
+    const how = coarse ? 'Hold a word to pick it up, then move it (or tap one, then where it goes).'
+      : 'Drag the words (or click one, then where it goes).';
+    $('jb-hint').textContent = how + (mode === 'blind'
+      ? ' Tap a vowel to mark it, for your own reference.'
+      : ' The marks follow the words; ⏓ can be long or short.')
       + (line.rows ? ' Where a clause runs over the end of a line, its words can move into the next line.' : '');
-    history.replaceState(null, '', `${location.pathname}?line=${encodeURIComponent(line.c)}`);
+    // a readable address: ?line=Met.+1.535-538
+    history.replaceState(null, '', `${location.pathname}?${new URLSearchParams({ line: line.c.replace('\u2013', '-') })}`);
   }
 
   // ---- lock in -----------------------------------------------------------------------------------
@@ -674,8 +820,9 @@
       fresh = award({ quick: secs <= 20, comeback: c.wrong >= 3 });
     });
     // the true scansion -- in the unscanned mode it lands with the drums
-    const sc = J.scanItem(c.line, order, countsNow());
+    const sc = v.meter.scan;            // a mute + liquid read as the line needs it
     c.scan = sc;
+    if (mode === 'scanned') order.forEach((w, i) => paintTile(tileOf(w.id), w, sc.marks[i], true));
     if (mode === 'blind') order.forEach((w) => tileOf(w.id).querySelectorAll('.nu').forEach((nu) => { nu.classList.add('truth'); setMark(nu, '', false); }));
     if (mode === 'blind') {
       order.forEach((w, i) => {
@@ -743,7 +890,7 @@
       if (el.classList.contains('wall')) return esc(el.textContent);
       if (!el.classList.contains('jb-seg-wrap')) return '';
       return [...el.querySelectorAll('.tile')].map((t) => {
-        const w = cur.words[+t.dataset.id], moved = w.id !== cur.words[idx].id;
+        const w = cur.words[+t.dataset.id], moved = w.w !== (cur.words[idx] || {}).w;
         idx++;
         return ' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w));
       }).join('');
@@ -780,16 +927,18 @@
     voc: (f) => `${q(f.words[0])} comes before the person addressed: ${q(f.words[1])}.`,
     indef: (f) => `${q(f.words[0])} here means "any": it comes after ${q(f.words[1])}.`,
   };
+  // the first foot that cannot be made (an 'A', a mute + liquid, may be long or short)
   function brokenFoot(pattern, spondaicFifth) {
-    let i = 0;
-    for (let f = 0; f < 6; f++) {
-      if (pattern[i] !== 'L') return f + 1;
-      if (f === 5) return pattern.length === i + 2 ? 0 : 6;
-      if (pattern[i + 1] === 'S' && pattern[i + 2] === 'S') i += 3;
-      else if (pattern[i + 1] === 'L' && (f < 4 || spondaicFifth)) i += 2;
-      else return f + 1;
-    }
-    return 6;
+    const is = (c, want) => c === want || c === 'A';
+    let best = 1;
+    const go = (i, f) => {
+      best = Math.max(best, f + 1);
+      if (f === 5) return pattern.length === i + 2 && is(pattern[i], 'L');
+      if (!is(pattern[i], 'L')) return false;
+      if (is(pattern[i + 1], 'S') && is(pattern[i + 2], 'S') && go(i + 3, f + 1)) return true;
+      return is(pattern[i + 1], 'L') && (f < 4 || spondaicFifth) && go(i + 2, f + 1);
+    };
+    return go(0, 0) ? 0 : best;
   }
   function showLose(order, v) {
     const el = $('jb-verdict');
@@ -833,7 +982,7 @@
       requestAnimationFrame(() => { t.classList.add('flip'); t.style.transform = ''; });
     });
     setTimeout(() => {
-      const sc = J.scanItem(c.line, c.words);
+      const sc = J.meter(c.line, c.words).scan;
       if (mode === 'blind') all.forEach((t) => t.querySelectorAll('.nu').forEach((nu) => { nu.classList.add('truth'); setMark(nu, '', false); }));
       refresh(true);
       drawBars(J.meter(c.line, c.words));
@@ -919,6 +1068,7 @@
     clearTimeout(resizeT);
     resizeT = setTimeout(() => {
       if (!cur || !cur.scan) return;
+      if (!drag) fitRows();
       if (mode === 'scanned' || cur.done) drawSwooshes(orderNow(), cur.scan, false);
       if (cur.done) drawBars(J.meter(cur.line, orderNow(), countsNow()));
     }, 120);
@@ -939,10 +1089,8 @@
       paintPoints();
       filterPool();
       const asked = new URLSearchParams(location.search).get('line');
-      const line = asked && d.lines.concat(d.sentences || []).find((l) => l.c === asked);
-      // a link to a sentence opens the sentences; a link to a line leaves the menu as it was
-      if (line && line.rows && $('jb-level').value !== 'sentences') { $('jb-level').value = 'sentences'; filterPool(); }
-      start(line || pick());
+      const line = asked && findItem(asked, $('jb-level').value === 'sentences');
+      if (line && !dead.has(line.c)) goTo(line); else start(pick());
     })
     .catch((err) => {
       console.error(err);
