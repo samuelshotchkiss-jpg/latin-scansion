@@ -1,5 +1,15 @@
 /* jumbles.css -- Hexameter jumbles (jumbles.html): drag the poet's words back into a hexameter. */
-.jb { max-width: 60rem; margin: 0 auto; padding: 1rem 1rem 2rem; }
+
+/* ⏓ (a syllable that may be long or short) in a font of its own: Tahoma has no such glyph, and a
+   device's own fallback may draw it badly or not at all. "Jumbles Metrical" holds that one character
+   (from Linux Biolinum G, OFL: fonts/OFL.txt), and unicode-range keeps it to that character, so it
+   can stand first in every font list here and every other letter keeps its usual font. */
+@font-face {
+  font-family: "Jumbles Metrical"; src: url("fonts/metrical.woff") format("woff");
+  unicode-range: U+23D3; font-display: swap;
+}
+.jb { max-width: 60rem; margin: 0 auto; padding: 1rem 1rem 2rem;
+  font-family: "Jumbles Metrical", system-ui, -apple-system, "Segoe UI", sans-serif; }
 .jb-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .jb-title { margin: .2rem 0; }
 .jb-statsbtn { padding: .4rem .9rem; border-radius: 999px; border: 1px solid var(--line); background: var(--panel);
@@ -35,7 +45,7 @@
 .jb-line {
   position: relative;
   margin: .8rem 0 .4rem; padding: .3rem .1rem 1.1rem; min-height: 4rem;
-  font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.2rem, 3.3vw, 1.85rem);
+  font-family: "Jumbles Metrical", Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: clamp(1.2rem, 3.3vw, 1.85rem);
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
 }
 /* a line to a row; a sentence has several, set apart */
@@ -172,7 +182,7 @@
 .jb-verdict p { margin: .25rem 0; }
 .jb-compare { margin: .5rem 0 .2rem; display: grid; grid-template-columns: auto 1fr; gap: .2rem .7rem; align-items: baseline; }
 .jb-compare dt { color: var(--muted); font-size: .85rem; }
-.jb-compare dd { margin: 0; font-family: Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.1rem; }
+.jb-compare dd { margin: 0; font-family: "Jumbles Metrical", Tahoma, "Noto Sans", "DejaVu Sans", sans-serif; font-size: 1.1rem; }
 .jb-compare .moved { background: color-mix(in srgb, var(--accent) 18%, transparent); border-radius: 3px; }
 .jb-pts { font-weight: 700; color: var(--accent); }
 

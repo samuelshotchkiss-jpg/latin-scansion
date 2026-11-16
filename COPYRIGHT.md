@@ -1,7 +1,7 @@
 # Copyright and licensing
 
-This repository combines three bodies of material under three sets of terms, plus one library
-written by someone else (section 4).
+This repository combines three bodies of material under three sets of terms, plus a library
+and a font written by others (sections 4 and 5).
 
 ## 1. The Latin texts — public domain
 
@@ -57,6 +57,14 @@ unchanged and used under the MIT licence; its notice and the licence text are in
 [`live/vendor/LICENSE-qrcode-generator.txt`](live/vendor/LICENSE-qrcode-generator.txt). The MIT
 licence lets anyone use, copy and change it, provided that notice travels with it. "QR Code" is a
 registered trademark of DENSO WAVE INCORPORATED.
+
+## 5. One character of a font — SIL Open Font License
+
+`fonts/metrical.woff` ("Jumbles Metrical") holds a single character, ⏓ (U+23D3, metrical long over
+short), taken from Linux Biolinum G by Philipp H. Poll, so that Hexameter jumbles can show the mark
+for a syllable that may be long or short on every device. It is a modified version — cut down to
+that one character and renamed, as the licence asks — used under the SIL Open Font License 1.0;
+the font's notice and the licence text are in [`fonts/OFL.txt`](fonts/OFL.txt).
 
 ## 5. Music — CC BY 4.0
 

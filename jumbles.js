@@ -779,7 +779,7 @@
       : 'Drag the words (or click one, then where it goes).';
     $('jb-hint').textContent = how + (mode === 'blind'
       ? ' Tap a vowel to mark it, for your own reference.'
-      : ' The marks follow the words; a long mark over a short one means either.')
+      : ' The marks follow the words; ⏓ can be long or short.')
       + (line.rows ? ' Where a clause runs over the end of a line, its words can move into the next line.' : '');
     // a readable address: ?line=Met.+1.535-538
     history.replaceState(null, '', `${location.pathname}?${new URLSearchParams({ line: line.c.replace('\u2013', '-') })}`);
