@@ -271,7 +271,10 @@ describe("\"Newest\" is per class (shared with the class relay)", () => {
   test("one 'Newest <class>' per class in the file, then every set by title", () => {
     const opts = D.classOptions(DATA.sets);
     assert.deepEqual(opts.slice(0, 2), [["newlatinii", "Newest Latin II"], ["newlatini", "Newest Latin I"]]);
-    assert.deepEqual(opts.slice(2).map((o) => o[0]).sort(), DATA.sets.map((s) => s.id).sort());
+    // one "Newest" per class in the file (three since Latin III joined, 2026-11-16), then the sets
+    const k = new Set(DATA.sets.map((s) => s.corpus)).size;
+    assert.ok(opts.slice(0, k).every(([v]) => v.startsWith("new")), "a Newest option per class comes first");
+    assert.deepEqual(opts.slice(k).map((o) => o[0]).sort(), DATA.sets.map((s) => s.id).sort());
     for (const [v] of opts) assert.match(v, /^[A-Za-z0-9]{1,16}$/);
   });
   test("'newest' is the LAST set of that class in the file; a set id picks that set", () => {
