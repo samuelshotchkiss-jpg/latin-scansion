@@ -1,6 +1,6 @@
 {
  "generated_by": "Latin Vocab Toolkit: engine/export_derivative_cards.py -- do not edit by hand",
- "generated": "2026-11-04",
+ "generated": "2026-11-16",
  "sets": [
   {
    "id": "ii04",
@@ -902,6 +902,868 @@
    "sets": [
     "trial-03",
     "trial-04"
+   ]
+  },
+  {
+   "id": "iii0307",
+   "title": "Latin III · Trials 3–7",
+   "corpus": "latin-iii",
+   "words": [
+    {
+     "key": "maximus",
+     "latin": "maximus, maxima, maximum",
+     "def": "greatest",
+     "derivs": [
+      {
+       "w": "maximize",
+       "d": "to make as large or as great as possible"
+      }
+     ]
+    },
+    {
+     "key": "nouus",
+     "latin": "novus, nova, novum",
+     "def": "new",
+     "derivs": [
+      {
+       "w": "novice",
+       "d": "a beginner"
+      },
+      {
+       "w": "novelty",
+       "d": "something new and unusual"
+      },
+      {
+       "w": "renovate",
+       "d": "to repair and make like new again"
+      },
+      {
+       "w": "nova",
+       "d": "a star that suddenly shines much brighter for a while"
+      }
+     ]
+    },
+    {
+     "key": "ullus",
+     "latin": "ūllus, ūlla, ūllum",
+     "def": "any",
+     "derivs": [
+      {
+       "w": "null",
+       "d": "having no value or force; zero"
+      }
+     ]
+    },
+    {
+     "key": "rapio",
+     "latin": "rapiō, rapere, rapuī, raptum",
+     "def": "to snatch",
+     "derivs": [
+      {
+       "w": "raptor",
+       "d": "a bird that hunts, such as a hawk or eagle"
+      },
+      {
+       "w": "rapture",
+       "d": "a feeling of great joy that carries you away"
+      },
+      {
+       "w": "rapacious",
+       "d": "greedy; grabbing everything it can"
+      }
+     ]
+    },
+    {
+     "key": "seruo",
+     "latin": "servō, servāre, servāvī, servātum",
+     "def": "to save",
+     "derivs": [
+      {
+       "w": "conserve",
+       "d": "to keep from being used up or wasted"
+      },
+      {
+       "w": "conservation",
+       "d": "the protection of nature and natural resources"
+      },
+      {
+       "w": "reservoir",
+       "d": "a lake where water is stored for later use"
+      }
+     ]
+    },
+    {
+     "key": "is",
+     "latin": "is, ea, id",
+     "def": "he / she / it; that",
+     "derivs": [
+      {
+       "w": "i.e.",
+       "d": "that is to say (before an explanation)"
+      },
+      {
+       "w": "id",
+       "d": "in psychology, the part of the mind that holds basic urges"
+      }
+     ]
+    },
+    {
+     "key": "locus",
+     "latin": "locus, locī, m. (n. pl. loca)",
+     "def": "place",
+     "derivs": [
+      {
+       "w": "dislocate",
+       "d": "to knock a bone out of its place"
+      },
+      {
+       "w": "relocate",
+       "d": "to move to a new place"
+      },
+      {
+       "w": "allocate",
+       "d": "to give out a share for a purpose"
+      }
+     ]
+    },
+    {
+     "key": "tantus",
+     "latin": "tantus, tanta, tantum",
+     "def": "so great, so much",
+     "derivs": [
+      {
+       "w": "tantamount",
+       "d": "equal in effect to; as good as"
+      }
+     ]
+    },
+    {
+     "key": "dominus",
+     "latin": "dominus, dominī, m.",
+     "def": "master",
+     "derivs": [
+      {
+       "w": "dominant",
+       "d": "most powerful or important"
+      },
+      {
+       "w": "domineering",
+       "d": "always trying to control others"
+      }
+     ]
+    },
+    {
+     "key": "lex",
+     "latin": "lēx, lēgis, f.",
+     "def": "law",
+     "derivs": [
+      {
+       "w": "legislature",
+       "d": "the group that makes a country's or state's laws"
+      },
+      {
+       "w": "legitimate",
+       "d": "allowed by law or by the rules"
+      }
+     ]
+    },
+    {
+     "key": "nego",
+     "latin": "negō, negāre, negāvī, negātum",
+     "def": "to deny",
+     "derivs": [
+      {
+       "w": "negate",
+       "d": "to cancel out or make useless"
+      },
+      {
+       "w": "renege",
+       "d": "to go back on a promise"
+      }
+     ]
+    },
+    {
+     "key": "copia",
+     "latin": "cōpia, cōpiae, f.",
+     "def": "amount",
+     "derivs": [
+      {
+       "w": "copious",
+       "d": "in large amounts; plentiful"
+      },
+      {
+       "w": "cornucopia",
+       "d": "a horn overflowing with food; a great supply"
+      }
+     ]
+    },
+    {
+     "key": "ex",
+     "latin": "ē, ex",
+     "def": "out of",
+     "derivs": [
+      {
+       "w": "exhale",
+       "d": "to breathe out"
+      }
+     ]
+    },
+    {
+     "key": "sine",
+     "latin": "sine",
+     "def": "without",
+     "derivs": [
+      {
+       "w": "sinecure",
+       "d": "a paid job with almost no work to do"
+      }
+     ]
+    },
+    {
+     "key": "animus",
+     "latin": "animus, animī, m.",
+     "def": "mind",
+     "derivs": [
+      {
+       "w": "unanimous",
+       "d": "agreed on by everyone"
+      },
+      {
+       "w": "magnanimous",
+       "d": "generous and forgiving, especially to a rival"
+      },
+      {
+       "w": "equanimity",
+       "d": "calmness, especially in a hard situation"
+      }
+     ]
+    },
+    {
+     "key": "fortuna",
+     "latin": "fortūna, fortūnae, f.",
+     "def": "fortune",
+     "derivs": [
+      {
+       "w": "misfortune",
+       "d": "bad luck"
+      }
+     ]
+    },
+    {
+     "key": "grauis",
+     "latin": "gravis, grave",
+     "def": "heavy",
+     "derivs": [
+      {
+       "w": "gravity",
+       "d": "the force that pulls things toward the earth"
+      },
+      {
+       "w": "aggravate",
+       "d": "to make a problem or injury worse"
+      },
+      {
+       "w": "gravitas",
+       "d": "a serious and dignified manner"
+      }
+     ]
+    },
+    {
+     "key": "paro",
+     "latin": "parō, parāre, parāvī, parātum",
+     "def": "to prepare",
+     "derivs": [
+      {
+       "w": "apparatus",
+       "d": "the equipment needed for a task"
+      }
+     ]
+    },
+    {
+     "key": "uerbum",
+     "latin": "verbum, verbī, n.",
+     "def": "word",
+     "derivs": [
+      {
+       "w": "verbal",
+       "d": "using spoken words"
+      },
+      {
+       "w": "proverb",
+       "d": "a short, well-known saying that gives advice"
+      },
+      {
+       "w": "verbatim",
+       "d": "in exactly the same words"
+      },
+      {
+       "w": "verbose",
+       "d": "using more words than needed"
+      }
+     ]
+    },
+    {
+     "key": "suus",
+     "latin": "suus, sua, suum",
+     "def": "one's own",
+     "derivs": [
+      {
+       "w": "sui generis",
+       "d": "unique; one of a kind"
+      }
+     ]
+    },
+    {
+     "key": "uenio",
+     "latin": "veniō, venīre, vēnī, ventum",
+     "def": "to come",
+     "derivs": [
+      {
+       "w": "intervene",
+       "d": "to step in to change what is happening"
+      },
+      {
+       "w": "venue",
+       "d": "the place where an event happens"
+      },
+      {
+       "w": "convene",
+       "d": "to come together for a meeting"
+      },
+      {
+       "w": "advent",
+       "d": "the arrival of something important"
+      },
+      {
+       "w": "circumvent",
+       "d": "to find a way around a rule or problem"
+      }
+     ]
+    },
+    {
+     "key": "fugio",
+     "latin": "fugiō, fugere, fūgī, fugitum",
+     "def": "to flee",
+     "derivs": [
+      {
+       "w": "fugitive",
+       "d": "a person running away, especially from the police"
+      },
+      {
+       "w": "refuge",
+       "d": "a safe place to escape to"
+      },
+      {
+       "w": "centrifugal",
+       "d": "moving away from the center"
+      }
+     ]
+    },
+    {
+     "key": "ipse",
+     "latin": "ipse, ipsa, ipsum",
+     "def": "himself, herself, itself",
+     "derivs": [
+      {
+       "w": "solipsism",
+       "d": "the belief that only your own mind is sure to exist"
+      }
+     ]
+    },
+    {
+     "key": "idem",
+     "latin": "īdem, eadem, idem",
+     "def": "the same",
+     "derivs": [
+      {
+       "w": "identical",
+       "d": "exactly alike"
+      }
+     ]
+    },
+    {
+     "key": "peto",
+     "latin": "petō, petere, petīvī / petiī, petītum",
+     "def": "to seek",
+     "derivs": [
+      {
+       "w": "petition",
+       "d": "a written request signed by many people"
+      },
+      {
+       "w": "appetite",
+       "d": "the wish to eat"
+      },
+      {
+       "w": "impetus",
+       "d": "a force or reason that makes something happen"
+      }
+     ]
+    },
+    {
+     "key": "ubi",
+     "latin": "ubi",
+     "def": "where, when",
+     "derivs": [
+      {
+       "w": "ubiquitous",
+       "d": "found everywhere"
+      }
+     ]
+    },
+    {
+     "key": "teneo",
+     "latin": "teneō, tenēre, tenuī, tentum",
+     "def": "to hold",
+     "derivs": [
+      {
+       "w": "tenant",
+       "d": "a person who rents a home or room"
+      },
+      {
+       "w": "tenacious",
+       "d": "holding on firmly; not giving up"
+      }
+     ]
+    },
+    {
+     "key": "sub",
+     "latin": "sub",
+     "def": "under",
+     "derivs": [
+      {
+       "w": "submarine",
+       "d": "a ship that travels underwater"
+      },
+      {
+       "w": "subway",
+       "d": "an underground train"
+      },
+      {
+       "w": "submerge",
+       "d": "to put or go under water"
+      },
+      {
+       "w": "subterranean",
+       "d": "underground"
+      }
+     ]
+    },
+    {
+     "key": "altus",
+     "latin": "altus, alta, altum",
+     "def": "high, deep",
+     "derivs": [
+      {
+       "w": "altitude",
+       "d": "the height above sea level"
+      },
+      {
+       "w": "alto",
+       "d": "the low female or high male singing voice"
+      },
+      {
+       "w": "exalt",
+       "d": "to praise highly or raise up"
+      }
+     ]
+    },
+    {
+     "key": "uia",
+     "latin": "via, viae, f.",
+     "def": "road",
+     "derivs": [
+      {
+       "w": "viaduct",
+       "d": "a long bridge carrying a road or railway over a valley"
+      },
+      {
+       "w": "deviate",
+       "d": "to turn away from the usual path"
+      }
+     ]
+    },
+    {
+     "key": "finis",
+     "latin": "fīnis, fīnis, m.",
+     "def": "end",
+     "derivs": [
+      {
+       "w": "infinite",
+       "d": "without any limit or end"
+      },
+      {
+       "w": "confine",
+       "d": "to keep within limits"
+      }
+     ]
+    },
+    {
+     "key": "gero",
+     "latin": "gerō, gerere, gessī, gestum",
+     "def": "to carry",
+     "derivs": [
+      {
+       "w": "congestion",
+       "d": "crowding, as of traffic or a stuffy nose"
+      },
+      {
+       "w": "belligerent",
+       "d": "eager to fight"
+      }
+     ]
+    },
+    {
+     "key": "fama",
+     "latin": "fāma, fāmae, f.",
+     "def": "rumor",
+     "derivs": [
+      {
+       "w": "fame",
+       "d": "the state of being known by many people"
+      },
+      {
+       "w": "infamous",
+       "d": "well known for something bad"
+      },
+      {
+       "w": "defame",
+       "d": "to damage someone's good name"
+      }
+     ]
+    },
+    {
+     "key": "litus",
+     "latin": "lītus, lītoris, n.",
+     "def": "shore",
+     "derivs": [
+      {
+       "w": "littoral",
+       "d": "of or on the shore"
+      }
+     ]
+    },
+    {
+     "key": "iter",
+     "latin": "iter, itineris, n.",
+     "def": "journey",
+     "derivs": [
+      {
+       "w": "itinerary",
+       "d": "a plan of a journey"
+      }
+     ]
+    },
+    {
+     "key": "uinco",
+     "latin": "vincō, vincere, vīcī, victum",
+     "def": "to conquer",
+     "derivs": [
+      {
+       "w": "victor",
+       "d": "the winner"
+      },
+      {
+       "w": "invincible",
+       "d": "impossible to defeat"
+      }
+     ]
+    },
+    {
+     "key": "sui",
+     "latin": "--, suī, sibi, sē, sē",
+     "def": "himself, herself, itself",
+     "derivs": [
+      {
+       "w": "sui generis",
+       "d": "unique; one of a kind"
+      }
+     ]
+    },
+    {
+     "key": "per",
+     "latin": "per",
+     "def": "through",
+     "derivs": [
+      {
+       "w": "perennial",
+       "d": "lasting a long time, or coming back year after year"
+      },
+      {
+       "w": "permeate",
+       "d": "to spread through every part of something"
+      },
+      {
+       "w": "perforate",
+       "d": "to make a hole or holes through something"
+      }
+     ]
+    },
+    {
+     "key": "refero",
+     "latin": "referō, referre, rettulī, relātum",
+     "def": "to bring back",
+     "derivs": [
+      {
+       "w": "referendum",
+       "d": "a vote by all the people on one question"
+      }
+     ]
+    },
+    {
+     "key": "mille",
+     "latin": "mīlle",
+     "def": "thousand",
+     "derivs": [
+      {
+       "w": "millennium",
+       "d": "a period of a thousand years"
+      },
+      {
+       "w": "millipede",
+       "d": "a small creature with a long body and very many legs"
+      }
+     ]
+    },
+    {
+     "key": "morior",
+     "latin": "morior, morī, mortuus sum",
+     "def": "to die",
+     "derivs": [
+      {
+       "w": "mortal",
+       "d": "certain to die someday"
+      },
+      {
+       "w": "immortal",
+       "d": "living forever"
+      },
+      {
+       "w": "mortuary",
+       "d": "a place where dead bodies are kept before burial"
+      },
+      {
+       "w": "moribund",
+       "d": "close to dying, or coming to an end"
+      }
+     ]
+    },
+    {
+     "key": "pono",
+     "latin": "pōnō, pōnere, posuī, positum",
+     "def": "to put",
+     "derivs": [
+      {
+       "w": "postpone",
+       "d": "to put off until a later time"
+      }
+     ]
+    },
+    {
+     "key": "quintus",
+     "latin": "quīntus, quīnta, quīntum",
+     "def": "fifth",
+     "derivs": [
+      {
+       "w": "quintet",
+       "d": "a group of five musicians, or music for five"
+      },
+      {
+       "w": "quintuplets",
+       "d": "five babies born to one mother at one birth"
+      }
+     ]
+    },
+    {
+     "key": "ab",
+     "latin": "ab",
+     "def": "(away) from",
+     "derivs": [
+      {
+       "w": "abnormal",
+       "d": "not usual or typical"
+      },
+      {
+       "w": "abduct",
+       "d": "to take someone away by force"
+      },
+      {
+       "w": "abstain",
+       "d": "to choose not to do or have something"
+      }
+     ]
+    },
+    {
+     "key": "ad",
+     "latin": "ad",
+     "def": "to",
+     "derivs": [
+      {
+       "w": "adhere",
+       "d": "to stick firmly to something"
+      },
+      {
+       "w": "adjacent",
+       "d": "next to or near something"
+      }
+     ]
+    }
+   ],
+   "cycles": [
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "id": "iii07",
+   "title": "Latin III · Trial 7",
+   "corpus": "latin-iii",
+   "words": [
+    {
+     "key": "sui",
+     "latin": "--, suī, sibi, sē, sē",
+     "def": "himself, herself, itself",
+     "derivs": [
+      {
+       "w": "sui generis",
+       "d": "unique; one of a kind"
+      }
+     ]
+    },
+    {
+     "key": "per",
+     "latin": "per",
+     "def": "through",
+     "derivs": [
+      {
+       "w": "perennial",
+       "d": "lasting a long time, or coming back year after year"
+      },
+      {
+       "w": "permeate",
+       "d": "to spread through every part of something"
+      },
+      {
+       "w": "perforate",
+       "d": "to make a hole or holes through something"
+      }
+     ]
+    },
+    {
+     "key": "refero",
+     "latin": "referō, referre, rettulī, relātum",
+     "def": "to bring back",
+     "derivs": [
+      {
+       "w": "referendum",
+       "d": "a vote by all the people on one question"
+      }
+     ]
+    },
+    {
+     "key": "mille",
+     "latin": "mīlle",
+     "def": "thousand",
+     "derivs": [
+      {
+       "w": "millennium",
+       "d": "a period of a thousand years"
+      },
+      {
+       "w": "millipede",
+       "d": "a small creature with a long body and very many legs"
+      }
+     ]
+    },
+    {
+     "key": "morior",
+     "latin": "morior, morī, mortuus sum",
+     "def": "to die",
+     "derivs": [
+      {
+       "w": "mortal",
+       "d": "certain to die someday"
+      },
+      {
+       "w": "immortal",
+       "d": "living forever"
+      },
+      {
+       "w": "mortuary",
+       "d": "a place where dead bodies are kept before burial"
+      },
+      {
+       "w": "moribund",
+       "d": "close to dying, or coming to an end"
+      }
+     ]
+    },
+    {
+     "key": "pono",
+     "latin": "pōnō, pōnere, posuī, positum",
+     "def": "to put",
+     "derivs": [
+      {
+       "w": "postpone",
+       "d": "to put off until a later time"
+      }
+     ]
+    },
+    {
+     "key": "quintus",
+     "latin": "quīntus, quīnta, quīntum",
+     "def": "fifth",
+     "derivs": [
+      {
+       "w": "quintet",
+       "d": "a group of five musicians, or music for five"
+      },
+      {
+       "w": "quintuplets",
+       "d": "five babies born to one mother at one birth"
+      }
+     ]
+    },
+    {
+     "key": "ab",
+     "latin": "ab",
+     "def": "(away) from",
+     "derivs": [
+      {
+       "w": "abnormal",
+       "d": "not usual or typical"
+      },
+      {
+       "w": "abduct",
+       "d": "to take someone away by force"
+      },
+      {
+       "w": "abstain",
+       "d": "to choose not to do or have something"
+      }
+     ]
+    },
+    {
+     "key": "ad",
+     "latin": "ad",
+     "def": "to",
+     "derivs": [
+      {
+       "w": "adhere",
+       "d": "to stick firmly to something"
+      },
+      {
+       "w": "adjacent",
+       "d": "next to or near something"
+      }
+     ]
+    }
+   ],
+   "cycles": [
+    7
    ]
   }
  ]
