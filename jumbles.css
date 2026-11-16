@@ -103,6 +103,17 @@
   }
 }
 @keyframes pop-up { from { transform: scale(1) rotate(0); } to { transform: scale(1.18) rotate(-2deg); } }
+/* the lifted word tied to the thumb: a line down from its foot, an arrowhead, a halo at the thumb */
+.tether { position: fixed; z-index: 49; width: 0; margin-left: -1px; border-left: 2px solid var(--accent); pointer-events: none; }
+.tether::before {          /* the arrowhead, just above the halo */
+  content: ""; position: absolute; left: -7px; bottom: 1.35rem;
+  border: 6px solid transparent; border-top: 8px solid var(--accent); border-bottom: 0;
+}
+.tether::after {           /* the halo: where the word will go, round the thumb */
+  content: ""; position: absolute; left: calc(-1.4rem - 1px); bottom: -1.4rem; width: 2.8rem; height: 2.8rem;
+  border-radius: 50%; border: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
 /* and a ring pulses out from the fingertip */
 .pickup-ring {
   position: fixed; z-index: 49; width: 3.2rem; height: 3.2rem; margin: -1.6rem 0 0 -1.6rem; border-radius: 50%;

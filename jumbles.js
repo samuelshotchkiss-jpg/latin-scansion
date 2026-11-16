@@ -485,6 +485,8 @@
       g.classList.add('popping');                 // glides up above the finger, then follows it
       void g.offsetWidth;                         // lay it out where the word was, then rise from there
       g.style.top = d.cy - d.dy - d.raise + 'px';
+      tether(d);
+      setTimeout(() => { if (drag === d) tether(d); }, 180);    // again once it has risen and grown
       setTimeout(() => g.classList.remove('popping'), 110);
       const ring = document.createElement('div');
       ring.className = 'pickup-ring';
@@ -515,8 +517,23 @@
     }
     drag.ghost.style.left = drag.cx - drag.dx + 'px';
     drag.ghost.style.top = drag.cy - drag.dy - drag.raise + 'px';
+    tether(drag);
     placeAt(drag.tile, ...aim(drag));
   });
+  // A word lifted above a finger is tied to it (owner, 2026-11-16: "some kind of directional
+  // indication from the floating word to my thumb"): a line from the word's foot down to the thumb,
+  // an arrowhead, and a soft halo at the thumb -- where the word will go -- that shows round its edges.
+  function tether(d) {
+    if (!d.raise) return;
+    if (!d.tether) {
+      d.tether = document.createElement('div');
+      d.tether.className = 'tether';
+      document.body.append(d.tether);
+    }
+    // from just inside the lifted word's lower edge (hidden behind it), measured: it is scaled and tilted
+    const foot = d.ghost.getBoundingClientRect().bottom - 4;
+    Object.assign(d.tether.style, { left: d.cx + 'px', top: foot + 'px', height: Math.max(0, d.cy - foot) + 'px' });
+  }
   // where the word being carried goes: under the finger (it is DRAWN above it, by `raise`)
   const aim = (d) => [d.cx, d.cy];
   // a finger carrying a word must not scroll the page under it
@@ -540,6 +557,7 @@
     if (!drag || (e && e.pointerId !== undefined && e.pointerId !== drag.id)) return;
     const d = drag;
     drag = null;
+    if (d.tether) d.tether.remove();
     clearTimeout(d.timer);
     d.tile.classList.remove('holding');
     clearInterval(d.edge);
@@ -565,7 +583,7 @@
   // any copy or placeholder a lost drag left behind
   function sweepDrags() {
     drag = null;
-    document.querySelectorAll('.tile.ghost').forEach((g) => g.remove());
+    document.querySelectorAll('.tile.ghost, .tether').forEach((g) => g.remove());
     lineEl.querySelectorAll('.tile.placeholder').forEach((t) => t.classList.remove('placeholder'));
   }
 
