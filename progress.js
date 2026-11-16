@@ -55,7 +55,7 @@ window.Progress = (function () {
         checks: Math.max(a.checks || 0, b.checks || 0),
         reveals: Math.max(a.reveals || 0, b.reveals || 0),
         solved: !!(a.solved || b.solved),
-      });
+      }, a.nm || b.nm ? { nm: true } : {});       // scanned right with the macrons hidden, in either tab
     });
     const earliest = (x, y) => (x && y ? (x < y ? x : y) : x || y);
     const latest = (x, y) => (x && y ? (x > y ? x : y) : x || y);
@@ -132,6 +132,9 @@ window.Progress = (function () {
     { id: 'wordstart', title: 'Next word along', desc: "Your first line decided by the consonants beginning the next word.", test: (t) => t.flag.wordStart },
     { id: 'spondee', title: 'A rare spondee', desc: 'Found a line whose fifth foot is a spondee.', test: (t) => t.flag.spondaic },
     { id: 'greek', title: "It's all Greek", desc: 'Your first line with a Greek-looking word.', test: (t) => t.flag.greek },
+    // NO MACRONS (owner, 2026-11-16: "the ultimate difficulty"): a line scanned right with its macrons hidden
+    { id: 'nomacrons', title: 'Sine macronibus', desc: 'A line scanned right with its macrons hidden.', test: (t) => t.nm >= 1 },
+    { id: 'nomacrons10', title: 'Bare Latin', desc: 'Ten lines scanned right with their macrons hidden.', test: (t) => t.nm >= 10 },
     { id: 'licence', title: "Poet's licence", desc: 'Your first line where the poet bends the rules.', test: (t) => t.flag.advanced },
     { id: 'days3', title: 'Three days', desc: 'Practiced on three different days.', test: () => Object.keys(S.days).length >= 3 },
     { id: 'days7', title: 'A week of practice', desc: 'Practiced on seven different days.', test: () => Object.keys(S.days).length >= 7 },
@@ -152,6 +155,7 @@ window.Progress = (function () {
     const f = line ? line.flags : [];
     const t = {
       solved: solvedCount(),
+      nm: Object.values(S.lines).filter((e) => e.nm).length,
       total: allLines.length,
       tutorialDone: stages.length > 0 && stages.every((s) => S.tutorial[s.id]),
       flag: {
@@ -183,11 +187,15 @@ window.Progress = (function () {
   // ---- recording ------------------------------------------------------------------------------------
   // `helped` is true when the student used Show answer on this line during this visit: a correct Check
   // afterwards earns nothing, and the line waits to be figured out on another visit.
-  function recordCheck(line, correct, helped, context) {
+  // opts.noMacrons: the line was scanned with its macrons hidden -- marked on the line (nm), worth 10
+  // more on a first solve, and counted for the No macrons badges even on a line solved before.
+  function recordCheck(line, correct, helped, context, opts) {
     const e = S.lines[line.citation] = S.lines[line.citation] || { checks: 0, solved: false, firstTry: false, points: 0, solvedAt: null, reveals: 0 };
     e.checks++;
     if (context) S.configs[context] = (S.configs[context] || 0) + 1;
     const result = { points: 0, firstTry: false, alreadySolved: e.solved, helped: false, badges: [] };
+    const nmNew = !!(correct && !helped && opts && opts.noMacrons && !e.nm);
+    if (nmNew) { e.nm = true; result.noMacrons = true; }
     if (!correct) {
       S.streak.current = 0;
     } else if (helped) {
@@ -198,7 +206,7 @@ window.Progress = (function () {
       e.firstTry = e.checks === 1 && !e.reveals;
       e.solvedAt = new Date().toISOString();
       e.solveChecks = e.checks;                    // what this line cost to figure out (fast scanning)
-      e.points = 10 * (line.level || 1) + (e.firstTry ? 10 : 0);
+      e.points = 10 * (line.level || 1) + (e.firstTry ? 10 : 0) + (nmNew ? 10 : 0);
       S.points += e.points;
       S.days[today()] = (S.days[today()] || 0) + 1;
       S.streak.current = e.firstTry ? S.streak.current + 1 : 0;
@@ -206,6 +214,8 @@ window.Progress = (function () {
       result.points = e.points;
       result.firstTry = e.firstTry;
       result.badges = awardBadges(line);
+    } else if (nmNew) {
+      result.badges = awardBadges(line);           // solved before, now without macrons: the badges only
     }
     save();
     return result;

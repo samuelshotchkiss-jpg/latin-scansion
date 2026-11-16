@@ -111,6 +111,7 @@
     <div class="toggles">
       <label id="fast-toggle" class="toggle" hidden><input type="checkbox" id="fast"> ⚡ Fast scanning</label>
       <label class="toggle" title="Play the line's rhythm on drums when you get it right"><input type="checkbox" id="autoplay"> 🥁 Play the rhythm</label>
+      <label id="nomac-toggle" class="toggle" title="The hardest way: the line without its macrons. They come back once you have it right."><input type="checkbox" id="nomacrons"> No macrons</label>
     </div>
     <p id="hint" class="hint"><span class="wide">Drag long and short marks onto vowels, and the elision mark under the gap between two syllables — or tap a mark, then tap the line. Drag a mark off the line to take it back.</span><span class="narrow">Tap a mark, then tap a vowel. Drag a mark off the line to take it back.</span></p>
     <p id="fast-hint" class="hint" hidden><span class="wide">Type <kbd>i</kbd> long, <kbd>u</kbd> short, <kbd>o</kbd> elided — each marks the highlighted syllable and moves on. <kbd>←</kbd> <kbd>→</kbd> move, <kbd>Backspace</kbd> goes back, <kbd>Enter</kbd> checks.</span><span class="narrow">Tap ¯ ˘ ‿ to mark the highlighted syllable and move on. Tap a vowel to jump to it.</span></p>
@@ -153,7 +154,7 @@
         <li>your points, your streaks, and the badges you have earned;</li>
         <li>which passages and levels you have practiced, and how far you are in the tutorial;</li>
         <li>the marks on a line you leave before finishing it, so that it is still there when you come back;</li>
-        <li>your settings: fast scanning, once you unlock it, and whether the rhythm plays by itself;</li>
+        <li>your settings: fast scanning, once you unlock it, whether the rhythm plays by itself, and whether the macrons are hidden (and which lines you have scanned without them);</li>
         <li>your name, only if you type it in to make a progress report.</li>
       </ul>
       <p><b>Your data is stored only on this computer and within this browser.</b> It is never collected, analyzed, or sent anywhere else. If you clear your browser's data, or use a different computer or browser, your progress starts over.</p>
@@ -227,9 +228,9 @@
     </div>
   </div>
 
-  <script src="progress.js?v=2026-10-29"></script>
+  <script src="progress.js?v=2026-11-16"></script>
   <script src="rhythm.js?v=2026-10-27s"></script>
-  <script src="app.js?v=2026-11-12"></script>
+  <script src="app.js?v=2026-11-16"></script>
   <!-- TEMPORARY, until the quiz on 2026-11-12: delete this line and quiz-notice.js -->
   <script src="quiz-notice.js?v=2026-11-10"></script>
   <script src="nav.js?v=2026-11-16"></script>

@@ -82,6 +82,8 @@
     { id: 'sentence', title: 'Over the line', desc: 'Your first sentence of two lines or more.', test: (c) => c.sentences >= 1 },
     { id: 'sentence10', title: 'Periodic', desc: 'Ten sentences of two lines or more.', test: (c) => c.sentences >= 10 },
     { id: 'four', title: 'Four-liner', desc: 'A sentence four lines long.', test: (c) => c.maxRows >= 4 },
+    { id: 'nomacrons', title: 'Sine macronibus', desc: 'A line unjumbled with its macrons hidden.', test: (c) => c.nm >= 1 },
+    { id: 'nomacrons10', title: 'Bare Latin', desc: 'Ten lines unjumbled with their macrons hidden.', test: (c) => c.nm >= 10 },
     { id: 'day20', title: 'Twenty in a day', desc: 'Twenty lines solved in one day.', test: () => (S.days[today()] || 0) >= 20 },
     { id: 'days3', title: 'Three days', desc: 'Jumbles on three different days.', test: () => Object.keys(S.days).length >= 3 },
   ];
@@ -89,6 +91,7 @@
     const solved = allItems().filter((l) => S.lines[l.c] && (S.lines[l.c].scanned || S.lines[l.c].blind));
     return Object.assign({
       sentences: solved.filter((l) => l.rows).length,
+      nm: solved.filter((l) => S.lines[l.c].nm).length,
       maxRows: solved.reduce((m, l) => Math.max(m, l.rows ? l.rows.length : 1), 0),
       elided: solved.filter((l) => l.e > 0).length,
       maxE: solved.reduce((m, l) => Math.max(m, l.e), 0),
@@ -109,6 +112,20 @@
   const dead = new Set();                         // lines no strict shuffle can break
   const pref = (k, d) => (S.prefs[k] === undefined ? d : S.prefs[k]);
   let mode = pref('mode', 'scanned');
+  // NO MACRONS (owner, 2026-11-16: "the ultimate difficulty"): the words without their macrons while the
+  // line is being solved; they come back when it is solved or shown. Every long vowel here is ONE
+  // character (ā), so changing the text in place moves no offset. Worth half again in points.
+  let noMac = pref('nomac', false);
+  const plain = (t) => t.normalize('NFD').replace(/\u0304/g, '').normalize('NFC');
+  const origText = new WeakMap();
+  function macrons(show) {
+    const walk = document.createTreeWalker(lineEl, NodeFilter.SHOW_TEXT);
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!origText.has(n)) origText.set(n, n.nodeValue);
+      const want = show ? origText.get(n) : plain(origText.get(n));
+      if (n.nodeValue !== want) n.nodeValue = want;
+    }
+  }
   const lineEl = $('jb-line');
   const coarse = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);   // a finger, not a mouse
 
@@ -780,8 +797,9 @@
     let order = keepOrder || J.jumble(line);
     if (!order) { dead.add(line.c); filterPool(); start(pick()); return; }
     lastCite = line.c;
-    cur = { line, words, wrong: 0, done: false, busy: false, moves: 0, shown: false, started: Date.now() };
+    cur = { line, words, wrong: 0, done: false, busy: false, moves: 0, shown: false, started: Date.now(), nm: noMac };
     build(order);
+    macrons(!noMac);
     cur.next = null;
     refresh(false);
     $('jb-cite').textContent = line.c;
@@ -851,16 +869,19 @@
       if (!already) {
         const base = BASE[mode] * J.rowsOf(c.line).length;
         pts = Math.max(Math.round(base / 3), base - 3 * c.wrong);
+        if (c.nm) pts = Math.round(pts * 1.5);           // without macrons: half again
         rec[mode] = today();
         s.points += pts;
       }
       if (v.exact) rec.exact = 1; else rec.own = 1;
+      if (c.nm) rec.nm = 1;
       s.t.locks++; s.t.right++;
       if (v.exact) s.t.exact++; else s.t.own++;
       s.days[today()] = (s.days[today()] || 0) + 1;
       if (c.wrong === 0) bump(s, true);
       fresh = award({ quick: secs <= 20, comeback: c.wrong >= 3 });
     });
+    macrons(true);                      // right: the macrons come back
     // the true scansion -- in the unscanned mode it lands with the drums
     const sc = v.meter.scan;            // a mute + liquid read as the line needs it
     c.scan = sc;
@@ -954,7 +975,7 @@
       ? `<p>${v.meter.rows.map((r, i) => `Line ${i + 1}: ${footText(r.feet)}`).join('<br>')}</p>`
       : `<p>Feet: ${footText(v.meter.rows[0].feet)}.</p>`;
     html += already ? `<p>You had solved this ${many ? 'sentence' : 'line'} before in this mode: no new points.</p>`
-      : `<p><span class="jb-pts">+${pts} points</span>${cur.wrong ? ` (${cur.wrong} wrong lock-in${cur.wrong > 1 ? 's' : ''} first)` : ' — first try!'}</p>`;
+      : `<p><span class="jb-pts">+${pts} points${cur.nm ? ' — without macrons!' : ''}</span>${cur.wrong ? ` (${cur.wrong} wrong lock-in${cur.wrong > 1 ? 's' : ''} first)` : ' — first try!'}</p>`;
     el.innerHTML = html;
     el.hidden = false;
   }
@@ -1013,6 +1034,7 @@
     if (!cur || cur.done || cur.busy) return;
     const c = cur;
     c.done = c.shown = true;
+    macrons(true);
     update((s) => { s.t.shown++; bump(s, false); });
     const all = tiles();
     const before = new Map(all.map((t) => [t, t.getBoundingClientRect()]));
@@ -1096,6 +1118,14 @@
   $('jb-level').addEventListener('change', () => { update((s) => { s.prefs.level = $('jb-level').value; }); filterPool(); start(pick()); });
   $('jb-passage').addEventListener('change', () => { update((s) => { s.prefs.passage = $('jb-passage').value; }); filterPool(); start(pick()); });
   $('jb-drums').addEventListener('change', () => update((s) => { s.prefs.drums = $('jb-drums').checked; }));
+  $('jb-nomac').addEventListener('change', () => {
+    noMac = $('jb-nomac').checked;
+    update((s) => { s.prefs.nomac = noMac; });
+    if (cur && !cur.done) {
+      macrons(!noMac);
+      if (!noMac) cur.nm = false;       // the bonus only for a line solved without macrons from the start
+    }
+  });
   $('jb-lock').addEventListener('click', lock);
   $('jb-next').addEventListener('click', () => { if (window.Rhythm) Rhythm.stop(); start(pick()); });
   $('jb-reshuffle').addEventListener('click', () => { if (cur && !cur.done && !cur.busy) start(cur.line); });
@@ -1126,6 +1156,7 @@
       $('jb-passage').value = pref('passage', '');
       if ($('jb-passage').value !== pref('passage', '')) $('jb-passage').value = '';
       $('jb-drums').checked = pref('drums', true);
+      $('jb-nomac').checked = noMac;
       $('jb-nostore').hidden = storageOK;
       setMode(mode);
       paintPoints();

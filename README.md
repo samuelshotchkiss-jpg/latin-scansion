@@ -130,6 +130,9 @@ About half the lines have more than one right order.
   edge scrolls it. The text shrinks a little where a verse would otherwise take three rows: one or
   two, never more. A mute (stop) + liquid inside a word, which may be long or short, shows ⏓ until
   the line is solved, and an answer may read it either way.
+* **No macrons** (the hardest way, here and in Practice): the words lose their macrons while the line
+  is being solved, and get them back when it is solved or shown. Worth half again in points here, and
+  10 more on a first solve in Practice; two badges, *Sine macronibus* and *Bare Latin*, on each page.
 * **Finding a line**: Go to takes a citation as it comes (*Aen. 1.322*, *met 1.535-538*, *1.322*), and
   ‹ › step through the text; the address carries it too (`jumbles.html?line=Met.+1.535-538`).
 * Points, a first-try streak and twenty badges are kept in the browser under their own key

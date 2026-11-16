@@ -113,6 +113,7 @@
     P.onChange(() => { updatePoints(); fillStageMenu(); showFastToggle(); });   // another tab saved
     showFastToggle();
     $('autoplay').checked = S.autoplay !== false;          // on unless the student turned it off
+    $('nomacrons').checked = !!S.noMacrons;
     setMode(S.mode || (Object.keys(S.lines).length ? 'practice' : 'tutorial'));
     // A line asked for by another page (the practice quiz's "Scan it" links): ?line=<citation> opens it in
     // Practice exactly as Go to does -- its kind ticked if it was not, a note saying so.
@@ -149,6 +150,7 @@
     document.body.classList.toggle('tutorial', mode === 'tutorial');
     $('goto').hidden = mode === 'tutorial';                // Go to and the map belong to Practice
     $('practice-controls').hidden = mode !== 'practice';
+    $('nomac-toggle').hidden = mode !== 'practice';       // the tutorial teaches with its macrons
     $('tutorial-controls').hidden = mode !== 'tutorial';
     $('lesson').hidden = mode !== 'tutorial';
     if (mode === 'tutorial') openStage(Math.min(S.stage || 0, stages.length - 1), true);
@@ -282,8 +284,32 @@
   }
 
   // ---- rendering ----------------------------------------------------------------------------------
+  // ---- NO MACRONS (owner, 2026-11-16: "the ultimate difficulty") -----------------------------------------
+  // In Practice, with the switch on, the line and its neighbours lose their macrons while the student
+  // scans; they come back once the line is right, or with Show answer. The text is changed in place:
+  // every long vowel here is ONE character (ā, not a + U+0304), so no offset moves.
+  const plain = (s) => s.normalize('NFD').replace(/\u0304/g, '').normalize('NFC');
+  const origText = new WeakMap();
+  let lineRight = false;                       // the line on show has been Checked right
+  const macronsHidden = () => !!S.noMacrons && S.mode === 'practice' && !lineRight && !revealed;
+  function applyMacrons() {
+    const box = $('line-box');
+    if (!box) return;
+    const hide = macronsHidden();
+    const walk = document.createTreeWalker(box, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => (n.parentElement && n.parentElement.closest('.mark, .line-check')
+        ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+    });
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!origText.has(n)) origText.set(n, n.nodeValue);
+      const want = hide ? plain(origText.get(n)) : origText.get(n);
+      if (n.nodeValue !== want) n.nodeValue = want;
+    }
+    box.classList.toggle('no-macrons', hide);
+  }
+
   function showLine() {
-    marks = {}; tieOf = {}; checked = false; revealed = false; helped = false;
+    marks = {}; tieOf = {}; checked = false; revealed = false; helped = false; lineRight = false;
     stopRhythm();
     cursor = fastOn() ? 0 : null;
     $('feedback').innerHTML = ''; closeZoom();
@@ -327,6 +353,7 @@
     if (draft) restoreDraft(l, draft);
     $('citation').textContent = l.citation;
     showContext(l);
+    applyMacrons();
     slide(l.citation);
     $('goto-msg').innerHTML = '';
     $('goto-work').value = workOf(l.citation);
@@ -931,12 +958,15 @@
     const correct = right === total;
     const context = S.mode === 'tutorial' ? `Tutorial: ${stages[S.stage].title}`
       : `${$('passage').value || 'All passages'} · ${S.levels.map((k) => KIND_NAMES[k - 1]).join(' + ')}`;
-    const result = P.recordCheck(l, correct, helped, context);
+    const result = P.recordCheck(l, correct, helped, context, { noMacrons: macronsHidden() });
+    lineRight = correct;
+    applyMacrons();                                       // right: the macrons come back
 
     let html;
     if (correct) {
       html = '<div><b>Correct!</b>';
-      if (result.points) html += ` <span class="gain">+${result.points} points${result.firstTry ? ' — first try!' : ''}</span>`;
+      if (result.points) html += ` <span class="gain">+${result.points} points${result.firstTry ? ' — first try!' : ''}${result.noMacrons ? ' — without macrons!' : ''}</span>`;
+      else if (result.noMacrons) html += ' <span class="gain">— without macrons!</span>';
       else if (result.helped) html += ' <span class="note">You used Show answer on this line — try it again on your own another time to count it.</span>';
       else if (result.alreadySolved) {
         // in Practice, say so when the line is one the tutorial already had them scan
@@ -993,6 +1023,11 @@
     const b = $('play-rhythm');
     if (b) b.addEventListener('click', playRhythm);
   }
+  $('nomacrons').addEventListener('change', () => {
+    S.noMacrons = $('nomacrons').checked;
+    P.save();
+    applyMacrons();
+  });
   $('autoplay').addEventListener('change', () => {
     S.autoplay = $('autoplay').checked;
     P.save();
@@ -1033,6 +1068,7 @@
     keepDraft();
     nucEls().forEach((el) => el.classList.remove('ok', 'bad'));
     render();
+    applyMacrons();                                       // shown: the macrons come back
     $('feedback').innerHTML = revealedHTML(l);
     wireRhythm();
     closeZoom();
