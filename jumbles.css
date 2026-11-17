@@ -86,6 +86,9 @@
 }
 @keyframes hold { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .tile.flip { transition: transform .12s ease-out; }
+/* the comma a floating vocative or parenthetical carries (jumbles.js paintCommas): ink, like a wall */
+.tile .cm { color: var(--ink); margin-left: .04em; }
+.tile .cm[hidden] { display: none; }
 .jb-line.locked .tile { cursor: default; }
 .jb-line.locked .tile:hover { border-color: var(--line); }
 .tile.ghost {

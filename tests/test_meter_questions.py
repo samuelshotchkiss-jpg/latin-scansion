@@ -91,7 +91,7 @@ class WhatIsNeverAsked(unittest.TestCase):
                     found += 1
                     q = asked[(l["citation"], i)]
                     self.assertEqual((q["answer"], q["kind"] in ("elision", "greek")), ("X", True), q["id"])
-        self.assertEqual(found, 55)         # 56 in the data; 1 is in a line that needed a licence
+        self.assertEqual(found, 54)         # 55 in the data; 1 is in a line that needed a licence (Aen. 4.74 media went short, 2026-11-17)
 
     def test_no_diphthong(self):
         for q in QS:

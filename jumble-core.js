@@ -21,6 +21,9 @@
 // A clause (data: k, else g) = a group, or several where et, -que, aut... join phrases, not clauses.
 //                          STRICT (the jumble)                    LOOSE (an answer)
 //   punctuation            no word crosses it                     the same (the page enforces it)
+//   a one-word vocative    where the toolkit ruled one of its commas soft (SOFT_COMMAS), that comma is
+//   or parenthetical       gone: the word (data: pc) is in no group or clause, stays put in the jumble,
+//   (precor, crēdō)        and an answer may set it anywhere in its stretch; the page draws its commas
 //   groups / clauses       groups keep their order, never mix     clauses keep their order, never mix;
 //                                                                 across an et joining phrases only a
 //                                                                 verb, an adverb or a free participle
@@ -200,6 +203,9 @@
     let level = -Infinity, seg = null, top = null;
     order.forEach((w) => {
       if (w.s !== seg) { seg = w.s; level = -Infinity; top = null; }
+      // a floater (pc: a one-word vocative or parenthetical, its commas taken down) is in no clause:
+      // it may stand anywhere in its stretch, and moves no clause on
+      if (w.pc) { chosen.set(w.id, 'pc' + w.id); return; }
       const opts = [K(w)].concat(w.g2 !== undefined ? [w.g2] : []).filter((c) => c >= level);
       if (!opts.length) {
         faults.push({ rule: 'group', words: [w, top] });

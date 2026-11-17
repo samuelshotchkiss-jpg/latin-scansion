@@ -252,3 +252,45 @@ test("a mute (stop) + liquid inside a word may be long or short (Aen. 1.317 Hebr
   for (const X of D.lines) for (const t of X.t) if (typeof t === "object" && t.am) n++;
   assert.ok(n >= 50, `${n} words`);
 });
+
+// A one-word vocative or parenthetical whose comma the toolkit ruled soft (export_jumbles.py SOFT_COMMAS,
+// owner 2026-11-17: "nympha, precor, Pēnēi, manē could conceivably come in any order").
+test("a one-word vocative or parenthetical floats across the commas ruled soft, and only those", () => {
+  const perms = (a) => (a.length < 2 ? [a] : a.flatMap((x, i) => perms(a.filter((_, j) => j !== i)).map((p) => [x].concat(p))));
+  // Met. 1.504: all four words in one stretch, any order right by the grammar
+  const L = find("Met. 1.504"), w = J.wordsOf(L);
+  const four = w.slice(0, 4);
+  assert.deepStrictEqual(four.map((x) => x.w), ["nympha", "precor", "Pēnēi", "manē"]);
+  assert.ok(four.every((x) => x.s === four[0].s), "one stretch");
+  for (const p of perms(four)) {
+    const o = p.concat(w.slice(4));
+    assert.deepStrictEqual(J.looseFaults(w, o), [], o.map((x) => x.w).join(" "));
+  }
+  // Aen. 1.257: Cytherēa joins parce metū, never manent immōta (the right comma is a real boundary)
+  const C = J.wordsOf(find("Aen. 1.257")), by = (ws, t) => ws.find((x) => x.w === t);
+  assert.ok(by(C, "Cytherēa").pc);
+  assert.strictEqual(by(C, "Cytherēa").s, by(C, "parce").s);
+  assert.notStrictEqual(by(C, "Cytherēa").s, by(C, "manent").s);
+  // Aen. 1.330 quaecumque, "whoever you are": a floater, no opener -- nostrumque levēs labōrem is one clause
+  const Q = J.wordsOf(find("Aen. 1.330")), qc = by(Q, "quaecumque");
+  assert.ok(qc.pc && qc.r === undefined);
+  // Aen. 1.387 haud, crēdō, invīsus: crēdō may follow invīsus; haud still goes with its word
+  const H = J.wordsOf(find("Aen. 1.387"));
+  const ord = (txt) => txt.split(" ").map((t) => by(H, t));
+  assert.deepStrictEqual(J.looseFaults(H, ord("quisquis es haud invīsus crēdō caelestibus aurās")), []);
+  assert.ok(by(H, "haud").to === H.indexOf(by(H, "invīsus")), "haud's word is invīsus, past the floater");
+  // Met. 4.110 ego tē, miseranda, perēmī
+  const F = J.wordsOf(find("Met. 4.110"));
+  assert.ok(by(F, "miseranda").pc);
+  // every floater is in a stretch of two or more words, and has no role
+  let n = 0;
+  for (const X of D.lines.concat(D.sentences)) {
+    const ws = J.wordsOf(X);
+    for (const x of ws.filter((y) => y.pc)) {
+      n++;
+      assert.ok(ws.filter((y) => y.s === x.s).length >= 2, `${X.c}: ${x.w} alone`);
+      assert.ok(x.r === undefined && x.pr === undefined, `${X.c}: ${x.w} keeps a role`);
+    }
+  }
+  assert.ok(n >= 25, `${n} floaters`);
+});

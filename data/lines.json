@@ -139691,7 +139691,7 @@
  },
  {
   "citation": "Aen. 4.74",
-  "text": "nunc mediā Aenēān sēcum per moenia dūcit",
+  "text": "nunc media Aenēān sēcum per moenia dūcit",
   "scans": true,
   "stage": 1,
   "penalty": 0,
@@ -139751,7 +139751,7 @@
    {
     "start": 9,
     "end": 10,
-    "text": "ā",
+    "text": "a",
     "mark": "elided"
    },
    {

@@ -111,7 +111,13 @@ About half the lines have more than one right order.
   a line may gain or lose words, and a line's share of a clause, emptied, leaves a dashed slot to drop
   words back into (the arrow keys step a word over the break too). Every line must scan; the grammar is judged
   over the whole sentence. 183 sentences; longer ones (up to fourteen lines) are left out.
-* **A jumble stays readable** (strict rules): no word crosses punctuation; a conjunction, relative or
+* **A one-word vocative or parenthetical** (*nympha, precor, Pēnēi, manē*; *haud, crēdō, invīsus*)
+  moves like any other word, across the commas round it -- but only the commas ruled place by place
+  in the toolkit's `export_jumbles.py` (`SOFT_COMMAS`, 2026-11-17), since one of them is often a real
+  boundary (*parce metū, Cytherēa, | manent immōta*). It belongs to no clause, may stand anywhere in
+  the stretch it joined, and carries its commas: one is drawn between it and each word beside it.
+  The jumble leaves it where the poet put it; an answer may move it.
+* **A jumble stays readable** (strict rules): no word crosses punctuation (save those commas); a conjunction, relative or
   *-que* word comes FIRST in its clause -- even where the poet put some of the clause's own words in
   front of it (*vīdistis sī quam…*, Aen. 1.322: the jumble never does that); a preposition keeps its
   object after it; *nōn* and *ō* stay before their word. It leans toward a plainer order (an

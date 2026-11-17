@@ -229,6 +229,21 @@
     return t;
   }
 
+  // A floater (pc: a one-word vocative or parenthetical whose commas came down, nympha, precor, Pēnēi,
+  // manē) carries its commas: one is drawn after a word wherever it or the next word in its stretch is
+  // a floater. In the poet's order that is exactly the poet's commas (the exporter checks).
+  const commaAfter = (a, b) => !!(a && b && a.s === b.s && (a.pc || b.pc));
+  function paintCommas() {
+    const ts = tiles();
+    ts.forEach((t, i) => {
+      const a = cur.words[+t.dataset.id], b = ts[i + 1] && cur.words[+ts[i + 1].dataset.id];
+      let c = t.querySelector(':scope > .cm');
+      const on = commaAfter(a, b);
+      if (on && !c) { c = document.createElement('span'); c.className = 'cm'; c.textContent = ','; t.append(c); }
+      if (c) c.hidden = !on;
+    });
+  }
+
   function build(order) {
     sweepDrags();
     lineEl.replaceChildren();
@@ -320,6 +335,7 @@
   const ghostOf = (id) => (drag && drag.ghost && +drag.tile.dataset.id === id ? drag.ghost : null);
 
   function refresh(animate, swooshesLater) {
+    paintCommas();
     const order = orderNow();
     const sc = J.scanItem(cur.line, order, countsNow());
     cur.scan = sc;
@@ -942,20 +958,23 @@
     return J.rowsOf(cur.line).map((row) => row.map((t) => {
       if (typeof t === 'string') return esc(t);
       const w = order[idx], moved = poet && w.id !== cur.words[idx].id;
+      const cm = commaAfter(w, order[idx + 1]) ? ',' : '';
       idx++;
-      return ' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w));
+      return ' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w)) + cm;
     }).join('').trim().replace(/ ([,.;:!?])/g, '$1')).join('<br>');
   }
   // the student's lines as they stand on the page, moved words shaded
   function yourText() {
     let idx = 0;
+    const now = orderNow();
     return [...lineEl.querySelectorAll('.jb-row')].map((row) => [...row.children].map((el) => {
       if (el.classList.contains('wall')) return esc(el.textContent);
       if (!el.classList.contains('jb-seg-wrap')) return '';
       return [...el.querySelectorAll('.tile')].map((t) => {
         const w = cur.words[+t.dataset.id], moved = w.w !== (cur.words[idx] || {}).w;
+        const cm = commaAfter(now[idx], now[idx + 1]) ? ',' : '';
         idx++;
-        return ' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w));
+        return ' ' + (moved ? `<span class="moved">${esc(w.w)}</span>` : esc(w.w)) + cm;
       }).join('');
     }).join('').trim().replace(/ ([,.;:!?])/g, '$1')).join('<br>');
   }
@@ -1039,6 +1058,7 @@
     const all = tiles();
     const before = new Map(all.map((t) => [t, t.getBoundingClientRect()]));
     [...new Set(c.words.map((w) => w.s))].forEach((sg) => fill(sg, c.words.filter((w) => w.s === sg).map((w) => tileOf(w.id))));
+    paintCommas();
     if (!reduced) all.forEach((t) => {
       const a = before.get(t), b = t.getBoundingClientRect();
       t.classList.remove('flip');
