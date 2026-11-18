@@ -119491,7 +119491,7 @@
  },
  {
   "citation": "Aen. 1.340",
-  "text": "imperium Dīdō Tyriā regit urbe profectā,",
+  "text": "imperium Dīdō Tyriā regit urbe profecta,",
   "scans": true,
   "stage": 1,
   "penalty": 0,
@@ -119694,7 +119694,7 @@
    {
     "start": 38,
     "end": 39,
-    "text": "ā",
+    "text": "a",
     "mark": "L",
     "why": "final syllable",
     "syllable": [
